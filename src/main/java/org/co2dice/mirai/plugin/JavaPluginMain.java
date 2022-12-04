@@ -1,4 +1,4 @@
-package org.example.mirai.plugin;
+package org.co2dice.mirai.plugin;
 
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription;
@@ -29,7 +29,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 public final class JavaPluginMain extends JavaPlugin {
     public static final JavaPluginMain INSTANCE = new JavaPluginMain();
     private JavaPluginMain() {
-        super(new JvmPluginDescriptionBuilder("org.example.mirai-example", "0.1.0")
+        super(new JvmPluginDescriptionBuilder("org.co2dice.mirai-example", "0.1.0")
                 .info("EG")
                 .build());
     }

@@ -3,13 +3,18 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
-    id("net.mamoe.mirai-console") version "2.11.1"
+    id("net.mamoe.mirai-console") version "2.13.0-RC2"
 }
 
-group = "org.example"
+group = "org.co2dice"
 version = "0.1.0"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
     mavenCentral()
+}
+
+dependencies {
+    api("net.mamoe:mirai-console-terminal:2.13.0-RC2") // 自行替换版本
+    api("net.mamoe:mirai-core:2.13.0-RC2")
 }
