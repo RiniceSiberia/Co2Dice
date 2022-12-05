@@ -6,8 +6,10 @@ import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder;
 import net.mamoe.mirai.event.Event;
 import net.mamoe.mirai.event.EventChannel;
 import net.mamoe.mirai.event.GlobalEventChannel;
+import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
+import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 
 
 /**
@@ -30,14 +32,23 @@ public final class JavaPluginMain extends JavaPlugin {
     public static final JavaPluginMain INSTANCE = new JavaPluginMain();
     private JavaPluginMain() {
         super(new JvmPluginDescriptionBuilder("org.co2dice.mirai-example", "0.1.0")
-                .info("EG")
+                .info("这是一个牧序的测试插件，用来测试他的新式跑团规则.")
+                .name("混乱或秩序规则专用骰")
+                .author("牧序")
                 .build());
     }
 
     @Override
     public void onEnable() {
-        getLogger().info("日志");
+        getLogger().info("Plugin loaded");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
+        eventChannel.subscribeAlways(GroupMessageEvent.class,m -> {
+           if (m.getMessage().contentToString().startsWith(".")){
+               MessageEntry.orderReflex(m);
+           }
+        });
+
+
         eventChannel.subscribeAlways(GroupMessageEvent.class, g -> {
             //监听群消息
             getLogger().info(g.getMessage().contentToString());
@@ -47,5 +58,10 @@ public final class JavaPluginMain extends JavaPlugin {
             //监听好友消息
             getLogger().info(f.getMessage().contentToString());
         });
+        eventChannel.subscribeAlways(NewFriendRequestEvent.class, NewFriendRequestEvent::accept);
+        //自动同意好友申请
+        eventChannel.subscribeAlways(BotInvitedJoinGroupRequestEvent.class,BotInvitedJoinGroupRequestEvent::accept);
+        //自动同意加群申请
+
     }
 }
