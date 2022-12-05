@@ -10,6 +10,10 @@ import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
+import org.co2dice.mirai.bean.dice.DiceList;
+import org.co2dice.mirai.bean.dice.NormalDice;
+
+import java.util.List;
 
 
 /**
@@ -43,8 +47,11 @@ public final class JavaPluginMain extends JavaPlugin {
         getLogger().info("Plugin loaded");
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.subscribeAlways(GroupMessageEvent.class,m -> {
-           if (m.getMessage().contentToString().startsWith(".")){
-               MessageEntry.orderReflex(m);
+            String content = m.getMessage().contentToString();
+           if (content.startsWith(".")){
+               if (content.startsWith(".r")){
+                   m.getGroup().sendMessage(String.valueOf(new DiceList(new NormalDice(100)).roll()));
+               }
            }
         });
 

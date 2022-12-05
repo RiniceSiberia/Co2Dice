@@ -8,6 +8,14 @@ import java.util.stream.Collectors;
 public class DiceList {
     List<Dice> diceList;
 
+    public DiceList(Dice dice){
+        this.diceList = List.of(dice);
+    }
+
+    public DiceList(List<Dice> diceList) {
+        this.diceList = diceList;
+    }
+
     public int roll(){
         int temp;
         var bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
