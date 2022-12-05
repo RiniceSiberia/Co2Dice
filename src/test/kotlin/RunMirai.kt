@@ -1,4 +1,4 @@
-package org.example.mirai.plugin
+package org.co2dice.mirai.plugin
 
 import net.mamoe.mirai.alsoLogin
 import net.mamoe.mirai.console.MiraiConsole
@@ -16,7 +16,7 @@ suspend fun main() {
 //    JavaPluginMain.INSTANCE.load()
 //    JavaPluginMain.INSTANCE.enable()
 
-    val bot = MiraiConsole.addBot(123456, "") {
+    val bot = MiraiConsole.addBot(142857, "") {
         fileBasedDeviceInfo()
     }.alsoLogin()
 
