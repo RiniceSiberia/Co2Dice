@@ -12,6 +12,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import org.co2dice.mirai.bean.dice.DiceList;
 import org.co2dice.mirai.bean.dice.NormalDice;
+import org.co2dice.mirai.utils.BattlesPond;
 
 import java.util.List;
 
@@ -48,19 +49,13 @@ public final class JavaPluginMain extends JavaPlugin {
         EventChannel<Event> eventChannel = GlobalEventChannel.INSTANCE.parentScope(this);
         eventChannel.subscribeAlways(GroupMessageEvent.class,m -> {
             String content = m.getMessage().contentToString();
+            getLogger().info(content);
            if (content.startsWith(".")){
-               if (content.startsWith(".r")){
-                   m.getGroup().sendMessage(String.valueOf(new DiceList(new NormalDice(100)).roll()));
-               }
+               AnalysisUtils.groupAnalysis(m);
            }
         });
 
 
-        eventChannel.subscribeAlways(GroupMessageEvent.class, g -> {
-            //监听群消息
-            getLogger().info(g.getMessage().contentToString());
-
-        });
         eventChannel.subscribeAlways(FriendMessageEvent.class, f -> {
             //监听好友消息
             getLogger().info(f.getMessage().contentToString());

@@ -1,5 +1,7 @@
 package org.co2dice.mirai.bean.cards
 
+import kotlinx.serialization.json.JsonObject
+
 /**
  *      使用IDEA编写
  * @Author: DUELIST
@@ -11,4 +13,6 @@ interface Cards {
     fun getFlavorText(): String
     fun getImg(): String
     fun getType():CardType
+    fun deserialize():JsonObject
+    fun serialize(jo:JsonObject)
 }
