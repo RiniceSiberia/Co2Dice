@@ -64,6 +64,5 @@ public final class JavaPluginMain extends JavaPlugin {
         //自动同意好友申请
         eventChannel.subscribeAlways(BotInvitedJoinGroupRequestEvent.class,BotInvitedJoinGroupRequestEvent::accept);
         //自动同意加群申请
-
     }
 }
