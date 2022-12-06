@@ -1,15 +1,14 @@
 package org.co2dice.mirai.bean.item
 
-import org.co2dice.mirai.bean.dice.DiceList
+import org.co2dice.mirai.bean.cards.CardType
+import org.co2dice.mirai.bean.cards.Cards
 
-class Item {
-    var id = this.javaClass.name
-    var chaos = 0
-    var order = 0
-    var SkillList
+abstract class Item :Cards{
+    abstract var id:String
+    abstract var chaos:Int
+    abstract var order:Int
 
-
-
-
-
+    override fun getType(): CardType {
+        return CardType.ITEM
+    }
 }

@@ -9,7 +9,7 @@ public class DiceList {
     List<Dice> diceList;
 
     public DiceList(Dice dice){
-        this.diceList = List.of(dice);
+        this.diceList = Collections.singletonList(dice);
     }
 
     public DiceList(List<Dice> diceList) {
@@ -18,7 +18,7 @@ public class DiceList {
 
     public int roll(){
         int temp;
-        var bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
+        int bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
         //惩罚骰子和奖励骰子的抵消
         int rollNum = diceList.stream().mapToInt(Dice::roll).sum();
         while (bpNum != 0){
@@ -51,10 +51,8 @@ public class DiceList {
         for (Integer k : keySet){
             values.set(k,map.get(k));
         }
-        List<Double> expects = values.stream()
-                    .map(e -> e.doubleValue() / (double) keySet.size())
-                    .toList();
-        return expects;
+        return values.stream()
+                    .map(e -> e.doubleValue() / (double) keySet.size()).collect(Collectors.toList());
     }
 
     private class D{
