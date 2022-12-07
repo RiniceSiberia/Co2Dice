@@ -8,7 +8,7 @@ import kotlin.streams.toList
  * @Time:  2022-12-05-23:03
  * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  **/
-class Deck(val id: String, var name: String,val type: CardType,var cards: MutableList<Cards>) {
+class Deck(val id: String, var name: String, private val type: CardType, var cards: MutableList<Cards>) {
     init {
         if (cards.size > 100) {
             throw Exception("卡组最多100张卡")
@@ -16,7 +16,7 @@ class Deck(val id: String, var name: String,val type: CardType,var cards: Mutabl
         if (cards.size < 20) {
             throw Exception("卡组最少20张卡")
         }
-        if (cards.stream().anyMatch { it.getType() != type }) {
+        if (cards.stream().anyMatch { it.type != this.type }) {
             throw Exception("卡组中有不属于该卡组的卡")
         }
     }
@@ -30,6 +30,15 @@ class Deck(val id: String, var name: String,val type: CardType,var cards: Mutabl
     fun searchCard(f:Function1<Cards,Boolean>): Cards? {
         return cards.stream().filter {f.invoke(it)}.toList().getOrNull(0)
     }
+    fun pickCard(card: Cards):Cards?{
+        shuffle()
+        return if(cards.remove(card)){
+            card
+        }else{
+            null
+        }
+    }
+
     fun addCardToTop(card: Cards) {
         cards.add(0,card)
     }
@@ -39,9 +48,9 @@ class Deck(val id: String, var name: String,val type: CardType,var cards: Mutabl
     fun shuffle () {
         cards = cards.shuffled().toMutableList()
     }
-    fun drawCard() : Cards {
+    fun drawCard() : Cards? {
         if (cards.size == 0) {
-            throw Exception("卡组已经没有卡了")
+            return null
         }
         val card = cards[0]
         cards.removeAt(0)

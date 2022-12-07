@@ -1,5 +1,7 @@
 package org.co2dice.mirai.bean.cards.skill
 
+import org.co2dice.mirai.bean.dice.DiceList
+
 /**
  *      使用IDEA编写
  * @Author: DUELIST
@@ -8,10 +10,10 @@ package org.co2dice.mirai.bean.cards.skill
  **/
 abstract class Skill(){
     abstract val skillType:SkillType
-    abstract val cost:
-    abstract val check:Function<Int>
+    abstract val cost:Function2<DiceList,Int>
+    abstract val check:Function1<DiceList,Int>
     //检定值
-    abstract val react:Function<Int>
+    abstract val react:Function1<DiceList,Int>
     abstract val trigger:Function<Boolean>
     //触发条件
     abstract val effect:Function<Boolean>

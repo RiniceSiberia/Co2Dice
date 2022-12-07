@@ -6,10 +6,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class DiceList {
-    List<Dice> diceList;
+    private final List<Dice> diceList;
 
-    public DiceList(Dice dice){
-        this.diceList = Collections.singletonList(dice);
+    public DiceList(Dice... diceList){
+        this.diceList = Arrays.asList(diceList);
     }
 
     public DiceList(List<Dice> diceList) {
@@ -92,7 +92,4 @@ public class DiceList {
         return diceList;
     }
 
-    public void setDiceList(List<Dice> diceList) {
-        this.diceList = diceList;
-    }
 }

@@ -8,5 +8,11 @@ package org.co2dice.mirai.bean.permanents
  **/
 abstract class Permanents {
     abstract val id:String
-    abstract val max:Int
+    abstract var lifeTime:Int
+    fun isTemp():Boolean{
+        return lifeTime > 0
+    }
+    fun timeFlow(){
+        lifeTime--
+    }
 }
