@@ -10,6 +10,7 @@ import net.mamoe.mirai.message.data.MessageChain;
 import org.co2dice.mirai.utils.BattlesPond;
 
 public class AnalysisUtils {
+
     public static void groupAnalysis(GroupMessageEvent e){
         Group group = e.getGroup();
         Member sender = e.getSender();
@@ -18,6 +19,6 @@ public class AnalysisUtils {
     public static void friendAnalysis(FriendMessageEvent e){
         Friend friend = e.getSender();
         MessageChain msg = e.getMessage();
-        msg.contentToString();
+        String content = msg.contentToString();
     }
 }

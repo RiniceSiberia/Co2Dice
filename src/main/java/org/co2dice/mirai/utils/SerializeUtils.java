@@ -1,9 +1,12 @@
 package org.co2dice.mirai.utils;
 
+import javafx.beans.DefaultProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SerializeUtils {
+@Deprecated
     public static List<String> serializeToStr(String str){
         //将字符串序列化
         String regex = "\\,";
@@ -18,11 +21,11 @@ public class SerializeUtils {
         return list;
     }
 
-    public static <T> String deserialize(List<T> list){
+    public static <T> String deserialize(List<T> list, String padding){
         //反序列化RiverIds
         StringBuilder sb = new StringBuilder();
         for (T a : list) {
-            sb.append(a.toString()).append(",");
+            sb.append(a.toString()).append(padding);
         }
         return sb.toString();
     }
