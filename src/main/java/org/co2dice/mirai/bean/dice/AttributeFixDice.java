@@ -1,21 +1,21 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.permanents.attribute.AbstractAttributePoint;
-import org.co2dice.mirai.bean.permanents.PermanentsFuller;
+import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken;
+import org.co2dice.mirai.bean.tokens.TokenFuller;
 
 import java.util.function.Function;
 
 public class AttributeFixDice {
-    private final AbstractAttributePoint point;
-    private final Function<PermanentsFuller,DiceList> fixFunc;
+    private final CharacterToken point;
+    private final Function<TokenFuller,DiceList> fixFunc;
 
-    public AttributeFixDice(AbstractAttributePoint point, Function<PermanentsFuller, DiceList> fixFunc) {
+    public AttributeFixDice(CharacterToken point, Function<TokenFuller, DiceList> fixFunc) {
         this.point = point;
         this.fixFunc = fixFunc;
     }
 
-    public AttributeFixDice(AbstractAttributePoint point){
+    public AttributeFixDice(CharacterToken point){
         this.point = point;
-        this.fixFunc = (p) -> new DiceList(new ConstantDice(p.getValue/3));
+        this.fixFunc = (p) -> new DiceList(new ConstantDice(p.getValue()/2));
     }
 }

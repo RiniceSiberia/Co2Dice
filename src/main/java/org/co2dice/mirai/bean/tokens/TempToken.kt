@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.permanents
+package org.co2dice.mirai.bean.tokens
 
 /**
  *      使用IDEA编写
@@ -6,9 +6,9 @@ package org.co2dice.mirai.bean.permanents
  * @Time:  2022-12-07-12:52
  * @Message: Have a good time!  :)
  **/
-abstract class TempPermanents :Permanents(){
-    abstract var lifeTime:Int
-    abstract fun checkPoint():Boolean
+interface TempToken {
+    var lifeTime:Int
+    fun checkPoint():Boolean
 
     fun timeCheck():Boolean{
         if (checkPoint()){

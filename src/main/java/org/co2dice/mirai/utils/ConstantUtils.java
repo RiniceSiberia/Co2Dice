@@ -10,6 +10,8 @@ import org.co2dice.mirai.bean.cards.CardType;
  * @Message: Have a good time!  :)
  **/
 public class ConstantUtils {
+    public static final String GPT_KEY = "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";
+
     public static final String DICE = "dice";
     public static final String SKILL = "skill";
     public static final String CHARACTER = "character";

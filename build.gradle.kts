@@ -15,6 +15,11 @@ repositories {
 }
 
 dependencies {
+    val open_gpt3_version = "0.8.1"
     api("net.mamoe:mirai-console-terminal:2.13.0-RC2") // 自行替换版本
     api("net.mamoe:mirai-core:2.13.0-RC2")
+
+    implementation ("com.theokanning.openai-gpt3-java:client:${open_gpt3_version}")
+
+
 }
