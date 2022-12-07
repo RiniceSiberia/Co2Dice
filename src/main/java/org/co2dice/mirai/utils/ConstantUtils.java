@@ -12,11 +12,6 @@ import org.co2dice.mirai.bean.cards.CardType;
 public class ConstantUtils {
     public static final String GPT_KEY = "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";
 
-    public static final String DICE = "dice";
-    public static final String SKILL = "skill";
-    public static final String CHARACTER = "character";
-    public static final String EVENT = "event";
-
 
     public String getCardPath(String resourcesType,CardType type, String name, String extension){
         return "/resources/"+resourcesType+"/cards/" + type.name() +"/"+name+"."+extension;
