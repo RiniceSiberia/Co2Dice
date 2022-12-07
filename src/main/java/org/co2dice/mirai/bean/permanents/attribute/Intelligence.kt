@@ -5,5 +5,5 @@ import org.co2dice.mirai.bean.dice.DiceList
 //智力
 class Intelligence () : AbstractAttributePoint() {
     override val id = "Intelligence"
-    override var max = 20
+    override val name = "智力"
 }

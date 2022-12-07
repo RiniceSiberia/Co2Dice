@@ -8,22 +8,22 @@ import org.co2dice.mirai.bean.permanents.attribute.AbstractAttributePoint
  * @Time:  2022-12-06-23:23
  * @Message: Have a good time!  :)
  **/
-class PermanentsFuller (point: AbstractAttributePoint, value:Int){
+class PermanentsFuller (point: AbstractAttributePoint,
+                        var value: Int
+){
     init {
-
     }
-    val points : MutableList<AbstractAttributePoint> = mutableListOf<AbstractAttributePoint>()
-        .forEach()
-    var value = value
+    //重复添加n个point进points中
+    val points : MutableList<AbstractAttributePoint> = mutableListOf<AbstractAttributePoint>().apply{
+        for (i in 1..value){
+            add(point)
+        }
+    }
 
-
-    fun timeFlow(){
+    fun timePointCheck(){
         points.forEach{
-            if (it.isTemp()){
-                it.lifeTime--
-                if (it.lifeTime == 0){
-                    points.remove(it)
-                }
+            if (it is TempPermanents && it.timeCheck()){
+                points.remove(it)
             }
         }
     }
