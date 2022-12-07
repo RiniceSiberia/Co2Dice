@@ -1,4 +1,4 @@
-package org.co2dice.mirai.utils
+package org.co2dice.mirai.bean.battle
 
 import net.mamoe.mirai.contact.Group
 
@@ -7,14 +7,14 @@ object BattlesPond {
 
     fun createBattle(group: Group) {
         val battle = Battle()
-        this.battlePond[group.id] = battle
+        battlePond[group.id] = battle
     }
 
     fun getBattle(group:Group) : Battle? {
-        return this.battlePond[group.id]
+        return battlePond[group.id]
     }
     fun finishBattle(group: Group){
-        this.battlePond.remove(group.id)
+        battlePond.remove(group.id)
     }
 
 }

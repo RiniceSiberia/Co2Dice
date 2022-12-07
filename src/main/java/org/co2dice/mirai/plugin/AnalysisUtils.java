@@ -5,9 +5,8 @@ import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
-import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChain;
-import org.co2dice.mirai.utils.BattlesPond;
+import org.co2dice.mirai.bean.battle.BattlesPond;
 
 public class AnalysisUtils {
 

@@ -10,11 +10,6 @@ import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
-import org.co2dice.mirai.bean.dice.DiceList;
-import org.co2dice.mirai.bean.dice.NormalDice;
-import org.co2dice.mirai.utils.BattlesPond;
-
-import java.util.List;
 
 
 /**

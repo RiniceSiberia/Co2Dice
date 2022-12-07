@@ -12,7 +12,5 @@ abstract class Permanents {
     fun isTemp():Boolean{
         return lifeTime > 0
     }
-    fun timeFlow(){
-        lifeTime--
-    }
+
 }

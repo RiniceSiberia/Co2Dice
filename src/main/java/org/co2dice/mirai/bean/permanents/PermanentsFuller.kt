@@ -12,13 +12,19 @@ class PermanentsFuller (point: AbstractAttributePoint, value:Int){
     init {
 
     }
-    val points : MutableList<AbstractAttributePoint> = mutableListOf<AbstractAttributePoint>(
-
-    )
+    val points : MutableList<AbstractAttributePoint> = mutableListOf<AbstractAttributePoint>()
+        .forEach()
     var value = value
 
 
     fun timeFlow(){
-        points.forEach()
+        points.forEach{
+            if (it.isTemp()){
+                it.lifeTime--
+                if (it.lifeTime == 0){
+                    points.remove(it)
+                }
+            }
+        }
     }
 }
