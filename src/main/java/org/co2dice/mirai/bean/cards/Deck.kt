@@ -6,7 +6,7 @@ import kotlin.streams.toList
  *      使用IDEA编写
  * @Author: DUELIST
  * @Time:  2022-12-05-23:03
- * @Message: Have a good time!  :)
+ * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  **/
 class Deck(val id: String, var name: String,val type: CardType,var cards: MutableList<Cards>) {
     init {
@@ -20,13 +20,38 @@ class Deck(val id: String, var name: String,val type: CardType,var cards: Mutabl
             throw Exception("卡组中有不属于该卡组的卡")
         }
     }
-
-
-
     fun removedCard(card: Cards) {
         cards.remove(card)
     }
-    fun addCard(card: Cards) {
+    fun insertCard(card: Cards) {
+        cards.add(card)
+        shuffle()
+    }
+    fun searchCard(f:Function1<Cards,Boolean>): Cards? {
+        return cards.stream().filter {f.invoke(it)}.toList().getOrNull(0)
+    }
+    fun addCardToTop(card: Cards) {
+        cards.add(0,card)
+    }
+    fun addCardToBottom(card: Cards) {
         cards.add(card)
     }
+    fun shuffle () {
+        cards = cards.shuffled().toMutableList()
+    }
+    fun drawCard() : Cards {
+        if (cards.size == 0) {
+            throw Exception("卡组已经没有卡了")
+        }
+        val card = cards[0]
+        cards.removeAt(0)
+        return card
+    }
+    fun checkTop(i:Int) : MutableList<Cards> {
+        return cards.subList(0,i)
+    }
+    fun checkBottom(i:Int) : MutableList<Cards> {
+        return cards.subList(cards.size-i-1,cards.size-1)
+    }
+
 }

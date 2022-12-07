@@ -9,10 +9,13 @@ import kotlinx.serialization.json.JsonObject
  * @Message: Have a good time!  :)
  **/
 interface Cards {
-    fun getName(): String
-    fun getFlavorText(): String
-    fun getImg(): String
-    fun getType():CardType
+    val id: String
+    var name:String
+    var order:Int
+    var chaos:Int
+    var flavorText: String
+    var imgUrl: String
+    val type : CardType
     fun deserialize():JsonObject
     fun serialize(jo:JsonObject)
 }
