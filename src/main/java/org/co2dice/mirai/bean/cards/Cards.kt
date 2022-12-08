@@ -8,14 +8,14 @@ import kotlinx.serialization.json.JsonObject
  * @Time:  2022-12-05-22:58
  * @Message: Have a good time!  :)
  **/
-interface Cards {
-    val id: String
-    var name:String
-    var order:Int
-    var chaos:Int
-    var flavorText: String
-    var imgUrl: String
-    val type : CardType
-    fun deserialize():JsonObject
-    fun serialize(jo:JsonObject)
+abstract class Cards {
+    abstract val id: String
+    abstract var name:String
+    abstract var order:Int
+    abstract var chaos:Int
+    abstract var flavorText: String
+    abstract var imgUrl: String
+    abstract val type : CardType
+    abstract fun deserialize():JsonObject
+    abstract fun serialize(jo:JsonObject)
 }

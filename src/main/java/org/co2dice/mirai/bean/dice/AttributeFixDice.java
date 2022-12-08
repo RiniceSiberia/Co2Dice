@@ -1,24 +1,50 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken;
+import org.co2dice.mirai.bean.cards.character.CharacterCard;
+import org.co2dice.mirai.bean.tokens.Token;
 import org.co2dice.mirai.bean.tokens.TokenFuller;
+import org.co2dice.mirai.bean.tokens.TokenPond;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 /**
  * @author DUELIST
  */
 public class AttributeFixDice {
-    private final CharacterToken point;
-    private final Function<TokenFuller,DiceList> fixFunc;
+    private final List<Token> tokens;
+    //属性种类
+    private final Function<List<TokenFuller>,DiceList> fixFunc;
+    //
 
-    public AttributeFixDice(CharacterToken point, Function<TokenFuller, DiceList> fixFunc) {
-        this.point = point;
+    public AttributeFixDice(List<Token> tokens, Function<List<TokenFuller>, DiceList> fixFunc) {
+        this.tokens = tokens;
         this.fixFunc = fixFunc;
     }
 
-    public AttributeFixDice(CharacterToken point){
-        this.point = point;
-        this.fixFunc = (p) -> new DiceList(new ConstantDice(p.getValue()/2));
+    public AttributeFixDice(List<Token> tokens){
+        this.tokens = tokens;
+        this.fixFunc = (p) -> new DiceList(new ConstantDice((p.stream()
+                .mapToInt(TokenFuller::getPoints).sum())/(2*p.size())));
+    }
+
+    public DiceList getDiceList(CharacterCard c){
+        TokenPond pond = c.getTokens();
+        List<TokenFuller> tfs = new ArrayList<>();
+        for (Token t : tokens){
+            TokenFuller tf = pond.getPointFuller(t);
+            if (tf != null){
+                tfs.add(tf);
+            }
+        }
+        if (tfs.size() > 0 && tfs.size() == tokens.size()){
+            return fixFunc.apply(tfs);
+        }
+        return new DiceList(new NormalDice(0));
+    }
+
+    public DiceResult roll(CharacterCard c){
+        return getDiceList(c).roll();
     }
 }

@@ -17,16 +17,14 @@ public class MutableDiceList extends DiceList{
     }
 
     @Override
-    public int roll() {
-        DiceList diceList = new DiceList(mutable);
-        return super.roll()+diceList.roll();
+    public DiceResult roll() {
+        DiceList diceList = new DiceList(mutable,super.getDiceList());
+        return diceList.roll();
     }
 
     @Override
     public List<Double> getExpected() {
-        List<Dice> dices = super.getDiceList();
-        dices.addAll(this.mutable);
-        DiceList diceList = new DiceList(dices);
+        DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.getExpected();
     }
 

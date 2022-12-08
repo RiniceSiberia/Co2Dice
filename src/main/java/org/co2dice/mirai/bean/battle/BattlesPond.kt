@@ -6,8 +6,7 @@ object BattlesPond {
     private val battlePond = HashMap<Long, Battle>()
 
     fun createBattle(group: Group) {
-        val battle = Battle()
-        battlePond[group.id] = battle
+        battlePond[group.id] = Battle()
     }
 
     fun getBattle(group:Group) : Battle? {

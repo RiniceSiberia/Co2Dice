@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.tokens
 
 import org.co2dice.mirai.bean.battle.Battle
-import org.co2dice.mirai.bean.cards.character.Character
+import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
  *      使用IDEA编写
@@ -17,69 +17,34 @@ class TokenFuller (val tokenType: Token,
     //重复添加n个point进points中
     val tokens : MutableList<Token> = mutableListOf<Token>().apply{
         for (i in 0 until value){
-            addToken(tokenType)
+            add(tokenType)
+            //初始化不触发添加事件
         }
     }
-    val detainTokens : MutableList<Token> = mutableListOf<Token>()
-    //扣押区
-    val interestTokens : MutableList<Token> = mutableListOf<Token>()
-    //增益区
 
 
-    fun timePointCheck(battle : Battle,character:Character):Boolean{
+    fun timePointCheck(battle : Battle, characterCard:CharacterCard):Boolean{
+        //对每个点都执行一次检查
         tokens.forEach{
-            if (it is TempToken && it.checkPoint(battle,character) && it.timeFlow(battle,character)){
-                tokens.remove(it)
-            }
-        }
-    }
-
-    fun getValue():Int{
-        return this.tokens.size + this.interestTokens.size - this.detainTokens.size
-    }
-
-    fun addTempValue(token:Token,value:Int, lifeTime: Int){
-        for (i in 0 until value){
-            var j = 1
-            token as TempToken
-            token.lifeTime = lifeTime
-            token.checkPoint = checkPoint@{ _, _ ->
-                return@checkPoint true
-            }
-            token.timeFlow = timeFlow@{ _, _ ->
-                token.lifeTime--
-                if (token.lifeTime == 0){
-                    return@timeFlow true
+            if (it.isTempToken && it.checkPoint(battle,characterCard) && it.timeFlow(battle,characterCard)){
+                //如果是临时token并且检查点返回true并且时间流逝返回true则删除这个点
+                if (!tokens.remove(it) || !it.removedEvent(this)){
+                    //如果删除失败则返回false
+                    return false
                 }
-                return@timeFlow false
             }
-            //将token转移为临时变量
-            detainTokens.add(token)
         }
+        return true
     }
 
-//    fun timeCheck():Boolean{
-//        if (checkPoint()){
-//            return timeFlow()
-//        }
-//        return false
-//    }
-//
-//    private fun timeFlow():Boolean{
-//        lifeTime--
-//        return lifeTime <= 0
-//    }
+    fun getPoints():Int{
+        return this.tokens.stream().mapToInt(Token::point).sum()
+    }
 
     //传入一个数字，抹除最后加的新token，并触发其addEvent
     fun addToken(token: Token):Boolean{
-        if (this.getValue() < this.limit && token.canReplace(this.tokenType)){
-            if (token is TempToken){
-                if (token)
-
-
-            }else{
-                return tokens.add(token) && token.addEvent(this)
-            }
+        if (this.getPoints() +token.point < this.limit && token.canReplace(this.tokenType)){
+            return tokens.add(token) && token.addEvent(this)
         }
         return false
     }
@@ -89,7 +54,8 @@ class TokenFuller (val tokenType: Token,
             if (tokens.size == 0){
                 b = false
             }else{
-                tokens.removeAt(tokens.size-1)
+                val token = tokens.removeAt(tokens.size-1)
+                token.removedEvent(this)
             }
         }
         return b

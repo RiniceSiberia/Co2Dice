@@ -12,26 +12,31 @@ public class DiceList {
         this.diceList = Arrays.asList(diceList);
     }
 
-    public DiceList(List<Dice> diceList) {
-        this.diceList = diceList;
+    @SafeVarargs
+    public DiceList(List<Dice>... diceList) {
+        List<Dice> temp = new ArrayList<>();
+        for (List<Dice> dices : diceList) {
+            temp.addAll(dices);
+        }
+        this.diceList = temp;
     }
 
-    public int roll(){
-        int temp;
+    public DiceResult roll(){
+        DiceResult temp;
         int bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
         //惩罚骰子和奖励骰子的抵消
-        int rollNum = diceList.stream().mapToInt(Dice::roll).sum();
+        DiceResult result = new DiceResult(this);
         while (bpNum != 0){
-            temp = diceList.stream().mapToInt(Dice::roll).sum();
+            temp = new DiceResult(this);
             if (bpNum > 0){
                 bpNum--;
-                rollNum = Math.max(rollNum,temp);
+                result = result.getResult() > temp.getResult() ? result : temp;
             }else {
                 bpNum++;
-                rollNum = Math.min(rollNum,temp);
+                result = result.getResult() < temp.getResult() ? result : temp;
             }
         }
-        return rollNum;
+        return result;
     }
 
     public List<Double> getExpected(){
