@@ -13,6 +13,13 @@ interface Token {
     val id:String
     val name:String
     val type:CardType
-    fun addEvent(fuller: TokenFuller):Boolean
-    fun deleteEvent(fuller: TokenFuller):Boolean
+    fun addEvent(fuller: TokenFuller):Boolean{
+        return true
+    }
+    fun deleteEvent(fuller: TokenFuller):Boolean{
+        return true
+    }
+    fun canReplace(token: Token):Boolean{
+        return this == token
+    }
 }

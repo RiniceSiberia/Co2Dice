@@ -6,4 +6,5 @@ import org.co2dice.mirai.bean.dice.Dice;
 import java.util.List;
 
 public class DiceUtils {
+
 }

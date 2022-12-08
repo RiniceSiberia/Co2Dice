@@ -5,6 +5,9 @@ import org.co2dice.mirai.bean.tokens.TokenFuller;
 
 import java.util.function.Function;
 
+/**
+ * @author DUELIST
+ */
 public class AttributeFixDice {
     private final CharacterToken point;
     private final Function<TokenFuller,DiceList> fixFunc;
