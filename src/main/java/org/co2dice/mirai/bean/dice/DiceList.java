@@ -4,7 +4,14 @@ import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+  * @author 韩左券
+  * @date 2022/12/8 15:16
+  * @input
+  * @return_value
+  * @message 骰子组，可以存放多个骰子，并使用封装好的批处理方法。注：如果要使用可随意修改参数的骰子，应该使用mutableDiceList
+  * @log /
+  */
 public class DiceList {
     private final List<Dice> diceList;
 

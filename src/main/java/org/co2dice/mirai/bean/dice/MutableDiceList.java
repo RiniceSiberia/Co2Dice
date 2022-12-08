@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
+import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public class MutableDiceList extends DiceList{
     private List<Dice> mutable;
 
-    public MutableDiceList(List<Dice> diceList, List<Dice> mutable) {
+    public MutableDiceList(List<Dice> diceList, List<Dice> mutable ) {
         super(diceList);
         this.mutable = mutable;
     }
