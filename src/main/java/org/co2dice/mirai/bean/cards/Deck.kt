@@ -20,7 +20,7 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
             throw Exception("卡组中有不属于该卡组的卡")
         }
     }
-    fun removedCard(card: Cards) {
+    fun removedCards(card: Cards) {
         cards.remove(card)
     }
     fun insertCard(card: Cards) {
@@ -30,13 +30,17 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
     fun searchCard(f:Function1<Cards,Boolean>): Cards? {
         return cards.stream().filter {f.invoke(it)}.toList().getOrNull(0)
     }
-    fun pickCard(card: Cards):Cards?{
+    fun pickCard(function: Function1<Cards,Boolean>):Cards?{
         shuffle()
-        return if(cards.remove(card)){
-            card
-        }else{
-            null
+        var card:Cards? = null
+        for (c in cards){
+            if (function.invoke(c)){
+                card = cards.removeAt(cards.indexOf(c))
+            }
         }
+        shuffle()
+        //随机获取一张符合条件的卡，并只将那张卡（不包括同名卡）从牌堆中删除，洗两次牌
+        return card
     }
 
     fun addCardToTop(card: Cards) {

@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.dice;
 import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.tokens.Token;
 import org.co2dice.mirai.bean.tokens.TokenFuller;
-import org.co2dice.mirai.bean.tokens.TokenPond;
+import org.co2dice.mirai.bean.tokens.TokenPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class AttributeFixDice {
     }
 
     public DiceList getDiceList(CharacterCard c){
-        TokenPond pond = c.getTokens();
+        TokenPool pond = c.getTokens();
         List<TokenFuller> tfs = new ArrayList<>();
         for (Token t : tokens){
             TokenFuller tf = pond.getPointFuller(t);

@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.tokens
 
-import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.dice.NormalDice
 import org.co2dice.mirai.bean.tokens.characterToken.*
+import javax.smartcardio.Card
 
 /**
  *      使用IDEA编写
@@ -11,7 +11,7 @@ import org.co2dice.mirai.bean.tokens.characterToken.*
  * @Time:  2022-12-06-23:38
  * @Message: Have a good time!  :)
  **/
-class TokenPond (val characterCard: CharacterCard, val fullers : MutableMap<Token,TokenFuller> = mutableMapOf<Token,TokenFuller>()){
+class TokenPool (val holder: Card, val fullers : MutableMap<Token,TokenFuller> = mutableMapOf<Token,TokenFuller>()){
 
     fun getPointFuller(tokenType: Token):TokenFuller?{
         return fullers[tokenType]
@@ -31,7 +31,10 @@ class TokenPond (val characterCard: CharacterCard, val fullers : MutableMap<Toke
         return null
     }
     fun addFuller(tokenType : Token,
-                  value : Int = DiceList(NormalDice(6),NormalDice(6),NormalDice(6)).roll().getResult(),
+                  value : Int = DiceList(
+                      NormalDice(6),
+                      NormalDice(6),
+                      NormalDice(6)).roll().getResult(),
                   limit : Int = value ):Boolean{
         if (fullers[tokenType] == null){
             fullers[tokenType] = TokenFuller(tokenType,value,limit)
@@ -40,20 +43,31 @@ class TokenPond (val characterCard: CharacterCard, val fullers : MutableMap<Toke
         return false
     }
 
-    fun addToken(token: Token,points:List<Token>){
+    fun addToken(token: Token,points:List<Token>):Boolean{
         if (fullers[token] != null){
+            //存在属性条，直接加一条
             fullers[token]!!.addToken(token)
+            return true
         }else{
             for (fuller in fullers.values){
+                //不存在，在现有的条里找能替换的
                 if (token.canReplace(fuller.tokenType) && points.contains(fuller.tokenType)){
                     fuller.addToken(token)
-                    break
+                    return true
                 }
             }
         }
+        return false
     }
-
-    fun addRandomHumanFuller():TokenPond{
+/**
+  * @author 韩左券
+  * @date 2022/12/8 16:46
+  * @input
+  * @return_value  tokenPond
+  * @message roll 人类角色初始点
+  * @log /
+  */
+    fun addRandomHumanFuller():TokenPool{
         val typeList = mutableListOf<Token>()
         typeList.add(Strength)
         typeList.add(Constitution)

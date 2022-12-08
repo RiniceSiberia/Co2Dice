@@ -54,8 +54,17 @@ class TokenFuller (val tokenType: Token,
             if (tokens.size == 0){
                 b = false
             }else{
-                val token = tokens.removeAt(tokens.size-1)
-                token.removedEvent(this)
+                for (j in 1 .. tokens.size){
+                    val token = tokens[tokens.size-j]
+                    if(token.point > 0){
+                        b = b && tokens.remove(token)
+                            //成功删除token
+                            && token.removedEvent(this)
+                            //成功触发事件
+                            && getPoints() > 0
+                        break
+                    }
+                }
             }
         }
         return b

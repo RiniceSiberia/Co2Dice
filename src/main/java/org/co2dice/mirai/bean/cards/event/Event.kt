@@ -9,6 +9,6 @@ import org.co2dice.mirai.bean.cards.Cards
  * @Time:  2022-12-06-21:18
  * @Message: Have a good time!  :)
  **/
-abstract class Event() : Cards {
+abstract class Event() : Cards() {
     override val type = CardType.EVENT
 }

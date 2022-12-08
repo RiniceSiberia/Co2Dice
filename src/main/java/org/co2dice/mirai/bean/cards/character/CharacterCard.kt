@@ -4,7 +4,7 @@ import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.item.Item
 import org.co2dice.mirai.bean.cards.skill.Skill
-import org.co2dice.mirai.bean.tokens.TokenPond
+import org.co2dice.mirai.bean.tokens.TokenPool
 
 /**
  *      使用IDEA编写
@@ -16,6 +16,6 @@ abstract class CharacterCard : Cards() {
     override val type = CardType.CHARACTER
     abstract val skills : MutableSet<Skill>
     abstract val items : MutableMap<Item,Int>
-    abstract val tokens : TokenPond
+    abstract val tokens : TokenPool
     //属性和token池子
 }

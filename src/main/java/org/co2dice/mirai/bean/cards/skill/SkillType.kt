@@ -8,4 +8,5 @@ package org.co2dice.mirai.bean.cards.skill
  **/
 enum class SkillType {
     ACTIVE, PASSIVE
+    //主动技能和被动技能
 }

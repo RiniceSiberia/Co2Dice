@@ -2,18 +2,18 @@ package org.co2dice.mirai.bean.battle
 
 import net.mamoe.mirai.contact.Group
 
-object BattlesPond {
-    private val battlePond = HashMap<Long, Battle>()
+object BattlesPool {
+    private val battles = HashMap<Long, Battle>()
 
     fun createBattle(group: Group) {
-        battlePond[group.id] = Battle()
+        battles[group.id] = Battle()
     }
 
     fun getBattle(group:Group) : Battle? {
-        return battlePond[group.id]
+        return battles[group.id]
     }
     fun finishBattle(group: Group){
-        battlePond.remove(group.id)
+        battles.remove(group.id)
     }
 
 }

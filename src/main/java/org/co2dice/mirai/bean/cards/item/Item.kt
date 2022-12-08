@@ -11,6 +11,6 @@ import org.co2dice.mirai.bean.cards.Cards
   * @message
   * @log /
   */
-abstract class Item : Cards {
+abstract class Item : Cards() {
     override val type = CardType.ITEM
 }
