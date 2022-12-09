@@ -81,8 +81,7 @@ object DiceUtils {
         return dices
     }
 
-    private class Temp(var dice: Dice, var priority: Int, var value: Double) {
-    }
+    private class Temp(var dice: Dice, var priority: Int, var value: Double)
 
     /**
      * @author 韩左券
