@@ -104,4 +104,17 @@ public class DiceList {
         return diceList;
     }
 
+    public Integer getMax(){
+        return diceList.stream().mapToInt(Dice::getDiceMax).sum();
+    }
+    public Integer getMin(){
+        return diceList.stream().mapToInt(Dice::getDiceMin).sum();
+    }
+    public Integer getDiceTime(){
+        return diceList.stream().mapToInt(Dice::getDiceTime).sum();
+    }
+    public List<List<Integer>> getDiceNumArray(){
+        return diceList.stream().map(Dice::getDiceNumArray).collect(Collectors.toList());
+    }
+
 }

@@ -4,6 +4,9 @@ import org.co2dice.mirai.bean.battle.Battle
 import org.co2dice.mirai.bean.battle.Damage
 import org.co2dice.mirai.bean.cards.CAOPot
 import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.cards.event.EventCard
+import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.dice.NormalDice
 
@@ -15,9 +18,14 @@ import org.co2dice.mirai.bean.dice.NormalDice
  **/
 class SkillActiveEffects {
 
-    fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,user:Cards,target:Cards):CAOPot{
+    fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,target:Cards):CAOPot{
         //造成伤害，取伤害数值
+        var skillHolder = skill.holder
+        var holderCharacter:CharacterCard? = skill.getHolder()
+        val level = skill.level
+
+
         var diceList = DiceList(NormalDice())
-        var damage:Damage = Damage( user, target, damageType = Damage.DamageType.BLUDGEON)
+        var damage:Damage = Damage( holderCharacter, target, damageType = Damage.DamageType.BLUDGEON)
     }
 }
