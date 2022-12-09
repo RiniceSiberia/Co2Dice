@@ -1,8 +1,9 @@
 package org.co2dice.mirai.bean.cards.character
 
+import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.item.Item
+import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.skill.Skill
 import org.co2dice.mirai.bean.tokens.TokenPool
 
@@ -14,8 +15,9 @@ import org.co2dice.mirai.bean.tokens.TokenPool
  **/
 abstract class CharacterCard : Cards() {
     override val type = CardType.CHARACTER
+    abstract var holder:Player
     abstract val skills : MutableSet<Skill>
-    abstract val items : MutableMap<Item,Int>
+    abstract val items : MutableMap<ItemCard,Int>
     abstract val tokens : TokenPool
     //属性和token池子
 }

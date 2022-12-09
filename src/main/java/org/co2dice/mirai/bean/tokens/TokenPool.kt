@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.tokens
 
+import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.dice.NormalDice
 import org.co2dice.mirai.bean.tokens.characterToken.*
-import javax.smartcardio.Card
 
 /**
  *      使用IDEA编写
@@ -11,7 +11,7 @@ import javax.smartcardio.Card
  * @Time:  2022-12-06-23:38
  * @Message: Have a good time!  :)
  **/
-class TokenPool (val holder: Card, val fullers : MutableMap<Token,TokenFuller> = mutableMapOf<Token,TokenFuller>()){
+class TokenPool (val holder: Cards, val fullers : MutableMap<Token,TokenFuller> = mutableMapOf<Token,TokenFuller>()){
 
     fun getPointFuller(tokenType: Token):TokenFuller?{
         return fullers[tokenType]

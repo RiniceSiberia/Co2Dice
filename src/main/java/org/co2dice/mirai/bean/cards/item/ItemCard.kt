@@ -2,6 +2,7 @@ package org.co2dice.mirai.bean.cards.item
 
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
   * @author trasgl
@@ -11,6 +12,8 @@ import org.co2dice.mirai.bean.cards.Cards
   * @message
   * @log /
   */
-abstract class Item : Cards() {
+abstract class ItemCard : Cards() {
     override val type = CardType.ITEM
+    abstract var holder: CharacterCard?
+    //持有者可为空
 }

@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.cards.skill
 
-import javax.smartcardio.Card
+import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
  *      使用IDEA编写
@@ -8,6 +9,8 @@ import javax.smartcardio.Card
  * @Time:  2022-12-06-22:13
  * @Message: Have a good time!  :)
  **/
-abstract class SkillCard : Card() {
+abstract class SkillCard : Cards() {
     abstract val skills:MutableSet<Skill>
+    abstract var holder: CharacterCard?
+    //持有者可为空
 }

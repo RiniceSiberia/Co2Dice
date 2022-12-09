@@ -7,6 +7,6 @@ package org.co2dice.mirai.bean.battle
   * @message 战斗类，用于存储战斗信息
   *
   */
-class Battle {
+class Battle : Scene() {
 
 }
