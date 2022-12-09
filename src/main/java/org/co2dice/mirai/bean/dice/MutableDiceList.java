@@ -32,9 +32,9 @@ public class MutableDiceList extends DiceList{
 
     @Override
     public List<Dice> getDiceList() {
-        List<Dice> diceList = super.getDiceList();
-        diceList.addAll(mutable);
-        return diceList;
+        List<Dice> d = super.getDiceList();
+        d.addAll(getMutable());
+        return d;
     }
 
     public List<Dice> getMutable() {
@@ -47,6 +47,30 @@ public class MutableDiceList extends DiceList{
 
     public List<Dice> getImmutable(){
         return super.getDiceList();
+    }
+
+
+
+    public Integer getMutableMin(){
+        return mutable.stream().mapToInt(Dice::getDiceMin).sum();
+    }
+    public Integer getMutableMax(){
+        return mutable.stream().mapToInt(Dice::getDiceMax).sum();
+    }
+    public Integer getImmutableMin(){
+        return super.getDiceList().stream().mapToInt(Dice::getDiceMin).sum();
+    }
+    public Integer getImmutableMax(){
+        return super.getDiceList().stream().mapToInt(Dice::getDiceMax).sum();
+    }
+    @Override
+    public Integer getMin() {
+        return getMutableMin()+getImmutableMin();
+    }
+
+    @Override
+    public Integer getMax() {
+        return getMutableMax()+getImmutableMax();
     }
 
     @Override
