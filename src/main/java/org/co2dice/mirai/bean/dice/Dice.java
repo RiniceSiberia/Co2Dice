@@ -32,4 +32,9 @@ public abstract class Dice {
     public int roll(){
         return (int) (Math.random() * diceValue + 1);
     }
+
+    @Override
+    public String toString() {
+        return "D"+diceValue;
+    }
 }

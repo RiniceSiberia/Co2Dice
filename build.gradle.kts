@@ -15,11 +15,15 @@ repositories {
 }
 
 dependencies {
-    val open_gpt3_version = "0.8.1"
+    val openGpt3Version = "0.8.1"
+    val junitVersion = "5.9.1"
     api("net.mamoe:mirai-console-terminal:2.13.0-RC2") // 自行替换版本
     api("net.mamoe:mirai-core:2.13.0-RC2")
 
-    implementation ("com.theokanning.openai-gpt3-java:api:${open_gpt3_version}")
-
-
+    implementation ("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
+    testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }

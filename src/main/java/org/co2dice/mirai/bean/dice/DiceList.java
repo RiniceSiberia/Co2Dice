@@ -47,7 +47,7 @@ public class DiceList {
     }
 
     public List<Double> getExpected(){
-        int[][] array= new int[][]{};
+        int[][] array= new int[1024][1024];
         for (int i = 0;i < diceList.size();i++){
             List<Integer> diceNum = diceList.get(i).getDiceNumArray();
             for (int j = 0; j < diceNum.size();j++){
@@ -115,6 +115,14 @@ public class DiceList {
     }
     public List<List<Integer>> getDiceNumArray(){
         return diceList.stream().map(Dice::getDiceNumArray).collect(Collectors.toList());
+    }
+
+    public String toString(){
+        //将dice根据string出来的结果进行分割，相同的骰子合并，在前面加个骰子数量
+        return diceList.stream().map(Dice::toString)
+                . collect(Collectors.groupingBy(e -> e, Collectors.counting()))
+                .entrySet().stream().map(e -> e.getValue() + e.getKey())
+                .collect(Collectors.joining(" + "));
     }
 
 }

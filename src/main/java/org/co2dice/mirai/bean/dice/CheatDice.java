@@ -37,5 +37,10 @@ public class CheatDice extends Dice{
     public int roll() {
         return (int) (Math.random() * (maxValue - minValue + 1) + minValue);
     }
+
+    @Override
+    public String toString() {
+        return "D"+super.diceValue;
+    }
 }
 

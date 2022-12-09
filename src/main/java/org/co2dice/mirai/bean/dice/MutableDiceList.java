@@ -48,4 +48,9 @@ public class MutableDiceList extends DiceList{
         return super.getDiceList();
     }
 
+    @Override
+    public String toString() {
+        DiceList diceList = new DiceList(mutable);
+        return super.toString()+","+diceList.toString();
+    }
 }

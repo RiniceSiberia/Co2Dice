@@ -17,4 +17,9 @@ public class ConstantDice extends Dice{
     public int roll(){
         return diceValue;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(diceValue);
+    }
 }
