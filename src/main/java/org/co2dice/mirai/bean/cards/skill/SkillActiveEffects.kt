@@ -20,12 +20,14 @@ class SkillActiveEffects {
 
     fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,target:Cards):CAOPot{
         //造成伤害，取伤害数值
-        var skillHolder = skill.holder
-        var holderCharacter:CharacterCard? = skill.getHolder()
-        val level = skill.level
-
-
-        var diceList = DiceList(NormalDice())
-        var damage:Damage = Damage( holderCharacter, target, damageType = Damage.DamageType.BLUDGEON)
+        var caoPot = CAOPot(0,0)
+//        var skillHolder = skill.holder
+//        var holderCharacter:CharacterCard? = skill.getHolder()
+//        val level = skill.level
+//
+//
+//        var diceList =
+//        var damage:Damage = Damage( holderCharacter, target, damageType = Damage.DamageType.BLUDGEON)
+        return caoPot
     }
 }

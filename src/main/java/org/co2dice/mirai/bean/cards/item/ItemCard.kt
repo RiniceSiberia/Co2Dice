@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.cards.item
 
+import org.co2dice.mirai.bean.cards.CAO
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.character.CharacterCard
@@ -12,7 +13,7 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard
   * @message
   * @log /
   */
-abstract class ItemCard : Cards() {
+abstract class ItemCard : Cards(),CAO {
     override val type = CardType.ITEM
     abstract var holder: CharacterCard?
     //持有者可为空

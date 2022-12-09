@@ -1,5 +1,7 @@
 package org.co2dice.mirai.bean.dice
 
+import kotlin.math.abs
+
 enum class UsuallyDices(val dice: Dice,val priority :Int) {
     D1(ConstantDice(1),2),
     COIN(NormalDice(2),1),
@@ -13,7 +15,6 @@ enum class UsuallyDices(val dice: Dice,val priority :Int) {
     D20(NormalDice(20),12),
     D100(NormalDice(100),13),
     NEGATIVE_1(ConstantDice(-1),4),
-    NEGATIVE_2(ConstantDice(-2),3),
     ;
 
     /**
@@ -28,10 +29,10 @@ enum class UsuallyDices(val dice: Dice,val priority :Int) {
         return values().sortedByDescending { it.priority }
     }
 
-    fun getExceptionList(e:Int):DiceList{
+    fun getExpectDice(e:Int):DiceList{
         val dices:MutableDiceList = MutableDiceList(mutableListOf(),mutableListOf())
         //循环遍历将所有的骰子都加入到dices,计算出所有的可能性，再将dices清空，算出最接近期望值的样子
-        var exlist = mutableListOf<Double>()
+        val exceptList = mutableListOf<Double>()
         var f = true
         while (f){
             for (dice in getListByPriority()){
@@ -42,21 +43,15 @@ enum class UsuallyDices(val dice: Dice,val priority :Int) {
                 val min = dices.min
                 val max = dices.max
                 for (i in 0..max-min){
-                    exlist.set(index = dice.priority,element = a@{
-                        if(exlist[dice.priority] != null){
-                            return@a exlist[dice.priority]
-                        }else{
-                            return@a 0.0
-                        }
-                    } + odds[i])
+                    exceptList.set(index = dice.priority,element = exceptList[dice.priority] + odds[i])
                 }
                 dices.mutable.remove(dice.dice)
             }
             //现在，exlist中承载了权重从高到低，每个权重下的期望值，需要从中
-            var resultList = mutableListOf<Dice>()
+            val resultList = mutableListOf<Dice>()
             //获取到了所有的期望值
-            for (i in 0 until exlist.size){
-                if (exlist[i] > e - 0.5 && exlist[i] < e + 0.5){
+            for (i in 0 until exceptList.size){
+                if (exceptList[i] > e - 0.5 && exceptList[i] < e + 0.5){
                     resultList.add(getListByPriority()[i].dice)
                 }
             }
@@ -64,23 +59,15 @@ enum class UsuallyDices(val dice: Dice,val priority :Int) {
             //如果resultList为空，则说明没有找到，将概率最接近的骰子加入到dices中
             if (resultList.isEmpty()){
                 //将和期望值最接近的骰子丢进去，注意，不是最大的骰子，而是最接近的骰子
-                dices.diceList.add(getListByPriority()[exlist.indexOf(exlist.stream().sorted(
-                    Comparator.comparingDouble(a,b ->{
-                        if(Math.abs(a - e) > Math.abs(b - e)){
-                            return@comparingDouble 1
-                        }else{
-                            return@comparingDouble -1
-                        }
-                    }
-                ).findFirst().get())].dice))
+                dices.diceList.add(getListByPriority()[exceptList.indexOf(exceptList.stream().sorted(
+                    Comparator.comparingDouble { abs(it - e) } ).findFirst().get())].dice)
             }else{
                 //如果不为空，则获取resultList的第一个元素，丢入dices中，结束循环
                 dices.diceList.add(resultList[0])
                 f = false
             }
         }
-
-
+        return dices
     }
 
 }

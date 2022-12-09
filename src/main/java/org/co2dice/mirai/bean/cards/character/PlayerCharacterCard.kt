@@ -22,8 +22,6 @@ class PlayerCharacterCard(
     override var tokens = TokenPool( holder = this).addRandomHumanFuller()
     override val skills: MutableSet<Skill> = mutableSetOf()
     override val items: MutableMap<ItemCard, Int> = mutableMapOf()
-    override var order = 0
-    override var chaos = 0
 
     fun reloadTokens() {
         tokens = TokenPool( holder = this).addRandomHumanFuller()
@@ -31,7 +29,8 @@ class PlayerCharacterCard(
 
 
     override fun deserialize(): JsonObject{
-
+        TODO()
+    //        return JsonObject()
     }
     override fun serialize(jo: JsonObject) {
 
