@@ -45,13 +45,14 @@ object DiceUtils {
                 val min = dices.mutableMin
                 val max = dices.mutableMax
                 for (i in min..max){
-                    exceptList[dice.priority] = fun(): Any {
+                    exceptList.set(dice.priority,
+                        fun(): Any {
                         return if (odds[i] != null) {
                             odds[i]!! * i + exceptList[dice.priority]
                         } else {
                             exceptList[dice.priority]
                         }
-                    }.invoke() as Double
+                    }.invoke() as Double)
                 }
                 dices.mutable.remove(dice.dice)
             }
