@@ -48,7 +48,11 @@ public class DiceList {
 
     public Map<Integer,Double> getExpected(){
         Map<Integer,Integer> map = Expect.getExcept(this);
-        return map.values().stream().collect(Collectors.toMap(k -> k, v -> map.get(v) / (double) map.size()));
+        Map<Integer,Double> result = new HashMap<>(map.size());
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            result.put(entry.getKey(), (double) (entry.getValue()/diceList.size()));
+        }
+        return result;
     }
 
     public List<Dice> getDiceList() {
@@ -68,6 +72,7 @@ public class DiceList {
         return diceList.stream().map(Dice::getDiceNumArray).collect(Collectors.toList());
     }
 
+    @Override
     public String toString(){
         //将dice根据string出来的结果进行分割，相同的骰子合并，在前面加个骰子数量
         return diceList.stream().map(Dice::toString)

@@ -42,7 +42,7 @@ object DiceUtils {
                 dices.mutable.add(dice.dice)
                 val odds:Map<Int,Double> = dices.expected
                 //概率
-                val min = dices.min
+                val min = dices.mutable.max
                 val max = dices.max
                 for (i in min..max){
                     exceptList[dice.priority] = fun(): Any {
