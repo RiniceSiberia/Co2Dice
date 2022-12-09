@@ -30,6 +30,14 @@ public class MutableDiceList extends DiceList{
         return diceList.getExpected();
     }
 
+    public Map<Integer,Double> getMutableExpected() {
+        return new DiceList(mutable).getExpected();
+    }
+
+    public Map<Integer,Double> getImmutableExpected() {
+        return super.getExpected();
+    }
+
     @Override
     public List<Dice> getDiceList() {
         List<Dice> d = super.getDiceList();

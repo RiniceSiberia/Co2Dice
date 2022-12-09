@@ -6,6 +6,7 @@ import org.co2dice.mirai.bean.dice.MutableDiceList
 import org.co2dice.mirai.bean.dice.UsuallyDices
 import java.util.*
 import kotlin.math.abs
+import kotlin.streams.toList
 
 object DiceUtils {
     val EXPECTED_VALUE:List<Double> = listOf(
@@ -48,6 +49,7 @@ object DiceUtils {
                 for (u in odds){
                     value += u.key * u.value
                 }
+                value /= odds.size
                 //向excpetList中添加一个临时对象，然后清空dices
                 exceptList.add(Temp(dice.dice,dice.priority,value))
                 dices.mutable.remove(dice.dice)
@@ -64,17 +66,18 @@ object DiceUtils {
             //现在，resultList中承载了所有的期望值在e+-0.5之间的骰子
             //如果resultList为空，则说明没有找到，将概率最接近的骰子加入到dices中
             if (resultList.isEmpty()){
-                //将和期望值最接近的骰子丢进去，注意，不是最大的骰子，而是最接近的骰子
-                resultList.add(resultList.stream().sorted(Comparator.comparingDouble{
+                //将和期望值最接近的骰子丢进去，注意，不是最大的骰子，而是最接近的骰子)
+                resultList.add(exceptList.stream().sorted(Comparator.comparingDouble<Temp?> {
                     return@comparingDouble abs(it.value - e)
-                }).findFirst().get())
+                }.reversed()).findFirst().get())
 //                dices.diceList.add(getListByPriority()[exceptList.indexOf(exceptList.stream().sorted(
 //                    Comparator.comparingDouble { abs(it - e) } ).findFirst().get())].dice)
             }else{
                 //如果不为空，则获取一个期望值最高的元素，丢入dices中，结束循环
-                val r :Temp = resultList.stream().sorted(
-                    Comparator.comparingInt<Temp?> { it.priority }.reversed() ).findFirst().get()
-                dices.diceList.add(r.dice)
+                val r :List<Temp> = resultList.stream().sorted(
+                    Comparator.comparingInt<Temp?> { it.priority }).toList()
+                r.reversed()
+                dices.diceList.add(r[0].dice)
                 f = false
             }
         }

@@ -50,7 +50,7 @@ public class DiceList {
         Map<Integer,Integer> map = Expect.getExcept(this);
         Map<Integer,Double> result = new HashMap<>(map.size());
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            result.put(entry.getKey(), (double) (entry.getValue()/diceList.size()));
+            result.put(entry.getKey(),  ((double)entry.getValue()/(double)diceList.size()));
         }
         return result;
     }
