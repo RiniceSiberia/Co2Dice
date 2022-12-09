@@ -4,6 +4,7 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.List;
+import java.util.Map;
 
 public class MutableDiceList extends DiceList{
     private List<Dice> mutable;
@@ -24,7 +25,7 @@ public class MutableDiceList extends DiceList{
     }
 
     @Override
-    public List<Double> getExpected() {
+    public Map<Integer,Double> getExpected() {
         DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.getExpected();
     }

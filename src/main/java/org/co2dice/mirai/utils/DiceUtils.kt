@@ -40,12 +40,18 @@ object DiceUtils {
             for (dice in getListByPriority()){
                 //获取当前的遍历数
                 dices.mutable.add(dice.dice)
-                val odds = dices.expected
+                val odds:Map<Int,Double> = dices.expected
                 //概率
                 val min = dices.min
                 val max = dices.max
-                for (i in 0..max-min){
-                    exceptList.set(index = dice.priority,element = exceptList[dice.priority] + odds[i])
+                for (i in min..max){
+                    exceptList[dice.priority] = fun(): Any {
+                        return if (odds[i] != null) {
+                            odds[i]!! * i + exceptList[dice.priority]
+                        } else {
+                            exceptList[dice.priority]
+                        }
+                    }.invoke() as Double
                 }
                 dices.mutable.remove(dice.dice)
             }

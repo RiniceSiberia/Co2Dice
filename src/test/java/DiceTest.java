@@ -19,7 +19,8 @@ public class DiceTest {
         List<Double> median = DiceUtils.INSTANCE.getEXPECTED_VALUE();
         for (Double d : median){
             DiceList diceList = DiceUtils.INSTANCE.getExpectDice(d);
-            logger.info(() -> "cost = "+median.indexOf(d)+" median = " + d + " diceList = " + diceList);
+            System.out.print("cost = "+median.indexOf(d)+" median = " + d + " diceList = " + diceList);
+            System.out.println("");
         }
     }
 
