@@ -13,7 +13,6 @@ enum class UsuallyDices(val dice: Dice,val priority :Int) {
     D10(NormalDice(10),9),
     D12(NormalDice(12),10),
     D20(NormalDice(20),12),
-    D100(NormalDice(100),13),
     NEGATIVE_1(ConstantDice(-1),4),
     ;
 

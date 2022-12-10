@@ -49,8 +49,9 @@ public class DiceList {
     public Map<Integer,Double> getExpected(){
         Map<Integer,Integer> map = Expect.getExcept(this);
         Map<Integer,Double> result = new HashMap<>(map.size());
+        int sum = map.values().stream().mapToInt(Integer::intValue).sum();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            result.put(entry.getKey(),  ((double)entry.getValue()/(double)diceList.size()));
+            result.put(entry.getKey(),  ((double)entry.getValue()/(double)sum));
         }
         return result;
     }
@@ -75,10 +76,16 @@ public class DiceList {
     @Override
     public String toString(){
         //将dice根据string出来的结果进行分割，相同的骰子合并，在前面加个骰子数量
-        return diceList.stream().map(Dice::toString)
+        String normal = diceList.stream().filter(d -> !(d instanceof ConstantDice)).map(Dice::toString)
                 . collect(Collectors.groupingBy(e -> e, Collectors.counting()))
                 .entrySet().stream().map(e -> e.getValue() + e.getKey())
                 .collect(Collectors.joining(" + "));
+        String c = diceList.stream().anyMatch(d -> d instanceof ConstantDice) ?
+                String.valueOf(diceList.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum()) : "";
+        if (diceList.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum() > 0){
+            c = "+" + c;
+        }
+        return normal +c;
     }
 
 }

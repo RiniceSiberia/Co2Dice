@@ -10,7 +10,7 @@ public class ConstantDice extends Dice{
 
     @Override
     public List<Integer> getDiceNumArray() {
-        return Collections.singletonList(super.getDiceValue());
+        return Collections.singletonList(diceValue);
     }
 
     @Override
