@@ -15,7 +15,7 @@ import org.co2dice.mirai.bean.tokens.TokenPool
  **/
 abstract class CharacterCard : Cards() {
     override val type = CardType.CHARACTER
-    abstract var holder:Player
+    abstract var characterHolder:Player
     abstract val skills : MutableSet<Skill>
     abstract val items : MutableMap<ItemCard,Int>
     abstract val tokens : TokenPool

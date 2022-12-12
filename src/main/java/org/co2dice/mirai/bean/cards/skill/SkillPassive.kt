@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.cards.skill
 
-import org.co2dice.mirai.bean.cards.CardType
+import org.co2dice.mirai.bean.battle.Scene
 import org.co2dice.mirai.bean.cards.Cards
 
 /**
@@ -11,5 +11,12 @@ import org.co2dice.mirai.bean.cards.Cards
  **/
 abstract class SkillPassive(holder: Cards) : Skill(holder) {
     override val skillType = SkillType.PASSIVE
-
+    abstract var check:Function1<SkillPassive,Boolean>
+    //检定值,宣言后会检定是否可以使用技能。
+    abstract var react:Function1<Cards,Int>
+    //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免.cards应该为技能目标。
+    abstract var effect:Function3<Scene,SkillPassive, Cards, Boolean>
+    //造成的特效，返回true则技能生效，返回false则技能失效。第一个cards应该为holder，第二个应为target。输出为本技能提供的混乱/秩序值。
+    abstract var reactEffect:Function3<Scene,SkillPassive, Cards, Boolean>
+    //反抗成功后的特效,card应为target.
 }

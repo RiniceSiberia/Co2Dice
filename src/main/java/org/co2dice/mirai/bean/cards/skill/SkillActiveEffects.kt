@@ -1,14 +1,7 @@
 package org.co2dice.mirai.bean.cards.skill
 
 import org.co2dice.mirai.bean.battle.Battle
-import org.co2dice.mirai.bean.battle.Damage
-import org.co2dice.mirai.bean.cards.CAOPot
 import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.character.CharacterCard
-import org.co2dice.mirai.bean.cards.event.EventCard
-import org.co2dice.mirai.bean.cards.item.ItemCard
-import org.co2dice.mirai.bean.dice.DiceList
-import org.co2dice.mirai.bean.dice.NormalDice
 
 /**
  *      使用IDEA编写
