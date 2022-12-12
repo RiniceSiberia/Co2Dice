@@ -1,8 +1,10 @@
 package org.co2dice.mirai.bean.dice;
 
 import org.co2dice.mirai.bean.cards.character.CharacterCard;
+import org.co2dice.mirai.bean.cards.character.CharacterTemp;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public class MutableDiceList extends DiceList{
         this.mutable = mutable;
         this.fixDice = fix;
     }
-    public MutableDiceList(DiceList diceList,List<Dice> mutable,AttributeFixDice fix){
+    public MutableDiceList(DiceList diceList, List<Dice> mutable, AttributeFixDice fix){
         super(diceList.getDiceList());
         this.mutable = mutable;
         this.fixDice = fix;
@@ -48,6 +50,13 @@ public class MutableDiceList extends DiceList{
     public List<Dice> getDiceList() {
         List<Dice> d = super.getDiceList();
         d.addAll(getMutable());
+        return d;
+    }
+
+    public List<Dice> getDiceListContainAttribute(CharacterCard c) {
+        List<Dice> d = super.getDiceList();
+        d.addAll(getMutable());
+        d.addAll(fixDice.getDiceList(c).getDiceList());
         return d;
     }
 

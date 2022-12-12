@@ -16,7 +16,7 @@ public class AttributeFixDice {
     private final List<Token> tokens;
     //属性种类
     private final Function<List<TokenFuller>,DiceList> fixFunc;
-    //
+    //获取属性修正值的函数
 
     public AttributeFixDice(List<Token> tokens, Function<List<TokenFuller>, DiceList> fixFunc) {
         this.tokens = tokens;
@@ -44,6 +44,14 @@ public class AttributeFixDice {
             return fixFunc.apply(tfs);
         }
         return new DiceList(new NormalDice(0));
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public Function<List<TokenFuller>, DiceList> getFixFunc() {
+        return fixFunc;
     }
 
     public DiceResult roll(CharacterCard c){

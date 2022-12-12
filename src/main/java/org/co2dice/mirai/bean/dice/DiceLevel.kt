@@ -27,13 +27,17 @@ enum class DiceLevel (val cost:Int,val diceList : DiceList){
     COST17 (17, DiceList(NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(10))),
     COST18 (18, DiceList(NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20),NormalDice(20))),
     ;
-    fun getDiceListByCost (cost:Int): DiceList? {
-        var diceList:DiceList? = null
-        for ( i in 0..values().size){
-            if (values()[i].cost == cost){
-                diceList = values()[i].diceList
+
+    companion object{
+        @JvmStatic
+        fun getDiceListByCost (cost:Int): DiceList? {
+            var diceList:DiceList? = null
+            for ( i in 0..values().size){
+                if (values()[i].cost == cost){
+                    diceList = values()[i].diceList
+                }
             }
+            return diceList
         }
-        return diceList
     }
 }

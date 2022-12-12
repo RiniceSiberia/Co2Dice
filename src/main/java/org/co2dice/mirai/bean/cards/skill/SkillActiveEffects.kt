@@ -11,9 +11,9 @@ import org.co2dice.mirai.bean.cards.Cards
  **/
 class SkillActiveEffects {
 
-    fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,target:Cards):CAOPot{
+    fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,target:Cards):{
         //造成伤害，取伤害数值
-        var caoPot = CAOPot(0,0)
+        var caoPot = (0,0)
 //        var skillHolder = skill.holder
 //        var holderCharacter:CharacterCard? = skill.getHolder()
 //        val level = skill.level
