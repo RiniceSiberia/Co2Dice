@@ -23,10 +23,12 @@ public class AttributeFixDice {
         this.fixFunc = fixFunc;
     }
 
+
     public AttributeFixDice(List<Token> tokens){
         this.tokens = tokens;
         this.fixFunc = (p) -> new DiceList(new ConstantDice((p.stream()
-                .mapToInt(TokenFuller::getPoints).sum())/(2*p.size())));
+                .mapToInt(TokenFuller::getPoints).sum())/(p.size())));
+        //默认的修正值为指定token的平均值
     }
 
     public DiceList getDiceList(CharacterCard c){

@@ -1,5 +1,6 @@
 package org.co2dice.mirai.utils
 
+import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.*
 import java.util.*
 import kotlin.math.abs
@@ -30,7 +31,8 @@ object DiceUtils {
         98.0
     )
     fun getExpectDice(e:Double): DiceList {
-        val dices = MutableDiceList(mutableListOf(),mutableListOf())
+        val fixDice:AttributeFixDice? = null
+        val dices = MutableDiceList(mutableListOf(),mutableListOf(),)
         //循环遍历将所有的骰子都加入到dices,计算出所有的可能性，再将dices清空，算出最接近期望值的样子
         //优先级和骰子的映射和期望值
         var f = true

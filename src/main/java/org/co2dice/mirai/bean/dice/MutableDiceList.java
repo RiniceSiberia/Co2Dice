@@ -8,34 +8,40 @@ import java.util.Map;
 
 public class MutableDiceList extends DiceList{
     private List<Dice> mutable;
+    //可变的修正值，技能牌丢弃去弃牌堆就将属性加在这里。
+    private AttributeFixDice fixDice;
+    //属性修正值，玩家的属性加成加在这里，不包含在期望计算中。需要使用新的方法计算期望值
 
-    public MutableDiceList(List<Dice> diceList, List<Dice> mutable ) {
+    public MutableDiceList(List<Dice> diceList, List<Dice> mutable,AttributeFixDice fix) {
         super(diceList);
         this.mutable = mutable;
+        this.fixDice = fix;
     }
-    public MutableDiceList(DiceList diceList,List<Dice> mutable){
+    public MutableDiceList(DiceList diceList,List<Dice> mutable,AttributeFixDice fix){
         super(diceList.getDiceList());
         this.mutable = mutable;
+        this.fixDice = fix;
     }
 
     @Override
     public DiceResult roll() {
-        DiceList diceList = new DiceList(mutable,super.getDiceList());
+        DiceList diceList = new DiceList(super.getDiceList(),mutable);
+        return diceList.roll();
+    }
+    public DiceResult rollContainAttribute(CharacterCard c){
+        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
         return diceList.roll();
     }
 
     @Override
-    public Map<Integer,Double> getExpected() {
-        DiceList diceList = new DiceList(super.getDiceList(),mutable);
-        return diceList.getExpected();
+    public Map<Integer,Double> getExpected(CharacterCard c) {
+        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
+        return diceList.getExpected(c);
     }
 
-    public Map<Integer,Double> getMutableExpected() {
-        return new DiceList(mutable).getExpected();
-    }
-
-    public Map<Integer,Double> getImmutableExpected() {
-        return super.getExpected();
+    public Map<Integer,Double> getExpectedContainAttribute(CharacterCard c) {
+        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
+        return diceList.getExpected(c);
     }
 
     @Override
@@ -43,6 +49,14 @@ public class MutableDiceList extends DiceList{
         List<Dice> d = super.getDiceList();
         d.addAll(getMutable());
         return d;
+    }
+
+    public AttributeFixDice getFixDice() {
+        return fixDice;
+    }
+
+    public void setFixDice(AttributeFixDice fixDice) {
+        this.fixDice = fixDice;
     }
 
     public List<Dice> getMutable() {

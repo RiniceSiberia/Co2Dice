@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
+import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.*;
@@ -46,7 +47,7 @@ public class DiceList {
         return result;
     }
 
-    public Map<Integer,Double> getExpected(){
+    public Map<Integer,Double> getExpected(CharacterCard c){
         Map<Integer,Integer> map = Expect.getExcept(this);
         Map<Integer,Double> result = new HashMap<>(map.size());
         int sum = map.values().stream().mapToInt(Integer::intValue).sum();
