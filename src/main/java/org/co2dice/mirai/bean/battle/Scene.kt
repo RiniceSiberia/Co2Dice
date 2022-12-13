@@ -7,4 +7,5 @@ package org.co2dice.mirai.bean.battle
  * @Message: Have a good time!  :)
  **/
 open class Scene {
+    var damageList = mutableListOf<Damage>()
 }

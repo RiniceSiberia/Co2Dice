@@ -62,6 +62,14 @@ abstract class SkillActive(holder: Cards) : Skill(holder) {
         var i: MutableList<Token> =
             cost.stream().collect( Collectors.groupingBy { it } )
             .values.stream().max( Comparator.comparingInt { it.size } ).get()
+//        skill.check = object : Function2<Scene, SkillActive, DiceList> {
+//            override fun invoke(p1: Scene, p2: SkillActive): DiceList {
+//                var dices = skill.check.invoke(scene, skill)
+//                dices.diceList.add(ConstantDice(1))
+//                return dices
+//            }
+//        }
+//        本函数的检定成功率+1
         if (i.size == 0){
             i = mutableListOf(Constitution)
         }

@@ -8,6 +8,8 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.cards.event.EventCard
 import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.tokens.Token
+import org.co2dice.mirai.bean.tokens.characterToken.Dexterity
+import org.co2dice.mirai.bean.tokens.characterToken.Strength
 
 /**
  *      使用IDEA编写
@@ -22,7 +24,11 @@ abstract class Skill(override var holder:Cards?):CAO,RelyToCard{
     //输入的传参,用来自定义一些卡的效果。
     // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
     // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化
-    abstract var cost:Function2<Scene,SkillActive,List<Token>>
+    var cost:Function2<Scene,Skill,List<Token>> =
+        {scene,skill ->
+            listOf(Strength,Strength,Dexterity)
+        }
+    //演示，cost为2点力量，1点敏捷
     //使用技能的token花费，宣言使用技能后无论怎么样都会消耗。返回一个消耗token的数组。
     abstract var trigger:Function2<Scene,Cards,Boolean>
     //触发条件，返回true则可以消耗cost使用技能。cards应该为holder，因为通过这张卡可以获得持有者的信息。
