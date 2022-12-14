@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.cards
 
 import org.co2dice.mirai.bean.SerializeJSON
+import java.util.UUID
 
 /**
  *      使用IDEA编写
@@ -9,7 +10,7 @@ import org.co2dice.mirai.bean.SerializeJSON
  * @Message: Have a good time!  :)
  **/
 abstract class Cards : SerializeJSON {
-    abstract val id: String
+    abstract val id: UUID
     abstract var name:String
     abstract var flavorText: String
     abstract var imgUrl: String

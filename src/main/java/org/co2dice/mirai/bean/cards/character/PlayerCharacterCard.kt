@@ -8,6 +8,7 @@ import org.co2dice.mirai.bean.cards.Hand
 import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.effect.Effect
 import org.co2dice.mirai.bean.tokens.TokenPool
+import java.util.UUID
 
 /**
  *      使用IDEA编写
@@ -16,7 +17,7 @@ import org.co2dice.mirai.bean.tokens.TokenPool
  * @Message: Have a good time!  :)
  **/
 class PlayerCharacterCard(
-    override val id: String,
+    override val id: UUID = UUID.randomUUID(),
     override var name: String,
     override var flavorText: String,
     override var imgUrl: String,

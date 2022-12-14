@@ -8,9 +8,10 @@ import org.co2dice.mirai.bean.cards.Hand
 import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.effect.Effect
 import org.co2dice.mirai.bean.tokens.TokenPool
+import java.util.*
 
 class CharacterTemp(
-    override val id: String = "-1",
+    override val id: UUID = UUID.randomUUID(),
     override var name: String = "测试用角色",
     override var flavorText: String = "用于测试混乱和秩序值，或者投骰子，请勿放于真实游戏中",
     override var imgUrl: String = "e:/",
