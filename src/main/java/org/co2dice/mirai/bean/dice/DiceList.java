@@ -57,6 +57,13 @@ public class DiceList {
         return result;
     }
 
+    public boolean addDice(Dice dice){
+        return diceList.add(dice);
+    }
+    public boolean removeDice(Dice dice){
+        return diceList.remove(dice);
+    }
+
     public List<Dice> getDiceList() {
         return diceList;
     }

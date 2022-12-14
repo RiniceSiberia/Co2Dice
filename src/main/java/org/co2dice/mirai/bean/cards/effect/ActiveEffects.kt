@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.cards.skill
+package org.co2dice.mirai.bean.cards.effect
 
 import org.co2dice.mirai.bean.battle.Battle
 import org.co2dice.mirai.bean.cards.Cards
@@ -9,9 +9,9 @@ import org.co2dice.mirai.bean.cards.Cards
  * @Time:  2022-12-08-20:39
  * @Message: Have a good time!  :)
  **/
-class SkillActiveEffects {
+class ActiveEffects {
 
-    fun blunt(input:MutableList<String>,battle: Battle,skill:SkillActive,target:Cards):{
+    fun blunt(input:MutableList<String>, battle: Battle, skill: EffectActive, target:Cards):{
         //造成伤害，取伤害数值
         var caoPot = (0,0)
 //        var skillHolder = skill.holder

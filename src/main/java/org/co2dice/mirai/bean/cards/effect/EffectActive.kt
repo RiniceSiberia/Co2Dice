@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.cards.skill
+package org.co2dice.mirai.bean.cards.effect
 
 import org.co2dice.mirai.bean.battle.Damage
 import org.co2dice.mirai.bean.battle.Scene
@@ -6,7 +6,6 @@ import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.*
 import org.co2dice.mirai.bean.tokens.Token
-import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken
 import org.co2dice.mirai.bean.tokens.characterToken.Constitution
 import org.co2dice.mirai.bean.tokens.characterToken.Dexterity
 import java.util.*
@@ -18,20 +17,25 @@ import java.util.stream.Collectors
  * @Time:  2022-12-06-21:30
  * @Message: 主动技能，只能在自己的回合使用。
  **/
-abstract class SkillActive(holder: Cards) : Skill(holder) {
-    override val skillType = SkillType.ACTIVE
+abstract class EffectActive(holder: Cards) : Effect(holder) {
+    //输入的传参,用来自定义一些卡的效果。
+    // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
+    // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化
+    abstract val skillParam:MutableMap<String,Int>
 
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
-    var check:Function2<Scene,SkillActive,DiceList> = check@{ _, skill ->
+    var check:Function2<Scene, EffectActive,DiceList> = check@{ _, skill ->
         val h = skill.getHolder()
         if (h != null){
             val tokens = h.tokens
             //这里默认值是获取敏捷
             val fuller = tokens.getPointFuller(Dexterity)
+            val burnValue:Int = skillParam[Dexterity.id] ?:0
+            //额外支付的敏捷值
             if (fuller != null){
                 return@check MutableDiceList(
                     listOf(NormalDice(20)),
-                    listOf(ConstantDice(0)),
+                    listOf(ConstantDice(burnValue)),
                     AttributeFixDice(listOf(Dexterity)))
                 //固定值，增益，以及变化的属性值
             }
@@ -42,7 +46,7 @@ abstract class SkillActive(holder: Cards) : Skill(holder) {
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
 
     //示例反抗函数,使用敏捷进行反抗,进行一个0修正值,1d20+敏捷的反抗
-    var react:Function3<Scene,SkillActive, Cards, DiceList> = react@{ _, _, target ->
+    var react:Function3<Scene, EffectActive, Cards, DiceList> = react@{ _, _, target ->
         if (target is CharacterCard){
             val tokens = target.tokens
             //这里默认值是获取敏捷
@@ -57,7 +61,7 @@ abstract class SkillActive(holder: Cards) : Skill(holder) {
     }
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
-    var effect:Function3<Scene,SkillActive, Cards, Boolean> = effect@{ scene, skill, cards ->
+    var effect:Function3<Scene, EffectActive, Cards, Boolean> = effect@{ scene, skill, cards ->
         val cost = skill.cost.invoke(scene,skill)
         var i: MutableList<Token> =
             cost.stream().collect( Collectors.groupingBy { it } )
@@ -88,7 +92,7 @@ abstract class SkillActive(holder: Cards) : Skill(holder) {
     // 该技能会将一个damage实体塞入场景的伤害列表计算槽。伤害源为持有该技能的卡牌，伤害目标会受到和cost对应等级的伤害。伤害类型为钝器击伤。
 
     // 传参:玩家的输入值，场景，技能本身，敌人。
-    abstract var reactEffect:Function3<Scene,SkillActive, Cards, Boolean>
+    abstract var reactEffect:Function3<Scene, EffectActive, Cards, Boolean>
     //反抗成功后的特效。
     // 传参:玩家的输入值，场景，技能本身，敌人。
 

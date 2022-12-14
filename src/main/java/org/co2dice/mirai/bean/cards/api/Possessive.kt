@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.cards
+package org.co2dice.mirai.bean.cards.api
 
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 

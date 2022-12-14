@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.cards
+package org.co2dice.mirai.bean.cards.api
 
 /**
  *      使用IDEA编写

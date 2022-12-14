@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.cards.character
 import kotlinx.serialization.json.JsonObject
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.cards.item.ItemCard
-import org.co2dice.mirai.bean.cards.skill.Skill
+import org.co2dice.mirai.bean.cards.effect.Effect
 import org.co2dice.mirai.bean.tokens.TokenPool
 
 /**
@@ -17,10 +17,10 @@ class PlayerCharacterCard(
     override var name: String,
     override var flavorText: String,
     override var imgUrl: String,
-    override var holder: Player,
+    override var characterHolder: Player?,
 ) : CharacterCard() {
-    override var tokens = TokenPool( holder = this).addRandomHumanFuller()
-    override val skills: MutableSet<Skill> = mutableSetOf()
+    override var tokens = TokenPool( this ).addRandomHumanFuller()
+    override val effects: MutableSet<Effect> = mutableSetOf()
     override val items: MutableMap<ItemCard, Int> = mutableMapOf()
 
     fun reloadTokens() {

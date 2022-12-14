@@ -1,8 +1,7 @@
 package org.co2dice.mirai.bean.buff
 
 import org.co2dice.mirai.bean.battle.Scene
-import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.RelyToCard
+import org.co2dice.mirai.bean.cards.api.RelyToCard
 
 /**
   * @author 韩左券
@@ -12,7 +11,7 @@ import org.co2dice.mirai.bean.cards.RelyToCard
   * @message buff是一个添加在token，道具，技能或场景上的效果，用于提供一个永续的效果。比如受伤减少，攻击力增加等等。
   * @log /
   */
-abstract class AbstractBuff :RelyToCard{
+abstract class AbstractBuff : RelyToCard {
     abstract val id : String
     abstract var name : String
     //buff的名称和id
