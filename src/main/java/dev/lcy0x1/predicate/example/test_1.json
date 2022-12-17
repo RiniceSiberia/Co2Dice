@@ -1,0 +1,45 @@
+{
+  "type": "AND",
+  "val": [
+	{
+	  "type": "NEQ",
+	  "val": [
+		{
+		  "type": "GET",
+		  "attr": "ATK",
+		  "target": "$0"
+		},
+		{
+		  "type": "GET",
+		  "attr": "ATK",
+		  "target": "$1"
+		},
+		{
+		  "type": "GET",
+		  "attr": "ATK",
+		  "target": "$2"
+		}
+	  ]
+	},
+	{
+	  "type": "NEQ",
+	  "val": [
+		{
+		  "type": "GET",
+		  "attr": "DEF",
+		  "target": "$0"
+		},
+		{
+		  "type": "GET",
+		  "attr": "DEF",
+		  "target": "$1"
+		},
+		{
+		  "type": "GET",
+		  "attr": "DEF",
+		  "target": "$2"
+		}
+	  ]
+	}
+  ]
+}
