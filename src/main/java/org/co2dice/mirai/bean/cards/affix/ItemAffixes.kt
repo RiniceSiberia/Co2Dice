@@ -29,6 +29,5 @@ abstract class ItemAffixes(param: MutableMap<String,String>) : AbstractAffixes(p
         override val name: String = "锐器"
         override val description: String = "该卡的技能会降低伤害。"
     }
-    class
 
 }

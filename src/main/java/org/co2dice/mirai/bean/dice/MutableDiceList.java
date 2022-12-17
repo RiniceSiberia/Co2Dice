@@ -36,14 +36,14 @@ public class MutableDiceList extends DiceList{
     }
 
     @Override
-    public Map<Integer,Double> getExpected(CharacterCard c) {
-        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
-        return diceList.getExpected(c);
+    public Map<Integer,Double> getExpected() {
+        DiceList diceList = new DiceList(super.getDiceList(),mutable);
+        return diceList.getExpected();
     }
 
     public Map<Integer,Double> getExpectedContainAttribute(CharacterCard c) {
         DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
-        return diceList.getExpected(c);
+        return diceList.getExpected();
     }
 
     @Override

@@ -13,9 +13,6 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
         if (cards.size > 100) {
             throw Exception("卡组最多100张卡")
         }
-        if (cards.size < 20) {
-            throw Exception("卡组最少20张卡")
-        }
         if (cards.stream().anyMatch { it.type != this.type }) {
             throw Exception("卡组中有不属于该卡组的卡")
         }
@@ -24,6 +21,8 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
         cards.remove(card)
     }
     fun insertCard(card: Cards) {
+        card.faceUp = false
+        card.tap = false
         cards.add(card)
         shuffle()
     }
@@ -44,9 +43,13 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
     }
 
     fun addCardToTop(card: Cards) {
+        card.faceUp = false
+        card.tap = false
         cards.add(0,card)
     }
     fun addCardToBottom(card: Cards) {
+        card.faceUp = false
+        card.tap = false
         cards.add(card)
     }
     fun shuffle () {
@@ -65,6 +68,15 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
     }
     fun checkBottom(i:Int) : MutableList<Cards> {
         return cards.subList(cards.size-i-1,cards.size-1)
+    }
+
+    fun watchDeckTop():Cards{
+        val card = cards[0]
+        return if (card.faceUp){
+            card
+        }else{
+            CardBack(card.type)
+        }
     }
 
 }

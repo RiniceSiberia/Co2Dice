@@ -15,4 +15,6 @@ abstract class Cards : SerializeJSON {
     abstract var flavorText: String
     abstract var imgUrl: String
     abstract val type : CardType
+    var faceUp : Boolean = false
+    var tap : Boolean = false
 }

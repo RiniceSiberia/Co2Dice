@@ -20,6 +20,8 @@ import org.co2dice.mirai.bean.tokens.characterToken.Strength
  **/
 abstract class Effect(override var holder:Cards?): CAO, RelyToCard {
 
+//    var influence =
+
 
     var cost:Function2<Scene, Effect,List<Token>> =
         {scene,skill ->

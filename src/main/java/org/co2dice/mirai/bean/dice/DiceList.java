@@ -47,7 +47,7 @@ public class DiceList {
         return result;
     }
 
-    public Map<Integer,Double> getExpected(CharacterCard c){
+    public Map<Integer,Double> getExpected(){
         Map<Integer,Integer> map = Expect.getExcept(this);
         Map<Integer,Double> result = new HashMap<>(map.size());
         int sum = map.values().stream().mapToInt(Integer::intValue).sum();

@@ -1,7 +1,5 @@
 package org.co2dice.mirai.utils;
 
-import javafx.beans.DefaultProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 
