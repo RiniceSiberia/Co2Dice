@@ -16,4 +16,8 @@ public interface PredicateContext {
 
 	<O, I> IFunction<O,I> buildChildren(IOperationInstanceSingle<O,I> v);
 
+	IEnvironment getEnv();
+
+	IValueInstance<?> getField(String str);
+
 }

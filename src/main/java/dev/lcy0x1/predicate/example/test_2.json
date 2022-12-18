@@ -2,30 +2,16 @@
   "type": "AND",
   "val": {
 	"type": "MAP",
-	"target": {
-	  "attrs": [
-		"atk",
-		"def"
-	  ],
-	  "list": "$all"
-	},
-	"iterate": "attrs",
+	"target": [["#atk", "#def"], "$all"],
 	"function": {
 	  "type": "NEQ",
 	  "val": {
 		"type": "MAP",
-		"target": {
-		  "attr": "$i",
-		  "list": "list"
-		},
-		"iterate": "list",
+		"target": ["$1", "$i"],
 		"function": {
-		  "type": "FUNCTION",
+		  "type": "GET",
 		  "function": "GET",
-		  "target": [
-			"$i",
-			"attr"
-		  ]
+		  "target": ["$i", "$1"]
 		}
 	  }
 	}

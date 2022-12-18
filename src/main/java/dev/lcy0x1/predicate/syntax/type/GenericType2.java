@@ -8,7 +8,7 @@ public class GenericType2<T, A, B> extends OperandType<T> implements GenericType
 	private final OperandType<B> b;
 
 	public GenericType2(String name, OperandType<A> a, OperandType<B> b) {
-		super(name, null);
+		super(name, null,null);
 		this.a = a;
 		this.b = b;
 	}

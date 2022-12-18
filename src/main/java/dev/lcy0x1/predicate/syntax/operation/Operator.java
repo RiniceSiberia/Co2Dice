@@ -49,18 +49,18 @@ public class Operator<T extends IOperationInstance> implements NamedEnum {
 							c -> ListHelper.reduce(false, e.unwrap(c), (u, x) -> u ^ x.getVal(c)))
 			));
 
-	public static final Operator<IOperationInstanceDouble<Boolean, Integer, Integer>> EQ =
-			new Operator<>("EQ", IOperationFactory.simpleSS(OperandTypes.BOOL,
-					IParam.getSingleton(OperandTypes.NUMBER, "left"),
-					IParam.getSingleton(OperandTypes.NUMBER, "right"),
-					(ctx, a, b) -> OperandTypes.BOOL.parse(ctx, c -> a.getVal(c).equals(b.getVal(c)))
+	public static final Operator<IOperationInstanceSingle<Boolean, List<Integer>>> EQ =
+			new Operator<>("EQ", IOperationFactory.simpleL(OperandTypes.BOOL,
+					IParam.getList(OperandTypes.NUMBER, "val", 2),
+					(ctx, e) -> OperandTypes.BOOL.parse(ctx,
+							c -> ListHelper.eq(e.getVal(c)))
 			));
 
-	public static final Operator<IOperationInstanceDouble<Boolean, Integer, Integer>> NEQ =
-			new Operator<>("NEQ", IOperationFactory.simpleSS(OperandTypes.BOOL,
-					IParam.getSingleton(OperandTypes.NUMBER, "left"),
-					IParam.getSingleton(OperandTypes.NUMBER, "right"),
-					(ctx, a, b) -> OperandTypes.BOOL.parse(ctx, c -> !a.getVal(c).equals(b.getVal(c)))
+	public static final Operator<IOperationInstanceSingle<Boolean, List<Integer>>> NEQ =
+			new Operator<>("NEQ", IOperationFactory.simpleL(OperandTypes.BOOL,
+					IParam.getList(OperandTypes.NUMBER, "val", 2),
+					(ctx, e) -> OperandTypes.BOOL.parse(ctx,
+							c -> ListHelper.neq(e.getVal(c)))
 			));
 
 	public static final Operator<IOperationInstanceDouble<Boolean, Integer, Integer>> LE =

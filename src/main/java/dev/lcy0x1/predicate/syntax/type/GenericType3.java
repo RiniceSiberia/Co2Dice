@@ -9,7 +9,7 @@ public class GenericType3<T, A, B, C> extends OperandType<T> implements GenericT
 	private final OperandType<C> c;
 
 	public GenericType3(String name, OperandType<A> a, OperandType<B> b, OperandType<C> c) {
-		super(name, null);
+		super(name, null,null);
 		this.a = a;
 		this.b = b;
 		this.c = c;
