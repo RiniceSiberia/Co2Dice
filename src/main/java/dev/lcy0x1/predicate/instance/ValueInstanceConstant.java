@@ -1,14 +1,14 @@
 package dev.lcy0x1.predicate.instance;
 
-import dev.lcy0x1.predicate.syntax.OperandType;
+import dev.lcy0x1.predicate.syntax.type.OperandType;
 
-public class OperandInstance<T> {
+public class ValueInstanceConstant<T> implements IValueInstance<T> {
 
 	private final OperandType<T> type;
 
-	private T value;
+	private final T value;
 
-	public OperandInstance(OperandType<T> type, T value) {
+	public ValueInstanceConstant(OperandType<T> type, T value) {
 		this.type = type;
 		this.value = value;
 	}

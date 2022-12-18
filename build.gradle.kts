@@ -9,6 +9,19 @@ plugins {
 group = "org.co2dice"
 version = "0.1.0"
 
+allprojects {
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
 repositories {
 //    maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
     mavenCentral()
@@ -20,9 +33,11 @@ dependencies {
     api("net.mamoe:mirai-console-terminal:2.13.0-RC2") // 自行替换版本
     api("net.mamoe:mirai-core:2.13.0-RC2")
 
-    implementation ("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
+    implementation("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
-    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 tasks.named<Test>("test") {
     useJUnitPlatform()

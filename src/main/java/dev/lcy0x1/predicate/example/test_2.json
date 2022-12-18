@@ -1,0 +1,33 @@
+{
+  "type": "AND",
+  "val": {
+	"type": "MAP",
+	"target": {
+	  "attrs": [
+		"atk",
+		"def"
+	  ],
+	  "list": "$all"
+	},
+	"iterate": "attrs",
+	"function": {
+	  "type": "NEQ",
+	  "val": {
+		"type": "MAP",
+		"target": {
+		  "attr": "$i",
+		  "list": "list"
+		},
+		"iterate": "list",
+		"function": {
+		  "type": "FUNCTION",
+		  "function": "GET",
+		  "target": [
+			"$i",
+			"attr"
+		  ]
+		}
+	  }
+	}
+  }
+}
