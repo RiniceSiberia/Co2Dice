@@ -9,6 +9,6 @@ import kotlinx.serialization.json.JsonObject
  * @Message: Have a good time!  :)
  **/
 interface SerializeJSON {
-    abstract fun deserialize(): JsonObject
-    abstract fun serialize(jo: JsonObject)
+    fun deserialize(): JsonObject
+    fun serialize(jo: JsonObject)
 }
