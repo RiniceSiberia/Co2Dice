@@ -1,6 +1,8 @@
 package org.co2dice.mirai.bean.game
 
+import com.alibaba.fastjson2.JSONObject
 import org.co2dice.mirai.bean.Player
+import org.co2dice.mirai.utils.SerializeJSON
 import org.co2dice.mirai.bean.buff.AbstractBuff
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
@@ -10,7 +12,7 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard
  * @Time:  2022-12-08-20:55
  * @Message: Have a good time!  :)
  **/
-open class Scene (open val players: MutableList<Player> = mutableListOf()){
+open class Scene (open val players: MutableList<Player> = mutableListOf()): SerializeJSON {
     //玩家列表，包括kp和所有参与者。
     val damageList = mutableListOf<Damage>()
     //伤害缓存列表
@@ -24,6 +26,14 @@ open class Scene (open val players: MutableList<Player> = mutableListOf()){
 
     fun makeDamage(){
 
+    }
+
+    override fun deserialize(): JSONObject {
+        TODO("Not yet implemented")
+    }
+
+    override fun serialize(jo: JSONObject) {
+        TODO("Not yet implemented")
     }
 
 

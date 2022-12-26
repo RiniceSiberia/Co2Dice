@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.cards.character
 
+import com.alibaba.fastjson2.JSONObject
 import kotlinx.serialization.json.JsonObject
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.cards.CardType
@@ -26,6 +27,8 @@ class PlayerCharacterCard(
     override var tokens = TokenPool( this ).addRandomHumanFuller()
     override val deck: Deck = Deck("${id}.deck","${name}的卡组",CardType.CHARACTER, mutableListOf())
     override val hand: Hand = Hand(this, mutableListOf())
+
+
     override val effects: MutableSet<Effect> = mutableSetOf()
     override val items: MutableMap<ItemCard, Int> = mutableMapOf()
 
@@ -33,12 +36,12 @@ class PlayerCharacterCard(
         tokens = TokenPool( holder = this).addRandomHumanFuller()
     }
 
-
-    override fun deserialize(): JsonObject{
-        TODO()
-    //        return JsonObject()
+    override fun deserialize(): JSONObject {
+        TODO("Not yet implemented")
     }
-    override fun serialize(jo: JsonObject) {
+
+    override fun serialize(jo: JSONObject) {
 
     }
+
 }

@@ -1,6 +1,6 @@
-package org.co2dice.mirai.bean
+package org.co2dice.mirai.utils
 
-import kotlinx.serialization.json.JsonObject
+import com.alibaba.fastjson2.JSONObject
 
 /**
  *      使用IDEA编写
@@ -9,6 +9,6 @@ import kotlinx.serialization.json.JsonObject
  * @Message: Have a good time!  :)
  **/
 interface SerializeJSON {
-    fun deserialize(): JsonObject
-    fun serialize(jo: JsonObject)
+    fun deserialize(): JSONObject
+    fun serialize(jo: JSONObject)
 }

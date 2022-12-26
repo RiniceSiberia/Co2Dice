@@ -32,12 +32,14 @@ dependencies {
     val openGpt3Version = "0.8.1"
     val junitVersion = "5.9.1"
     val dataFixerUpperVersion = "4.1.27"
+    val fastJsonVersion = "2.0.21"
     api("net.mamoe:mirai-console-terminal:2.13.0-RC2") // 自行替换版本
     api("net.mamoe:mirai-core:2.13.0-RC2")
 
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
     implementation("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
+    implementation("com.alibaba:fastjson:${fastJsonVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("com.mojang:datafixerupper:${dataFixerUpperVersion}")
