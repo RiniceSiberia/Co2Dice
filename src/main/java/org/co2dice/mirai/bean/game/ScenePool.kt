@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.battle
+package org.co2dice.mirai.bean.game
 
 import net.mamoe.mirai.contact.Group
 

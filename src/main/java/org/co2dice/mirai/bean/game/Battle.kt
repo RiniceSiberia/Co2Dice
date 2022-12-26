@@ -1,7 +1,6 @@
-package org.co2dice.mirai.bean.battle
+package org.co2dice.mirai.bean.game
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
   * @author 韩左券

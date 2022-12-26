@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.buff
 
-import org.co2dice.mirai.bean.battle.Scene
+import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.api.RelyToCard
 
 /**

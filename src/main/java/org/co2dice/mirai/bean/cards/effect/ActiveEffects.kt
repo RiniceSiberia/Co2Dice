@@ -1,16 +1,5 @@
 package org.co2dice.mirai.bean.cards.effect
 
-import org.co2dice.mirai.bean.battle.Battle
-import org.co2dice.mirai.bean.battle.Damage
-import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.character.CharacterCard
-import org.co2dice.mirai.bean.dice.ConstantDice
-import org.co2dice.mirai.bean.dice.DiceLevel
-import org.co2dice.mirai.bean.dice.DiceList
-import org.co2dice.mirai.bean.tokens.characterToken.Constitution
-import java.util.Comparator
-import java.util.stream.Collectors
-
 /**
  *      使用IDEA编写
  * @Author: DUELIST

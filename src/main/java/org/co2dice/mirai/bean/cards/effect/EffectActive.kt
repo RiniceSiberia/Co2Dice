@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.cards.effect
 
-import org.co2dice.mirai.bean.battle.Damage
-import org.co2dice.mirai.bean.battle.Scene
+import org.co2dice.mirai.bean.game.Damage
+import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.*

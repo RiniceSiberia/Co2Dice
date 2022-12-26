@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.tokens
 
-import org.co2dice.mirai.bean.battle.Battle
+import org.co2dice.mirai.bean.game.Battle
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**

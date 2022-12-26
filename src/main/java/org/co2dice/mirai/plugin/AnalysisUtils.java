@@ -6,7 +6,7 @@ import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.MessageChain;
-import org.co2dice.mirai.bean.battle.ScenePool;
+import org.co2dice.mirai.bean.game.ScenePool;
 
 public class AnalysisUtils {
 
