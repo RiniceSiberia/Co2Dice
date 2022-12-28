@@ -5,7 +5,7 @@ import dev.lcy0x1.predicate.syntax.operation.instance.api.IOperationFactory;
 import dev.lcy0x1.predicate.syntax.param.type.IParam;
 import dev.lcy0x1.predicate.syntax.param.type.ParameterSet;
 import dev.lcy0x1.predicate.syntax.type.OperandType;
-import dev.lcy0x1.predicate.util.type.Either;
+import dev.lcy0x1.util.type.Either;
 
 import java.util.List;
 import java.util.function.BiFunction;

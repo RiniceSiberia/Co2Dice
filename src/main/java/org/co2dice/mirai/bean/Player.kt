@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean
 
-import com.alibaba.fastjson2.JSONObject
-import org.co2dice.mirai.utils.SerializeJSON
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  *      使用IDEA编写
@@ -9,12 +9,9 @@ import org.co2dice.mirai.utils.SerializeJSON
  * @Time:  2022-12-08-20:45
  * @Message: Have a good time!  :)
  **/
-class Player(val qq: Long) :SerializeJSON{
-    override fun deserialize(): JSONObject {
-        TODO("Not yet implemented")
-    }
+@Serializable
+class Player(
+    @SerialName("qq")
+    val qq: Long) {
 
-    override fun serialize(jo: JSONObject) {
-        TODO("Not yet implemented")
-    }
 }

@@ -1,4 +1,4 @@
-package dev.lcy0x1.predicate.util.type;
+package dev.lcy0x1.util.type;
 
 import java.util.Optional;
 import java.util.function.Function;

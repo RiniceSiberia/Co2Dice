@@ -10,8 +10,8 @@ import dev.lcy0x1.predicate.syntax.param.type.ParameterSet;
 import dev.lcy0x1.predicate.syntax.type.NamedEnum;
 import dev.lcy0x1.predicate.syntax.type.OperandType;
 import dev.lcy0x1.predicate.syntax.type.OperandTypes;
-import dev.lcy0x1.predicate.util.ListHelper;
-import dev.lcy0x1.predicate.util.type.Either;
+import dev.lcy0x1.util.ListHelper;
+import dev.lcy0x1.util.type.Either;
 
 import java.util.HashMap;
 import java.util.List;

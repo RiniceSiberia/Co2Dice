@@ -1,4 +1,4 @@
-package dev.lcy0x1.predicate.util;
+package dev.lcy0x1.util;
 
 import java.util.List;
 import java.util.TreeSet;

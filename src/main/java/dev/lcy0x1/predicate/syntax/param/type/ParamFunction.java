@@ -8,7 +8,7 @@ import dev.lcy0x1.predicate.syntax.param.instance.IParamInstance;
 import dev.lcy0x1.predicate.syntax.param.instance.ParamBiFunctionInstance;
 import dev.lcy0x1.predicate.syntax.param.instance.ParamFunctionInstance;
 import dev.lcy0x1.predicate.syntax.type.OperandTypes;
-import dev.lcy0x1.predicate.util.CastHelper;
+import dev.lcy0x1.util.CastHelper;
 
 public class ParamFunction implements IParam {
 

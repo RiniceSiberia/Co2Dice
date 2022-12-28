@@ -1,7 +1,7 @@
 package dev.lcy0x1.predicate.instance;
 
 import dev.lcy0x1.predicate.syntax.type.OperandType;
-import dev.lcy0x1.predicate.util.CastHelper;
+import dev.lcy0x1.util.CastHelper;
 
 import java.util.List;
 

@@ -1,7 +1,5 @@
 package org.co2dice.mirai.bean.cards
 
-import com.alibaba.fastjson2.JSONObject
-import kotlinx.serialization.json.JsonObject
 import java.util.*
 
 /**
@@ -11,17 +9,11 @@ import java.util.*
  * @Message: Have a good time!  :)
  **/
 class CardBack(override val type: CardType) : Cards() {
-    override val id: UUID = UUID.randomUUID()
-    override var name: String = "未知卡片"
+    override val cardId: UUID = UUID.randomUUID()
+    override var cardName: String = "未知卡片"
     override var flavorText: String = "NaN"
     override var imgUrl: String = ""
-    override fun deserialize(): JSONObject {
-        TODO("Not yet implemented")
-    }
 
-    override fun serialize(jo: JSONObject) {
-        TODO("Not yet implemented")
-    }
 
 
 }

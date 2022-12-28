@@ -11,7 +11,7 @@ import dev.lcy0x1.predicate.syntax.param.type.ParamList;
 import dev.lcy0x1.predicate.syntax.param.type.ParamValue;
 import dev.lcy0x1.predicate.syntax.param.type.ParameterSet;
 import dev.lcy0x1.predicate.syntax.type.OperandType;
-import dev.lcy0x1.predicate.util.type.Either;
+import dev.lcy0x1.util.type.Either;
 
 import java.util.List;
 import java.util.function.BiFunction;
