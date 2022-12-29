@@ -9,7 +9,7 @@ import java.util.UUID
  * @Message: Have a good time!  :)
  **/
 abstract class Cards {
-    abstract val cardId: String
+    abstract val cardId: UUID
     abstract var cardName:String
     abstract var flavorText: String
     abstract var imgUrl: String

@@ -16,7 +16,7 @@ import java.util.UUID
  * @Message: Have a good time!  :)
  **/
 class PlayerCharacterCard(
-    override val cardId: String = UUID.randomUUID().toString(),
+    override val cardId: UUID = UUID.randomUUID(),
     override var cardName: String,
     override var flavorText: String,
     override var imgUrl: String,
