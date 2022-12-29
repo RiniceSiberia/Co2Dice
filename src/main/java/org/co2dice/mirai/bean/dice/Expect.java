@@ -25,9 +25,9 @@ public class Expect {
     }
 
     public static Map<Integer,Integer> getExcept(DiceList diceList) {
-        Expect e = new Expect(new int[diceList.size()][], new HashMap<>());
-        for (int i = 0; i < diceList.size() ; i++){
-            e.data[i] = diceList.get(i).getDiceNumArray().stream().mapToInt(Integer::valueOf).toArray();
+        Expect e = new Expect(new int[diceList.getDiceList().size()][], new HashMap<>());
+        for (int i = 0; i < diceList.getDiceList().size() ; i++){
+            e.data[i] = diceList.getDiceList().get(i).getDiceNumArray().stream().mapToInt(Integer::valueOf).toArray();
         }
         e.dfs(0, 0);
         return e.map;

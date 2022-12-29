@@ -17,32 +17,44 @@ public class MutableDiceList extends DiceList{
         this.mutable = mutable;
         this.fixDice = fix;
     }
+    public MutableDiceList(DiceList diceList, List<Dice> mutable, AttributeFixDice fix){
+        super(diceList.getDiceList());
+        this.mutable = mutable;
+        this.fixDice = fix;
+    }
 
     @Override
     public DiceResult roll() {
-        DiceList diceList = new DiceList(this,mutable);
+        DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.roll();
     }
     public DiceResult rollContainAttribute(CharacterCard c){
-        DiceList diceList = new DiceList(this,mutable,fixDice.getDiceList(c));
+        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
         return diceList.roll();
     }
 
     @Override
     public Map<Integer,Double> getExpected() {
-        DiceList diceList = new DiceList(this,mutable);
+        DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.getExpected();
     }
 
     public Map<Integer,Double> getExpectedContainAttribute(CharacterCard c) {
-        DiceList diceList = new DiceList(this,mutable,fixDice.getDiceList(c));
+        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
         return diceList.getExpected();
     }
 
-    public List<Dice> getDiceListContainAttribute(CharacterCard c) {
-        List<Dice> d = this;
+    @Override
+    public List<Dice> getDiceList() {
+        List<Dice> d = super.getDiceList();
         d.addAll(getMutable());
-        d.addAll(fixDice.getDiceList(c));
+        return d;
+    }
+
+    public List<Dice> getDiceListContainAttribute(CharacterCard c) {
+        List<Dice> d = super.getDiceList();
+        d.addAll(getMutable());
+        d.addAll(fixDice.getDiceList(c).getDiceList());
         return d;
     }
 
@@ -63,7 +75,7 @@ public class MutableDiceList extends DiceList{
     }
 
     public List<Dice> getImmutable(){
-        return this;
+        return super.getDiceList();
     }
 
 
@@ -75,10 +87,10 @@ public class MutableDiceList extends DiceList{
         return mutable.stream().mapToInt(Dice::getDiceMax).sum();
     }
     public Integer getImmutableMin(){
-        return this.stream().mapToInt(Dice::getDiceMin).sum();
+        return super.getDiceList().stream().mapToInt(Dice::getDiceMin).sum();
     }
     public Integer getImmutableMax(){
-        return this.stream().mapToInt(Dice::getDiceMax).sum();
+        return super.getDiceList().stream().mapToInt(Dice::getDiceMax).sum();
     }
     @Override
     public Integer getMin() {
