@@ -32,17 +32,22 @@ public class AttributeFixDice {
     }
 
     public DiceList getDiceList(CharacterCard c){
+        //获取属性修正值
         TokenPool pond = c.getTokens();
+        //获取角色的token池
         List<TokenFuller> tfs = new ArrayList<>();
         for (Token t : tokens){
+            //遍历本骰中记载的Token类型，如果角色的token池中有这种类型的token，则将其加入到tfs中
             TokenFuller tf = pond.getPointFuller(t);
             if (tf != null){
                 tfs.add(tf);
             }
         }
         if (tfs.size() > 0 && tfs.size() == tokens.size()){
+            //如果tfs中有token，且tfs中的token种类与本骰中记载的token种类相同，则返回修正值
             return fixFunc.apply(tfs);
         }
+        //否则返回0
         return new DiceList(new NormalDice(0));
     }
 

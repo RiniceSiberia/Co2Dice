@@ -13,11 +13,10 @@ import java.util.stream.Collectors;
   * @message 骰子组，可以存放多个骰子，并使用封装好的批处理方法。注：如果要使用可随意修改参数的骰子，应该使用mutableDiceList
   * @log /
   */
-public class DiceList {
-    private final List<Dice> diceList;
+public class DiceList extends ArrayList<Dice> {
 
     public DiceList(Dice... diceList){
-        this.diceList = Arrays.asList(diceList);
+        super(Arrays.asList(diceList));
     }
 
     @SafeVarargs
@@ -26,12 +25,12 @@ public class DiceList {
         for (List<Dice> dices : diceList) {
             temp.addAll(dices);
         }
-        this.diceList = temp;
+        super.addAll(temp);
     }
 
     public DiceResult roll(){
         DiceResult temp;
-        int bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
+        int bpNum = this.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();
         //惩罚骰子和奖励骰子的抵消
         DiceResult result = new DiceResult(this);
         while (bpNum != 0){
@@ -57,40 +56,29 @@ public class DiceList {
         return result;
     }
 
-    public boolean addDice(Dice dice){
-        return diceList.add(dice);
-    }
-    public boolean removeDice(Dice dice){
-        return diceList.remove(dice);
-    }
-
-    public List<Dice> getDiceList() {
-        return diceList;
-    }
-
     public Integer getMax(){
-        return diceList.stream().mapToInt(Dice::getDiceMax).sum();
+        return this.stream().mapToInt(Dice::getDiceMax).sum();
     }
     public Integer getMin(){
-        return diceList.stream().mapToInt(Dice::getDiceMin).sum();
+        return this.stream().mapToInt(Dice::getDiceMin).sum();
     }
     public Integer getDiceTime(){
-        return diceList.stream().mapToInt(Dice::getDiceTime).sum();
+        return this.stream().mapToInt(Dice::getDiceTime).sum();
     }
     public List<List<Integer>> getDiceNumArray(){
-        return diceList.stream().map(Dice::getDiceNumArray).collect(Collectors.toList());
+        return this.stream().map(Dice::getDiceNumArray).collect(Collectors.toList());
     }
 
     @Override
     public String toString(){
         //将dice根据string出来的结果进行分割，相同的骰子合并，在前面加个骰子数量
-        String normal = diceList.stream().filter(d -> !(d instanceof ConstantDice)).map(Dice::toString)
+        String normal = this.stream().filter(d -> !(d instanceof ConstantDice)).map(Dice::toString)
                 . collect(Collectors.groupingBy(e -> e, Collectors.counting()))
                 .entrySet().stream().map(e -> e.getValue() + e.getKey())
                 .collect(Collectors.joining(" + "));
-        String c = diceList.stream().anyMatch(d -> d instanceof ConstantDice) ?
-                String.valueOf(diceList.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum()) : "";
-        if (diceList.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum() > 0){
+        String c = this.stream().anyMatch(d -> d instanceof ConstantDice) ?
+                String.valueOf(this.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum()) : "";
+        if (this.stream().filter(d -> d instanceof ConstantDice).mapToInt(Dice::getDiceValue).sum() > 0){
             c = "+" + c;
         }
         return normal +c;
