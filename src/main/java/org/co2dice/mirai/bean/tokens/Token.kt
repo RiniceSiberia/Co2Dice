@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.tokens
 
-import org.co2dice.mirai.bean.battle.Battle
+import org.co2dice.mirai.bean.game.Battle
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
@@ -26,11 +26,11 @@ abstract class Token {
     //每个token提供的属性值，用于计算属性，0是无数值，负数会倒扣属性
     // 大于1或者小于1会当做n点属性的加值来计算，比如value=5就等于这是一个+5属性的点，但扣除依然按照一个来计算
 
-    var checkPoint:Function2<Battle,CharacterCard,Boolean> = checkPoint@{ _, _ ->
+    var checkPoint:Function2<Battle<Any?>,CharacterCard,Boolean> = checkPoint@{ _, _ ->
         return@checkPoint isTempToken
     }
 
-    var timeFlow:Function2<Battle,CharacterCard,Boolean> = timeFlow@{ _, _ ->
+    var timeFlow:Function2<Battle<Any?>,CharacterCard,Boolean> = timeFlow@{ _, _ ->
         //触发检查点时自动调用的方法,true视为时间结束，默认方法为检查是否是临时token，如果是临时token则减少生命周期，如果生命周期为0则返回true
         if (isTempToken){
             lifetime--

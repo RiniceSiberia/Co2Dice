@@ -8,7 +8,12 @@ import dev.lcy0x1.predicate.instance.PredicateContext;
 import dev.lcy0x1.predicate.instance.ValueInstanceConstant;
 
 import java.util.function.Function;
-
+/**
+    *      使用IDEA编写
+    * @Author: L2
+    * @Time:  2022/12/18
+    * @Message: 这是一个操作符号的类型，T代表了不同的操作符号
+ **/
 public class OperandType<T> {
 
 	private final String name;

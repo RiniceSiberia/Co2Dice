@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.cards.skill
 
 
-import org.co2dice.mirai.bean.battle.Scene
+import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.api.CAO
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.api.Possessive

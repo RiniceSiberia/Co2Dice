@@ -32,7 +32,9 @@ public class AttributeFixDice {
     }
 
     public DiceList getDiceList(CharacterCard c){
+        //获取属性修正值
         TokenPool pond = c.getTokens();
+        //
         List<TokenFuller> tfs = new ArrayList<>();
         for (Token t : tokens){
             TokenFuller tf = pond.getPointFuller(t);

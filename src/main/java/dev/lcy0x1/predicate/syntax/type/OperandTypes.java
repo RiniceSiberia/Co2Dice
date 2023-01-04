@@ -8,7 +8,7 @@ import dev.lcy0x1.predicate.api.instance.IFunction;
 import dev.lcy0x1.predicate.instance.IAttributeType;
 import dev.lcy0x1.predicate.instance.ValueInstanceConstant;
 import dev.lcy0x1.predicate.instance.ValueInstanceList;
-import dev.lcy0x1.predicate.util.ListHelper;
+import dev.lcy0x1.util.ListHelper;
 
 import java.util.List;
 

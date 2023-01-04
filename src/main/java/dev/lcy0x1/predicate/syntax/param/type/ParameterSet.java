@@ -6,7 +6,7 @@ import dev.lcy0x1.predicate.instance.IValueInstance;
 import dev.lcy0x1.predicate.instance.PredicateContext;
 import dev.lcy0x1.predicate.syntax.operation.Operator;
 import dev.lcy0x1.predicate.syntax.param.instance.IParamInstance;
-import dev.lcy0x1.predicate.util.CastHelper;
+import dev.lcy0x1.util.CastHelper;
 
 import java.util.HashMap;
 import java.util.Map;

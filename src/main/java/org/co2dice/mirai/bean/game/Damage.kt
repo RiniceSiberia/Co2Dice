@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.battle
+package org.co2dice.mirai.bean.game
 
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.dice.DiceList

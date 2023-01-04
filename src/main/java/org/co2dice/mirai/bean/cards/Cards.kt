@@ -1,6 +1,5 @@
 package org.co2dice.mirai.bean.cards
 
-import org.co2dice.mirai.bean.SerializeJSON
 import java.util.UUID
 
 /**
@@ -9,9 +8,9 @@ import java.util.UUID
  * @Time:  2022-12-05-22:58
  * @Message: Have a good time!  :)
  **/
-abstract class Cards : SerializeJSON {
-    abstract val id: UUID
-    abstract var name:String
+abstract class Cards {
+    abstract val cardId: UUID
+    abstract var cardName:String
     abstract var flavorText: String
     abstract var imgUrl: String
     abstract val type : CardType

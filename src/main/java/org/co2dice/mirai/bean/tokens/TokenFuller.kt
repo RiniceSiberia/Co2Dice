@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.tokens
 
-import org.co2dice.mirai.bean.battle.Battle
+import org.co2dice.mirai.bean.game.Battle
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
@@ -23,7 +23,7 @@ class TokenFuller (val tokenType: Token,
     }
 
 
-    fun timePointCheck(battle : Battle, characterCard:CharacterCard):Boolean{
+    fun timePointCheck(battle : Battle<Any?>, characterCard:CharacterCard):Boolean{
         //对每个点都执行一次检查
         tokens.forEach{
             if (it.isTempToken && it.checkPoint(battle,characterCard) && it.timeFlow(battle,characterCard)){

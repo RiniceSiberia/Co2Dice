@@ -1,4 +1,4 @@
-package dev.lcy0x1.predicate.util.type;
+package dev.lcy0x1.util.type;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -21,10 +21,12 @@ public interface Either<A, B> {
 
 	record Left<A, B>(A a) implements Either<A, B> {
 
+		@Override
 		public Optional<A> getLeft() {
 			return Optional.of(a);
 		}
 
+		@Override
 		public Optional<B> getRight() {
 			return Optional.empty();
 		}
@@ -38,10 +40,12 @@ public interface Either<A, B> {
 
 	record Right<A, B>(B b) implements Either<A, B> {
 
+		@Override
 		public Optional<A> getLeft() {
 			return Optional.empty();
 		}
 
+		@Override
 		public Optional<B> getRight() {
 			return Optional.of(b);
 		}

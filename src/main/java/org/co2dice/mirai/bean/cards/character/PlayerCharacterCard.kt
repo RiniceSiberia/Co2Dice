@@ -1,6 +1,5 @@
 package org.co2dice.mirai.bean.cards.character
 
-import kotlinx.serialization.json.JsonObject
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Deck
@@ -17,15 +16,17 @@ import java.util.UUID
  * @Message: Have a good time!  :)
  **/
 class PlayerCharacterCard(
-    override val id: UUID = UUID.randomUUID(),
-    override var name: String,
+    override val cardId: UUID = UUID.randomUUID(),
+    override var cardName: String,
     override var flavorText: String,
     override var imgUrl: String,
     override var characterHolder: Player?,
 ) : CharacterCard() {
     override var tokens = TokenPool( this ).addRandomHumanFuller()
-    override val deck: Deck = Deck("${id}.deck","${name}的卡组",CardType.CHARACTER, mutableListOf())
+    override val deck: Deck = Deck("${cardId}.deck","${cardName}的卡组",CardType.CHARACTER, mutableListOf())
     override val hand: Hand = Hand(this, mutableListOf())
+
+
     override val effects: MutableSet<Effect> = mutableSetOf()
     override val items: MutableMap<ItemCard, Int> = mutableMapOf()
 
@@ -34,11 +35,5 @@ class PlayerCharacterCard(
     }
 
 
-    override fun deserialize(): JsonObject{
-        TODO()
-    //        return JsonObject()
-    }
-    override fun serialize(jo: JsonObject) {
 
-    }
 }

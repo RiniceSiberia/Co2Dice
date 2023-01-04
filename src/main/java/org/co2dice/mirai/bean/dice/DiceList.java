@@ -4,6 +4,9 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 /**
   * @author 韩左券
@@ -58,14 +61,55 @@ public class DiceList {
     }
 
     public boolean addDice(Dice dice){
-        return diceList.add(dice);
+        boolean r = diceList.add(dice);
+        integrate();
+        return r;
     }
     public boolean removeDice(Dice dice){
-        return diceList.remove(dice);
+        boolean r = diceList.remove(dice);
+        integrate();
+        return r;
     }
 
-    public List<Dice> getDiceList() {
+    public void integrate(){
+        int c = 0;
+        for (Dice d : diceList) {
+            if (d instanceof ConstantDice){
+                c += d.getDiceValue();
+                removeDice(d);
+            }
+        }
+        if (c != 0){
+            addDice(new ConstantDice(c));
+        }
+    }
+
+    public Dice removeDiceAt(int index){
+        return diceList.remove(index);
+    }
+
+    public Dice getDiceByIndex(int index){
+        return diceList.get(index);
+    }
+    public boolean changeDice(Dice target,Dice dice){
+        for (Dice d : diceList) {
+            if (d.equals(target)){
+                diceList.set(diceList.indexOf(d),dice);
+                return true;
+            }
+        }
+        return true;
+    }
+
+    List<Dice> getDiceList() {
         return diceList;
+    }
+    int getDiceListSize(){
+        return diceList.size();
+    }
+
+    void sortDiceList(Comparator<? super Dice> c){
+        diceList.sort(c);
     }
 
     public Integer getMax(){
