@@ -23,7 +23,7 @@ class TokenFuller (val tokenType: Token,
     }
 
 
-    fun timePointCheck(battle : Battle, characterCard:CharacterCard):Boolean{
+    fun timePointCheck(battle : Battle<Any?>, characterCard:CharacterCard):Boolean{
         //对每个点都执行一次检查
         tokens.forEach{
             if (it.isTempToken && it.checkPoint(battle,characterCard) && it.timeFlow(battle,characterCard)){

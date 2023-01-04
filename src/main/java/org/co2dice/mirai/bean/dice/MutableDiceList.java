@@ -17,11 +17,7 @@ public class MutableDiceList extends DiceList{
         this.mutable = mutable;
         this.fixDice = fix;
     }
-    public MutableDiceList(DiceList diceList, List<Dice> mutable, AttributeFixDice fix){
-        super(diceList.getDiceList());
-        this.mutable = mutable;
-        this.fixDice = fix;
-    }
+
 
     @Override
     public DiceResult roll() {
@@ -46,13 +42,13 @@ public class MutableDiceList extends DiceList{
 
     @Override
     public List<Dice> getDiceList() {
-        List<Dice> d = super.getDiceList();
+        List<Dice> d = new ArrayList<>(super.getDiceList());
         d.addAll(getMutable());
         return d;
     }
 
     public List<Dice> getDiceListContainAttribute(CharacterCard c) {
-        List<Dice> d = super.getDiceList();
+        List<Dice> d = new ArrayList<>(super.getDiceList());
         d.addAll(getMutable());
         d.addAll(fixDice.getDiceList(c).getDiceList());
         return d;

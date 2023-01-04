@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.game
 
 import org.co2dice.mirai.bean.Player
+import org.co2dice.mirai.bean.game.morph.Morph
 
 /**
   * @author 韩左券
@@ -10,7 +11,8 @@ import org.co2dice.mirai.bean.Player
   * @message 战斗类，用于存储战斗信息
   *
   */
-class Battle(override val players: MutableList<Player>) : Scene(players) {
+class Battle<M : Morph>(override val players: MutableList<Player>) : Scene(players) {
+    val morphs : List<M> = mutableListOf()
 
 
 
