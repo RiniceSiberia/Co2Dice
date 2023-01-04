@@ -1,7 +1,9 @@
 package dev.lcy0x1.predicate.syntax.param.type;
 
+import com.google.gson.JsonElement;
 import dev.lcy0x1.predicate.instance.IValueInstance;
 import dev.lcy0x1.predicate.instance.IValueInstanceName;
+import dev.lcy0x1.predicate.instance.PredicateContext;
 import dev.lcy0x1.predicate.syntax.operation.Operator;
 import dev.lcy0x1.predicate.syntax.operation.instance.api.IOperationInstance;
 import dev.lcy0x1.predicate.syntax.param.instance.IParamInstance;
@@ -24,10 +26,12 @@ public class ParamFunction implements IParam {
 	}
 
 	@Override
+	public IValueInstance<?> decode(PredicateContext ctx, JsonElement elem) {
+		return null;
+	}
+
+	@Override
 	public IParamInstance<?> build(IValueInstance<?> val) {
-		if (val.getType() != OperandTypes.OPERATOR) {
-			throw new RuntimeException(name + "requires operation, got " + val.getType());
-		}
 		return typeSafeBuild(CastHelper.unsafeCast(val));
 	}
 
