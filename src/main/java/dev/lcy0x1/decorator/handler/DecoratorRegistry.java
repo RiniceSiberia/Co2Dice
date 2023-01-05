@@ -10,10 +10,19 @@ import dev.lcy0x1.decorator.instance.get_numeric_attribute.GetNumericAttributeVa
 
 import java.util.LinkedHashMap;
 
+/**
+ * registry class that provides decorator token instance. Call register() to initialize
+ */
 public class DecoratorRegistry {
 
-	private static final LinkedHashMap<String, DecoratorToken<?, ?, ?>> REGISTRY = new LinkedHashMap<>();
+	/**
+	 * registry of the decorator token, allowing serialization
+	 */
+	private static final LinkedHashMap<Class<?>, DecoratorToken<?, ?, ?>> REGISTRY = new LinkedHashMap<>();
 
+	/**
+	 * the decorator for getting numeric attributes of a card
+	 */
 	public static final DecoratorToken<
 			GetNumericAttributeDecorator,
 			GetNumericAttributeContext,
@@ -27,22 +36,32 @@ public class DecoratorRegistry {
 				new DefaultGetNumericAttributeDecorator()));
 	}
 
+	/**
+	 * register a decorator token into the registry
+	 */
 	public static <D extends Decorator<D, C, V>,
 			C extends Record & DecoratorContext<C>,
 			V extends Record & DecoratorValueInstance<V>>
 	DecoratorToken<D, C, V> registerDecorator(DecoratorToken<D, C, V> token) {
-		REGISTRY.put(token.name(), token);
+		assert !REGISTRY.containsKey(token.cls());
+		REGISTRY.put(token.cls(), token);
 		return token;
 	}
 
+	/**
+	 * get a token from the registry, for serialization purpose
+	 */
 	@SuppressWarnings("unchecked")
 	public static <D extends Decorator<D, C, V>,
 			C extends Record & DecoratorContext<C>,
 			V extends Record & DecoratorValueInstance<V>>
-	DecoratorToken<D, C, V> getToken(String name) {
-		return (DecoratorToken<D, C, V>) REGISTRY.get(name);
+	DecoratorToken<D, C, V> getToken(Class<D> cls) {
+		return (DecoratorToken<D, C, V>) REGISTRY.get(cls);
 	}
 
+	/**
+	 * Invoke the static class initializer (the static {} block). Must be called before everything.
+	 */
 	public static void register() {
 
 	}

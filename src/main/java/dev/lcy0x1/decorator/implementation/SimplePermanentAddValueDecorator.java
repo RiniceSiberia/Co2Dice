@@ -1,12 +1,14 @@
 package dev.lcy0x1.decorator.implementation;
 
+import dev.lcy0x1.decorator.api.DecoratorHandler;
 import dev.lcy0x1.decorator.env.AttributeType;
-import dev.lcy0x1.decorator.handler.DecoratorHandler;
 import dev.lcy0x1.decorator.instance.get_numeric_attribute.GetNumericAttributeContext;
 import dev.lcy0x1.decorator.instance.get_numeric_attribute.GetNumericAttributeDecorator;
 import dev.lcy0x1.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
 
-public final class SimplePermanentAddValueDecorator extends SimplePermanentDecorator implements GetNumericAttributeDecorator {
+public final class SimplePermanentAddValueDecorator extends SimplePermanentDecorator<
+		GetNumericAttributeDecorator, GetNumericAttributeContext, GetNumericAttributeValueInstance
+		> implements GetNumericAttributeDecorator {
 
 	private final AttributeType type;
 	private final int value;
