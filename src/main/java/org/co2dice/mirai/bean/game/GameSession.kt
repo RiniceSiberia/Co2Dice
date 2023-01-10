@@ -1,12 +1,7 @@
 package org.co2dice.mirai.bean.game
 
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JsonClassDiscriminator
 import org.co2dice.mirai.bean.Player
-import java.io.Serial
 import java.util.*
 
 /**

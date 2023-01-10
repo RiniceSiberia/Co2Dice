@@ -1,6 +1,8 @@
-package org.co2dice.mirai.bean.cards
+package org.co2dice.mirai.bean.game.zone
 
-import kotlin.streams.toList
+import org.co2dice.mirai.bean.cards.CardBack
+import org.co2dice.mirai.bean.cards.CardType
+import org.co2dice.mirai.bean.cards.Cards
 
 /**
  *      使用IDEA编写
@@ -29,9 +31,9 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
     fun searchCard(f:Function1<Cards,Boolean>): Cards? {
         return cards.stream().filter {f.invoke(it)}.toList().getOrNull(0)
     }
-    fun pickCard(function: Function1<Cards,Boolean>):Cards?{
+    fun pickCard(function: Function1<Cards,Boolean>): Cards?{
         shuffle()
-        var card:Cards? = null
+        var card: Cards? = null
         for (c in cards){
             if (function.invoke(c)){
                 card = cards.removeAt(cards.indexOf(c))
@@ -70,7 +72,7 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
         return cards.subList(cards.size-i-1,cards.size-1)
     }
 
-    fun watchDeckTop():Cards{
+    fun watchDeckTop(): Cards {
         val card = cards[0]
         return if (card.faceUp){
             card

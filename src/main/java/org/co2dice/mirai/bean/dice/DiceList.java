@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 /**
-  * @author 韩左券
+  * @author DUELIST
   * @date 2022/12/8 15:16
   * @input
   * @return_value
@@ -60,10 +60,9 @@ public class DiceList {
         return result;
     }
 
-    public boolean addDice(Dice dice){
+    public void addDice(Dice dice){
         boolean r = diceList.add(dice);
         integrate();
-        return r;
     }
     public boolean removeDice(Dice dice){
         boolean r = diceList.remove(dice);

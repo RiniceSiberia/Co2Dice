@@ -3,8 +3,8 @@ package org.co2dice.mirai.bean.cards.character
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.Deck
-import org.co2dice.mirai.bean.cards.Hand
+import org.co2dice.mirai.bean.game.zone.Deck
+import org.co2dice.mirai.bean.game.zone.Hand
 import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.effect.Effect
 import org.co2dice.mirai.bean.tokens.TokenPool
