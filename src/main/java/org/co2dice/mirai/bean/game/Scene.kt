@@ -10,15 +10,19 @@ import org.co2dice.mirai.bean.game.Damage
  * @Time:  2022-12-08-20:55
  * @Message: Have a good time!  :)
  **/
-open class Scene (open val players: MutableList<Player> = mutableListOf()) {
-    //玩家列表，包括kp和所有参与者。
-    val damageList = mutableListOf<Damage>()
+abstract class Scene(
+    val characters: MutableList<CharacterCard>,
+    val damageList: MutableList<Damage>,
     //伤害缓存列表
+    var hasEnded:Boolean,
+    //是否已经结束
+    var isClosed:Boolean
+    //是否已经关闭（暂停）
+) {
+    //玩家列表，包括kp和所有参与者。
 //    val buffList = mutableListOf<AbstractBuff>()
     //buff列表
-    val characters = mutableSetOf<CharacterCard>()
     //角色列表，会存储不同类型的角色
-
 
 
 

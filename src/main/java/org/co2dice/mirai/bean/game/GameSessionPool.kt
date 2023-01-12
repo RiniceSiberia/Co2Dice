@@ -1,5 +1,7 @@
 package org.co2dice.mirai.bean.game
 
+import org.co2dice.mirai.bean.Player
+
 object GameSessionPool {
     private val gameSessionPool = mutableMapOf<String, GameSession>()
 
@@ -8,9 +10,10 @@ object GameSessionPool {
         return gameSessionPool[groupId]
     }
 
-    fun createGameSession(groupId: String, gameSession: GameSession): Boolean {
+    fun createGameSession(groupId: String,
+                          gameSession: GameSession): GameSession? {
         //创建会话
-        return gameSessionPool.putIfAbsent(groupId, gameSession) == null
+        return gameSessionPool.putIfAbsent(groupId, gameSession)
     }
 
 

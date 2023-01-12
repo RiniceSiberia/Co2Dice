@@ -9,8 +9,12 @@ public record GetNumericAttributeValueInstance(Integer value)
 		return new GetNumericAttributeValueInstance(this.value + value);
 	}
 
-	public GetNumericAttributeValueInstance multiply(double value) {
+	public GetNumericAttributeValueInstance multiply(int value) {
 		return new GetNumericAttributeValueInstance((int) Math.ceil(this.value * value));
+	}
+
+	public GetNumericAttributeValueInstance division(int value) {
+		return new GetNumericAttributeValueInstance(this.value / value);
 	}
 
 }

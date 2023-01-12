@@ -11,9 +11,9 @@ public final class SimplePermanentMultiplyValueDecorator extends SimplePermanent
 		> implements GetNumericAttributeDecorator {
 
 	private final AttributeNumericType type;
-	private final double value;
+	private final int value;
 
-	public SimplePermanentMultiplyValueDecorator(AttributeNumericType type, double value) {
+	public SimplePermanentMultiplyValueDecorator(AttributeNumericType type, int value) {
 		this.type = type;
 		this.value = value;
 	}
