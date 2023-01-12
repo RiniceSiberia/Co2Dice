@@ -8,6 +8,7 @@ import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.skill.SkillCard
 import org.co2dice.mirai.bean.game.GameSession
 import org.co2dice.mirai.bean.game.GameSessionPool
+import org.co2dice.mirai.bean.game.decorator.env.AttributeNumericType
 import org.co2dice.mirai.bean.game.decorator.handler.DecoratorRegistry
 import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentAddValueDecorator
 import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentMultiplyValueDecorator
@@ -30,12 +31,13 @@ class Test {
             characterHolder = player
         )
         gameSession.addBattle(mutableListOf(characterCard))
+        val scene = gameSession.getPlayerScene(player)!!
         val card = SkillCard()
-        duel.addDecorator(SimplePermanentAddValueDecorator(AttributeType.DEF, 500))
-        duel.addDecorator(SimplePermanentSwitchStatDecorator())
-        duel.addDecorator(SimplePermanentMultiplyValueDecorator(AttributeType.ATK, 2))
-        val value: Int = duel.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
-            .apply(GetNumericAttributeContext(AttributeType.ATK, card)).value()
+        scene.addDecorator(SimplePermanentAddValueDecorator(AttributeNumericType.CHAOS, 500))
+        scene.addDecorator(SimplePermanentSwitchStatDecorator())
+        scene.addDecorator(SimplePermanentMultiplyValueDecorator(AttributeNumericType.ORDER, 2))
+        val value: Int = scene.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
+            .apply(GetNumericAttributeContext(AttributeNumericType.CHAOS, card)).value()
         println(value)
     }
 }
