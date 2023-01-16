@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.game.decorator.env;
 
 import org.co2dice.mirai.bean.cards.Cards;
+import org.co2dice.mirai.bean.cards.api.CAO;
 import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.cards.event.EventCard;
 import org.co2dice.mirai.bean.cards.item.ItemCard;
@@ -8,7 +9,9 @@ import org.co2dice.mirai.bean.cards.skill.SkillCard;
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
 
 import java.util.function.Function;
-
+ /**
+ * 属性的间接实体，记录了获取属性的方法，此处是返回数字类型的属性
+ */
 public final class AttributeNumericType {
 
 //	@Deprecated
@@ -17,17 +20,13 @@ public final class AttributeNumericType {
 //	public static final AttributeNumericType DEF = new AttributeNumericType(e -> e.def);
 //
 	public static final AttributeNumericType CHAOS = new AttributeNumericType(e -> {
-		if (e instanceof ItemCard itemCard) return itemCard.getChaos();
-		else if (e instanceof SkillCard skillCard) return skillCard.getChaos();
-		else if (e instanceof CharacterCard || e instanceof EventCard) return -1;
-		else return -1;
+		if (e instanceof CAO cao) return cao.getChaos();
+		else return null;
 	});
 
 	public static final AttributeNumericType ORDER = new AttributeNumericType(e -> {
-		if (e instanceof ItemCard itemCard) return itemCard.getOrder();
-		else if (e instanceof SkillCard skillCard) return skillCard.getOrder();
-		else if (e instanceof CharacterCard || e instanceof EventCard) return -1;
-		else return -1;
+		if (e instanceof CAO cao) return cao.getOrder();
+		else return null;
 	});
 
 	private final Function<Cards, Integer> getter;

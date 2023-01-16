@@ -1,12 +1,8 @@
 package org.co2dice.mirai.plugin
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
-import org.co2dice.mirai.bean.cards.effect.attribute.AttributeType
-import org.co2dice.mirai.bean.cards.item.ItemCard
 import org.co2dice.mirai.bean.cards.skill.SkillCard
-import org.co2dice.mirai.bean.game.GameSession
 import org.co2dice.mirai.bean.game.GameSessionPool
 import org.co2dice.mirai.bean.game.decorator.env.AttributeNumericType
 import org.co2dice.mirai.bean.game.decorator.handler.DecoratorRegistry
@@ -15,6 +11,7 @@ import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentMulti
 import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentSwitchStatDecorator
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
 import org.junit.jupiter.api.Test
+import java.util.function.Predicate
 
 
 class Test {
@@ -33,10 +30,12 @@ class Test {
         gameSession.addBattle(mutableListOf(characterCard))
         val scene = gameSession.getPlayerScene(player)!!
         val card = SkillCard()
+        Predicate<>(scene,card)
         scene.addDecorator(SimplePermanentAddValueDecorator(AttributeNumericType.CHAOS, 500))
         scene.addDecorator(SimplePermanentSwitchStatDecorator())
         scene.addDecorator(SimplePermanentMultiplyValueDecorator(AttributeNumericType.ORDER, 2))
         val value: Int = scene.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
+            //获取场景的Token，并运用于卡片的获取属性值
             .apply(GetNumericAttributeContext(AttributeNumericType.CHAOS, card)).value()
         println(value)
     }

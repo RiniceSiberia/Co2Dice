@@ -4,9 +4,9 @@ package org.co2dice.mirai.bean.game.decorator.api;
  * A handler to allow performing actions through the decorators.
  * Can only be instantiated by DecoratorHolder.
  * Has only 1 public function: apply
+ * //持有修饰器的对象，用于修饰器的调用
+ * //apply方法为获取所有修饰器处理完毕后的总结果
  */
-//持有修饰器的对象，用于修饰器的调用
-	//apply方法为获取所有修饰器处理完毕后的总结果
 public interface DecoratorHandler<D extends Decorator<D, C, V>,
 		C extends Record & DecoratorContext<C>,
 		V extends Record & DecoratorValueInstance<V>> {
