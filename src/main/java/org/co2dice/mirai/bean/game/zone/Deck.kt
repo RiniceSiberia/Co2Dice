@@ -3,6 +3,9 @@ package org.co2dice.mirai.bean.game.zone
 import org.co2dice.mirai.bean.cards.CardBack
 import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.cards.event.EventCard
+import org.co2dice.mirai.bean.cards.venue.VenueCard
 
 /**
  *      使用IDEA编写
@@ -15,7 +18,8 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
         if (cards.size > 100) {
             throw Exception("卡组最多100张卡")
         }
-        if (cards.stream().anyMatch { it.type != this.type }) {
+        if (cards.stream().anyMatch { it is CharacterCard || it is EventCard || it is VenueCard }) {
+            //角色卡,事件卡,场地卡过滤掉
             throw Exception("卡组中有不属于该卡组的卡")
         }
     }
