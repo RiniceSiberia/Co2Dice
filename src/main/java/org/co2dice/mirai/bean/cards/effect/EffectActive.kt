@@ -3,6 +3,7 @@ package org.co2dice.mirai.bean.cards.effect
 import org.co2dice.mirai.bean.game.Damage
 import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.api.EffectAPI
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.*
 import org.co2dice.mirai.bean.tokens.Token
@@ -18,7 +19,7 @@ import java.util.stream.Collectors
  * @Message: 主动技能，只能在自己的回合使用。
  **/
 abstract class EffectActive(holder: Cards) : Effect(holder) {
-    //输入的传参,用来自定义一些卡的效果。
+    // 输入的传参,用来自定义一些卡的效果。
     // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
     // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化
     abstract val skillParam:MutableMap<String,Int>
@@ -45,7 +46,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     }
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
 
-    //示例反抗函数,使用敏捷进行反抗,进行一个0修正值,1d20+敏捷的反抗
+    //示例反抗函数,使用敏捷进行反抗,进行一个10+敏捷的反抗
     var react:Function3<Scene, EffectActive, Cards, DiceList> = react@{ _, _, target ->
         if (target is CharacterCard){
             val tokens = target.tokens
@@ -61,11 +62,13 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     }
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
-    var effect:Function3<Scene, EffectActive, Cards, Boolean> = effect@{ scene, skill, cards ->
-        val cost = skill.cost(scene,skill,)
+    override var function: (Scene, Cards, CharacterCard, EffectAPI<Scene, Cards, CharacterCard>) -> Boolean = effect@{
+            scene, cards, character,effect ->
+        val cost = effect.cost(scene,cards,character,effect)
         var i: MutableList<Token> =
             cost.stream().collect( Collectors.groupingBy { it } )
             .values.stream().max( Comparator.comparingInt { it.size } ).get()
+        //找到支付cost中最多的那个token
 //        skill.check = object : Function2<Scene, SkillActive, DiceList> {
 //            override fun invoke(p1: Scene, p2: SkillActive): DiceList {
 //                var dices = skill.check.invoke(scene, skill)
@@ -77,9 +80,9 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
         if (i.size == 0){
             i = mutableListOf(Constitution)
         }
-        //获取cost中数量最多的token的数量
+        //如果没有就扣1体质
         val d = Damage (
-            skill.getHolder(),
+            character,
             cards,
             DiceLevel.getDiceListByCost(i.size)?:DiceList(ConstantDice(1)),
             i[0], listOf(Damage.DamageType.BLUDGEON)
