@@ -11,7 +11,6 @@ import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentMulti
 import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentSwitchStatDecorator
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
 import org.junit.jupiter.api.Test
-import java.util.function.Predicate
 
 
 class Test {
@@ -30,7 +29,6 @@ class Test {
         gameSession.addBattle(mutableListOf(characterCard))
         val scene = gameSession.getPlayerScene(player)!!
         val card = SkillCard()
-        Predicate<>(scene,card)
         scene.addDecorator(SimplePermanentAddValueDecorator(AttributeNumericType.CHAOS, 500))
         scene.addDecorator(SimplePermanentSwitchStatDecorator())
         scene.addDecorator(SimplePermanentMultiplyValueDecorator(AttributeNumericType.ORDER, 2))

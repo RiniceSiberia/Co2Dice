@@ -5,6 +5,7 @@ import org.co2dice.mirai.bean.cards.CardType
 import org.co2dice.mirai.bean.cards.Cards
 import org.co2dice.mirai.bean.cards.api.Possessive
 import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.cards.effect.Effect
 
 /**
   * @author trasgl
@@ -18,4 +19,6 @@ abstract class ItemCard : Cards(), CAO, Possessive {
     override val type = CardType.ITEM
     abstract override var holder: CharacterCard?
     //持有者可为空
+    abstract val effects:MutableList<Effect>
+    //效果列表
 }

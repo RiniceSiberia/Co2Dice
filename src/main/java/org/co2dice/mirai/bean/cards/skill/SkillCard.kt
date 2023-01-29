@@ -24,18 +24,19 @@ abstract class SkillCard() : Cards(), CAO, Possessive {
     //持有者可为空
     abstract val burnValue:List<CharacterToken>
     //燃烧时使用的token
-    abstract val effects:MutableSet<Effect>
+    abstract val effects:MutableList<Effect>
     //技能池
-    abstract val recycle:Function3<Scene,SkillCard,CharacterCard,Int>
+    abstract val recycle:Function2<Scene,SkillCard,Int>
     //回收技能时的处理函数
-    override var chaos: Int=0
-        get() {
-            chaos = effects.stream().mapToInt { it.chaos }.sum()
-            return field
-        }
-        set(value) {
-            //无法set,chaos是自动计算的
-        }
+    override fun getChaos(): Int {
+        //获取所有技能的混乱值,并取最大值
+        return effects.stream().mapToInt { it.getChaos() }.max().orElse(0)
+    }
+
+    override fun getOrder(): Int {
+        //获取所有技能的秩序值取和
+        return effects.stream().mapToInt { it.getOrder() }.sum()
+    }
 
 
     var burnEffect :Function2<SkillCard,EffectActive,Unit> = {

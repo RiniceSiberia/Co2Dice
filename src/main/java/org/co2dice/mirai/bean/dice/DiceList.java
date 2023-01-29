@@ -100,7 +100,7 @@ public class DiceList {
         return true;
     }
 
-    List<Dice> getDiceList() {
+    public List<Dice> getDiceList() {
         return diceList;
     }
     int getDiceListSize(){

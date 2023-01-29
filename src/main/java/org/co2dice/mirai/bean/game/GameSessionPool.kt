@@ -49,6 +49,21 @@ object GameSessionPool {
         return false
     }
 
+    fun getGameSessionByQQ(qq:Long,dependId:String?):GameSession?{
+        //根据QQ号和依赖的账号获取会话
+        gameSessionPool.values.forEach {
+            if (it.dependId.equals(dependId)
+                && it.rosters.any { p -> p.qq == qq}) {
+                return it
+            }
+        }
+        return null
+
+    }
+
+
+
+
 
 
     fun loadGameSession(){

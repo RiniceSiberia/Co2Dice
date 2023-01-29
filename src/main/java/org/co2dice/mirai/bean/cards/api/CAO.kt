@@ -7,6 +7,6 @@ package org.co2dice.mirai.bean.cards.api
  * @Message: Have a good time!  :)
  **/
 interface CAO {
-    var chaos : Int
-    var order : Int
+    fun getChaos(): Int
+    fun getOrder(): Int
 }

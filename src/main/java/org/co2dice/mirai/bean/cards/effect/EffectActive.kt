@@ -25,7 +25,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
 
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
     var check:Function2<Scene, EffectActive,DiceList> = check@{ _, skill ->
-        val h = skill.getHolder()
+        val h = skill.getRelyCardHolder()
         if (h != null){
             val tokens = h.tokens
             //这里默认值是获取敏捷
@@ -62,7 +62,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
     var effect:Function3<Scene, EffectActive, Cards, Boolean> = effect@{ scene, skill, cards ->
-        val cost = skill.cost.invoke(scene,skill)
+        val cost = skill.cost(scene,skill,)
         var i: MutableList<Token> =
             cost.stream().collect( Collectors.groupingBy { it } )
             .values.stream().max( Comparator.comparingInt { it.size } ).get()
