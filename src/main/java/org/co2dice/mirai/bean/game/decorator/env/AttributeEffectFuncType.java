@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.game.decorator.env;
 
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function3;
+import kotlin.jvm.functions.Function4;
 import org.co2dice.mirai.bean.cards.Cards;
-import org.co2dice.mirai.bean.cards.api.CAO;
+import org.co2dice.mirai.bean.cards.api.EffectAPI;
 import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.cards.item.ItemCard;
 import org.co2dice.mirai.bean.cards.skill.SkillCard;
@@ -31,14 +31,12 @@ public final class AttributeEffectFuncType {
                return i.getEffects().get(index).getFunction();
            }
        }
-       return (scene,cards,character) -> {
-           return false;
-       };
+       return (scene,cards,character,effectAPI) -> false;
    });
 
-   private final Function2<Cards,Integer, Function3<Scene,Cards, CharacterCard,Boolean>> getter;
+   private final Function2<Cards,Integer, Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean>> getter;
 
-   private AttributeEffectFuncType(Function2<Cards,Integer, Function3<Scene,Cards, CharacterCard,Boolean>> getter) {
+   private AttributeEffectFuncType(Function2<Cards,Integer, Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean>> getter) {
        this.getter = getter;
    }
 

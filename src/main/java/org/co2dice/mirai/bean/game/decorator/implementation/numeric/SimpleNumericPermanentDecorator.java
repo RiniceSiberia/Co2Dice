@@ -1,11 +1,11 @@
-package org.co2dice.mirai.bean.game.decorator.implementation;
+package org.co2dice.mirai.bean.game.decorator.implementation.numeric;
 
 import org.co2dice.mirai.bean.game.decorator.api.Decorator;
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorContext;
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorModifier;
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorValueInstance;
 
-public abstract class SimplePermanentDecorator<
+public abstract class SimpleNumericPermanentDecorator<
 		D extends Decorator<D, C, V>,
 		C extends Record & DecoratorContext<C>,
 		V extends Record & DecoratorValueInstance<V>

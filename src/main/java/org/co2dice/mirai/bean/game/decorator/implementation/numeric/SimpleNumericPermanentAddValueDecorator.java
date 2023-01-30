@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.game.decorator.implementation;
+package org.co2dice.mirai.bean.game.decorator.implementation.numeric;
 
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorHandler;
 import org.co2dice.mirai.bean.game.decorator.env.AttributeNumericType;
@@ -6,14 +6,14 @@ import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetN
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeDecorator;
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
 
-public final class SimplePermanentAddValueDecorator extends SimplePermanentDecorator<
+public final class SimpleNumericPermanentAddValueDecorator extends SimpleNumericPermanentDecorator<
         GetNumericAttributeDecorator, GetNumericAttributeContext, GetNumericAttributeValueInstance
 		> implements GetNumericAttributeDecorator {
 
 	private final AttributeNumericType type;
 	private final int value;
 
-	public SimplePermanentAddValueDecorator(AttributeNumericType type, int value) {
+	public SimpleNumericPermanentAddValueDecorator(AttributeNumericType type, int value) {
 		this.type = type;
 		this.value = value;
 	}

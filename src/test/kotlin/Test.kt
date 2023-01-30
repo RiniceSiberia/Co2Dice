@@ -6,11 +6,10 @@ import org.co2dice.mirai.bean.cards.skill.SkillCard
 import org.co2dice.mirai.bean.game.GameSessionPool
 import org.co2dice.mirai.bean.game.decorator.env.AttributeNumericType
 import org.co2dice.mirai.bean.game.decorator.handler.DecoratorRegistry
-import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentAddValueDecorator
-import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentMultiplyValueDecorator
-import org.co2dice.mirai.bean.game.decorator.implementation.SimplePermanentSwitchStatDecorator
+import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
+import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
+import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
-import org.junit.jupiter.api.Test
 
 
 class Test {
@@ -29,9 +28,19 @@ class Test {
         gameSession.addBattle(mutableListOf(characterCard))
         val scene = gameSession.getPlayerScene(player)!!
         val card = SkillCard()
-        scene.addDecorator(SimplePermanentAddValueDecorator(AttributeNumericType.CHAOS, 500))
-        scene.addDecorator(SimplePermanentSwitchStatDecorator())
-        scene.addDecorator(SimplePermanentMultiplyValueDecorator(AttributeNumericType.ORDER, 2))
+        scene.addDecorator(
+            SimpleNumericPermanentAddValueDecorator(
+                AttributeNumericType.CHAOS,
+                500
+            )
+        )
+        scene.addDecorator(SimpleNumericPermanentSwitchStatDecorator())
+        scene.addDecorator(
+            SimpleNumericPermanentMultiplyValueDecorator(
+                AttributeNumericType.ORDER,
+                2
+            )
+        )
         val value: Int = scene.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
             //获取场景的Token，并运用于卡片的获取属性值
             .apply(GetNumericAttributeContext(AttributeNumericType.CHAOS, card)).value()
