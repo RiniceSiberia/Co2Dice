@@ -1,11 +1,9 @@
 package org.co2dice.mirai.bean.game.decorator.implementation.effect_func;
 
 
-import kotlin.jvm.functions.Function4;
-import org.co2dice.mirai.bean.cards.Cards;
-import org.co2dice.mirai.bean.cards.api.EffectAPI;
-import org.co2dice.mirai.bean.cards.character.CharacterCard;
-import org.co2dice.mirai.bean.game.Scene;
+
+import kotlin.jvm.functions.Function1;
+import org.co2dice.mirai.bean.cards.Situation;
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorHandler;
 import org.co2dice.mirai.bean.game.decorator.env.AttributeEffectFuncType;
 import org.co2dice.mirai.bean.game.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeContext;
@@ -17,9 +15,9 @@ public final class SimpleEffectFuncPermanentAddValueDecorator extends SimpleEffe
 		> implements GetEffectFuncAttributeDecorator {
 
 	private final AttributeEffectFuncType type;
-	private final Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean> value;
+	private final Function1<Situation,Boolean> value;
 
-	public SimpleEffectFuncPermanentAddValueDecorator(AttributeEffectFuncType type, Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean> value) {
+	public SimpleEffectFuncPermanentAddValueDecorator(AttributeEffectFuncType type, Function1<Situation,Boolean> value) {
 		this.type = type;
 		this.value = value;
 	}
@@ -40,7 +38,7 @@ public final class SimpleEffectFuncPermanentAddValueDecorator extends SimpleEffe
 		return val;
 	}
 
-	public Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean> value() {
+	public Function1<Situation,Boolean> value() {
 		return value;
 	}
 

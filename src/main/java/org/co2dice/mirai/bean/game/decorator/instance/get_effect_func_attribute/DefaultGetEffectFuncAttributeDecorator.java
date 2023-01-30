@@ -10,7 +10,7 @@ public final class DefaultGetEffectFuncAttributeDecorator
 
 	@Override
 	public GetEffectFuncAttributeValueInstance apply(GetEffectFuncAttributeContext context) {
-		return context.type().getValue(context.target(),context.index());
+		return context.type().getFunc(context.target(),context.index());
 	}
 
 }

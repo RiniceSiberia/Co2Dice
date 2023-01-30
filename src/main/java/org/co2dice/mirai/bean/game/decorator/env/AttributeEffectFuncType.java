@@ -1,16 +1,15 @@
 package org.co2dice.mirai.bean.game.decorator.env;
 
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function4;
 import org.co2dice.mirai.bean.cards.Cards;
+import org.co2dice.mirai.bean.cards.Situation;
 import org.co2dice.mirai.bean.cards.api.EffectAPI;
 import org.co2dice.mirai.bean.cards.character.CharacterCard;
 import org.co2dice.mirai.bean.cards.item.ItemCard;
 import org.co2dice.mirai.bean.cards.skill.SkillCard;
 import org.co2dice.mirai.bean.game.Scene;
 import org.co2dice.mirai.bean.game.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeValueInstance;
-
-import java.util.function.Function;
 
 /**
 * 属性的间接实体，记录了获取属性的方法，此处是返回效果类型的属性
@@ -31,16 +30,16 @@ public final class AttributeEffectFuncType {
                return i.getEffects().get(index).getFunction();
            }
        }
-       return (scene,cards,character,effectAPI) -> false;
+       return (situation) -> false;
    });
 
-   private final Function2<Cards,Integer, Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean>> getter;
+   private final Function2<Cards,Integer, Function1<Situation,Boolean>> getter;
 
-   private AttributeEffectFuncType(Function2<Cards,Integer, Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean>> getter) {
+   private AttributeEffectFuncType(Function2<Cards,Integer, Function1<Situation,Boolean>> getter) {
        this.getter = getter;
    }
 
-   public GetEffectFuncAttributeValueInstance getValue(Cards target,Integer index) {
+   public GetEffectFuncAttributeValueInstance getFunc(Cards target, Integer index) {
        return new GetEffectFuncAttributeValueInstance(getter.invoke(target,index));
    }
 }

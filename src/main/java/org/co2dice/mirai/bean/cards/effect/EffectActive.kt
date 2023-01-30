@@ -3,6 +3,7 @@ package org.co2dice.mirai.bean.cards.effect
 import org.co2dice.mirai.bean.game.Damage
 import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.Situation
 import org.co2dice.mirai.bean.cards.api.EffectAPI
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.dice.*
@@ -95,7 +96,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     // 该技能会将一个damage实体塞入场景的伤害列表计算槽。伤害源为持有该技能的卡牌，伤害目标会受到和cost对应等级的伤害。伤害类型为钝器击伤。
 
     // 传参:玩家的输入值，场景，技能本身，敌人。
-    abstract var reactEffect:Function4<Scene,Cards, CharacterCard, EffectAPI<Scene,Cards, CharacterCard>,Boolean>
+    abstract var reactEffect:Function1<Situation,Boolean>
     //反抗成功后的特效。
     // 传参:玩家的输入值，场景，技能本身，敌人。
 

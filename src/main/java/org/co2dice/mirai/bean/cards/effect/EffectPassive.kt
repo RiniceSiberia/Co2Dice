@@ -1,9 +1,7 @@
 package org.co2dice.mirai.bean.cards.effect
 
-import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.Cards
-import org.co2dice.mirai.bean.cards.api.EffectAPI
-import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.cards.Situation
 
 /**
  *      使用IDEA编写
@@ -16,6 +14,6 @@ abstract class EffectPassive(holder: Cards) : Effect(holder) {
     //检定值,宣言后会检定是否可以使用技能。
     abstract var react:Function1<Cards,Int>
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免.cards应该为技能目标。
-    abstract var reactEffect:Function4<Scene,Cards, CharacterCard, EffectAPI<Scene, Cards, CharacterCard>,Boolean>
+    abstract var reactEffect:Function1<Situation,Boolean>
     //反抗成功后的特效,card应为target.
 }
