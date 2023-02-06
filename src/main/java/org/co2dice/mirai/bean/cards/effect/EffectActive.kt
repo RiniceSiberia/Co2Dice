@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.cards.effect
 
 import org.co2dice.mirai.bean.game.Damage
 import org.co2dice.mirai.bean.game.Scene
-import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.CardsInstance
 import org.co2dice.mirai.bean.cards.Situation
 import org.co2dice.mirai.bean.cards.api.EffectAPI
 import org.co2dice.mirai.bean.cards.character.CharacterCard
@@ -19,7 +19,7 @@ import java.util.stream.Collectors
  * @Time:  2022-12-06-21:30
  * @Message: 主动技能，只能在自己的回合使用。
  **/
-abstract class EffectActive(holder: Cards) : Effect(holder) {
+abstract class EffectActive(holder: CardsInstance) : Effect(holder) {
     // 输入的传参,用来自定义一些卡的效果。
     // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
     // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化
@@ -48,7 +48,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
 
     //示例反抗函数,使用敏捷进行反抗,进行一个10+敏捷的反抗
-    var react:Function3<Scene, EffectActive, Cards, DiceList> = react@{ _, _, target ->
+    var react:Function3<Scene, EffectActive, CardsInstance, DiceList> = react@{ _, _, target ->
         if (target is CharacterCard){
             val tokens = target.tokens
             //这里默认值是获取敏捷
@@ -63,7 +63,7 @@ abstract class EffectActive(holder: Cards) : Effect(holder) {
     }
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
-    override var function: (Scene, Cards, CharacterCard, EffectAPI<Scene, Cards, CharacterCard>) -> Boolean = effect@{
+    override var function: (Scene, CardsInstance, CharacterCard, EffectAPI<Scene, CardsInstance, CharacterCard>) -> Boolean = effect@{
             scene, cards, character,effect ->
         val cost = effect.cost(scene,cards,character,effect)
         var i: MutableList<Token> =

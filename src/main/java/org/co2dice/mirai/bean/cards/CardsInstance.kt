@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.cards
 
+import org.co2dice.mirai.bean.cards.api.EffectTarget
 import java.util.UUID
 
 /**
@@ -8,7 +9,7 @@ import java.util.UUID
  * @Time:  2022-12-05-22:58
  * @Message: Have a good time!  :)
  **/
-abstract class Cards {
+abstract class CardsInstance:EffectTarget {
     abstract val cardId: UUID
     abstract var cardName:String
     abstract var flavorText: String

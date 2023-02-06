@@ -1,6 +1,9 @@
 package org.co2dice.mirai.bean.game
 
-import org.co2dice.mirai.bean.cards.character.CharacterCard
+
+import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
+import org.co2dice.mirai.bean.game.zone.DeckInstance
+import org.co2dice.mirai.bean.game.zone.HandInstance
 
 /**
   * @author 韩左券
@@ -10,13 +13,11 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard
   * @message 战斗类，用于存储战斗信息
   *
   */
-class Battle(characters: MutableList<CharacterCard>,
-             damageList: MutableList<Damage> = mutableListOf(),
+class Battle(decks:MutableMap<PlayerCharacterCard, DeckInstance>,
              hasEnded: Boolean = false,
              isClosed: Boolean = false)
-    : Scene(characters, damageList, hasEnded, isClosed) {
-
-
+    : Scene(decks, hasEnded, isClosed) {
+        val hands:MutableMap<PlayerCharacterCard,HandInstance> = mutableMapOf()
 
 
 

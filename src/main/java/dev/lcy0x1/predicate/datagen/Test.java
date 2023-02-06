@@ -6,7 +6,7 @@ import dev.lcy0x1.predicate.syntax.type.OperandType;
 public class Test {
 
 	public static void main(String[] args) {
-		//Operator.ADD.build(OperandType.NUMBER.constantToken(1), OperandType.NUMBER.constantToken(2));
+		Operator.ADD.build(OperandType.NUMBER.constantToken(1), OperandType.NUMBER.constantToken(2));
 
 	}
 

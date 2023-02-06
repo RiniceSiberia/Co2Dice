@@ -1,11 +1,11 @@
 package org.co2dice.mirai.bean.game.zone
 
 import org.co2dice.mirai.bean.cards.CardBack
-import org.co2dice.mirai.bean.cards.CardType
-import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.CardsInstance
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.cards.event.EventCard
 import org.co2dice.mirai.bean.cards.venue.VenueCard
+import java.util.function.Predicate
 
 /**
  *      使用IDEA编写
@@ -13,7 +13,8 @@ import org.co2dice.mirai.bean.cards.venue.VenueCard
  * @Time:  2022-12-05-23:03
  * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  **/
-class Deck(val id: String, var name: String, private val type: CardType, var cards: MutableList<Cards>) {
+class DeckInstance(val id: String, var name: String, override var cards: MutableList<CardsInstance>, override var holder: CharacterCard?
+) : ZoneInstance {
     init {
         if (cards.size > 100) {
             throw Exception("卡组最多100张卡")
@@ -23,45 +24,36 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
             throw Exception("卡组中有不属于该卡组的卡")
         }
     }
-    fun removedCards(card: Cards) {
-        cards.remove(card)
-    }
-    fun insertCard(card: Cards) {
-        card.faceUp = false
-        card.tap = false
-        cards.add(card)
-        shuffle()
-    }
-    fun searchCard(f:Function1<Cards,Boolean>): Cards? {
-        return cards.stream().filter {f.invoke(it)}.toList().getOrNull(0)
-    }
-    fun pickCard(function: Function1<Cards,Boolean>): Cards?{
-        shuffle()
-        var card: Cards? = null
-        for (c in cards){
-            if (function.invoke(c)){
-                card = cards.removeAt(cards.indexOf(c))
-            }
-        }
-        shuffle()
-        //随机获取一张符合条件的卡，并只将那张卡（不包括同名卡）从牌堆中删除，洗两次牌
-        return card
+
+    override fun addCard(card: CardsInstance): Boolean {
+        return addCardToBottom(card)
     }
 
-    fun addCardToTop(card: Cards) {
+    override fun getCard(card: CardsInstance): CardsInstance?{
+        val c = super.getCard(card)
+        shuffle()
+        return c
+    }
+    override fun pickCard(function: Predicate<CardsInstance>): CardsInstance?{
+        val c = super.pickCard(function)
+        shuffle()
+        //随机获取一张符合条件的卡，并只将那张卡（不包括同名卡）从牌堆中删除，洗牌
+        return c
+    }
+
+    fun addCardToTop(card: CardsInstance):Boolean {
         card.faceUp = false
         card.tap = false
         cards.add(0,card)
+        return true
     }
-    fun addCardToBottom(card: Cards) {
+    fun addCardToBottom(card: CardsInstance):Boolean {
         card.faceUp = false
         card.tap = false
-        cards.add(card)
+        return cards.add(card)
     }
-    fun shuffle () {
-        cards = cards.shuffled().toMutableList()
-    }
-    fun drawCard() : Cards? {
+
+    fun drawCard() : CardsInstance? {
         if (cards.size == 0) {
             return null
         }
@@ -69,14 +61,14 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
         cards.removeAt(0)
         return card
     }
-    fun checkTop(i:Int) : MutableList<Cards> {
+    fun checkTop(i:Int) : MutableList<CardsInstance> {
         return cards.subList(0,i)
     }
-    fun checkBottom(i:Int) : MutableList<Cards> {
+    fun checkBottom(i:Int) : MutableList<CardsInstance> {
         return cards.subList(cards.size-i-1,cards.size-1)
     }
 
-    fun watchDeckTop(): Cards {
+    fun watchDeckTop(): CardsInstance {
         val card = cards[0]
         return if (card.faceUp){
             card
@@ -84,5 +76,4 @@ class Deck(val id: String, var name: String, private val type: CardType, var car
             CardBack(card.type)
         }
     }
-
 }

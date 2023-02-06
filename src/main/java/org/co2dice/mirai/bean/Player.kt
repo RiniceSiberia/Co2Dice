@@ -1,7 +1,8 @@
 package org.co2dice.mirai.bean
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+
+import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
+import org.co2dice.mirai.bean.game.zone.DeckInstance
 
 /**
  *      使用IDEA编写
@@ -9,9 +10,6 @@ import kotlinx.serialization.Serializable
  * @Time:  2022-12-08-20:45
  * @Message: Have a good time!  :)
  **/
-@Serializable
 class Player(
-    @SerialName("qq")
-    val qq: Long) {
-
+    val qq: Long,val characters:Map<PlayerCharacterCard,DeckInstance>) {
 }

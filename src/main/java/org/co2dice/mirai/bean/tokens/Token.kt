@@ -2,6 +2,7 @@ package org.co2dice.mirai.bean.tokens
 
 import org.co2dice.mirai.bean.game.Battle
 import org.co2dice.mirai.bean.cards.CardType
+import org.co2dice.mirai.bean.cards.api.EffectTarget
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
 /**
@@ -11,7 +12,7 @@ import org.co2dice.mirai.bean.cards.character.CharacterCard
  * @Message: 衍生物类
  * 衍生物是一种类似于属性和指示物的东西，它可以根据类型的不同放置在卡上，用来表示一些状态。
  **/
-abstract class Token {
+abstract class Token:EffectTarget {
     abstract val id:String
     //id
     abstract val name:String

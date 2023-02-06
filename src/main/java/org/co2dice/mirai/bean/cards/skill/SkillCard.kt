@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.cards.skill
 
 import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.cards.api.CAO
-import org.co2dice.mirai.bean.cards.Cards
+import org.co2dice.mirai.bean.cards.CardsInstance
 import org.co2dice.mirai.bean.cards.api.Possessive
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.cards.effect.Effect
@@ -16,7 +16,7 @@ import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken
  * @Time:  2022-12-06-22:13
  * @Message: Have a good time!  :)
  **/
-abstract class SkillCard() : Cards(), CAO, Possessive {
+abstract class SkillCard() : CardsInstance(), CAO, Possessive {
 
     abstract val inputParam:MutableMap<String,String>
     //玩家输入的属性，每次都有不同的值。比如输入X点力量换取X点攻击等。使用完需要清理。
