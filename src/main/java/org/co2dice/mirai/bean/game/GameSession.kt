@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game
 
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard
 import java.util.*
 
 /**

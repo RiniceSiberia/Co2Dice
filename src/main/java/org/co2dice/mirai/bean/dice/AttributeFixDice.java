@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.cards.character.CharacterCard;
+import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard;
 import org.co2dice.mirai.bean.tokens.Token;
 import org.co2dice.mirai.bean.tokens.TokenFuller;
 import org.co2dice.mirai.bean.tokens.TokenPool;

@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.cards.api.Possessive
-import org.co2dice.mirai.bean.cards.character.CharacterCard
+import org.co2dice.mirai.bean.game.gameInstance.card.api.Possessive
+import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard
 
 class ZoneInstanceSet(
     override var holder: CharacterCard?

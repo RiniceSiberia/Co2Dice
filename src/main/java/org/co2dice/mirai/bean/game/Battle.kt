@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game
 
 
-import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
+import org.co2dice.mirai.bean.game.gameInstance.card.character.PlayerCharacterCard
 import org.co2dice.mirai.bean.game.zone.DeckInstance
 import org.co2dice.mirai.bean.game.zone.HandInstance
 

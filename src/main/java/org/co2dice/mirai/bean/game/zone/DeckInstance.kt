@@ -1,10 +1,10 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.cards.CardBack
-import org.co2dice.mirai.bean.cards.CardsInstance
-import org.co2dice.mirai.bean.cards.character.CharacterCard
-import org.co2dice.mirai.bean.cards.event.EventCard
-import org.co2dice.mirai.bean.cards.venue.VenueCard
+import org.co2dice.mirai.bean.game.gameInstance.card.CardBack
+import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
+import org.co2dice.mirai.bean.game.gameInstance.card.event.EventCard
+import org.co2dice.mirai.bean.game.gameInstance.card.venue.VenueCard
+import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard
 import java.util.function.Predicate
 
 /**

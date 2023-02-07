@@ -1,9 +1,6 @@
 package org.co2dice.mirai.utils;
 
-import org.co2dice.mirai.bean.cards.CardType;
-
-import java.util.Arrays;
-import java.util.List;
+import org.co2dice.mirai.bean.game.gameInstance.card.CardType;
 
 /**
  * 使用IDEA编写

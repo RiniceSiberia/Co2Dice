@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.tokens
 
 import org.co2dice.mirai.bean.game.Battle
-import org.co2dice.mirai.bean.cards.CardType
+import org.co2dice.mirai.bean.game.gameInstance.card.CardType
 import org.co2dice.mirai.bean.cards.api.EffectTarget
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 
@@ -17,7 +17,7 @@ abstract class Token:EffectTarget {
     //id
     abstract val name:String
     //token的名称
-    abstract val type:CardType
+    abstract val type: CardType
     //可以放在什么卡上
     var isTempToken = false
     //是否是临时token

@@ -1,8 +1,8 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.cards.CardsInstance
-import org.co2dice.mirai.bean.cards.api.EffectTarget
-import org.co2dice.mirai.bean.cards.api.Possessive
+import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
+import org.co2dice.mirai.bean.game.gameInstance.card.api.EffectTarget
+import org.co2dice.mirai.bean.game.gameInstance.card.api.Possessive
 import java.util.function.Predicate
 
 interface ZoneInstance :Possessive,EffectTarget {
@@ -19,7 +19,7 @@ interface ZoneInstance :Possessive,EffectTarget {
         return cards.stream().filter {function.test(it)}.toList().toMutableList()
     }
     //查找符合函数的所有牌
-    fun randomSelectCard(): CardsInstance{
+    fun randomSelectCard(): CardsInstance {
         return cards.random()
     }
     //随机选择一张卡
