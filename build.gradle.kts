@@ -16,11 +16,11 @@ allprojects {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-}
+//tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+//    kotlinOptions {
+//        jvmTarget = "17"
+//    }
+//}
 
 repositories {
     maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
@@ -47,6 +47,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("com.mojang:datafixerupper:${dataFixerUpperVersion}")
+    implementation(group = "space.controlnet", name =  "lightioc-api_2.13", version = "0.3.1")
+
 }
 tasks.named<Test>("test") {
     useJUnitPlatform()
