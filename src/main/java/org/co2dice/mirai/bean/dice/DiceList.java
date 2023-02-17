@@ -1,12 +1,8 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard;
 import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 /**
   * @author DUELIST

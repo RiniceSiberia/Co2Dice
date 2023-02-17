@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game.decorator.instance.get_effect_func_attribute
 
 
 import kotlin.jvm.functions.Function1;
-import org.co2dice.mirai.bean.game.gameInstance.card.Situation;
+import org.co2dice.mirai.bean.game.instance.card.Situation;
 import org.co2dice.mirai.bean.game.decorator.api.DecoratorValueInstance;
 
 public record GetEffectFuncAttributeValueInstance(

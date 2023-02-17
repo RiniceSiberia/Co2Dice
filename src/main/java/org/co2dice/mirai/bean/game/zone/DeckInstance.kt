@@ -1,10 +1,9 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.game.gameInstance.card.CardBack
-import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
-import org.co2dice.mirai.bean.game.gameInstance.card.event.EventCard
-import org.co2dice.mirai.bean.game.gameInstance.card.venue.VenueCard
-import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard
+import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.card.event.EventCard
+import org.co2dice.mirai.bean.game.instance.card.venue.VenueCard
+import org.co2dice.mirai.bean.game.instance.character.CharacterCard
 import java.util.function.Predicate
 
 /**
@@ -73,7 +72,7 @@ class DeckInstance(val id: String, var name: String, override var cards: Mutable
         return if (card.faceUp){
             card
         }else{
-            CardBack(card.type)
+            org.co2dice.mirai.bean.game.instance.card.CardBack(card.type)
         }
     }
 }

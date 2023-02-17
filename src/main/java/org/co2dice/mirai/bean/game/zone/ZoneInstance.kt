@@ -1,11 +1,11 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
-import org.co2dice.mirai.bean.game.gameInstance.card.api.EffectTarget
-import org.co2dice.mirai.bean.game.gameInstance.card.api.Possessive
+import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.api.EffectTarget
+import org.co2dice.mirai.bean.game.instance.api.Possessive
 import java.util.function.Predicate
 
-interface ZoneInstance :Possessive,EffectTarget {
+interface ZoneInstance : Possessive, EffectTarget {
     val cards:MutableList<CardsInstance>
     fun addCard(card: CardsInstance):Boolean{
         return cards.add(card)

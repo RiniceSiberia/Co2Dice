@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.tokens
 
 import org.co2dice.mirai.bean.game.Battle
-import org.co2dice.mirai.bean.game.gameInstance.card.CardType
+import org.co2dice.mirai.bean.game.instance.card.CardType
 import org.co2dice.mirai.bean.cards.api.EffectTarget
 import org.co2dice.mirai.bean.cards.character.CharacterCard
 

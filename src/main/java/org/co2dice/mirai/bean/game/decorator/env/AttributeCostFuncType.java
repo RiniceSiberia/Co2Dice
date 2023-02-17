@@ -2,11 +2,11 @@ package org.co2dice.mirai.bean.game.decorator.env;
 
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
-import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance;
-import org.co2dice.mirai.bean.game.gameInstance.card.api.EffectAPI;
-import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard;
-import org.co2dice.mirai.bean.game.gameInstance.card.item.ItemCard;
-import org.co2dice.mirai.bean.game.gameInstance.card.skill.SkillCard;
+import org.co2dice.mirai.bean.game.instance.card.CardsInstance;
+import org.co2dice.mirai.bean.game.instance.api.EffectAPI;
+import org.co2dice.mirai.bean.game.instance.character.CharacterCard;
+import org.co2dice.mirai.bean.game.instance.card.item.ItemCard;
+import org.co2dice.mirai.bean.game.instance.card.skill.SkillCard;
 import org.co2dice.mirai.bean.game.Scene;
 import org.co2dice.mirai.bean.tokens.Token;
 

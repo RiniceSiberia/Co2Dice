@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.game
 
-import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.card.CardsInstance
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.tokens.Token
 

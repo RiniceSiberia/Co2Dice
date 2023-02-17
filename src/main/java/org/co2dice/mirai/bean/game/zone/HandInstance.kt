@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.game.gameInstance.card.CardsInstance
-import org.co2dice.mirai.bean.game.gameInstance.card.character.CharacterCard
+import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.character.CharacterCard
 import java.util.function.Predicate
 
 class HandInstance (override var holder: CharacterCard?, override val cards: MutableList<CardsInstance> = mutableListOf()) : ZoneInstance{
