@@ -26,6 +26,7 @@ repositories {
     maven("https://maven.aliyun.com/repository/public") // 阿里云国内代理仓库
     maven("https://libraries.minecraft.net") // mc的库
     maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+    maven("https://repo1.maven.org/maven2/")
 
     mavenCentral()
 }
@@ -37,6 +38,7 @@ dependencies {
     val dataFixerUpperVersion = "4.1.27"
     val log4jVersion = "2.19.0"
     val gsonVersion = "2.10"
+    val luajVersion = "3.0.1"
     api("net.mamoe:mirai-console-terminal:${miraiVersion}") // 自行替换版本
     api("net.mamoe:mirai-core:${miraiVersion}")
 
@@ -48,6 +50,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("com.mojang:datafixerupper:${dataFixerUpperVersion}")
     implementation(group = "space.controlnet", name =  "lightioc-api_2.13", version = "0.3.1")
+    implementation(group = "org.luaj", name = "luaj-jse", version = luajVersion)
 
 }
 tasks.named<Test>("test") {
