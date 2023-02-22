@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.game.instance.effect
 
 import org.co2dice.mirai.bean.game.Scene
+import org.co2dice.mirai.bean.game.entry.CardEntry
 import org.co2dice.mirai.bean.game.instance.card.CardsInstance
 import org.co2dice.mirai.bean.game.instance.api.EffectAPI
 import org.co2dice.mirai.bean.game.instance.api.EffectTarget
@@ -14,13 +15,13 @@ import org.co2dice.mirai.bean.game.instance.character.CharacterCard
  * @Time:  2022-12-06-21:01
  * @Message: 效果实体，可以装在技能卡，角色卡，物品卡等有持有者的卡中。
  **/
-abstract class Effect(override var holder: CardsInstance?): EffectAPI<Scene, CardsInstance, CharacterCard>,
+abstract class Effect(override var holder: CardEntry?): EffectAPI<Scene, CardsInstance, CharacterCard>,
     EffectTarget, RelyToCard {
 
 
 
     fun getRelyCardHolder(): CharacterCard?{
-        return when (holder) {
+        return when (holder?.card?.type) {
             is CharacterCard -> {
                 holder as CharacterCard
             }

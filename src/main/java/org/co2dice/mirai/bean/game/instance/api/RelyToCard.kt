@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game.instance.api
 
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.entry.CardEntry
 
 interface RelyToCard {
-    var holder: CardsInstance?
+    var holder: CardEntry?
 }

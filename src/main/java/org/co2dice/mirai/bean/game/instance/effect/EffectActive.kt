@@ -5,6 +5,7 @@ import org.co2dice.mirai.bean.game.Scene
 import org.co2dice.mirai.bean.game.instance.card.CardsInstance
 import org.co2dice.mirai.bean.game.instance.card.Situation
 import org.co2dice.mirai.bean.dice.*
+import org.co2dice.mirai.bean.game.entry.CardEntry
 import org.co2dice.mirai.bean.game.instance.api.EffectAPI
 import org.co2dice.mirai.bean.game.instance.character.CharacterCard
 import org.co2dice.mirai.bean.tokens.Token
@@ -19,7 +20,7 @@ import java.util.stream.Collectors
  * @Time:  2022-12-06-21:30
  * @Message: 主动技能，只能在自己的回合使用。
  **/
-abstract class EffectActive(holder: CardsInstance) : Effect(holder) {
+abstract class EffectActive(holder: CardEntry?) : Effect(holder) {
     // 输入的传参,用来自定义一些卡的效果。
     // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
     // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化

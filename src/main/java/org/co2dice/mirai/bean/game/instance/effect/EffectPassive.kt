@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.game.instance.effect
 
+import org.co2dice.mirai.bean.game.entry.CardEntry
 import org.co2dice.mirai.bean.game.instance.card.CardsInstance
 import org.co2dice.mirai.bean.game.instance.card.Situation
 
@@ -9,7 +10,7 @@ import org.co2dice.mirai.bean.game.instance.card.Situation
  * @Time:  2022-12-06-21:26
  * @Message: Have a good time!  :)
  **/
-abstract class EffectPassive(holder: CardsInstance) : Effect(holder) {
+abstract class EffectPassive(holder: CardEntry?) : Effect(holder) {
     abstract var check:Function1<EffectPassive,Boolean>
     //检定值,宣言后会检定是否可以使用技能。
     abstract var react:Function1<CardsInstance,Int>
