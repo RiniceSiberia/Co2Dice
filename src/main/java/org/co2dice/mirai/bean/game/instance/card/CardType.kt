@@ -7,5 +7,5 @@ package org.co2dice.mirai.bean.game.instance.card
  * @Message: Have a good time!  :)
  **/
 enum class CardType {
-    ITEM, SKILL, CHARACTER,EVENT,VENUE
+    ITEM, SKILL,EVENT,VENUE
 }

@@ -1,6 +1,7 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.game.instance.character.CharacterCard;
+import org.co2dice.mirai.bean.game.instance.chess.ChessInstance;
+import org.co2dice.mirai.bean.game.prototype.character.Chess;
 import org.co2dice.mirai.bean.tokens.Token;
 import org.co2dice.mirai.bean.tokens.TokenFuller;
 import org.co2dice.mirai.bean.tokens.TokenPool;
@@ -31,9 +32,9 @@ public class AttributeFixDice {
         //默认的修正值为指定token的平均值
     }
 
-    public DiceList getDiceList(CharacterCard c){
+    public DiceList getDiceList(ChessInstance c){
         //获取属性修正值
-        TokenPool pond = c.getTokens();
+        TokenPool pond = c.getTokenPool();
         //
         List<TokenFuller> tfs = new ArrayList<>();
         for (Token t : tokens){
@@ -56,7 +57,7 @@ public class AttributeFixDice {
         return fixFunc;
     }
 
-    public DiceResult roll(CharacterCard c){
+    public DiceResult roll(ChessInstance c){
         return getDiceList(c).roll();
     }
 }

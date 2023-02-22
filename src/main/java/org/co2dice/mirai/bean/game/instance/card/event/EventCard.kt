@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.game.instance.card.event
 
 import org.co2dice.mirai.bean.game.instance.card.CardType
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
-import org.co2dice.mirai.bean.game.instance.api.Possessive
-import org.co2dice.mirai.bean.game.instance.character.CharacterCard
+import org.co2dice.mirai.bean.game.api.Possessive
+import org.co2dice.mirai.bean.game.prototype.Card
+import org.co2dice.mirai.bean.game.prototype.character.Chess
 import java.util.*
 
 /**
@@ -17,7 +17,7 @@ class EventCard(
     override var cardName: String,
     override var flavorText: String,
     override var imgUrl: String,
-) : CardsInstance(), Possessive {
+) : Card(), Possessive {
     override val type = CardType.EVENT
-    override var holder: CharacterCard? = null
+    override var holder: Chess? = null
 }

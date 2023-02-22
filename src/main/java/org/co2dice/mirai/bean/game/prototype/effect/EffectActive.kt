@@ -1,13 +1,14 @@
-package org.co2dice.mirai.bean.game.instance.effect
+package org.co2dice.mirai.bean.game.prototype.effect
 
 import org.co2dice.mirai.bean.game.Damage
 import org.co2dice.mirai.bean.game.Scene
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.instance.card.Situation
 import org.co2dice.mirai.bean.dice.*
-import org.co2dice.mirai.bean.game.entry.CardEntry
-import org.co2dice.mirai.bean.game.instance.api.EffectAPI
-import org.co2dice.mirai.bean.game.instance.character.CharacterCard
+import org.co2dice.mirai.bean.game.api.EffectAPI
+import org.co2dice.mirai.bean.game.instance.chess.ChessInstance
+import org.co2dice.mirai.bean.game.prototype.Card
+import org.co2dice.mirai.bean.game.prototype.character.Chess
 import org.co2dice.mirai.bean.tokens.Token
 import org.co2dice.mirai.bean.tokens.characterToken.Constitution
 import org.co2dice.mirai.bean.tokens.characterToken.Dexterity
@@ -20,17 +21,18 @@ import java.util.stream.Collectors
  * @Time:  2022-12-06-21:30
  * @Message: 主动技能，只能在自己的回合使用。
  **/
-abstract class EffectActive(holder: CardEntry?) : Effect(holder) {
+abstract class EffectActive(holder: Card,c : Class<*>) : Effect(holder) {
     // 输入的传参,用来自定义一些卡的效果。
     // 比如输入damage key，就是定义殴打的伤害。加入heal key，就是定义治疗的回复量。加入coldDown，就是定义技能的冷却时间。加入aim，就是定义技能的命中率，加入range，就是定义技能的射程。
     // 多个位置的技能对应不同的输入,可以技能带来的混乱值和秩序值的变化
     abstract val skillParam:MutableMap<String,Int>
 
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
-    var check:Function2<Scene, EffectActive,DiceList> = check@{ _, skill ->
-        val h = skill.getRelyCardHolder()
+    var check:Function1<Situation<>,DiceList> = check@{ situation ->
+        val h = situation.chess
+        //获取技能源的持有Chess
         if (h != null){
-            val tokens = h.tokens
+            val tokens = h.tokenPool
             //这里默认值是获取敏捷
             val fuller = tokens.getPointFuller(Dexterity)
             val burnValue:Int = skillParam[Dexterity.id] ?:0
@@ -49,22 +51,23 @@ abstract class EffectActive(holder: CardEntry?) : Effect(holder) {
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
 
     //示例反抗函数,使用敏捷进行反抗,进行一个10+敏捷的反抗
-    var react:Function3<Scene, EffectActive, CardsInstance, DiceList> = react@{ _, _, target ->
-        if (target is CharacterCard){
-            val tokens = target.tokens
+    var react:Function1<Situation, DiceList> = react@{ situation ->
+        if (situation.target is ChessInstance<*>){
+            val tokens = situation.target.tokenPool
             //这里默认值是获取敏捷
             val fuller = tokens.getPointFuller(Dexterity)
             if (fuller != null){
                 return@react DiceList(
                     listOf(ConstantDice(10)),
-                    AttributeFixDice(listOf(Dexterity)).getDiceList(target).diceList)
+                    AttributeFixDice(listOf(Dexterity))
+                        .getDiceList(situation.target).diceList)
             }
         }
         return@react DiceList(ConstantDice(0))
     }
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
-    override var function: (Scene, CardsInstance, CharacterCard, EffectAPI<Scene, CardsInstance, CharacterCard>) -> Boolean = effect@{
+    override var operation: (Situation) -> Boolean = effect@{
             scene, cards, character,effect ->
         val cost = effect.cost(scene,cards,character,effect)
         var i: MutableList<Token> =

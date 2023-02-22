@@ -1,12 +1,12 @@
 package org.co2dice.mirai.bean.game
 
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.tokens.Token
 
 class Damage(
-    val damager: CardsInstance?,
-    val target: CardsInstance,
+    val damager: CardInstance<Any?>?,
+    val target: CardInstance<Any?>,
     val damage: DiceList,
     val damageType: Token,
     val sourceType: List<DamageType>) {

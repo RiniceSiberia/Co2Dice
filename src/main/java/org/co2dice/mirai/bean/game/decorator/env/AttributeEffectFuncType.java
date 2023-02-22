@@ -2,9 +2,9 @@ package org.co2dice.mirai.bean.game.decorator.env;
 
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance;
+import org.co2dice.mirai.bean.game.instance.card.CardInstance;
 import org.co2dice.mirai.bean.game.instance.card.Situation;
-import org.co2dice.mirai.bean.game.instance.card.item.ItemCard;
+import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance;
 import org.co2dice.mirai.bean.game.instance.card.skill.SkillCard;
 import org.co2dice.mirai.bean.game.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeValueInstance;
 
@@ -23,20 +23,20 @@ public final class AttributeEffectFuncType {
        if (index != null){
            if (e instanceof SkillCard s){
                return s.getEffects().get(index).getFunction();
-           }else if (e instanceof ItemCard i){
+           }else if (e instanceof ItemCardInstance i){
                return i.getEffects().get(index).getFunction();
            }
        }
        return (situation) -> false;
    });
 
-   private final Function2<CardsInstance,Integer, Function1<Situation,Boolean>> getter;
+   private final Function2<CardInstance,Integer, Function1<Situation,Boolean>> getter;
 
-   private AttributeEffectFuncType(Function2<CardsInstance,Integer, Function1<Situation,Boolean>> getter) {
+   private AttributeEffectFuncType(Function2<CardInstance,Integer, Function1<Situation,Boolean>> getter) {
        this.getter = getter;
    }
 
-   public GetEffectFuncAttributeValueInstance getFunc(CardsInstance target, Integer index) {
+   public GetEffectFuncAttributeValueInstance getFunc(CardInstance target, Integer index) {
        return new GetEffectFuncAttributeValueInstance(getter.invoke(target,index));
    }
 }

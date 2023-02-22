@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.game.instance.api
+package org.co2dice.mirai.bean.game.api
 
 /**
  *      使用IDEA编写
@@ -7,6 +7,6 @@ package org.co2dice.mirai.bean.game.instance.api
  * @Message: Have a good time!  :)
  **/
 interface CAO {
-    fun getChaos(): Int
-    fun getOrder(): Int
+    val chaos: Int
+    val order: Int
 }

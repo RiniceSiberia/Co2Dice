@@ -1,8 +1,9 @@
-package org.co2dice.mirai.bean.game.instance.effect
+package org.co2dice.mirai.bean.game.prototype.effect
 
-import org.co2dice.mirai.bean.game.entry.CardEntry
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
+import org.co2dice.mirai.bean.game.entry.card.CardEntry
+import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.instance.card.Situation
+import org.co2dice.mirai.bean.game.prototype.Card
 
 /**
  *      使用IDEA编写
@@ -10,10 +11,10 @@ import org.co2dice.mirai.bean.game.instance.card.Situation
  * @Time:  2022-12-06-21:26
  * @Message: Have a good time!  :)
  **/
-abstract class EffectPassive(holder: CardEntry?) : Effect(holder) {
-    abstract var check:Function1<EffectPassive,Boolean>
+abstract class EffectPassive<E : CardEntry<C>,C : Card>(holder: Card) : Effect(holder) {
+    abstract var check:Function1<EffectPassive<E, C>,Boolean>
     //检定值,宣言后会检定是否可以使用技能。
-    abstract var react:Function1<CardsInstance,Int>
+    abstract var react:Function1<CardInstance<E>,Int>
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免.cards应该为技能目标。
     abstract var reactEffect:Function1<Situation,Boolean>
     //反抗成功后的特效,card应为target.

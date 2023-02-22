@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game.decorator.env;
 
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance;
-import org.co2dice.mirai.bean.game.instance.api.CAO;
+import org.co2dice.mirai.bean.game.instance.card.CardInstance;
+import org.co2dice.mirai.bean.game.api.CAO;
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
 
 import java.util.function.Function;
@@ -25,13 +25,13 @@ public final class AttributeNumericType {
 		else return null;
 	});
 
-	private final Function<CardsInstance, Integer> getter;
+	private final Function<CardInstance, Integer> getter;
 
-	private AttributeNumericType(Function<CardsInstance, Integer> getter) {
+	private AttributeNumericType(Function<CardInstance, Integer> getter) {
 		this.getter = getter;
 	}
 
-	public GetNumericAttributeValueInstance getValue(CardsInstance target) {
+	public GetNumericAttributeValueInstance getValue(CardInstance target) {
 		return new GetNumericAttributeValueInstance(getter.apply(target));
 	}
 }

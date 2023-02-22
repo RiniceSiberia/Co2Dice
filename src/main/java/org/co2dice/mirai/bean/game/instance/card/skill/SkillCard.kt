@@ -2,12 +2,12 @@ package org.co2dice.mirai.bean.game.instance.card.skill
 
 
 import org.co2dice.mirai.bean.game.Scene
-import org.co2dice.mirai.bean.game.instance.card.CardsInstance
-import org.co2dice.mirai.bean.game.instance.api.CAO
-import org.co2dice.mirai.bean.game.instance.api.Possessive
-import org.co2dice.mirai.bean.game.instance.character.CharacterCard
-import org.co2dice.mirai.bean.game.instance.effect.Effect
-import org.co2dice.mirai.bean.game.instance.effect.EffectActive
+import org.co2dice.mirai.bean.game.instance.card.CardInstance
+import org.co2dice.mirai.bean.game.api.Possessive
+import org.co2dice.mirai.bean.game.prototype.character.Chess
+import org.co2dice.mirai.bean.game.prototype.effect.Effect
+import org.co2dice.mirai.bean.game.prototype.effect.EffectActive
+import org.co2dice.mirai.bean.game.prototype.Card
 import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken
 
 /**
@@ -16,36 +16,30 @@ import org.co2dice.mirai.bean.tokens.characterToken.CharacterToken
  * @Time:  2022-12-06-22:13
  * @Message: Have a good time!  :)
  **/
-abstract class SkillCard() : CardsInstance(), CAO, Possessive {
+class SkillCard(
 
-    abstract val inputParam:MutableMap<String,String>
+    val inputParam:MutableMap<String,String>,
     //玩家输入的属性，每次都有不同的值。比如输入X点力量换取X点攻击等。使用完需要清理。
-    abstract override var holder: CharacterCard?
+    override var holder: Chess?,
     //持有者可为空
-    abstract val burnValue:List<CharacterToken>
+    val burnValue:List<CharacterToken>,
     //燃烧时使用的token
-    abstract val effects:MutableList<Effect>
+    val effects:MutableList<Effect<Card>>,
     //技能池
-    abstract val recycle:Function2<Scene, SkillCard,Int>
+    val recycle:Function2<Scene, SkillCard,Int>,
     //回收技能时的处理函数
-    override fun getChaos(): Int {
-        //获取所有技能的混乱值,并取最大值
-        return effects.stream().mapToInt { it.getChaos() }.max().orElse(0)
-    }
-
-    override fun getOrder(): Int {
-        //获取所有技能的秩序值取和
-        return effects.stream().mapToInt { it.getOrder() }.sum()
-    }
 
 
     var burnEffect :Function2<SkillCard, EffectActive,Unit> = {
-        skillCard,effect ->
+            skillCard,effect ->
         for (CharacterToken in skillCard.burnValue){
             effect.skillParam[CharacterToken.id] = effect.skillParam[CharacterToken.id]?.plus(1)?:1
         }
     }
     //弃牌加成（没写手牌和丢弃）
+
+) : CardInstance<*>(null), Possessive {
+
 
 
 }
