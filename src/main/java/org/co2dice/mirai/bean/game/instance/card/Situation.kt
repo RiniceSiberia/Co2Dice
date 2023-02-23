@@ -7,12 +7,12 @@ import org.co2dice.mirai.bean.game.instance.chess.ChessInstance
 import org.co2dice.mirai.bean.game.prototype.character.Chess
 import org.co2dice.mirai.bean.game.prototype.effect.EffectTargetSet
 
-data class Situation<CA :CardInstance<*>,CH : ChessInstance<*>>(
+data class Situation(
     val scene: Scene,
     //进行action的场景
-    val cards: CA,
+    val cards: CardInstance,
     //进行action的目标卡
-    val chess : CH?,
+    val chess : ChessInstance<*>?,
     //进行action的目标角色，角色控制卡
     val target : EffectTargetSet,
     //action的目标

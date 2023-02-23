@@ -9,9 +9,6 @@ class TapCardCost(var num:Int) : AbstractCost() {
 
     override fun check(situation: Situation): Boolean {
         val c = situation.chess
-        if (c != null){
-            c.OnFieldData
-        }
 
     }
 

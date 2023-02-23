@@ -7,6 +7,6 @@ package org.co2dice.mirai.bean.game.api
  * @Message: Have a good time!  :)
  **/
 interface CAO {
-    val chaos: Int
-    val order: Int
+    val chaos: Int?
+    val order: Int?
 }

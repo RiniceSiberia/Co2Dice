@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.game.prototype.effect
 import org.co2dice.mirai.bean.game.entry.card.CardEntry
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.instance.card.Situation
-import org.co2dice.mirai.bean.game.prototype.Card
+import org.co2dice.mirai.bean.game.prototype.card.Card
 
 /**
  *      使用IDEA编写

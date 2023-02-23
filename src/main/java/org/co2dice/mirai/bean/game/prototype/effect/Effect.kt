@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game.prototype.effect
 
 import org.co2dice.mirai.bean.game.api.EffectAPI
 import org.co2dice.mirai.bean.game.api.EffectTarget
-import org.co2dice.mirai.bean.game.prototype.Card
+import org.co2dice.mirai.bean.game.prototype.card.Card
 
 /**
  *      使用IDEA编写

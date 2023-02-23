@@ -5,7 +5,7 @@ import kotlin.jvm.functions.Function2;
 import org.co2dice.mirai.bean.game.instance.card.CardInstance;
 import org.co2dice.mirai.bean.game.instance.card.Situation;
 import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance;
-import org.co2dice.mirai.bean.game.instance.card.skill.SkillCard;
+import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance;
 import org.co2dice.mirai.bean.game.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeValueInstance;
 
 /**
@@ -21,7 +21,7 @@ public final class AttributeEffectFuncType {
 
    public static final AttributeEffectFuncType EFFECT_FUNC = new AttributeEffectFuncType((e,index) -> {
        if (index != null){
-           if (e instanceof SkillCard s){
+           if (e instanceof SkillCardInstance s){
                return s.getEffects().get(index).getFunction();
            }else if (e instanceof ItemCardInstance i){
                return i.getEffects().get(index).getFunction();

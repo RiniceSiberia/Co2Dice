@@ -10,9 +10,9 @@ import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumeri
 import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
 import org.co2dice.mirai.bean.game.instance.card.CardType
-import org.co2dice.mirai.bean.game.instance.card.skill.SkillCard
+import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance
 import org.co2dice.mirai.bean.game.prototype.character.PlayerChess
-import org.co2dice.mirai.bean.game.prototype.Card
+import org.co2dice.mirai.bean.game.prototype.card.Card
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container
 import java.util.*
@@ -33,7 +33,7 @@ class Test {
         )
         gameSession.addBattle(mutableListOf(characterCard))
         val scene = gameSession.getPlayerScene(player)!!
-        val card = SkillCard()
+        val card = SkillCardInstance()
         scene.addDecorator(
             SimpleNumericPermanentAddValueDecorator(
                 AttributeNumericType.CHAOS,
