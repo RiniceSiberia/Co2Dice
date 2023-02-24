@@ -10,9 +10,6 @@ import org.co2dice.mirai.bean.game.instance.CardInstanceTempData
  * @Time:  2022-12-05-22:58
  * @Message: Have a good time!  :)
  **/
-abstract class CardInstance(
-    open val entry: CardEntry<*>,
-    var type: CardType) : EffectTarget {
+abstract class CardInstance(open val entry: CardEntry) : EffectTarget {
     val onFieldData : MutableMap<CardInstanceTempData,Any> = mutableMapOf()
-    var entryType = entry.card.type
 }

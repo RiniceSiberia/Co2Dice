@@ -1,11 +1,10 @@
 package org.co2dice.mirai.bean.game.zone
 
+import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.CardInstanceTempData
-import org.co2dice.mirai.bean.game.instance.card.CardBack
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.instance.card.event.EventCardInstance
 import org.co2dice.mirai.bean.game.instance.card.venue.VenueCardInstance
-import org.co2dice.mirai.bean.game.prototype.character.Chess
 import java.util.function.Predicate
 
 /**
@@ -14,9 +13,9 @@ import java.util.function.Predicate
  * @Time:  2022-12-05-23:03
  * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  **/
-class DeckInstance(override val cards: MutableList<CardInstance>,
-                   override var holder: Chess?
-) : ZoneInstance {
+class DeckInstanceStack(override val cards: MutableList<CardInstance>,
+                        override var holder: Player?
+) : StackZoneInstance {
     init {
         if (cards.size > 100) {
             throw Exception("卡组最多100张卡")
@@ -29,10 +28,9 @@ class DeckInstance(override val cards: MutableList<CardInstance>,
 
     override fun addCard(card: CardInstance): Boolean {
         //将卡放入卡组后洗牌
-        card.onFieldData.clear()
-        val c = addCardToBottom(card)
+        val b = super.addCard(card)
         shuffle()
-        return c
+        return b
     }
 
     override fun getCard(card: CardInstance): CardInstance?{
@@ -42,56 +40,57 @@ class DeckInstance(override val cards: MutableList<CardInstance>,
         return c
     }
     override fun pickCard(function: Predicate<CardInstance>): CardInstance?{
-        val c = super.pickCard(function)
+        val r = super.pickCard(function)
         shuffle()
-        //随机获取一张符合条件的卡，并只将那张卡（不包括同名卡）从牌堆中删除，洗牌
-        return c
+        return r
     }
-
-    fun addCardToTop(card: CardInstance):Boolean {
-        //放顶
-        cards.add(0,card)
-        return true
-    }
-    fun addCardToBottom(card: CardInstance):Boolean {
-        //放底
-        return cards.add(card)
-    }
+    //和父类区别在于，1.拿出卡后会洗牌，2.是从容器尾部(卡组最上方)开始遍历
 
     fun drawCard() : CardInstance? {
         if (cards.size == 0) {
             return null
         }
-        val card = cards[0]
-        cards.removeAt(0)
+        val card = cards.last()
+        //顶部开始抽牌
+        cards.removeLast()
         return card
     }
-    fun checkTop(i:Int) : MutableList<CardInstance> {
-        return cards.subList(0,i)
+    fun checkTop(i:Int) : List<CardInstance>? {
+        return if (cards.size < i) {
+            null
+        } else {
+            cards.subList(cards.size-i-1,cards.size-1)
+        }
     }
-    fun checkBottom(i:Int) : MutableList<CardInstance> {
-        return cards.subList(cards.size-i-1,cards.size-1)
+    //查看卡组最顶上的i张卡
+    fun checkBottom(i:Int) : List<CardInstance>? {
+        return if (cards.size < i) {
+            null
+        } else {
+            return cards.subList(0,i)
+        }
     }
-
-    fun watchDeckTop(): CardInstance {
-        val card = cards[0]
+    //查看卡组最底下的i张卡
+    fun watchDeckTop(): CardInstance? {
+        val card = cards.last()
         return if (card.onFieldData.get(CardInstanceTempData.FACE_UP) as Boolean == true){
             card
         }else{
-            CardBack()
+            null
         }
     }
-
-    //翻开卡组最顶上的卡
-    fun faceUpTopCard() : CardInstance {
+    //看卡组最顶上的卡
+    fun faceUpTopCard() : CardInstance? {
         cards[0].onFieldData[CardInstanceTempData.FACE_UP] = true
         return watchDeckTop()
     }
+    //将卡组最顶上的卡变为正面
 
     fun faceDownAllCard() {
         cards.forEach {
             it.onFieldData[CardInstanceTempData.FACE_UP] = false
         }
     }
+    //将卡组所有卡变为背面
 
 }

@@ -1,7 +1,10 @@
 package org.co2dice.mirai.bean.game.prototype.card
 
 import org.co2dice.mirai.bean.game.api.CAO
+import org.co2dice.mirai.bean.game.entry.card.CardEntry
+import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.instance.card.CardType
+import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance
 import org.co2dice.mirai.bean.game.prototype.effect.Effect
 import java.util.*
 

@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game
 
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.game.prototype.character.Chess
+import org.co2dice.mirai.bean.game.prototype.character.Chessman
 import java.util.*
 
 /**
@@ -50,7 +50,7 @@ class GameSession (
     var isClosed:Boolean = false
     //如果会话关闭且再没有可以添加的玩家则为 true，否则为 false。 如果此值为 true，请求加入会话将被拒绝。
 
-    fun addBattle(characters:MutableList<Chess>):Boolean{
+    fun addBattle(characters:MutableList<Chessman>):Boolean{
         for (player in characters.stream().map { it.characterHolder }.toList().filterNotNull()){
             //1:判定该角色是否是会话中的角色
             if (player !in rosters){

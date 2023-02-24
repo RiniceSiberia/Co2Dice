@@ -1,11 +1,8 @@
 package org.co2dice.mirai.bean.game.entry.chess
 
-import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.game.api.SetTokenAPI
-import org.co2dice.mirai.bean.game.prototype.character.Chess
-import org.co2dice.mirai.bean.tokens.TokenPool
+import org.co2dice.mirai.bean.game.prototype.character.Chessman
 
-class ChessEntry<T:Chess>(
+class ChessEntry<T:Chessman>(
     val chess: T,
 ) {
 

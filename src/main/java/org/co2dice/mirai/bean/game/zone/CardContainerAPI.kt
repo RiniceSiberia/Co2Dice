@@ -1,28 +1,28 @@
 package org.co2dice.mirai.bean.game.zone
 
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
-import org.co2dice.mirai.bean.game.api.EffectTarget
-import org.co2dice.mirai.bean.game.api.Possessive
 import java.util.function.Predicate
 
-interface ZoneInstance : Possessive, EffectTarget {
+interface CardContainerAPI {
     val cards:MutableList<CardInstance>
     fun addCard(card: CardInstance):Boolean{
+        card.onFieldData.clear()
         return cards.add(card)
     }
-    //添加卡牌到区域
-    fun get():MutableList<CardInstance>{
+    //添加容器末尾
+    fun insertCard(card: CardInstance, index: Int):Boolean{
+        card.onFieldData.clear()
+        cards.add(index,card)
+        return cards[index] == card
+    }
+    //添加卡牌到区域任意位置
+    fun getAll():List<CardInstance>{
         return cards
     }
-    //看牌
-    fun selectCard(function: Predicate<CardInstance>):MutableList<CardInstance>{
-        return cards.stream().filter {function.test(it)}.toList().toMutableList()
+    fun selectCard(function: Predicate<CardInstance>):List<CardInstance>{
+        return getAll().stream().filter {function.test(it)}.toList().toMutableList()
     }
     //查找符合函数的所有牌
-    fun randomSelectCard(): CardInstance {
-        return cards.random()
-    }
-    //随机选择一张卡
     fun getCard(card: CardInstance): CardInstance?{
         return if (cards.remove(card)){
             card
@@ -33,26 +33,27 @@ interface ZoneInstance : Possessive, EffectTarget {
     fun checkCard(function: Predicate<CardInstance>):Boolean{
         return cards.stream().anyMatch(function::test)
     }
+    //确认符合条件的卡是否存在于容器中
     fun pickCard(function: Predicate<CardInstance>): CardInstance?{
         var card: CardInstance? = null
         for (c in cards){
             if (function.test(c)){
                 card = cards.removeAt(cards.indexOf(c))
+                return card
             }
         }
-        //随机获取一张符合条件的卡，并只将那张卡（不包括同名卡）从牌堆中删除，洗两次牌
         return card
     }
-
+    //随机获取一张符合条件的卡，将那张卡（同条件按照容器顺序排序）从牌堆中删除
     fun contain(card: CardInstance):Boolean{
         return cards.contains(card)
     }
-    //检查手牌中是否有指定的卡
-    fun removed(card: CardInstance) {
-        cards.remove(card)
+    fun moveCardToElseZone(card: CardInstance, container: CardContainerAPI):Boolean{
+        val c = pickCard { it == card }
+        if (c != null){
+            return container.addCard(c)
+        }
+        return false
     }
-    fun shuffle(){
-        cards.shuffle()
-    }
-    //洗牌
+    //将卡片移动到其他区域
 }

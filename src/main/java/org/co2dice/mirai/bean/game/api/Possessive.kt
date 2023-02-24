@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.game.api
 
-import org.co2dice.mirai.bean.game.prototype.character.Chess
+import org.co2dice.mirai.bean.Player
 
 
 /**
@@ -10,6 +10,6 @@ import org.co2dice.mirai.bean.game.prototype.character.Chess
  * @Message: Have a good time!  :)
  **/
 interface Possessive {
-    var holder: Chess?
+    var holder: Player?
     //持有者可为空
 }

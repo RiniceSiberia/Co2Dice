@@ -1,12 +1,11 @@
 package org.co2dice.mirai.bean
 
 
-import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
 import org.co2dice.mirai.bean.game.entry.chess.ChessEntry
 import org.co2dice.mirai.bean.game.instance.chess.ChessInstance
-import org.co2dice.mirai.bean.game.prototype.character.PlayerChess
-import org.co2dice.mirai.bean.game.zone.DeckInstance
-import org.co2dice.mirai.bean.game.zone.ZoneInstance
+import org.co2dice.mirai.bean.game.prototype.character.PlayerChessman
+import org.co2dice.mirai.bean.game.zone.DeckInstanceStack
+import org.co2dice.mirai.bean.game.zone.StackZoneInstance
 
 /**
  *      使用IDEA编写
@@ -15,6 +14,6 @@ import org.co2dice.mirai.bean.game.zone.ZoneInstance
  * @Message: Have a good time!  :)
  **/
 class Player(
-    val qq: Long,val characters:Map<ChessInstance<ChessEntry<PlayerChess>>,DeckInstance>) {
-    val battleField : ZoneInstance
+    val qq: Long,val characters:Map<ChessInstance<ChessEntry<PlayerChessman>>,DeckInstanceStack>) {
+    val battleField : StackZoneInstance
 }

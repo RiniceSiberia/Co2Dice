@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.game
 
 
-import org.co2dice.mirai.bean.game.prototype.character.PlayerChess
-import org.co2dice.mirai.bean.game.zone.DeckInstance
-import org.co2dice.mirai.bean.game.zone.HandInstance
+import org.co2dice.mirai.bean.game.prototype.character.PlayerChessman
+import org.co2dice.mirai.bean.game.zone.DeckInstanceStack
+import org.co2dice.mirai.bean.game.zone.HandInstanceStack
 
 /**
   * @author 韩左券
@@ -13,11 +13,11 @@ import org.co2dice.mirai.bean.game.zone.HandInstance
   * @message 战斗类，用于存储战斗信息
   *
   */
-class Battle(decks:MutableMap<PlayerChess, DeckInstance>,
+class Battle(decks:MutableMap<PlayerChessman, DeckInstanceStack>,
              hasEnded: Boolean = false,
              isClosed: Boolean = false)
     : Scene(decks, hasEnded, isClosed) {
-        val hands:MutableMap<PlayerChess,HandInstance> = mutableMapOf()
+        val hands:MutableMap<PlayerChessman,HandInstanceStack> = mutableMapOf()
 
 
 

@@ -1,11 +1,11 @@
 package org.co2dice.mirai.bean.game.zone
 
+import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
-import org.co2dice.mirai.bean.game.prototype.character.Chess
 import java.util.function.Predicate
 
-class HandInstance (override var holder: Chess?,
-                    override val cards: MutableList<CardInstance> = mutableListOf()) : ZoneInstance{
+class HandInstanceStack (override var holder: Player?,
+                         override val cards: MutableList<CardInstance> = mutableListOf()) : StackZoneInstance{
 
 
     fun discard(f:Predicate<CardInstance>):Boolean{

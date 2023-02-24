@@ -1,9 +1,8 @@
 package org.co2dice.mirai.bean.game
 
-import org.co2dice.mirai.bean.cards.character.CharacterCard
 import org.co2dice.mirai.bean.cards.character.PlayerCharacterCard
 import org.co2dice.mirai.bean.game.decorator.handler.DecoratorHolder
-import org.co2dice.mirai.bean.game.zone.DeckInstance
+import org.co2dice.mirai.bean.game.zone.DeckInstanceStack
 
 /**
  *      使用IDEA编写
@@ -12,7 +11,7 @@ import org.co2dice.mirai.bean.game.zone.DeckInstance
  * @Message: Have a good time!  :)
  **/
 abstract class Scene (
-    val decks:MutableMap<PlayerCharacterCard,DeckInstance>,
+    val decks:MutableMap<PlayerCharacterCard,DeckInstanceStack>,
     //伤害缓存列表
     var hasEnded:Boolean,
     //是否已经结束

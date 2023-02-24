@@ -4,7 +4,7 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
 import org.co2dice.mirai.bean.game.api.EffectAPI;
 import org.co2dice.mirai.bean.game.instance.card.CardInstance;
-import org.co2dice.mirai.bean.game.prototype.character.Chess;
+import org.co2dice.mirai.bean.game.prototype.character.Chessman;
 import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance;
 import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance;
 import org.co2dice.mirai.bean.game.Scene;
@@ -24,9 +24,9 @@ public class AttributeCostFuncType {
         return (scene, cards, character, effectAPI) -> List.of();
     });
 
-    private final Function2<CardInstance,Integer, Function4<Scene, CardInstance, Chess, EffectAPI<Scene, CardInstance, Chess>,List<Token>>> getter;
+    private final Function2<CardInstance,Integer, Function4<Scene, CardInstance, Chessman, EffectAPI<Scene, CardInstance, Chessman>,List<Token>>> getter;
 
-    private AttributeCostFuncType(Function2<CardInstance,Integer, Function4<Scene, CardInstance, Chess, EffectAPI<Scene, CardInstance, Chess>,List<Token>>> getter) {
+    private AttributeCostFuncType(Function2<CardInstance,Integer, Function4<Scene, CardInstance, Chessman, EffectAPI<Scene, CardInstance, Chessman>,List<Token>>> getter) {
         this.getter = getter;
     }
 
