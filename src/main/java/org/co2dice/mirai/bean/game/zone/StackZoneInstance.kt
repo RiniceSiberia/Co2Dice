@@ -1,13 +1,10 @@
 package org.co2dice.mirai.bean.game.zone
 
-import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import org.co2dice.mirai.bean.game.api.EffectTarget
-import org.co2dice.mirai.bean.game.api.Possessive
-import java.util.function.Predicate
+import org.co2dice.mirai.bean.game.api.DependPlayer
 
-interface StackZoneInstance : EffectTarget ,CardContainerAPI, Possessive {
-    override var holder: Player?
+abstract class StackZoneInstance : EffectTarget , CardListContainerAPI(), DependPlayer {
     fun addCardToTop(card: CardInstance):Boolean{
         //index[cards.size-1]为最上方
         return addCard(card)

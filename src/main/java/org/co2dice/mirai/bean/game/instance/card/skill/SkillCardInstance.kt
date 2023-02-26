@@ -3,9 +3,8 @@ package org.co2dice.mirai.bean.game.instance.card.skill
 
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
-import org.co2dice.mirai.bean.game.api.Possessive
+import org.co2dice.mirai.bean.game.api.DependPlayer
 import org.co2dice.mirai.bean.game.entry.card.CardEntry
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
 
 /**
  *      使用IDEA编写
@@ -19,7 +18,7 @@ class SkillCardInstance(
     //玩家输入的属性，每次都有不同的值。比如输入X点力量换取X点攻击等。使用完需要清理。
     override var holder: Player? = null,
 
-    ) : CardInstance(entry), Possessive {
+    ) : CardInstance(entry), DependPlayer {
 
 
 

@@ -3,8 +3,8 @@ package org.co2dice.mirai.bean.game.zone
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.CardInstanceTempData
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
-import org.co2dice.mirai.bean.game.instance.card.event.EventCardInstance
-import org.co2dice.mirai.bean.game.instance.card.venue.VenueCardInstance
+import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance
+import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance
 import java.util.function.Predicate
 
 /**
@@ -13,24 +13,36 @@ import java.util.function.Predicate
  * @Time:  2022-12-05-23:03
  * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  **/
-class DeckInstanceStack(override val cards: MutableList<CardInstance>,
+open class DeckInstanceStack(override val cards: MutableList<CardInstance>,
                         override var holder: Player?
-) : StackZoneInstance {
+) : StackZoneInstance() {
+    //初始化完毕后进行检测，如果卡片不合法则抛出异常，并将错误的卡片筛掉
     init {
-        if (cards.size > 100) {
-            throw Exception("卡组最多100张卡")
+        val illegalCards = cards.filter { !typeLegal(it) }
+        if (illegalCards.isNotEmpty()) {
+            throw IllegalArgumentException("卡组中有不合法的卡片")
         }
-        if (cards.stream().anyMatch { it is EventCardInstance || it is VenueCardInstance }) {
-            //角色卡,事件卡,场地卡过滤掉
-            throw Exception("卡组中有不属于该卡组的卡")
+        if (!countLegal()) {
+            throw IllegalArgumentException("卡组中卡片数量不合法")
         }
+    }
+
+
+    open fun countLegal() : Boolean{
+        return cards.size in 0..100
+    }
+
+    override fun typeLegal(card: CardInstance): Boolean {
+        return card is ItemCardInstance || card is SkillCardInstance
     }
 
     override fun addCard(card: CardInstance): Boolean {
         //将卡放入卡组后洗牌
-        val b = super.addCard(card)
-        shuffle()
-        return b
+        if (countLegal() && super.addCard(card)){
+            shuffle()
+            return true
+        }
+        return false
     }
 
     override fun getCard(card: CardInstance): CardInstance?{
@@ -73,7 +85,7 @@ class DeckInstanceStack(override val cards: MutableList<CardInstance>,
     //查看卡组最底下的i张卡
     fun watchDeckTop(): CardInstance? {
         val card = cards.last()
-        return if (card.onFieldData.get(CardInstanceTempData.FACE_UP) as Boolean == true){
+        return if (card.onFieldData[CardInstanceTempData.FACE_UP] == true){
             card
         }else{
             null

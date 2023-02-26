@@ -2,9 +2,8 @@ package org.co2dice.mirai.bean.game.instance.card.item
 
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.instance.card.CardInstance
-import org.co2dice.mirai.bean.game.api.Possessive
+import org.co2dice.mirai.bean.game.api.DependPlayer
 import org.co2dice.mirai.bean.game.entry.card.CardEntry
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
 
 /**
   * @author trasgl
@@ -18,7 +17,7 @@ class ItemCardInstance(
     override val entry: CardEntry,
     override var holder: Player? = null
     //持有者可为空
-) : CardInstance(entry), Possessive {
+) : CardInstance(entry), DependPlayer {
 
 
 }

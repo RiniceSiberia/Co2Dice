@@ -5,7 +5,7 @@ import org.co2dice.mirai.bean.game.instance.card.CardInstance
 import java.util.function.Predicate
 
 class HandInstanceStack (override var holder: Player?,
-                         override val cards: MutableList<CardInstance> = mutableListOf()) : StackZoneInstance{
+                         override val cards: MutableList<CardInstance> = mutableListOf()) : StackZoneInstance() {
 
 
     fun discard(f:Predicate<CardInstance>):Boolean{
