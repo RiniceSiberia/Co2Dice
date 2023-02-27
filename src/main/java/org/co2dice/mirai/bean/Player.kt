@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean
 
 
-import org.co2dice.mirai.bean.game.entry.chess.ChessEntry
-import org.co2dice.mirai.bean.game.instance.chess.ChessInstance
-import org.co2dice.mirai.bean.game.prototype.character.PlayerChessman
+import org.co2dice.mirai.bean.game.entry.chessman.ChessmanEntry
+import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance
+import org.co2dice.mirai.bean.game.prototype.chessman.PlayerChessman
 import org.co2dice.mirai.bean.game.zone.DeckInstanceStack
 import org.co2dice.mirai.bean.game.zone.StackZoneInstance
 
@@ -14,6 +14,6 @@ import org.co2dice.mirai.bean.game.zone.StackZoneInstance
  * @Message: Have a good time!  :)
  **/
 class Player(
-    val qq: Long,val characters:Map<ChessInstance<ChessEntry<PlayerChessman>>,DeckInstanceStack>) {
+    val qq: Long,val characters:Map<ChessmanInstance<ChessmanEntry<PlayerChessman>>,DeckInstanceStack>) {
     val battleField : StackZoneInstance
 }

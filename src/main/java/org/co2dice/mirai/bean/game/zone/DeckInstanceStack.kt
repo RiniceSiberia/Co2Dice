@@ -45,9 +45,9 @@ open class DeckInstanceStack(override val cards: MutableList<CardInstance>,
         return false
     }
 
-    override fun getCard(card: CardInstance): CardInstance?{
+    override fun takeCard(card: CardInstance): CardInstance?{
         //获取指定卡
-        val c = super.getCard(card)
+        val c = super.takeCard(card)
         shuffle()
         return c
     }
@@ -58,15 +58,10 @@ open class DeckInstanceStack(override val cards: MutableList<CardInstance>,
     }
     //和父类区别在于，1.拿出卡后会洗牌，2.是从容器尾部(卡组最上方)开始遍历
 
-    fun drawCard() : CardInstance? {
-        if (cards.size == 0) {
-            return null
-        }
-        val card = cards.last()
-        //顶部开始抽牌
-        cards.removeLast()
-        return card
+    fun getTopCard() : CardInstance {
+        return cards.last()
     }
+
     fun checkTop(i:Int) : List<CardInstance>? {
         return if (cards.size < i) {
             null

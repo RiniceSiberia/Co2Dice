@@ -4,7 +4,7 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
 import org.co2dice.mirai.bean.game.api.EffectAPI;
 import org.co2dice.mirai.bean.game.instance.card.CardInstance;
-import org.co2dice.mirai.bean.game.prototype.character.Chessman;
+import org.co2dice.mirai.bean.game.prototype.chessman.Chessman;
 import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance;
 import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance;
 import org.co2dice.mirai.bean.game.Scene;

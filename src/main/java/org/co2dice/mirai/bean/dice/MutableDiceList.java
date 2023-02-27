@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.game.instance.chess.ChessInstance;
+import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class MutableDiceList extends DiceList{
         DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.roll();
     }
-    public DiceResult rollContainAttribute(ChessInstance c){
+    public DiceResult rollContainAttribute(ChessmanInstance c){
         DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
         return diceList.roll();
     }
@@ -35,7 +35,7 @@ public class MutableDiceList extends DiceList{
         return diceList.getExpected();
     }
 
-    public Map<Integer,Double> getExpectedContainAttribute(ChessInstance c) {
+    public Map<Integer,Double> getExpectedContainAttribute(ChessmanInstance c) {
         DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
         return diceList.getExpected();
     }
@@ -47,7 +47,7 @@ public class MutableDiceList extends DiceList{
         return d;
     }
 
-    public List<Dice> getDiceListContainAttribute(ChessInstance c) {
+    public List<Dice> getDiceListContainAttribute(ChessmanInstance c) {
         List<Dice> d = new ArrayList<>(super.getDiceList());
         d.addAll(getMutable());
         d.addAll(fixDice.getDiceList(c).getDiceList());

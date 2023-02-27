@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.game.prototype.character
+package org.co2dice.mirai.bean.game.prototype.chessman
 
 /**
  *      使用IDEA编写
@@ -6,7 +6,7 @@ package org.co2dice.mirai.bean.game.prototype.character
  * @Time:  2022-12-06-21:22
  * @Message: Have a good time!  :)
  **/
-open class Chessman(
+abstract class Chessman(
     val str: Int,
     val con: Int,
     val dex: Int,

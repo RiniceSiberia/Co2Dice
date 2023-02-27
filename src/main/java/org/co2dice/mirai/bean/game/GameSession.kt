@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game
 
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
+import org.co2dice.mirai.bean.game.prototype.chessman.Chessman
 import java.util.*
 
 /**

@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.game.instance.chess.ChessInstance;
+import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance;
 import org.co2dice.mirai.bean.tokens.Token;
 import org.co2dice.mirai.bean.tokens.TokenFuller;
 import org.co2dice.mirai.bean.tokens.TokenPool;
@@ -31,7 +31,7 @@ public class AttributeFixDice {
         //默认的修正值为指定token的平均值
     }
 
-    public DiceList getDiceList(ChessInstance c){
+    public DiceList getDiceList(ChessmanInstance c){
         //获取属性修正值
         TokenPool pond = c.getTokenPool();
         //
@@ -56,7 +56,7 @@ public class AttributeFixDice {
         return fixFunc;
     }
 
-    public DiceResult roll(ChessInstance c){
+    public DiceResult roll(ChessmanInstance c){
         return getDiceList(c).roll();
     }
 }

@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.game.api
 
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
+import org.co2dice.mirai.bean.game.prototype.chessman.Chessman
 
 /**
  *      使用IDEA编写

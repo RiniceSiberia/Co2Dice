@@ -2,7 +2,8 @@ package org.co2dice.mirai.bean.game.zone
 
 import org.co2dice.mirai.bean.Player
 import org.co2dice.mirai.bean.game.entry.card.CardEntry
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
+import org.co2dice.mirai.bean.game.entry.chessman.ChessmanEntry
+import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance
 
 class ZoneInstanceSet(
     var holder: Player?,
@@ -10,9 +11,9 @@ class ZoneInstanceSet(
     venueDeck : MutableList<CardEntry>,
     //主卡组的卡片列表,记录了entry的信息
     //领域归属于玩家,而不是棋子
-    chessman: Chessman
+    chessman: ChessmanEntry
 ) {
-    val permanents : MutableMap<Chessman,PermanentsInstance>
+    val permanents : MutableMap<ChessmanInstance,PermanentsInstance>
     = mutableMapOf(chessman to PermanentsInstance(chessman = chessman))
     //一个玩家可以拥有不止一个棋子，当失去所有棋子或所有棋子都无法行动时,游戏失败,除非是系统棋子
     //permanents(永久物）是和棋子绑定的
@@ -38,4 +39,19 @@ class ZoneInstanceSet(
     val gy : GYInstanceStack = GYInstanceStack(holder = holder)
     //墓地
 
+
+    fun start(){
+        for (i in 0..4){
+            try {
+                val card = deck.getTopCard()
+                deck.move(card,hand)
+            }catch (e : NoSuchElementException){
+                //卡组没有卡了
+                permanents.keys.forEach { chessman ->
+                    //获取每个chessman的token条，使其所有基础toKen-1点
+
+                }
+            }
+        }
+    }
 }

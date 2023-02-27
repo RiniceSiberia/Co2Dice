@@ -8,7 +8,7 @@ class TapCardCost(var num:Int) : AbstractCost() {
     // 不可以做到的场景举例：横置场上的1只力量小于1的怪兽和1只力量大于1的怪兽
 
     override fun check(situation: Situation): Boolean {
-        val c = situation.chess
+        val c = situation.chessman
 
     }
 

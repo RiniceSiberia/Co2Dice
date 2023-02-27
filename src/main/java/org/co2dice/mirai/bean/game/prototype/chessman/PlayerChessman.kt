@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.game.prototype.character
+package org.co2dice.mirai.bean.game.prototype.chessman
 
 import org.co2dice.mirai.bean.dice.DiceList
 import org.co2dice.mirai.bean.dice.NormalDice

@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game
 
 
-import org.co2dice.mirai.bean.game.prototype.character.PlayerChessman
+import org.co2dice.mirai.bean.game.prototype.chessman.PlayerChessman
 import org.co2dice.mirai.bean.game.zone.DeckInstanceStack
 import org.co2dice.mirai.bean.game.zone.HandInstanceStack
 

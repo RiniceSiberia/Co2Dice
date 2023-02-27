@@ -11,7 +11,7 @@ import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumeri
 import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
 import org.co2dice.mirai.bean.game.instance.card.CardType
 import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance
-import org.co2dice.mirai.bean.game.prototype.character.PlayerChessman
+import org.co2dice.mirai.bean.game.prototype.chessman.PlayerChessman
 import org.co2dice.mirai.bean.game.prototype.card.Card
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container

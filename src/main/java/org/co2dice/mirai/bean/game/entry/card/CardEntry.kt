@@ -9,7 +9,6 @@ import org.co2dice.mirai.bean.game.instance.card.item.ItemCardInstance
 import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance
 import org.co2dice.mirai.bean.game.instance.card.venue.VenueCardInstance
 import org.co2dice.mirai.bean.game.prototype.card.*
-import org.co2dice.mirai.bean.game.prototype.character.Chessman
 
 open class CardEntry(
     val card: Card,
@@ -18,10 +17,10 @@ open class CardEntry(
 ) : SetTokenAPI {
     fun toInstance(holder: Player? = null): CardInstance {
         when(card){
-            is SkillCard -> SkillCardInstance(this, holder)
-            is ItemCard -> ItemCardInstance(this, holder)
-            is VenueCard -> VenueCardInstance(this, holder)
-            is EventCard -> EventCardInstance(this, holder)
+            is SkillCard -> return SkillCardInstance(this, holder)
+            is ItemCard -> return ItemCardInstance(this, holder)
+            is VenueCard -> return VenueCardInstance(this, holder)
+            is EventCard -> return EventCardInstance(this, holder)
         }
         throw Exception("CardEntry toInstance() error")
     }

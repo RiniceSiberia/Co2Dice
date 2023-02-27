@@ -37,7 +37,7 @@ abstract class CardListContainerAPI {
         return cards.stream().anyMatch(function::test)
     }
     //确认符合条件的卡是否存在于容器中
-    open fun getCard(card: CardInstance): CardInstance?{
+    open fun takeCard(card: CardInstance): CardInstance?{
         return pickCard { it == card }
     }
     //拿出一张指定的卡,将那张卡从牌堆中删除
@@ -56,7 +56,7 @@ abstract class CardListContainerAPI {
         return checkCard { it == card }
     }
     open fun move(card: CardInstance, listContainer: CardListContainerAPI):Boolean{
-        val c = getCard(card)
+        val c = takeCard(card)
         return if (c != null){
             listContainer.addCard(c)
         }else{

@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.game.prototype.effect
 import org.co2dice.mirai.bean.game.Damage
 import org.co2dice.mirai.bean.game.instance.card.Situation
 import org.co2dice.mirai.bean.dice.*
-import org.co2dice.mirai.bean.game.instance.chess.ChessInstance
+import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance
 import org.co2dice.mirai.bean.game.prototype.card.Card
 import org.co2dice.mirai.bean.tokens.Token
 import org.co2dice.mirai.bean.tokens.characterToken.Constitution
@@ -48,7 +48,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
 
     //示例反抗函数,使用敏捷进行反抗,进行一个10+敏捷的反抗
     var react:Function1<Situation, DiceList> = react@{ situation ->
-        if (situation.target is ChessInstance<*>){
+        if (situation.target is ChessmanInstance<*>){
             val tokens = situation.target.tokenPool
             //这里默认值是获取敏捷
             val fuller = tokens.getPointFuller(Dexterity)
