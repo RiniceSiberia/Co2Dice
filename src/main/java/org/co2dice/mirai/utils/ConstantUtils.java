@@ -1,6 +1,5 @@
 package org.co2dice.mirai.utils;
 
-import org.co2dice.mirai.bean.game.instance.card.CardType;
 
 /**
  * 使用IDEA编写
@@ -14,8 +13,10 @@ public class ConstantUtils {
 
 
 
-    public String getCardPath(String resourcesType,CardType type, String name, String extension){
-        return "/resources/"+resourcesType+"/cards/" + type.name() +"/"+name+"."+extension;
+    public String getCardPath(String resourcesType,
+                              String imgUrl,
+                              String extension){
+        return "/resources/" + resourcesType + "/cards/" + imgUrl + "." + extension;
     }
 
 }

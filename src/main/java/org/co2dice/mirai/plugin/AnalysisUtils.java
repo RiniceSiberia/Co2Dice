@@ -6,14 +6,14 @@ import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.MessageChain;
-import org.co2dice.mirai.bean.game.ScenePool;
+import org.co2dice.mirai.bean.game.GameSessionPool;
 
 public class AnalysisUtils {
 
     public static void groupAnalysis(GroupMessageEvent e){
         Group group = e.getGroup();
         Member sender = e.getSender();
-        ScenePool battlesPool = ScenePool.INSTANCE;
+        GameSessionPool battlesPool = GameSessionPool.INSTANCE;
     }
     public static void friendAnalysis(FriendMessageEvent e){
         Friend friend = e.getSender();

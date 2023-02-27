@@ -1,0 +1,10 @@
+package org.co2dice.mirai.decorator.instance.get_numeric_attribute;
+
+import org.co2dice.mirai.decorator.api.Decorator;
+
+public interface GetNumericAttributeDecorator
+        extends Decorator<GetNumericAttributeDecorator,
+        GetNumericAttributeContext,
+        GetNumericAttributeValueInstance> {
+
+}

@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.game
 
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.game.prototype.chessman.Chessman
+import org.co2dice.mirai.bean.zone.ZoneInstanceSet
 import java.util.*
 
 /**
@@ -43,38 +43,42 @@ class GameSession (
     // 场景可以同时存在多个。但一个人只能在一个场景里。
     ) {
 
-    var seatsAvailable:Int = maxPlayer - rosters.size
+    fun getSeatsAvailable():Int{
+        return maxPlayer - rosters.size
+    }
     //可进入的玩家数量
     var hasEnded:Boolean = false
     //如果会话已结束为 true，否则为 false。 将此字段设置为 true 会将会话标记为只读，防止其他数据被提交到会话。
     var isClosed:Boolean = false
     //如果会话关闭且再没有可以添加的玩家则为 true，否则为 false。 如果此值为 true，请求加入会话将被拒绝。
 
-    fun addBattle(characters:MutableList<Chessman>):Boolean{
-        for (player in characters.stream().map { it.characterHolder }.toList().filterNotNull()){
-            //1:判定该角色是否是会话中的角色
-            if (player !in rosters){
+    //新建一场战斗，需要：
+    //1：初始的玩家，玩家的数量不能小于1
+    //2：每个玩家的卡组和场地卡组和棋子
+    fun addBattle(map:MutableMap<Player, ZoneInstanceSet>):Boolean{
+        //使用一些map来创建一个Sence
+        //1:判定该角色是否是本会话中的角色
+        map.keys.forEach{
+            if (it !in rosters){
                 return false
             }
-
         }
-        for (c in characters){
-            for (s in sceneList.stream().filter{!it.hasEnded}.toList()){
-                //2：判定该角色对应的角色卡是否在其他场景里
-                if (c in s.characters){
-                    return false
-                }
+        //2:如果是本绘画的角色，判定该角色是否在其他场景里
+        //现在,一个player只能在一个场景里,所以这里不需要判定角色的chessman了
+        map.keys.forEach{
+            if (it in sceneList.map {i -> i.zones.keys }.flatten()){
+                return false
             }
         }
         //新建一个场景
-        val battle = Battle(characters)
+        val battle = Battle(map)
         return sceneList.add(battle)
     }
 
     fun getPlayerScene(player: Player):Scene?{
         //获取玩家所在的场景
         return sceneList.stream()
-            .filter { it -> player in it.characters.map { it.characterHolder } }
+            .filter { player in it.zones.keys }
             .findFirst().orElse(null)
     }
 

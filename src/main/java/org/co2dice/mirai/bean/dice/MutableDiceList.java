@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
-import org.co2dice.mirai.bean.game.instance.chessman.ChessmanInstance;
+import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance;
 
 import java.util.ArrayList;
 import java.util.List;

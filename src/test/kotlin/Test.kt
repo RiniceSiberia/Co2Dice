@@ -3,16 +3,16 @@ package org.co2dice.mirai.plugin
 import org.co2dice.mirai.bean.Player
 
 import org.co2dice.mirai.bean.game.GameSessionPool
-import org.co2dice.mirai.bean.game.decorator.env.AttributeNumericType
-import org.co2dice.mirai.bean.game.decorator.handler.DecoratorRegistry
-import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
-import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
-import org.co2dice.mirai.bean.game.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
-import org.co2dice.mirai.bean.game.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
-import org.co2dice.mirai.bean.game.instance.card.CardType
-import org.co2dice.mirai.bean.game.instance.card.skill.SkillCardInstance
-import org.co2dice.mirai.bean.game.prototype.chessman.PlayerChessman
-import org.co2dice.mirai.bean.game.prototype.card.Card
+import org.co2dice.mirai.decorator.env.AttributeNumericType
+import org.co2dice.mirai.decorator.handler.DecoratorRegistry
+import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
+import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
+import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
+import org.co2dice.mirai.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
+import org.co2dice.mirai.utils.TokenDepend
+import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance
+import org.co2dice.mirai.bean.chessman.prototype.PlayerChessman
+import org.co2dice.mirai.bean.card.prototype.Card
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container
 import java.util.*
@@ -49,19 +49,24 @@ class Test {
         )
         val value: Int = scene.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
             //获取场景的Token，并运用于卡片的获取属性值
-            .apply(GetNumericAttributeContext(AttributeNumericType.CHAOS, card)).value()
+            .apply(
+                GetNumericAttributeContext(
+                    AttributeNumericType.CHAOS,
+                    card
+                )
+            ).value()
         println(value)
     }
 
     @Test
     fun main2(){
         Container.init("org.co2dice.mirai.bean.game.prototype")
-        val cardA = Card(cardId = UUID.randomUUID(), cardRealName = "testA", cardType = CardType.ITEM)
-        val cardB = Card(cardId = UUID.randomUUID(), cardRealName = "testB", cardType = CardType.ITEM)
+        val cardA = Card(cardId = UUID.randomUUID(), cardRealName = "testA", cardType = TokenDepend.ITEM)
+        val cardB = Card(cardId = UUID.randomUUID(), cardRealName = "testB", cardType = TokenDepend.ITEM)
         Container.register<Card>("cardA").toValue(cardA).inSingletonScope()
         Container.register<Card>("cardB").toValue(cardB).inSingletonScope()
         Container.register<Card>("cardPrototype")
-            .toFactory { Card(cardId = UUID.randomUUID(), cardRealName = "test", cardType = CardType.ITEM) }
+            .toFactory { Card(cardId = UUID.randomUUID(), cardRealName = "test", cardType = TokenDepend.ITEM) }
             .inTransientScope()
         val a = Container.resolve("cardA", Card::class.java)
         val b = Container.resolve("cardPrototype", Card::class.java)
