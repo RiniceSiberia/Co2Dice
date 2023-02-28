@@ -5,7 +5,7 @@ import org.co2dice.mirai.bean.API.SetTokenAPI
 import org.co2dice.mirai.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.bean.counter.CounterPool
 
-class ChessmanInstance(
+abstract class ChessmanInstance(
     val entry : ChessmanEntry,
     var holder: Player?
 ) : SetTokenAPI {
@@ -20,6 +20,5 @@ class ChessmanInstance(
 
     fun die() {}
 
-    fun freeze() {}
 
 }
