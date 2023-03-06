@@ -11,7 +11,7 @@ import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanent
 import org.co2dice.mirai.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
 import org.co2dice.mirai.utils.TokenDepend
 import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance
-import org.co2dice.mirai.bean.chessman.prototype.PlayerChessman
+import org.co2dice.mirai.bean.chessman.prototype.FullAttributeChessman
 import org.co2dice.mirai.bean.card.prototype.Card
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container
@@ -25,7 +25,7 @@ class Test {
         val gameSession = GameSessionPool.getGameSession("test")!!
         val player = Player(qq = 2979897510L)
         GameSessionPool.createGameSession("123456",gameSession)
-        val characterCard = PlayerChessman(
+        val characterCard = FullAttributeChessman(
             cardName = "测试角色",
             flavorText = "测试角色",
             imgUrl = "/",

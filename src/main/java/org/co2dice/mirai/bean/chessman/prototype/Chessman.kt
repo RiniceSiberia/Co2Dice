@@ -1,5 +1,7 @@
 package org.co2dice.mirai.bean.chessman.prototype
 
+import org.co2dice.mirai.bean.chessman.attribute.AttributeEntryTable
+
 /**
  *      使用IDEA编写
  * @Author: DUELIST
@@ -7,14 +9,8 @@ package org.co2dice.mirai.bean.chessman.prototype
  * @Message: Have a good time!  :)
  **/
 abstract class Chessman(
-    val str: Int,
-    val con: Int,
-    val dex: Int,
-    val wis: Int,
-    val int: Int,
-    val san: Int,
-    var name: String,
+    val attributeEntryTable : AttributeEntryTable,
+    var name: String
 ) {
-
-    //属性和token池子
+    //棋子是有属性的，但这个属性不会存储在抽象的棋子里。不同的棋子有不同的属性，比如杂鱼有忠诚
 }

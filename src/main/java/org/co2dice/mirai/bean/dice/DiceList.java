@@ -28,6 +28,10 @@ public class DiceList {
         this.diceList = temp;
     }
 
+    public DiceList(int value){
+        this.diceList = Collections.singletonList(new ConstantDice(value));
+    }
+
     public DiceResult roll(){
         DiceResult temp;
         int bpNum = diceList.stream().filter(d -> d instanceof CoCReRollDice).mapToInt(Dice::getDiceTime).sum();

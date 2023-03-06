@@ -42,7 +42,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
             }
         }
 
-        return@check DiceList(ConstantDice(0))
+        return@check DiceList(0)
     }
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
 
@@ -59,7 +59,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
                         .getDiceList(situation.target).diceList)
             }
         }
-        return@react DiceList(ConstantDice(0))
+        return@react DiceList(0)
     }
     //反抗值,敌人受到技能影响后会检定是否可以反抗，若成功则豁免。 传参:玩家的输入值，场景，技能本身，敌人。返回值:反抗值
 
@@ -85,7 +85,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
         val d = Damage (
             character,
             cards,
-            DiceLevel.getDiceListByCost(i.size)?:DiceList(ConstantDice(1)),
+            DiceLevel.getDiceListByCost(i.size)?:DiceList(1),
             i[0], listOf(Damage.DamageType.BLUDGEON)
         )
         scene.damageList.add(d)
