@@ -1,6 +1,11 @@
 package org.co2dice.mirai.bean.dice;
 
+import com.mojang.datafixers.util.Either;
+import kotlin.jvm.functions.Function1;
+import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable;
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +23,41 @@ public class MutableDiceList extends DiceList{
         this.fixDice = fix;
     }
 
+    @TestOnly
+    public MutableDiceList(List<Dice> diceList, List<Dice> mutable) {
+        super(diceList);
+        this.mutable = mutable;
+        this.fixDice = new AttributeFixDice(table -> Either.right("没有属性修正值"));
+    }
+    //只在测试时使用
+
 
     @Override
     public DiceResult roll() {
         DiceList diceList = new DiceList(super.getDiceList(),mutable);
         return diceList.roll();
     }
-    public DiceResult rollContainAttribute(ChessmanInstance c){
-        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
-        return diceList.roll();
+
+    @NotNull
+    private Either<List<Dice>,String> getFixDiceEither(ChessmanInstance c){
+        if (this.fixDice.getListDice(c).left().isPresent()){
+            return Either.left(this.fixDice.getListDice(c).left().get());
+        }else {
+            if (this.fixDice.getListDice(c).right().isPresent()){
+                return Either.right(this.fixDice.getListDice(c).right().get());
+            }
+            return Either.right("roll属性时发生未知错误");
+        }
+    }
+
+    public Either<DiceResult,String> rollContainAttribute(ChessmanInstance c){
+        if (getFixDiceEither(c).left().isPresent()){
+            var diceList = new DiceList(super.getDiceList(),mutable,getFixDiceEither(c).left().get());
+            return Either.left(diceList.roll());
+        }else if (getFixDiceEither(c).right().isPresent()){
+            return Either.right(getFixDiceEither(c).right().get());
+        }
+        return Either.right("roll属性时发生未知错误");
     }
 
     @Override
@@ -35,9 +66,14 @@ public class MutableDiceList extends DiceList{
         return diceList.getExpected();
     }
 
-    public Map<Integer,Double> getExpectedContainAttribute(ChessmanInstance c) {
-        DiceList diceList = new DiceList(super.getDiceList(),mutable,fixDice.getDiceList(c).getDiceList());
-        return diceList.getExpected();
+    public Either<Map<Integer,Double>,String> getExpectedContainAttribute(ChessmanInstance c) {
+        if (getFixDiceEither(c).left().isPresent()){
+            DiceList diceList = new DiceList(super.getDiceList(),mutable,getFixDiceEither(c).left().get());
+            return Either.left(diceList.getExpected());
+        }else if (getFixDiceEither(c).right().isPresent()){
+            return Either.right(getFixDiceEither(c).right().get());
+        }
+        return Either.right("roll属性时发生未知错误");
     }
 
     @Override
@@ -47,11 +83,16 @@ public class MutableDiceList extends DiceList{
         return d;
     }
 
-    public List<Dice> getDiceListContainAttribute(ChessmanInstance c) {
-        List<Dice> d = new ArrayList<>(super.getDiceList());
-        d.addAll(getMutable());
-        d.addAll(fixDice.getDiceList(c).getDiceList());
-        return d;
+    public Either<List<Dice>,String> getDiceListContainAttribute(ChessmanInstance c) {
+        if (getFixDiceEither(c).left().isPresent()) {
+            List<Dice> d = new ArrayList<>(super.getDiceList());
+            d.addAll(getMutable());
+            d.addAll(getFixDiceEither(c).left().get());
+            return Either.left(d);
+        }else if (getFixDiceEither(c).right().isPresent()){
+            return Either.right(getFixDiceEither(c).right().get());
+        }
+        return Either.right("roll属性时发生未知错误");
     }
 
     public AttributeFixDice getFixDice() {

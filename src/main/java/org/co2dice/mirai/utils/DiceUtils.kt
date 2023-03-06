@@ -1,7 +1,9 @@
 package org.co2dice.mirai.utils
 
-import org.co2dice.mirai.bean.cards.character.CharacterCard
+import com.mojang.datafixers.util.Either
+import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable
 import org.co2dice.mirai.bean.dice.*
+import scala.Function1
 import java.util.*
 import kotlin.math.abs
 import kotlin.streams.toList
@@ -32,7 +34,10 @@ object DiceUtils {
     )
     fun getExpectDice(e:Double): DiceList {
         val fixDice:AttributeFixDice? = null
-        val dices = MutableDiceList(mutableListOf(),mutableListOf(), AttributeFixDice(mutableListOf()))
+        val dices = MutableDiceList(
+            mutableListOf(),
+            mutableListOf()
+        )
         //循环遍历将所有的骰子都加入到dices,计算出所有的可能性，再将dices清空，算出最接近期望值的样子
         //优先级和骰子的映射和期望值
         var f = true
@@ -41,7 +46,7 @@ object DiceUtils {
             for (dice in getListByPriority()){
                 //计算dices中所有骰子的期望值
                 dices.mutable.add(dice.dice)
-                val odds:Map<Int,Double> = dices.getExpected()
+                val odds:Map<Int,Double> = dices.expected
                 //所有和的概率
                 //获取一个总的期望值，即每个key乘以每个value后得到的总和
                 var value:Double = 0.0;

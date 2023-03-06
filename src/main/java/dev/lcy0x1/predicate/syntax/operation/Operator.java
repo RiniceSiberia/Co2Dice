@@ -128,6 +128,7 @@ public class Operator<T extends IOperationInstance> implements NamedEnum {
 		return REGISTRY.get(type);
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
