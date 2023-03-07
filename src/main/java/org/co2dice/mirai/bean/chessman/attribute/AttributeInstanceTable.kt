@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.chessman.attribute
 
-import org.co2dice.mirai.bean.dice.DiceList
+import org.co2dice.mirai.bean.dice.diceList.DiceList
 
 /**
  *      使用IDEA编写
@@ -29,12 +29,25 @@ class AttributeInstanceTable (private val set : Set<AttributeInstance>){
         }
         //精英怪的构造器，不填或负数属性代表没有这个属性
 
-        fun createElite(str:DiceList = DiceList(0),
-                        con:DiceList = DiceList(0),
-                        dex:DiceList = DiceList(0),
-                        wis:DiceList = DiceList(0),
-                        int:DiceList = DiceList(0),
-                        san:DiceList = DiceList(0))
+        fun createElite(str: DiceList = DiceList(
+            0
+        ),
+                        con: DiceList = DiceList(
+                            0
+                        ),
+                        dex: DiceList = DiceList(
+                            0
+                        ),
+                        wis: DiceList = DiceList(
+                            0
+                        ),
+                        int: DiceList = DiceList(
+                            0
+                        ),
+                        san: DiceList = DiceList(
+                            0
+                        )
+        )
         : AttributeInstanceTable{
             return createElite(
                 str.roll().getResult(),

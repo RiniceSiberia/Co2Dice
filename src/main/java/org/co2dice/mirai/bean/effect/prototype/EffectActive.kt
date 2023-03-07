@@ -9,6 +9,12 @@ import org.co2dice.mirai.bean.chessman.attribute.EliteAttribute
 import org.co2dice.mirai.bean.counter.Counter
 import org.co2dice.mirai.bean.counter.chessmanToken.Constitution
 import org.co2dice.mirai.bean.counter.chessmanToken.Dexterity
+import org.co2dice.mirai.bean.dice.diceList.DiceList
+import org.co2dice.mirai.bean.dice.diceList.MutableDiceList
+import org.co2dice.mirai.bean.dice.single.AttributeFixDice
+import org.co2dice.mirai.bean.dice.single.ConstantDice
+import org.co2dice.mirai.bean.dice.single.NormalDice
+import org.co2dice.mirai.bean.dice.utils.DiceLevel
 import java.util.*
 import java.util.stream.Collectors
 
@@ -25,7 +31,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
     abstract val skillParam:MutableMap<String,Int>
 
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
-    var check:Function1<Situation,DiceList> = check@{ situation ->
+    var check:Function1<Situation, DiceList> = check@{ situation ->
         val h = situation.chessman
         //获取技能源的持有Chess
         if (h != null){
@@ -38,7 +44,8 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
                 return@check MutableDiceList(
                     listOf(NormalDice(20)),
                     listOf(ConstantDice(burnValue)),
-                    AttributeFixDice(listOf(Dexterity)))
+                    AttributeFixDice(listOf(Dexterity))
+                )
                 //固定值，增益，以及变化的属性值
             }
         }
@@ -57,7 +64,8 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
                 return@react DiceList(
                     listOf(ConstantDice(10)),
                     AttributeFixDice(listOf(Dexterity))
-                        .getDiceList(situation.target).diceList)
+                        .getDiceList(situation.target).diceList
+                )
             }
         }
         return@react DiceList(0)
@@ -86,7 +94,7 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
         val d = Damage (
             character,
             cards,
-            DiceLevel.getDiceListByCost(i.size)?:DiceList(1),
+            DiceLevel.getDiceListByCost(i.size)?: DiceList(1),
             i[0], listOf(Damage.DamageType.BLUDGEON)
         )
         scene.damageList.add(d)

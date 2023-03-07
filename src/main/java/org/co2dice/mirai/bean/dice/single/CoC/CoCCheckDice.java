@@ -1,7 +1,10 @@
-package org.co2dice.mirai.bean.dice.CoC;
+package org.co2dice.mirai.bean.dice.single.CoC;
 
-import org.co2dice.mirai.bean.dice.NormalDice;
+import org.co2dice.mirai.bean.dice.single.NormalDice;
 
+/**
+ * @author DUELIST
+ */
 public class CoCCheckDice extends NormalDice {
     public CoCCheckDice() {
         super(100);

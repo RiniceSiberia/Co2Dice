@@ -1,12 +1,12 @@
 package org.co2dice.mirai.utils
 
-import com.mojang.datafixers.util.Either
-import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable
-import org.co2dice.mirai.bean.dice.*
-import scala.Function1
+import org.co2dice.mirai.bean.dice.diceList.DiceList
+import org.co2dice.mirai.bean.dice.diceList.MutableDiceList
+import org.co2dice.mirai.bean.dice.single.AttributeFixDice
+import org.co2dice.mirai.bean.dice.single.Dice
+import org.co2dice.mirai.bean.dice.utils.UsuallyDices
 import java.util.*
 import kotlin.math.abs
-import kotlin.streams.toList
 
 object DiceUtils {
     val EXPECTED_VALUE:List<Double> = listOf(
@@ -33,7 +33,7 @@ object DiceUtils {
         98.0
     )
     fun getExpectDice(e:Double): DiceList {
-        val fixDice:AttributeFixDice? = null
+        val fixDice: AttributeFixDice? = null
         val dices = MutableDiceList(
             mutableListOf(),
             mutableListOf()

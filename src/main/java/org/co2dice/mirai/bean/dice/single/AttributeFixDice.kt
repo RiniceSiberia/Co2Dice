@@ -1,8 +1,9 @@
-package org.co2dice.mirai.bean.dice
+package org.co2dice.mirai.bean.dice.single
 
 import com.mojang.datafixers.util.Either
 import org.co2dice.mirai.bean.chessman.attribute.*
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
+import org.co2dice.mirai.bean.dice.diceList.DiceList
 import java.util.*
 import java.util.stream.Collectors
 
@@ -20,10 +21,12 @@ class AttributeFixDice {
     }
 
     constructor(a: AttributeAPI) {
-        fixFunc = label@{ table: AttributeInstanceTable ->
+        fixFunc = fixFunc@{ table: AttributeInstanceTable ->
             val value = table.getValue(a)
             if (value != null) {
-                return@label Either.left<DiceList, String>(DiceList(value))
+                return@fixFunc Either.left<DiceList, String>(
+                    DiceList(value)
+                )
             }
             Either.right("属性修正值为空,为空属性:" + a.nameStr)
         }
@@ -37,8 +40,7 @@ class AttributeFixDice {
 
     fun getDiceList(c: ChessmanInstance): Either<DiceList, String> {
         //通过玩家获取属性修正值
-        val table = c.attributeInstanceTable
-        return fixFunc.invoke(table)
+        return fixFunc(c.attributeInstanceTable)
     }
 
     fun getListDice(c: ChessmanInstance): Either<List<Dice>, String> {

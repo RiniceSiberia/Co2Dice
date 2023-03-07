@@ -1,6 +1,10 @@
-package org.co2dice.mirai.bean.dice;
+package org.co2dice.mirai.bean.dice.diceList;
 
-import org.co2dice.mirai.bean.dice.CoC.CoCReRollDice;
+import org.co2dice.mirai.bean.dice.DiceResult;
+import org.co2dice.mirai.bean.dice.utils.Expect;
+import org.co2dice.mirai.bean.dice.single.CoC.CoCReRollDice;
+import org.co2dice.mirai.bean.dice.single.ConstantDice;
+import org.co2dice.mirai.bean.dice.single.Dice;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -103,7 +107,7 @@ public class DiceList {
     public List<Dice> getDiceList() {
         return diceList;
     }
-    int getDiceListSize(){
+    public int getDiceListSize(){
         return diceList.size();
     }
 

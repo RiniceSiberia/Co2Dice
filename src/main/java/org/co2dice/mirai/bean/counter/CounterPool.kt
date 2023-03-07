@@ -1,8 +1,5 @@
 package org.co2dice.mirai.bean.counter
 
-import org.co2dice.mirai.bean.dice.DiceList
-import org.co2dice.mirai.bean.dice.NormalDice
-
 /**
  *      使用IDEA编写
  * @Author: DUELIST

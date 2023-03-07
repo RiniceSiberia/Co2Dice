@@ -1,4 +1,6 @@
-package org.co2dice.mirai.bean.dice;
+package org.co2dice.mirai.bean.dice.utils;
+
+import org.co2dice.mirai.bean.dice.diceList.DiceList;
 
 import java.util.HashMap;
 import java.util.Map;

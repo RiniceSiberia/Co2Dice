@@ -1,8 +1,10 @@
-package org.co2dice.mirai.bean.dice
+package org.co2dice.mirai.bean.dice.utils
 
-import kotlin.math.abs
+import org.co2dice.mirai.bean.dice.single.ConstantDice
+import org.co2dice.mirai.bean.dice.single.Dice
+import org.co2dice.mirai.bean.dice.single.NormalDice
 
-enum class UsuallyDices(val dice: Dice,val priority :Int) {
+enum class UsuallyDices(val dice: Dice, val priority :Int) {
     D1(ConstantDice(1),2),
     COIN(NormalDice(2),1),
     D3(NormalDice(3),6),

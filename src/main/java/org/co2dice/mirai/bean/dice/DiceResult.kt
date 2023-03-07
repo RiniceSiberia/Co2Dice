@@ -1,8 +1,10 @@
 package org.co2dice.mirai.bean.dice
 
+import org.co2dice.mirai.bean.dice.diceList.DiceList
+import org.co2dice.mirai.bean.dice.single.Dice
 import kotlin.streams.toList
 
-class DiceResult (val diceList:DiceList){
+class DiceResult (val diceList: DiceList){
     var resultList:List<Int> = diceList.diceList.stream().mapToInt(Dice::roll).toList()
 
 
@@ -13,7 +15,7 @@ class DiceResult (val diceList:DiceList){
     fun changeResult(diceIndex:Int, changeValue:Int){
         resultList = resultList.mapIndexed { index, i -> if(index == diceIndex) changeValue else i }
     }
-    fun reRollPointDice(diceIndex: Int,replaceDice:Dice){
+    fun reRollPointDice(diceIndex: Int,replaceDice: Dice){
         resultList = resultList.mapIndexed { index, i -> if(index == diceIndex) replaceDice.roll() else i }
     }
 }

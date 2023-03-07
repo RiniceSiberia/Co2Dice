@@ -1,10 +1,13 @@
-package org.co2dice.mirai.bean.dice.CoC;
+package org.co2dice.mirai.bean.dice.single.CoC;
 
-import org.co2dice.mirai.bean.dice.Dice;
+import org.co2dice.mirai.bean.dice.single.Dice;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author DUELIST
+ */
 public class CoCReRollDice extends Dice {
     //该骰子不会计入实际计算骰面，只会根据time对最终结果进行调整
     private int times;

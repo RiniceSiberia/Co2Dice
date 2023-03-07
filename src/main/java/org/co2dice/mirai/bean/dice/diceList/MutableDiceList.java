@@ -1,7 +1,10 @@
-package org.co2dice.mirai.bean.dice;
+package org.co2dice.mirai.bean.dice.diceList;
 
 import com.mojang.datafixers.util.Either;
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance;
+import org.co2dice.mirai.bean.dice.DiceResult;
+import org.co2dice.mirai.bean.dice.single.AttributeFixDice;
+import org.co2dice.mirai.bean.dice.single.Dice;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
 

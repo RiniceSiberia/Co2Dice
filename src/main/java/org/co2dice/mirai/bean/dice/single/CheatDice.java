@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.dice;
+package org.co2dice.mirai.bean.dice.single;
 
 
 import java.util.ArrayList;
