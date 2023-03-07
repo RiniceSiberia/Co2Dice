@@ -5,6 +5,7 @@ import org.co2dice.mirai.utils.Situation
 import org.co2dice.mirai.bean.dice.*
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.bean.card.prototype.Card
+import org.co2dice.mirai.bean.chessman.attribute.EliteAttribute
 import org.co2dice.mirai.bean.counter.Counter
 import org.co2dice.mirai.bean.counter.chessmanToken.Constitution
 import org.co2dice.mirai.bean.counter.chessmanToken.Dexterity
@@ -24,16 +25,16 @@ abstract class EffectActive(holder: Card, c : Class<*>) : Effect(holder) {
     abstract val skillParam:MutableMap<String,Int>
 
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
-    var check:Function1<Situation<>,DiceList> = check@{ situation ->
-        val h = situation.chess
+    var check:Function1<Situation,DiceList> = check@{ situation ->
+        val h = situation.chessman
         //获取技能源的持有Chess
         if (h != null){
-            val tokens = h.tokenPool
+            val table = h.attributeInstanceTable
             //这里默认值是获取敏捷
-            val fuller = tokens.getPointFuller(Dexterity)
+            val dex = table.getValue(EliteAttribute.DEX)
             val burnValue:Int = skillParam[Dexterity.id] ?:0
             //额外支付的敏捷值
-            if (fuller != null){
+            if (dex != null){
                 return@check MutableDiceList(
                     listOf(NormalDice(20)),
                     listOf(ConstantDice(burnValue)),

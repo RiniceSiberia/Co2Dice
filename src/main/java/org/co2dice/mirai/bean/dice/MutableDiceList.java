@@ -1,8 +1,6 @@
 package org.co2dice.mirai.bean.dice;
 
 import com.mojang.datafixers.util.Either;
-import kotlin.jvm.functions.Function1;
-import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable;
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
@@ -142,6 +140,6 @@ public class MutableDiceList extends DiceList{
     @Override
     public String toString() {
         DiceList diceList = new DiceList(mutable);
-        return super.toString()+","+diceList.toString();
+        return super.toString()+","+ diceList;
     }
 }
