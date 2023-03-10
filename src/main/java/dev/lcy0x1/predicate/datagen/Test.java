@@ -1,7 +1,6 @@
 package dev.lcy0x1.predicate.datagen;
 
 import dev.lcy0x1.predicate.syntax.operation.Operator;
-import dev.lcy0x1.predicate.syntax.type.OperandType;
 import dev.lcy0x1.predicate.syntax.type.OperandTypes;
 
 public class Test {

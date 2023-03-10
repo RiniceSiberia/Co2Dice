@@ -44,14 +44,16 @@ public class OperandType<T> {
 	}
 
 	public IValueToken<T> constantToken(T val) {
-		if (encoder == null)
+		if (encoder == null) {
 			throw new RuntimeException(name + " does not support constant");
+		}
 		return new ConstantToken<>(this, val);
 	}
 
 	public JsonElement encode(T value) {
-		if (encoder == null)
+		if (encoder == null) {
 			throw new RuntimeException(name + " does not support constant");
+		}
 		return encoder.apply(value);
 	}
 

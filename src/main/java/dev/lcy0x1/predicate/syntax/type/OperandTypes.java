@@ -13,6 +13,8 @@ import dev.lcy0x1.util.ListHelper;
 import java.util.List;
 
 public class OperandTypes {
+	//这个类记录可操作的数据类型，基本类如bool,number,name,attribute,entity
+
 	public static final OperandType<Boolean> BOOL = new OperandType<>("bool", JsonPrimitive::new,
 			(t, ctx, e) -> new ValueInstanceConstant<>(t, e.getAsBoolean()));
 	public static final OperandType<Integer> NUMBER = new OperandType<>("number", JsonPrimitive::new,
