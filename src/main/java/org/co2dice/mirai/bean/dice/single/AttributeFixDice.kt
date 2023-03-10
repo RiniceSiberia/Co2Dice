@@ -1,7 +1,10 @@
 package org.co2dice.mirai.bean.dice.single
 
 import com.mojang.datafixers.util.Either
-import org.co2dice.mirai.bean.chessman.attribute.*
+import org.co2dice.mirai.bean.attribute.prototype.AttributeAPI
+import org.co2dice.mirai.bean.attribute.prototype.EliteAttribute
+import org.co2dice.mirai.bean.attribute.prototype.MobAttribute
+import org.co2dice.mirai.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.bean.dice.diceList.DiceList
 import java.util.*
@@ -63,14 +66,13 @@ class AttributeFixDice {
             //现在这个set里获取了所有类型的属性，无论是不是怪物的
             set.removeIf { a: AttributeAPI ->
                 //将set里的属性全部转化为AttributeInstance，然后填充入table中
-                val table = AttributeInstanceTable(
-                    set.stream().filter { i: AttributeAPI -> i != a }
-                        .map { i: AttributeAPI? ->
-                            AttributeInstance(
-                                i!!, 8, 8
-                            )
-                        }.collect(Collectors.toSet())
-                )
+                val map = set.stream().filter { i: AttributeAPI -> i != a }
+                    //筛出了set中除了本元素外的所有元素
+                    //接下来用这些元素建立一个map，这些元素做key，统一生成一个AttributeInstanceTable.ValuesInstance(8, 8)做value
+                    .collect(Collectors.toMap({ i: AttributeAPI -> i },
+                        { AttributeInstanceTable.ValuesInstance(8, 8) }))
+
+                val table = AttributeInstanceTable(map)
                 canUse(table)
             }
             return set

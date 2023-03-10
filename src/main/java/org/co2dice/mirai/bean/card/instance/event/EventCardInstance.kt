@@ -1,7 +1,8 @@
 package org.co2dice.mirai.bean.card.instance.event
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.API.DependPlayer
+import org.co2dice.mirai.bean.api.DependPlayer
+import org.co2dice.mirai.bean.card.api.OpenCardInstance
 import org.co2dice.mirai.bean.card.entry.CardEntry
 import org.co2dice.mirai.bean.card.instance.CardInstance
 
@@ -13,7 +14,7 @@ import org.co2dice.mirai.bean.card.instance.CardInstance
  **/
 class EventCardInstance(
     override val entry: CardEntry,
-    override var holder: Player? = null
-) : CardInstance(entry), DependPlayer {
+    override var holder: Player? = null, override val uniqueId: Int
+) : CardInstance(entry), DependPlayer,OpenCardInstance {
 
 }

@@ -1,4 +1,4 @@
-package org.co2dice.mirai.utils
+package org.co2dice.mirai.publicEnums
 
 enum class ItemType {
     LEFT_HAND,

@@ -1,8 +1,8 @@
 package org.co2dice.mirai.bean.chessman.instance
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable
-import org.co2dice.mirai.bean.chessman.attribute.MobAttribute
+import org.co2dice.mirai.bean.attribute.table.AttributeInstanceTable
+import org.co2dice.mirai.bean.attribute.prototype.MobAttribute
 import org.co2dice.mirai.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.bean.game.Damage
 
@@ -19,7 +19,7 @@ class MobChessmanInstance(entry : ChessmanEntry,
 
 
     override fun makeDamage(damage: Damage): Boolean {
-        attributeInstanceTable.subtractionValue(damage.damage.roll().getResult(),MobAttribute.LOYALTY)
+        attributeInstanceTable.subtractionValue(damage.damage.roll().getResult(), MobAttribute.LOYALTY)
         return true
     }
     //无论输入是啥，都打忠诚度

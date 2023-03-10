@@ -5,7 +5,7 @@ import org.co2dice.mirai.decorator.api.DecoratorHandler;
 import org.co2dice.mirai.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeContext;
 import org.co2dice.mirai.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeDecorator;
 import org.co2dice.mirai.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeValueInstance;
-import org.co2dice.mirai.utils.Situation;
+import org.co2dice.mirai.bean.effect.utils.Situation;
 import org.co2dice.mirai.decorator.env.AttributeEffectFuncType;
 
 public final class SimpleEffectFuncPermanentNegateValueDecorator extends SimpleEffectFuncPermanentDecorator<

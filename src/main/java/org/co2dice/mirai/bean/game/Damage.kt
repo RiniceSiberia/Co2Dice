@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.game
 
 import org.co2dice.mirai.bean.card.instance.CardInstance
-import org.co2dice.mirai.bean.chessman.attribute.AttributeAPI
+import org.co2dice.mirai.bean.attribute.prototype.AttributeAPI
 import org.co2dice.mirai.bean.dice.diceList.DiceList
 
 data class Damage(

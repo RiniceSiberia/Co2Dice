@@ -1,7 +1,7 @@
 package org.co2dice.mirai.decorator.env;
 
 import org.co2dice.mirai.bean.card.instance.CardInstance;
-import org.co2dice.mirai.bean.API.CAO;
+import org.co2dice.mirai.bean.api.CAO;
 import org.co2dice.mirai.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
 
 import java.util.function.Function;

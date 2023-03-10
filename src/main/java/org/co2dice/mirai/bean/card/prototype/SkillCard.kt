@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.card.prototype
 
-import org.co2dice.mirai.bean.API.CAO
+import org.co2dice.mirai.bean.api.CAO
 import org.co2dice.mirai.bean.effect.prototype.Effect
 import java.util.*
 

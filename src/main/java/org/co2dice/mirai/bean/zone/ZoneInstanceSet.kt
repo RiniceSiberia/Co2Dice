@@ -15,14 +15,12 @@ class ZoneInstanceSet(
     chessman: ChessmanEntry
 ) {
     init {
-        createPermanentZone(chessman.toInstance(holder))
+        createEquipmentZone(chessman.toInstance(holder))
     }
 
-    private val permanents : MutableMap<ChessmanInstance, EquipmentsInstance> = mutableMapOf()
+    val equipments : MutableMap<ChessmanInstance, EquipmentsInstance> = mutableMapOf()
     //一个玩家可以拥有不止一个棋子，当失去所有棋子或所有棋子都无法行动时,游戏失败,除非是系统棋子
-    //permanents(永久物）是和棋子绑定的
-
-//    private val publicPermanents : PermanentsInstance = PermanentsInstance(null)
+    //Equipments(装备）是和棋子绑定的
 
     private val buffer : BufferInstance = BufferInstance(holder = holder)
     //缓冲区，释放卡片时的区域，类比如万智牌的堆叠区域或者连锁处理区
@@ -43,10 +41,10 @@ class ZoneInstanceSet(
     //手牌
 
     private val gy : StackZoneInstance = StackZoneInstance(holder = holder, cards = mutableListOf())
-    //墓地
+    //墓地，放那些丢失的道具
 
     private val banish : StackZoneInstance = StackZoneInstance(holder = holder, cards = mutableListOf())
-    //除外区
+    //除外区，放损坏的道具
 
 
 
@@ -56,7 +54,7 @@ class ZoneInstanceSet(
                 deck.move(deck.getTopCard(),hand)
             }catch (e : NoSuchElementException){
                 //卡组没有卡了
-                noCardInDeck(deck,permanents.keys)
+                noCardInDeck(deck,equipments.keys)
                 deck.move(deck.getTopCard(),hand)
             }
         }
@@ -66,7 +64,7 @@ class ZoneInstanceSet(
         //卡组没有卡了
         chessmen.forEach { chessman ->
             //获取每个chessman的token条，使其所有基础toKen-1点
-            chessman.counterPool.getBasicFuller().forEach { tokenFuller ->
+            chessman.attributeInstanceTable.forEach { tokenFuller ->
                 if (tokenFuller.removeToken(1) == false){
                     //token不足，棋子死亡
                     chessmanDie(chessman)
@@ -83,18 +81,19 @@ class ZoneInstanceSet(
     fun chessmanDie(chessman: ChessmanInstance){
         chessman.die()
         //棋子死亡
-        permanents.remove(chessman)
+        equipments.remove(chessman)
         //检查是否还有棋子
-        if (permanents.isEmpty()){
+        if (equipments.isEmpty()){
             //没有棋子了，游戏失败
             throw FailException()
         }
     }
 
-    fun createPermanentZone(chessman: ChessmanInstance){
+    fun createEquipmentZone(chessman: ChessmanInstance){
         //创建永久物区域
-        permanents[chessman] = EquipmentsInstance(chessman)
+        equipments[chessman] = EquipmentsInstance(chessman)
     }
+
 
 
 

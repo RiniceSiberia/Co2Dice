@@ -4,7 +4,7 @@ import org.co2dice.mirai.bean.dice.diceList.DiceList
 import org.co2dice.mirai.bean.dice.diceList.MutableDiceList
 import org.co2dice.mirai.bean.dice.single.AttributeFixDice
 import org.co2dice.mirai.bean.dice.single.Dice
-import org.co2dice.mirai.bean.dice.utils.UsuallyDices
+import org.co2dice.mirai.publicEnums.UsuallyDices
 import java.util.*
 import kotlin.math.abs
 

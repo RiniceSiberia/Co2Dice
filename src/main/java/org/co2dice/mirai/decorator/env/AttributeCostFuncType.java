@@ -2,7 +2,7 @@ package org.co2dice.mirai.decorator.env;
 
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
-import org.co2dice.mirai.bean.API.EffectAPI;
+import org.co2dice.mirai.bean.api.EffectAPI;
 import org.co2dice.mirai.bean.card.instance.CardInstance;
 import org.co2dice.mirai.bean.chessman.prototype.Chessman;
 import org.co2dice.mirai.bean.card.instance.item.ItemCardInstance;

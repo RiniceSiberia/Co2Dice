@@ -1,4 +1,4 @@
-package org.co2dice.mirai.utils
+package org.co2dice.mirai.publicEnums
 
 /**
  *      使用IDEA编写

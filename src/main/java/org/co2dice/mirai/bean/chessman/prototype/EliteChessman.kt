@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.chessman.prototype
 
-import org.co2dice.mirai.bean.chessman.attribute.AttributeEntryTable
+import org.co2dice.mirai.bean.attribute.table.AttributeEntryTable
 
 /**
  *      使用IDEA编写

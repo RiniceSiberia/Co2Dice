@@ -2,7 +2,7 @@ package org.co2dice.mirai.decorator.instance.get_effect_func_attribute;
 
 
 import kotlin.jvm.functions.Function1;
-import org.co2dice.mirai.utils.Situation;
+import org.co2dice.mirai.bean.effect.utils.Situation;
 import org.co2dice.mirai.decorator.api.DecoratorValueInstance;
 
 public record GetEffectFuncAttributeValueInstance(

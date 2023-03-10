@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.zone
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.card.CardInstanceTempData
+import org.co2dice.mirai.publicEnums.CardInstanceTempData
 import org.co2dice.mirai.bean.card.instance.CardInstance
 import org.co2dice.mirai.bean.card.instance.item.ItemCardInstance
 import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance

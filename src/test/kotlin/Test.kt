@@ -9,7 +9,7 @@ import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanent
 import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
 import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
 import org.co2dice.mirai.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
-import org.co2dice.mirai.utils.TokenDepend
+import org.co2dice.mirai.publicEnums.TokenDepend
 import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance
 import org.co2dice.mirai.bean.chessman.prototype.FullAttributeChessman
 import org.co2dice.mirai.bean.card.prototype.Card

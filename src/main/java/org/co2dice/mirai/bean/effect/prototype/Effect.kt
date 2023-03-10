@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.effect.prototype
 
-import org.co2dice.mirai.bean.API.EffectAPI
-import org.co2dice.mirai.bean.API.EffectTarget
+import org.co2dice.mirai.bean.api.EffectAPI
+import org.co2dice.mirai.bean.api.EffectTarget
 import org.co2dice.mirai.bean.card.prototype.Card
 
 /**

@@ -1,9 +1,9 @@
 package org.co2dice.mirai.bean.counter
 
 import org.co2dice.mirai.bean.game.Battle
-import org.co2dice.mirai.bean.API.EffectTarget
+import org.co2dice.mirai.bean.api.EffectTarget
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
-import org.co2dice.mirai.utils.TokenDepend
+import org.co2dice.mirai.publicEnums.TokenDepend
 import space.controlnet.lightioc.annotation.Provider
 
 /**

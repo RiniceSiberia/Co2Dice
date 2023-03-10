@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.chessman.instance
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.chessman.attribute.AttributeInstanceTable
+import org.co2dice.mirai.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.bean.game.Damage
 

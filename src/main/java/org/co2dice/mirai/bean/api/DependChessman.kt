@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.API
+package org.co2dice.mirai.bean.api
 
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 

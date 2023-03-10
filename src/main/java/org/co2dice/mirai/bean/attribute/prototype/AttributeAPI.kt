@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.chessman.attribute
+package org.co2dice.mirai.bean.attribute.prototype
 
 /**
  *      使用IDEA编写

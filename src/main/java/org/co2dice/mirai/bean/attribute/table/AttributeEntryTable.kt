@@ -1,10 +1,14 @@
-package org.co2dice.mirai.bean.chessman.attribute
+package org.co2dice.mirai.bean.attribute.table
+
+import org.co2dice.mirai.bean.attribute.prototype.AttributeAPI
+import org.co2dice.mirai.bean.attribute.prototype.EliteAttribute
+import org.co2dice.mirai.bean.attribute.prototype.MobAttribute
 
 /**
  *      使用IDEA编写
  * @Author: DUELIST
  * @Time:  2023-03-06-1:34
- * @Message: Have a good time!  :)
+ * @Message: 一个记录在卡片上的静态的属性表,可用于卡片记录信息，或者是传递属性cost消耗
  **/
 class AttributeEntryTable(private val map : Map<AttributeAPI,Int>) {
 
@@ -22,16 +26,16 @@ class AttributeEntryTable(private val map : Map<AttributeAPI,Int>) {
             return AttributeEntryTable(m.toMap())
         }
         //精英怪
-        fun createMob(loyalty:Int) : AttributeEntryTable{
-            return AttributeEntryTable(mapOf(
-                MobAttribute.LOYALTY to loyalty
-            ))
+        fun createMob(loyalty:Int) : AttributeEntryTable {
+            return AttributeEntryTable(mapOf(MobAttribute.LOYALTY to loyalty))
         }
         //小怪
     }
 
 
-    fun toInstance() : AttributeInstanceTable{
-        return AttributeInstanceTable(map.map { AttributeInstance(it.key,it.value,it.value) }.toSet())
+    fun toInstance() : AttributeInstanceTable {
+        val m = mutableMapOf<AttributeAPI,AttributeInstanceTable.ValuesInstance>().apply {
+            map.forEach { (k, v) -> put(k,AttributeInstanceTable.ValuesInstance(v,v)) } }
+        return AttributeInstanceTable(m.toMap())
     }
 }

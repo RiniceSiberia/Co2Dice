@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.counter.chessmanToken
 
-import org.co2dice.mirai.utils.TokenDepend
+import org.co2dice.mirai.publicEnums.TokenDepend
 import org.co2dice.mirai.bean.counter.Counter
 import space.controlnet.lightioc.annotation.Provider
 

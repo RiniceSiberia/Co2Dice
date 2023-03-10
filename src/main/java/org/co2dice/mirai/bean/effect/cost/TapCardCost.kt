@@ -1,6 +1,6 @@
 package org.co2dice.mirai.bean.effect.cost
 
-import org.co2dice.mirai.utils.Situation
+import org.co2dice.mirai.bean.effect.utils.Situation
 
 class TapCardCost(var num:Int) : AbstractCost() {
     // 横置场上n张卡，但是筛选器的条件作用于所有目标。

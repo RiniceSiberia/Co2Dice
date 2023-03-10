@@ -1,7 +1,7 @@
 package org.co2dice.mirai.bean.zone
 
 import org.co2dice.mirai.bean.Player
-import org.co2dice.mirai.bean.API.DependPlayer
+import org.co2dice.mirai.bean.api.DependPlayer
 import org.co2dice.mirai.bean.card.instance.CardInstance
 
 /**

@@ -2,7 +2,7 @@ package org.co2dice.mirai.bean.effect.prototype
 
 import org.co2dice.mirai.bean.card.entry.CardEntry
 import org.co2dice.mirai.bean.card.instance.CardInstance
-import org.co2dice.mirai.utils.Situation
+import org.co2dice.mirai.bean.effect.utils.Situation
 import org.co2dice.mirai.bean.card.prototype.Card
 
 /**

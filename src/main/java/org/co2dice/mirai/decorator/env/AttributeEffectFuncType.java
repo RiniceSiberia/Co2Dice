@@ -4,7 +4,7 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import org.co2dice.mirai.bean.card.instance.CardInstance;
 import org.co2dice.mirai.decorator.instance.get_effect_func_attribute.GetEffectFuncAttributeValueInstance;
-import org.co2dice.mirai.utils.Situation;
+import org.co2dice.mirai.bean.effect.utils.Situation;
 import org.co2dice.mirai.bean.card.instance.item.ItemCardInstance;
 import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance;
 

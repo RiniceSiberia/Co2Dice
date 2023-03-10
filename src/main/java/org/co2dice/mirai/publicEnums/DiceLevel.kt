@@ -1,4 +1,4 @@
-package org.co2dice.mirai.bean.dice.utils
+package org.co2dice.mirai.publicEnums
 
 import org.co2dice.mirai.bean.dice.diceList.DiceList
 import org.co2dice.mirai.bean.dice.single.ConstantDice
