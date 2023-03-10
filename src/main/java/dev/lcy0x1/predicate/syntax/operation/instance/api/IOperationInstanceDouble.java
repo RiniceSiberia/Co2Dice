@@ -14,6 +14,7 @@ public interface IOperationInstanceDouble<O, A, B> extends IOperationInstance {
 
 	OperandType<B> getSecondType();
 
+	@Override
 	default IValueInstance<IBiFunction<O, A, B>> toFunction(PredicateContext ctx) {
 		var type = OperandTypes.biFunctionType(getOutputType(), getFirstType(), getSecondType());
 		return ctx.buildInstance(type, c -> c.buildChildren(this));

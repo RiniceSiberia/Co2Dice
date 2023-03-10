@@ -12,6 +12,7 @@ public interface IOperationInstanceSingle<O, I> extends IOperationInstance {
 
 	OperandType<I> getParameterType();
 
+	@Override
 	default IValueInstance<IFunction<O, I>> toFunction(PredicateContext ctx) {
 		var type = OperandTypes.functionType(getOutputType(), getParameterType());
 		return ctx.buildInstance(type, c -> c.buildChildren(this));

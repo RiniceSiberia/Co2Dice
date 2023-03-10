@@ -20,6 +20,43 @@ import java.util.function.BiFunction;
 
 public class Operator<T extends IOperationInstance> implements NamedEnum {
 
+	private final IOperationFactory<T> factory;
+	private final String name;
+
+	//operator(操作符)有两个属性:name(名称)，factory(一个函数)
+
+	private Operator(String name, IOperationFactory<T> factory) {
+		this.name = name;
+		this.factory = factory;
+		REGISTRY.put(name, this);
+	}
+	//构造时会注册
+
+	public static Operator<?> getType(String type) {
+		if (!REGISTRY.containsKey(type)) {
+			throw new RuntimeException("type " + type + " not found");
+		}
+		return REGISTRY.get(type);
+	}
+	//通过类型来获取注册器中的操作符
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public T getOperator(ParameterSet set) {
+		return factory.parse(set);
+	}
+
+	public Either<OperandType<IFunction<?, ?>>, OperandType<BiFunction<?, ?, ?>>> toFunctionType() {
+		return factory.toFunctionType();
+	}
+
+	public List<IParam> getParams() {
+		return factory.getParams();
+	}
+
 	private static final Map<String, Operator<?>> REGISTRY = new HashMap<>();
 
 	public static final Operator<IOperationInstanceSingle<Boolean, Boolean>> NOT =
@@ -27,6 +64,7 @@ public class Operator<T extends IOperationInstance> implements NamedEnum {
 					IParam.getSingleton(OperandTypes.BOOL, "val"),
 					(ctx, e) -> OperandTypes.BOOL.parse(ctx, c -> !e.getVal(c))
 			));
+	//
 
 	public static final Operator<IOperationInstanceSingle<Boolean, List<Boolean>>> AND =
 			new Operator<>("AND", IOperationFactory.simpleL(OperandTypes.BOOL,
@@ -34,6 +72,7 @@ public class Operator<T extends IOperationInstance> implements NamedEnum {
 					(ctx, e) -> OperandTypes.BOOL.parse(ctx,
 							c -> ListHelper.reduce(true, e.unwrap(c), (u, x) -> u && x.getVal(c)))
 			));
+	//以and举例:他的factory是一个函数，这个函数的参数是一个ParameterSet，返回值是一个IOperationInstanceSingle
 
 	public static final Operator<IOperationInstanceSingle<Boolean, List<Boolean>>> OR =
 			new Operator<>("OR", IOperationFactory.simpleL(OperandTypes.BOOL,
@@ -112,36 +151,4 @@ public class Operator<T extends IOperationInstance> implements NamedEnum {
 							c -> ListHelper.reduce(0, e.unwrap(c), (u, x) -> u * x.getVal(c)))
 			));
 
-	private final IOperationFactory<T> factory;
-	private final String name;
-
-	private Operator(String name, IOperationFactory<T> factory) {
-		this.name = name;
-		this.factory = factory;
-		REGISTRY.put(name, this);
-	}
-
-	public static Operator<?> getType(String type) {
-		if (!REGISTRY.containsKey(type)) {
-			throw new RuntimeException("type " + type + " not found");
-		}
-		return REGISTRY.get(type);
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	public T getOperator(ParameterSet set) {
-		return factory.parse(set);
-	}
-
-	public Either<OperandType<IFunction<?, ?>>, OperandType<BiFunction<?, ?, ?>>> toFunctionType() {
-		return factory.toFunctionType();
-	}
-
-	public List<IParam> getParams() {
-		return factory.getParams();
-	}
 }

@@ -18,24 +18,31 @@ import java.util.function.BiFunction;
 
 public interface IOperationFactory<T extends IOperationInstance> {
 
-	static <O, I> IOperationFactory<IOperationInstanceSingle<O, I>>
-	simpleS(OperandType<O> output, ParamValue<I> param, IOperationSingle<O, I> func) {
+	static <O, I> IOperationFactory<IOperationInstanceSingle<O, I>> simpleS(
+			OperandType<O> output,
+			ParamValue<I> param,
+			IOperationSingle<O, I> func) {
 		return SimpleOperationInstanceSingle.of(output, param, func);
 	}
+	//这是操作符有一个传参
 
-	static <O, I> IOperationFactory<IOperationInstanceSingle<O, List<I>>>
-	simpleL(OperandType<O> output, ParamList<I> param, IOperationList<O, I> func) {
+	static <O, I> IOperationFactory<IOperationInstanceSingle<O, List<I>>> simpleL(
+			OperandType<O> output,
+			ParamList<I> param,
+			IOperationList<O, I> func) {
 		return SimpleOperationInstanceSingle.of(output, param, func);
 	}
+	//这个操作符有一个传参，但是是对List操作
 
-	static <O, A, B> IOperationFactory<IOperationInstanceDouble<O, A, B>>
-	simpleSS(OperandType<O> output,
+	static <O, A, B> IOperationFactory<IOperationInstanceDouble<O, A, B>> simpleSS(
+			OperandType<O> output,
 			 ParamValue<A> first,
 			 ParamValue<B> second,
 			 IOperationDouble<O, A, B> func
 	) {
 		return SimpleOperationInstanceDouble.of(output, first, second, func);
 	}
+	//这个操作符需要两个参数，类不同，A和B
 
 	T parse(ParameterSet set);
 

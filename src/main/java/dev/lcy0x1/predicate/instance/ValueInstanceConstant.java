@@ -13,10 +13,12 @@ public class ValueInstanceConstant<T> implements IValueInstance<T> {
 		this.value = value;
 	}
 
+	@Override
 	public OperandType<T> getType() {
 		return type;
 	}
 
+	@Override
 	public T getVal(PredicateContext ctx) {
 		return value;
 	}

@@ -11,6 +11,7 @@ public interface IValueInstanceList<T> extends IValueInstance<List<T>> {
 		return CastHelper.castList(obj);
 	}
 
+	@Override
 	OperandType<List<T>> getType();
 
 	List<ValueInstanceConstant<T>> unwrap(PredicateContext ctx);

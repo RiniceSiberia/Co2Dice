@@ -6,7 +6,6 @@ import org.co2dice.mirai.bean.dice.*
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.bean.card.prototype.Card
 import org.co2dice.mirai.bean.attribute.prototype.EliteAttribute
-import org.co2dice.mirai.bean.counter.chessmanToken.Dexterity
 import org.co2dice.mirai.bean.dice.diceList.DiceList
 import org.co2dice.mirai.bean.dice.diceList.MutableDiceList
 import org.co2dice.mirai.bean.dice.single.AttributeFixDice
@@ -56,12 +55,10 @@ open class EffectActive(
             val table = h.attributeInstanceTable
             //这里默认值是获取敏捷
             val dex = table.getValue(EliteAttribute.DEX)
-            val burnValue:Int = skillParam[Dexterity.id] ?:0
             //额外支付的敏捷值
             if (dex != null){
                 return@check MutableDiceList(
                     listOf(NormalDice(20)),
-                    listOf(ConstantDice(burnValue)),
                     AttributeFixDice(listOf(Dexterity))
                 )
                 //固定值，增益，以及变化的属性值

@@ -9,6 +9,7 @@ import java.util.List;
 @FunctionalInterface
 public interface IOperationList<O, I> extends IOperationSingle<O, List<I>> {
 
+	@Override
 	default IValueInstance<O> apply(PredicateContext ctx, IValueInstance<List<I>> obj){
 		return _apply(ctx, IValueInstanceList.asList(obj));
 	}
