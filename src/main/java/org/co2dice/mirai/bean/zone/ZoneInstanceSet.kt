@@ -18,7 +18,7 @@ class ZoneInstanceSet(
         createEquipmentZone(chessman.toInstance(holder))
     }
 
-    val equipments : MutableMap<ChessmanInstance, EquipmentsInstance> = mutableMapOf()
+    val equipmentZone : MutableMap<ChessmanInstance, EquipmentsInstance> = mutableMapOf()
     //一个玩家可以拥有不止一个棋子，当失去所有棋子或所有棋子都无法行动时,游戏失败,除非是系统棋子
     //Equipments(装备）是和棋子绑定的
 
@@ -54,7 +54,7 @@ class ZoneInstanceSet(
                 deck.move(deck.getTopCard(),hand)
             }catch (e : NoSuchElementException){
                 //卡组没有卡了
-                noCardInDeck(deck,equipments.keys)
+                noCardInDeck(deck,equipmentZone.keys)
                 deck.move(deck.getTopCard(),hand)
             }
         }
@@ -81,9 +81,9 @@ class ZoneInstanceSet(
     fun chessmanDie(chessman: ChessmanInstance){
         chessman.die()
         //棋子死亡
-        equipments.remove(chessman)
+        equipmentZone.remove(chessman)
         //检查是否还有棋子
-        if (equipments.isEmpty()){
+        if (equipmentZone.isEmpty()){
             //没有棋子了，游戏失败
             throw FailException()
         }
@@ -91,7 +91,7 @@ class ZoneInstanceSet(
 
     fun createEquipmentZone(chessman: ChessmanInstance){
         //创建永久物区域
-        equipments[chessman] = EquipmentsInstance(chessman)
+        equipmentZone[chessman] = EquipmentsInstance(chessman)
     }
 
 

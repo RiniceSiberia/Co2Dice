@@ -32,6 +32,17 @@ class AttributeEntryTable(private val map : Map<AttributeAPI,Int>) {
         //小怪
     }
 
+    fun contain(attribute: AttributeAPI) : Boolean{
+        return getValue(attribute) != null
+    }
+
+    fun getAttributes() : Set<AttributeAPI>{
+        return map.keys
+    }
+
+    fun getValue(type: AttributeAPI): Int? {
+        return map[type]
+    }
 
     fun toInstance() : AttributeInstanceTable {
         val m = mutableMapOf<AttributeAPI,AttributeInstanceTable.ValuesInstance>().apply {

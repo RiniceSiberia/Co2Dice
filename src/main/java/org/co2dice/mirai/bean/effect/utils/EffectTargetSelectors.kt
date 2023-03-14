@@ -1,8 +1,6 @@
 package org.co2dice.mirai.bean.effect.utils
 
-import com.mojang.datafixers.util.Either
 import org.co2dice.mirai.bean.api.EffectTarget
-import org.co2dice.mirai.bean.effect.EffectTargets
 
 /**
  *      使用IDEA编写
@@ -20,7 +18,7 @@ enum class EffectTargetSelectors(val func : (String, Situation) -> Set<EffectTar
             val t = org.co2dice.mirai.utils.SelectorUtils.inputTrans(input)
             //将输入转换成Either
 
-            zones.flatMap { z -> z.equipments.values }.forEach{ e ->
+            zones.flatMap { z -> z.equipmentZone.values }.forEach{ e ->
                 t.ifLeft{
 
                 }.ifRight{

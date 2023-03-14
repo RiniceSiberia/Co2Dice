@@ -13,6 +13,7 @@ public class GenericType2<T, A, B> extends OperandType<T> implements GenericType
 		this.b = b;
 	}
 
+	@Override
 	public List<OperandType<?>> getGenericTypes() {
 		return List.of(a, b);
 	}

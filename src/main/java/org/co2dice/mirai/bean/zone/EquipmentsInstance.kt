@@ -25,6 +25,10 @@ private val equipments : Map<ItemType,EquipSlots>) : DependChessman {
         return true
     }
 
+    fun getEquipNum() : Int{
+        return getAllEquip().size
+    }
+
     fun getEquipmentByNameAndId(name : String,uniqueId : Int = -1) : ItemCardInstance?{
         //找寻所有name相同的装备
         val list = equipments.values.flatMap { it -> it.getEquipments().filter { it.entry.card.cardRealName == name } }

@@ -11,6 +11,8 @@ import org.co2dice.mirai.bean.effect.utils.Situation
  **/
 class AttributeCost(val table : AttributeEntryTable): AbstractCost() {
     override fun check(situation: Situation): Boolean {
-        return true
+        return if (situation.chessman != null && situation.chessman.attributeInstanceTable.canPayToCost(table)){
+            return true
+        }else false
     }
 }

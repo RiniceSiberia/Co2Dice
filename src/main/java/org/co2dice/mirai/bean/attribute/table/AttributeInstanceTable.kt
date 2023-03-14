@@ -65,6 +65,21 @@ class AttributeInstanceTable (private val map : Map<AttributeAPI,ValuesInstance>
         return findAttribute(attribute) != null
     }
 
+    fun canPayToCost(table: AttributeEntryTable) : Boolean{
+        table.getAttributes().forEach{
+            if (this.contain(it)){
+                //如果本实体包括这个元素就对比，如果table里的值大于本方法就false
+                if (table.getValue(it)!! > this.getValue(it)!!){
+                    return false
+                }
+            }else{
+                return false
+            }
+        }
+
+        return true
+    }
+
     fun plusValue(value: Int,attribute: AttributeAPI): AttributeInstanceTable {
         findAttribute(attribute)?.value = value + findAttribute(attribute)!!.value
         return this
