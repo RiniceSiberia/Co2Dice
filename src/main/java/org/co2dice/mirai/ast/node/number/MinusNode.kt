@@ -10,14 +10,14 @@ import org.co2dice.mirai.ast.node.api.PairChildNode
  * @Message: Have a good time!  :)
  **/
 class MinusNode(
-    override var left : AstNode<Int>?,
-    override var right : AstNode<Int>?,
+    override var left : AstNode<Int> = NumberPlaceholderNode(),
+    override var right : AstNode<Int> = NumberPlaceholderNode(),
 ) : PairChildNode<Int, Int, Int>() {
 
     override val name: String = "minus_node"
 
     override fun operation(param : Map<String,Any>) : Int{
-        return left!!.operation(param) - right!!.operation(param)
+        return left.operation(param) - right.operation(param)
     }
 
 

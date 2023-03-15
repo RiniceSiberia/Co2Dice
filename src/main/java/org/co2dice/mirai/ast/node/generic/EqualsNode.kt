@@ -10,8 +10,8 @@ import org.co2dice.mirai.ast.node.api.PairChildNode
  * @Message: Have a good time!  :)
  **/
 abstract class EqualsNode<T>(
-    override var left :  AstNode<T>? = null,
-    override var right : AstNode<T>? = null,
+    override var left :  AstNode<T>,
+    override var right : AstNode<T>,
 ) : PairChildNode<T, T, Boolean>() {
 
 

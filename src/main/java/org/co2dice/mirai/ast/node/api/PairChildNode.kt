@@ -1,7 +1,5 @@
 package org.co2dice.mirai.ast.node.api
 
-import com.google.gson.Gson
-import com.google.gson.JsonElement
 
 /**
  *      使用IDEA编写
@@ -24,18 +22,17 @@ abstract class PairChildNode<
     //  |   |
     //  7   +
     //     3  2
-    abstract var left : AstNode<LI>?
+    abstract var left : AstNode<LI>
     //左节点
-    abstract var right :  AstNode<RI>?
+    abstract var right :  AstNode<RI>
+    //右节点
 
-    override fun toJSONElement(): JsonElement {
-        return Gson().toJsonTree(mapOf(
-            "node_name" to Gson().toJson(this.name),
-            "left_node" to left!!.toJSONElement(),
-            "right_node" to right!!.toJSONElement()
-            ))
+    override fun vacancy(): Boolean {
+        return (left is PlaceholderNode) || (right is PlaceholderNode)
     }
-    override fun isEmpty(): Boolean {
-        return (left?.isEmpty() ?: true) || (right?.isEmpty() ?: true)
+    override fun getChild(): List<AstNode<*>> {
+        return listOfNotNull(left,right)
     }
+
+
 }

@@ -10,7 +10,8 @@ package org.co2dice.mirai.utils;
  **/
 public class ConstantUtils {
     public static final String GPT_KEY = "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";
-
+    public static final String AST_CONSTANT_SIGN = "c = ";
+    public static final String AST_NULL_SIGN = "NULL";
 
 
     public String getCardPath(String resourcesType,

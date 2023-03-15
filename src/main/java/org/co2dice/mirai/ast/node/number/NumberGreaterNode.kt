@@ -10,13 +10,13 @@ import org.co2dice.mirai.ast.node.api.PairChildNode
  * @Message: Have a good time!  :)
  **/
 class NumberGreaterNode (
-override var left : AstNode<Int>?,
-override var right : AstNode<Int>?,
+override var left : AstNode<Int> = NumberPlaceholderNode(),
+override var right : AstNode<Int> = NumberPlaceholderNode(),
 ) : PairChildNode<Int, Int, Boolean>() {
 
     override val name: String = "number_greater_node"
 
     override fun operation(param : Map<String,Any>) : Boolean{
-        return left!!.operation(param) > right!!.operation(param)
+        return left.operation(param) > right.operation(param)
     }
 }

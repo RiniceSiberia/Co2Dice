@@ -10,8 +10,8 @@ import org.co2dice.mirai.ast.node.api.PairChildNode
  * @Message: Have a good time!  :)
  **/
 class MultipleNode(
-    override var left : AstNode<Int>?,
-    override var right : AstNode<Int>?
+    override var left : AstNode<Int> = NumberPlaceholderNode(),
+    override var right : AstNode<Int> = NumberPlaceholderNode(),
 ) : PairChildNode<Int, Int, Int>() {
 
     override val name: String = "multiple_node"

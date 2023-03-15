@@ -1,8 +1,4 @@
-package org.co2dice.mirai.ast.node.generic
-
-import com.google.gson.Gson
-import com.google.gson.JsonElement
-import org.co2dice.mirai.ast.node.api.AstNode
+package org.co2dice.mirai.ast.node.api
 
 /**
  *      使用IDEA编写
@@ -25,18 +21,16 @@ abstract class ParamNode<T>(
          }
     }
 
-    override fun toJSONElement(): JsonElement {
-        return Gson().toJsonTree(mapOf(
-            "node_name" to this.name,
-            "param_name" to paramName))
-    }
-
     override fun toString(): String {
         return paramName
     }
 
-    override fun isEmpty(): Boolean {
+    override fun vacancy(): Boolean {
         return false
+    }
+
+    override fun getChild(): List<AstNode<*>> {
+        return emptyList()
     }
 
 

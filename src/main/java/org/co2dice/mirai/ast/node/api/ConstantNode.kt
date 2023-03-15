@@ -1,6 +1,4 @@
-package org.co2dice.mirai.ast.node.generic
-
-import org.co2dice.mirai.ast.node.api.AstNode
+package org.co2dice.mirai.ast.node.api
 
 /**
  *      使用IDEA编写
@@ -12,8 +10,6 @@ abstract class ConstantNode<T>(
     val value : T
     ) : AstNode<T>() {
 
-    override val name: String = "constant_node"
-
     override fun operation(param: Map<String, Any>): T {
         return value
     }
@@ -22,9 +18,12 @@ abstract class ConstantNode<T>(
         return value.toString()
     }
 
-    override fun isEmpty(): Boolean {
+    override fun vacancy(): Boolean {
         return false
     }
 
+    override fun getChild(): List<AstNode<*>> {
+        return emptyList()
+    }
 
 }

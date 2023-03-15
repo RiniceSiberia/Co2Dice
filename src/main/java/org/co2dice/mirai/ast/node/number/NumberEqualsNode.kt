@@ -10,8 +10,8 @@ import org.co2dice.mirai.ast.node.generic.EqualsNode
  * @Message: Have a good time!  :)
  **/
 class NumberEqualsNode(
-    left : AstNode<Int>?,
-    right : AstNode<Int>?,
+    left : AstNode<Int> = NumberPlaceholderNode(),
+    right : AstNode<Int> = NumberPlaceholderNode(),
 ) : EqualsNode<Int>(left,right) {
     override val name: String = "number_equals"
 }
