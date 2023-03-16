@@ -1,4 +1,6 @@
-package org.co2dice.mirai.ast.node.api
+package org.co2dice.mirai.ast.node.basic.leaf
+
+import org.co2dice.mirai.ast.node.basic.LeafNode
 
 /**
  *      使用IDEA编写
@@ -7,8 +9,9 @@ package org.co2dice.mirai.ast.node.api
  * @Message: 这是一个特殊的节点，他没有具体的类型，是作为一个传参而使用的
  **/
 abstract class ParamNode<T>(
-    private val paramName : String,
-) : AstNode<T>() {
+) : LeafNode<T>() {
+
+    abstract var paramName : String
 
     override fun operation(param : Map<String,Any>) : T{
          //获取本节点的参数，然后一个个检查param
@@ -24,14 +27,4 @@ abstract class ParamNode<T>(
     override fun toString(): String {
         return paramName
     }
-
-    override fun vacancy(): Boolean {
-        return false
-    }
-
-    override fun getChild(): List<AstNode<*>> {
-        return emptyList()
-    }
-
-
 }

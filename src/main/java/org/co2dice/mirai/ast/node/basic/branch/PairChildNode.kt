@@ -1,4 +1,8 @@
-package org.co2dice.mirai.ast.node.api
+package org.co2dice.mirai.ast.node.basic.branch
+
+import org.co2dice.mirai.ast.node.basic.AstNode
+import org.co2dice.mirai.ast.node.basic.BranchNode
+import org.co2dice.mirai.ast.node.basic.leaf.PlaceholderNode
 
 
 /**
@@ -12,7 +16,7 @@ abstract class PairChildNode<
     //左输入，left input
     RI,
     //右输入,
-    O> : AstNode<O>() {
+    O> : BranchNode<O>() {
 
     //example:
     //(7*(3+2) / 6)^2 ->
@@ -24,7 +28,7 @@ abstract class PairChildNode<
     //     3  2
     abstract var left : AstNode<LI>
     //左节点
-    abstract var right :  AstNode<RI>
+    abstract var right : AstNode<RI>
     //右节点
 
     override fun vacancy(): Boolean {

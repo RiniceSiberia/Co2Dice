@@ -1,7 +1,9 @@
 package org.co2dice.mirai.ast.node.number
 
-import org.co2dice.mirai.ast.node.api.AstNode
-import org.co2dice.mirai.ast.node.generic.EqualsNode
+import org.co2dice.mirai.ast.SymbolEnum
+import org.co2dice.mirai.ast.node.basic.AstNode
+import org.co2dice.mirai.ast.node.basic.generic.EqualsNode
+import org.co2dice.mirai.ast.node.number.leaf.NumberPlaceholderNode
 
 /**
  *      使用IDEA编写
@@ -13,5 +15,5 @@ class NumberEqualsNode(
     left : AstNode<Int> = NumberPlaceholderNode(),
     right : AstNode<Int> = NumberPlaceholderNode(),
 ) : EqualsNode<Int>(left,right) {
-    override val name: String = "number_equals"
+    override val name: String = SymbolEnum.NUMBER_EQUALS.getName()
 }

@@ -1,4 +1,4 @@
-package org.co2dice.mirai.ast.node.api
+package org.co2dice.mirai.ast.node.basic
 
 
 /**

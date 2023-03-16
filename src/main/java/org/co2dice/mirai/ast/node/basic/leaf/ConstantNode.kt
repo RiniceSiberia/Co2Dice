@@ -1,4 +1,6 @@
-package org.co2dice.mirai.ast.node.api
+package org.co2dice.mirai.ast.node.basic.leaf
+
+import org.co2dice.mirai.ast.node.basic.LeafNode
 
 /**
  *      使用IDEA编写
@@ -8,7 +10,7 @@ package org.co2dice.mirai.ast.node.api
  **/
 abstract class ConstantNode<T>(
     val value : T
-    ) : AstNode<T>() {
+    ) : LeafNode<T>() {
 
     override fun operation(param: Map<String, Any>): T {
         return value
@@ -16,14 +18,6 @@ abstract class ConstantNode<T>(
 
     override fun toString(): String {
         return value.toString()
-    }
-
-    override fun vacancy(): Boolean {
-        return false
-    }
-
-    override fun getChild(): List<AstNode<*>> {
-        return emptyList()
     }
 
 }

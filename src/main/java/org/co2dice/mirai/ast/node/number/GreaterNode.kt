@@ -8,19 +8,17 @@ import org.co2dice.mirai.ast.node.number.leaf.NumberPlaceholderNode
 /**
  *      使用IDEA编写
  * @Author: DUELIST
- * @Time:  2023-03-13-17:47
+ * @Time:  2023-03-14-16:25
  * @Message: Have a good time!  :)
  **/
-class PlusNode(
+class GreaterNode (
     override var left : AstNode<Int> = NumberPlaceholderNode(),
     override var right : AstNode<Int> = NumberPlaceholderNode(),
-) : PairChildNode<Int, Int, Int>() {
+) : PairChildNode<Int, Int, Boolean>() {
 
-    override val name: String = SymbolEnum.PLUS.getName()
+    override val name: String = SymbolEnum.GREATER.getName()
 
-    override fun operation(param : Map<String,Any>) : Int{
-        return left.operation(param) + right.operation(param)
+    override fun operation(param : Map<String,Any>) : Boolean{
+        return left.operation(param) > right.operation(param)
     }
-
-
 }

@@ -1,7 +1,6 @@
 package org.co2dice.mirai.ast
 
 import com.google.gson.*
-import org.co2dice.mirai.ast.node.api.AstNode
 import java.lang.reflect.Type
 
 /**

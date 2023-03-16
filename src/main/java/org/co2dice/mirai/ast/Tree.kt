@@ -1,8 +1,9 @@
 package org.co2dice.mirai.ast
 
-import org.co2dice.mirai.ast.node.api.AstNode
-import org.co2dice.mirai.ast.node.api.PairChildNode
-import org.co2dice.mirai.ast.node.api.PlaceholderNode
+import com.mojang.datafixers.util.Either
+import com.mojang.datafixers.util.Pair
+import org.co2dice.mirai.ast.node.basic.AstNode
+import org.co2dice.mirai.ast.node.basic.LeafNode
 
 /**
  *      使用IDEA编写
@@ -13,22 +14,52 @@ import org.co2dice.mirai.ast.node.api.PlaceholderNode
 class Tree <T>(
     var root : AstNode<T>
 ) : Function<T>{
-
     //根节点返回值一定要是T
 
-    fun <O,X>addNode(old : AstNode<O>, new : AstNode<X>) : Boolean{
-        if(old.vacancy()){
-            //有空位,可插入替代
-            if (old is PairChildNode<*,*,*>){
-                if (old.left is PlaceholderNode && old.left){
-                    old.left = new
-                    return true
+    companion object{
+
+        fun createTree(input : String) : Tree<Any>{
+            //将input先去掉空格
+            val inputList = input.replace(" ","")
+            val list : MutableList<Either<LeafNode<*>,SymbolEnum>> = mutableListOf()
+            //将inputList里的数字和符号分开,然后分段填充进list变量中,具体对应的元素需要查看SymbolEnum和LeafEnum
+            //如果是未知数，变量，或者占位符(规则见leafEnum),就填充到左边,如果是symbol(对应的符号见SymbolEnum),就填充到右边
+            while (true){
+                LeafEnum.matchSymbol(inputList)?.let {
+                    list.add(it.first.constructor(it.second))
+                } ?: SymbolEnum.matchSymbol(inputList)?.let {
+                    list.add(Either.right(it))
+                } ?:throw Exception("输入的字符串不合法")
+                if (inputList.isEmpty()){
+                    break
                 }
             }
-        }else{
-            return false
+            //现在list里装满东西了
+            //使用递归开始，从叶子节点的最下方到根节点，从字符串左到字符串右，构建树
+            var currentNode : AstNode<Any>
+
+            for (s in list){
+                s.ifLeft {
+
+                }.ifRight {
+                    it.constructor.apply { mutableListOf() }
+
+
+                    currentNode = it.createNode()
+                }
+
+            }
+
+
+
         }
     }
+
+
+
+
+
+
     fun invoke(param : Map<String,Any>) : T?{
         return try {
             root.operation(param)
