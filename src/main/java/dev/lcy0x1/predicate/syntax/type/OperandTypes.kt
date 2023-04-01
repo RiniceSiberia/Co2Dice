@@ -15,7 +15,7 @@ import dev.lcy0x1.util.ListHelper
  * @Message: Have a good time!  :)
  **/
 object OperandTypes {
-    //这个类记录可操作的数据类型，基本类如bool,number,name,attribute,entity
+    //这个类记录可操作的数据类型，基本类如bool,integer,name,attribute,entity
     val BOOL = OperandType("bool",
         encoder = { bool: Boolean? -> JsonPrimitive(bool) },
         decoder = IDecoder.createIDecoder { t: OperandType<Boolean>?, _: PredicateContext?, e: JsonElement ->
@@ -23,7 +23,7 @@ object OperandTypes {
     )
     //布尔类型，编码是调用JsonPrimitive的构造函数，解码是调用ValueInstanceConstant的构造函数
 
-    val NUMBER = OperandType("number",
+    val NUMBER = OperandType("integer",
         encoder = { number: Int? -> JsonPrimitive(number) },
         decoder = IDecoder.createIDecoder { t: OperandType<Int>?, _: PredicateContext?, e: JsonElement ->
             ValueInstanceConstant(t, e.asInt) }
