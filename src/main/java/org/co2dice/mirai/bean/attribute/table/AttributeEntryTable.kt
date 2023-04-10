@@ -45,8 +45,8 @@ class AttributeEntryTable(private val map : Map<AttributeAPI,Int>) {
     }
 
     fun toInstance() : AttributeInstanceTable {
-        val m = mutableMapOf<AttributeAPI,AttributeInstanceTable.ValuesInstance>().apply {
-            map.forEach { (k, v) -> put(k,AttributeInstanceTable.ValuesInstance(v,v)) } }
+        val m = mutableMapOf<AttributeAPI,ValueInstance>().apply {
+            map.forEach { (k, v) -> put(k,ValueInstance(v,v)) } }
         return AttributeInstanceTable(m.toMap())
     }
 }

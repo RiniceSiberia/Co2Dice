@@ -5,7 +5,7 @@ import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.bean.dice.DiceResult
 import org.co2dice.mirai.bean.dice.single.AttributeFixDice
 import org.co2dice.mirai.bean.dice.single.ConstantDice
-import org.co2dice.mirai.bean.dice.single.Dice
+import org.co2dice.mirai.bean.dice.single.AbstractDice
 
 /**
  *      使用IDEA编写
@@ -14,9 +14,9 @@ import org.co2dice.mirai.bean.dice.single.Dice
  * @Message: Have a good time!  :)
  **/
 class MutableDiceList(
-    immutable: List<Dice> = mutableListOf(),
+    immutable: List<AbstractDice> = mutableListOf(),
     //俺也忘了当初为什么要留这个diceList了，就当他不存在罢
-    private val mutable : MutableList<Dice>,
+    private val mutable : MutableList<AbstractDice>,
     //可变的部分
     private var fixDice: AttributeFixDice
     //属性修正值，玩家的属性加成加在这里，不包含在期望计算中。需要使用新的方法计算期望值
@@ -45,7 +45,7 @@ class MutableDiceList(
         return Either.right("roll属性时发生未知错误")
     }
 
-    private fun getFixDiceEither(c: ChessmanInstance): Either<List<Dice>, String> {
+    private fun getFixDiceEither(c: ChessmanInstance): Either<List<AbstractDice>, String> {
         return if (fixDice.getListDice(c).left().isPresent) {
             Either.left(fixDice.getListDice(c).left().get())
         } else {
@@ -72,15 +72,15 @@ class MutableDiceList(
         return Either.right("roll属性时发生未知错误")
     }
 
-    override fun getDiceList(): List<Dice> {
-        val d: MutableList<Dice> = ArrayList(super.getDiceList())
+    override fun getDiceList(): List<AbstractDice> {
+        val d: MutableList<AbstractDice> = ArrayList(super.getDiceList())
         d.addAll(mutable)
         return d
     }
 
-    fun getDiceListContainAttribute(c: ChessmanInstance): Either<List<Dice>, String> {
+    fun getDiceListContainAttribute(c: ChessmanInstance): Either<List<AbstractDice>, String> {
         if (getFixDiceEither(c).left().isPresent) {
-            val d: MutableList<Dice> = ArrayList(super.getDiceList())
+            val d: MutableList<AbstractDice> = ArrayList(super.getDiceList())
             d.addAll(mutable)
             d.addAll(getFixDiceEither(c).left().get())
             return Either.left(d)
@@ -90,17 +90,17 @@ class MutableDiceList(
         return Either.right("roll属性时发生未知错误")
     }
 
-    val immutable: List<Dice>
+    val immutable: List<AbstractDice>
         get() = super.getDiceList()
     val mutableMin: Int
-        get() = mutable.stream().mapToInt { obj: Dice -> obj.diceMin }.sum()
+        get() = mutable.stream().mapToInt { obj: AbstractDice -> obj.diceMin }.sum()
     val mutableMax: Int
-        get() = mutable.stream().mapToInt { obj: Dice -> obj.diceMax }.sum()
+        get() = mutable.stream().mapToInt { obj: AbstractDice -> obj.diceMax }.sum()
     val immutableMin: Int
-        get() = super.getDiceList().stream().mapToInt { obj: Dice -> obj.diceMin }
+        get() = super.getDiceList().stream().mapToInt { obj: AbstractDice -> obj.diceMin }
             .sum()
     val immutableMax: Int
-        get() = super.getDiceList().stream().mapToInt { obj: Dice -> obj.diceMax }
+        get() = super.getDiceList().stream().mapToInt { obj: AbstractDice -> obj.diceMax }
             .sum()
 
     override fun getMin(): Int {
@@ -121,13 +121,13 @@ class MutableDiceList(
         return super.toString() + "," + mutable.toString() + "," + fixDice.toString()
     }
 
-    fun addDice(dice: Dice) {
-        val r: Boolean = mutable.add(dice)
+    fun addDice(diceList: AbstractDice) {
+        val r: Boolean = mutable.add(diceList)
         integrate()
     }
 
-    fun removeDice(dice: Dice): Boolean {
-        val r: Boolean = mutable.remove(dice)
+    fun removeDice(diceList: AbstractDice): Boolean {
+        val r: Boolean = mutable.remove(diceList)
         integrate()
         return r
     }
@@ -146,14 +146,14 @@ class MutableDiceList(
         }
     }
 
-    fun removeDiceAt(index: Int): Dice {
+    fun removeDiceAt(index: Int): AbstractDice {
         return mutable.removeAt(index)
     }
 
-    fun changeDice(target: Dice, dice: Dice): Boolean {
+    fun changeDice(target: AbstractDice, diceList: AbstractDice): Boolean {
         for (d in mutable) {
             if (d == target) {
-                mutable[mutable.indexOf(d)] = dice
+                mutable[mutable.indexOf(d)] = diceList
                 integrate()
                 return true
             }
@@ -165,7 +165,7 @@ class MutableDiceList(
 //        return mutable.size
 //    }
 
-    fun sort( comparator: Comparator<Dice>) {
+    fun sort( comparator: Comparator<AbstractDice>) {
         mutable.sortWith(comparator)
     }
 

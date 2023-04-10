@@ -19,7 +19,7 @@ class MobChessmanInstance(entry : ChessmanEntry,
 
 
     override fun makeDamage(damage: Damage): Boolean {
-        attributeInstanceTable.subtractionValue(damage.damage.roll().getResult(), MobAttribute.LOYALTY)
+        attributeInstanceTable.subtractionValue(damage.damage.roll().open(), MobAttribute.LOYALTY)
         return true
     }
     //无论输入是啥，都打忠诚度

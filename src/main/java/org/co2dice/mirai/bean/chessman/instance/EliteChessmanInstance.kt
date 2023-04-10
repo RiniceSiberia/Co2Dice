@@ -20,7 +20,7 @@ open class EliteChessmanInstance(
 
     override fun makeDamage(damage: Damage): Boolean {
         if (attributeInstanceTable.contain(damage.damageType)) {
-            attributeInstanceTable.subtractionValue(damage.damage.roll().getResult(),damage.damageType)
+            attributeInstanceTable.subtractionValue(damage.damage.roll().open(),damage.damageType)
             return true
         }
         return false

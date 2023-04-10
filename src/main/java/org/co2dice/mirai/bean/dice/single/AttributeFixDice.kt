@@ -1,12 +1,23 @@
 package org.co2dice.mirai.bean.dice.single
 
 import com.mojang.datafixers.util.Either
+import org.co2dice.mirai.ast.Params
+import org.co2dice.mirai.ast.node.*
+import org.co2dice.mirai.ast.node.basic.INode
+import org.co2dice.mirai.ast.symbol.impl.game.attribute.GetAttributeValue
+import org.co2dice.mirai.ast.symbol.impl.game.dice.*
+import org.co2dice.mirai.ast.symbol.impl.leaf.constant.AttributePrototypeConstant
 import org.co2dice.mirai.bean.attribute.prototype.AttributeAPI
 import org.co2dice.mirai.bean.attribute.prototype.EliteAttribute
 import org.co2dice.mirai.bean.attribute.prototype.MobAttribute
 import org.co2dice.mirai.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.bean.dice.diceList.DiceList
+import org.co2dice.mirai.ast.symbol.impl.leaf.constant.IntegerConstant
+import org.co2dice.mirai.ast.symbol.impl.leaf.param.ChessmanInstanceParam
+import org.co2dice.mirai.ast.symbol.impl.leaf.param.IntegerParam
+
+import org.co2dice.mirai.bean.effect.utils.Situation
 import java.util.*
 import java.util.stream.Collectors
 
@@ -16,25 +27,51 @@ import java.util.stream.Collectors
  * 可能存在多个属性的修正值，比如玩家的体质/2+意志/2
  */
 class AttributeFixDice(
-    private val fixFunc: Function1<AttributeInstanceTable, Either<DiceList, String>>,
+    private val fixFunc: INode<Int>,
     //获取属性修正值的函数
-    val representation: String = "属性修正值(暂未实现查看方式)"
     ) {
+    companion object{
+        const val ATT_FIX_CHESS_SIGN = "attribute_fix_chess"
+    }
 
     constructor(a: AttributeAPI) : this(
-        fixFunc = fixFunc@{ table: AttributeInstanceTable ->
-            val value = table.getValue(a)
-            if (value != null) {
-                return@fixFunc Either.left<DiceList, String>(
-                    DiceList(value)
+        //指定对象的属性+1d20
+    fixFunc = UniOpNode(
+        symbol = Open,
+        child = UniOpNode(
+            symbol = Roll,
+            child = ListOpNode<DiceList, AbstractDice>(
+                symbol = DiceListSymbol,
+                children = listOf(
+                    UniOpNode(
+                        symbol = NormalDiceSymbol,
+                        child = ConstantLeafNode( symbol = IntegerConstant, value = 20 )
+                    ),
+                    UniOpNode(
+                        symbol = ConstantDiceSymbol,
+                        child = BiOpNode(
+                            symbol = GetAttributeValue,
+                            left = ParamLeafNode( symbol = ChessmanInstanceParam, key = ATT_FIX_CHESS_SIGN),
+                            right = ConstantLeafNode( symbol = AttributePrototypeConstant, value = a)
+                            )
+                        )
+                    )
                 )
-            }
-            Either.right("属性修正值为空,为空属性:" + a.nameStr)
-        }
+            )
+        )
+    )
+//            Either.right("属性修正值为空,为空属性:" + a.nameStr)
 
         //默认的修正值,传入属性，返回那个属性的数值
         //如果属性不存在返回right
     )
+
+    fun checkAttribute (situation: Situation,table : AttributeInstanceTable) : Either<DiceList, String>{
+        val params = Params(mapOf("attributes" to table,"situation" to situation))
+        return
+    }
+
+
 
     fun canUse(table: AttributeInstanceTable): Boolean {
         return fixFunc(table).left().isPresent
@@ -45,7 +82,7 @@ class AttributeFixDice(
         return fixFunc(c.attributeInstanceTable)
     }
 
-    fun getListDice(c: ChessmanInstance): Either<List<Dice>, String> {
+    fun getListDice(c: ChessmanInstance): Either<List<AbstractDice>, String> {
         //通过玩家获取属性修正值
         val either = getListDice(c)
         if (either.left().isPresent) {
@@ -80,7 +117,7 @@ class AttributeFixDice(
     fun roll(c: ChessmanInstance): Either<Int, String> {
         val either = getDiceList(c)
         if (either.left().isPresent) {
-            return Either.left(either.left().get().roll().getResult())
+            return Either.left(either.left().get().roll().open())
         } else if (either.right().isPresent) {
             return Either.right(either.right().get())
         }
@@ -88,6 +125,6 @@ class AttributeFixDice(
     }
 
     override fun toString(): String {
-        return representation
+        return fixFunc.natualSerialize()
     }
 }

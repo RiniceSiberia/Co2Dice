@@ -9,4 +9,5 @@ package org.co2dice.mirai.bean.attribute.prototype
 interface AttributeAPI {
     val id:String
     val nameStr:String
+
 }

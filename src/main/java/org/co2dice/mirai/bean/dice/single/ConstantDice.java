@@ -3,7 +3,7 @@ package org.co2dice.mirai.bean.dice.single;
 import java.util.Collections;
 import java.util.List;
 
-public class ConstantDice extends Dice{
+public class ConstantDice extends AbstractDice {
     public ConstantDice(int diceNum) {
         super(diceNum);
     }

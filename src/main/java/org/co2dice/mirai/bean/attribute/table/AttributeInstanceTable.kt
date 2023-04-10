@@ -12,12 +12,10 @@ import org.co2dice.mirai.bean.dice.diceList.DiceList
  * @Time:  2023-03-06-0:28
  * @Message: 一个动态的属性表
  **/
-class AttributeInstanceTable (private val map : Map<AttributeAPI,ValuesInstance>){
+class AttributeInstanceTable (private val map : Map<AttributeAPI,ValueInstance>){
     //不用set的原因是需要保留AttributeInstance这个完整体
 
-    data class ValuesInstance(var value : Int,var limit : Int){
 
-    }
 
 
     companion object{
@@ -25,13 +23,13 @@ class AttributeInstanceTable (private val map : Map<AttributeAPI,ValuesInstance>
                         dex:Int = 0, wis:Int = 0, int:Int = 0, san:Int = 0,
                         strLimit:Int = str, conLimit:Int = con, dexLimit:Int = dex,
                         wisLimit:Int = wis, intLimit:Int = int, sanLimit:Int = san) : AttributeInstanceTable {
-            val s = mutableMapOf<AttributeAPI,ValuesInstance>().apply {
-                if(str > 0) put(EliteAttribute.STR,ValuesInstance(str,strLimit))
-                if(con > 0) put(EliteAttribute.CON,ValuesInstance(con,conLimit))
-                if(dex > 0) put(EliteAttribute.DEX,ValuesInstance(dex,dexLimit))
-                if(wis > 0) put(EliteAttribute.WIS,ValuesInstance(wis,wisLimit))
-                if(int > 0) put(EliteAttribute.INT,ValuesInstance(int,intLimit))
-                if(san > 0) put(EliteAttribute.SAN,ValuesInstance(san,sanLimit))
+            val s = mutableMapOf<AttributeAPI,ValueInstance>().apply {
+                if(str > 0) put(EliteAttribute.STR,ValueInstance(str,strLimit))
+                if(con > 0) put(EliteAttribute.CON,ValueInstance(con,conLimit))
+                if(dex > 0) put(EliteAttribute.DEX,ValueInstance(dex,dexLimit))
+                if(wis > 0) put(EliteAttribute.WIS,ValueInstance(wis,wisLimit))
+                if(int > 0) put(EliteAttribute.INT,ValueInstance(int,intLimit))
+                if(san > 0) put(EliteAttribute.SAN,ValueInstance(san,sanLimit))
             }
             return AttributeInstanceTable(s.toMap())
         }
@@ -44,18 +42,18 @@ class AttributeInstanceTable (private val map : Map<AttributeAPI,ValuesInstance>
                         int: DiceList = DiceList(0),
                         san: DiceList = DiceList(0)): AttributeInstanceTable {
             return createElite(
-                str.roll().getResult(),
-                con.roll().getResult(),
-                dex.roll().getResult(),
-                wis.roll().getResult(),
-                int.roll().getResult(),
-                san.roll().getResult()
+                str.roll().open(),
+                con.roll().open(),
+                dex.roll().open(),
+                wis.roll().open(),
+                int.roll().open(),
+                san.roll().open()
             )
         }
         //现roll的构造器
 
         fun createMob(loyalty:Int) : AttributeInstanceTable {
-            return AttributeInstanceTable(mapOf(MobAttribute.LOYALTY to ValuesInstance(loyalty,loyalty)))
+            return AttributeInstanceTable(mapOf(MobAttribute.LOYALTY to ValueInstance(loyalty,loyalty)))
         }
     }
 
@@ -124,7 +122,7 @@ class AttributeInstanceTable (private val map : Map<AttributeAPI,ValuesInstance>
     }
 
 
-    private fun findAttribute(type: AttributeAPI): ValuesInstance? {
+    private fun findAttribute(type: AttributeAPI): ValueInstance? {
         return map[type]
     }
 }

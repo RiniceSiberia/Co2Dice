@@ -10,5 +10,13 @@ enum class MobAttribute(override val id:String, override val nameStr:String) : A
     LOYALTY("loyalty","忠诚度"),
     ;
 
+    override fun toString(): String {
+        return id
+    }
 
+    companion object{
+        fun findByName(name:String) : EliteAttribute? {
+            return EliteAttribute.values().find { it.nameStr == name }
+        }
+    }
 }

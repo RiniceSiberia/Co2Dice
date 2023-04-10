@@ -14,4 +14,14 @@ enum class EliteAttribute (override val id:String, override val nameStr:String) 
     INT("int","智力"),
     SAN("san","理智")
     ;
+
+    override fun toString(): String {
+        return id
+    }
+
+    companion object{
+        fun findByName(name:String) : EliteAttribute? {
+            return values().find { it.nameStr == name }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package org.co2dice.mirai.bean.effect.prototype
 
+import com.mojang.datafixers.util.Either
 import dev.lcy0x1.util.type.Either
 import org.co2dice.mirai.bean.effect.utils.Situation
 import org.co2dice.mirai.bean.dice.*
@@ -32,7 +33,7 @@ import java.util.*
  **/
 open class EffectActive(
     holder: Card,
-    val typeCheck : Map<String,Either<EffectTargetSelectors,Any>>,
+    val typeCheck : Map<String, Either<EffectTargetSelectors, Any>>,
     //输入的传参的格式检查器，用来检查输入的参数的Class和typeCheck中的是否一致。如果是输入文字的形式，就是要根据typeCheck反查对应的对象了。
     //left代表这个参数是选择目标，right代表这个参数是非目标相关,比如说丢弃x张手牌这种自定义参数
     //String代表这个输入的参数意味着什么,距离:effectA( a = 青眼白龙 1 , b = 玩家b, c = 3)，其中c是发动技能时支付的力量值

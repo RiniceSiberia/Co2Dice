@@ -4,7 +4,7 @@ package org.co2dice.mirai.bean.dice.single;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheatDice extends Dice{
+public class CheatDice extends AbstractDice {
     private int minValue;
     private int maxValue;
 

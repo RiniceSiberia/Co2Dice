@@ -1,11 +1,9 @@
 package org.co2dice.mirai.bean.dice.single;
 
-import org.co2dice.mirai.bean.dice.single.Dice;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class NormalDice extends Dice {
+public class NormalDice extends AbstractDice {
     public NormalDice(int diceNum) {
         super(diceNum);
     }

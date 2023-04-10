@@ -3,7 +3,7 @@ package org.co2dice.mirai.utils
 import org.co2dice.mirai.bean.dice.diceList.DiceList
 import org.co2dice.mirai.bean.dice.diceList.MutableDiceList
 import org.co2dice.mirai.bean.dice.single.AttributeFixDice
-import org.co2dice.mirai.bean.dice.single.Dice
+import org.co2dice.mirai.bean.dice.single.AbstractDice
 import org.co2dice.mirai.publicEnums.UsuallyDices
 import java.util.*
 import kotlin.math.abs
@@ -45,7 +45,7 @@ object DiceUtils {
             val exceptList = mutableListOf<Temp>()
             for (dice in getListByPriority()){
                 //计算dices中所有骰子的期望值
-                dices.mutable.add(dice.dice)
+                dices.mutable.add(dice.diceList)
                 val odds:Map<Int,Double> = dices.expected
                 //所有和的概率
                 //获取一个总的期望值，即每个key乘以每个value后得到的总和
@@ -54,9 +54,9 @@ object DiceUtils {
                     value += u.key.toDouble() * u.value
                 }
                 //向excpetList中添加一个临时对象，然后清空dices
-                exceptList.add(Temp(dice.dice,dice.priority,value))
+                exceptList.add(Temp(dice.diceList,dice.priority,value))
 
-                dices.mutable.remove(dice.dice)
+                dices.mutable.remove(dice.diceList)
             }
             //现在，exList中承载了权重从高到低，每个权重下的期望值以及对应的骰子
             val resultList = mutableListOf<Temp>()
@@ -74,22 +74,22 @@ object DiceUtils {
                     val x = exceptList.stream().min(
                         Comparator.comparingDouble { o: Temp -> abs(o.value - e) }
                     ).get()
-                dices.diceList.add(x.dice)
+                dices.diceList.add(x.diceList)
 
 //                dices.diceList.add(getListByPriority()[exceptList.indexOf(exceptList.stream().sorted(
-//                    Comparator.comparingDouble { abs(it - e) } ).findFirst().get())].dice)
+//                    Comparator.comparingDouble { abs(it - e) } ).findFirst().get())].diceList)
             }else{
                 //如果不为空，则获取一个期望值最高的元素，丢入dices中，结束循环
                 val r :List<Temp> = resultList.stream().sorted(
                     Comparator.comparingInt<Temp?> { it.priority }).toList().reversed()
-                dices.diceList.add(r[0].dice)
+                dices.diceList.add(r[0].diceList)
                 f = false
             }
         }
         return dices
     }
 
-    private class Temp(var dice: Dice, var priority: Int, var value: Double)
+    private class Temp(var diceList: AbstractDice, var priority: Int, var value: Double)
 
     /**
      * @author 韩左券
