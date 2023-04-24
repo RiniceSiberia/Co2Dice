@@ -1,5 +1,7 @@
 import net.mamoe.mirai.console.terminal.MiraiConsoleTerminalLoader;
 
+import java.util.Scanner;
+
 /**
  * 使用IDEA编写
  *

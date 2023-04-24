@@ -1,18 +1,18 @@
 package org.co2dice.mirai.plugin
 
-import org.co2dice.mirai.bean.Player
+import org.co2dice.mirai.core.bean.player.prototype.Player
 
-import org.co2dice.mirai.bean.game.GameSessionPool
-import org.co2dice.mirai.decorator.env.AttributeNumericType
-import org.co2dice.mirai.decorator.handler.DecoratorRegistry
-import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
-import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
-import org.co2dice.mirai.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
-import org.co2dice.mirai.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
-import org.co2dice.mirai.publicEnums.TokenDepend
-import org.co2dice.mirai.bean.card.instance.skill.SkillCardInstance
-import org.co2dice.mirai.bean.chessman.prototype.FullAttributeChessman
-import org.co2dice.mirai.bean.card.prototype.Card
+import org.co2dice.mirai.core.bean.game.GameSessionPool
+import org.co2dice.mirai.core.decorator.env.AttributeNumericType
+import org.co2dice.mirai.core.decorator.handler.DecoratorRegistry
+import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
+import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
+import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
+import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
+import org.co2dice.mirai.core.publicEnums.TokenDepend
+import org.co2dice.mirai.core.bean.card.instance.skill.SkillCardInstance
+import org.co2dice.mirai.core.bean.chessman.prototype.FullAttributeChessman
+import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container
 import java.util.*
@@ -60,7 +60,7 @@ class Test {
 
     @Test
     fun main2(){
-        Container.init("org.co2dice.mirai.bean.game.prototype")
+        Container.init("org.co2dice.mirai.core.bean.game.prototype")
         val cardA = Card(cardId = UUID.randomUUID(), cardRealName = "testA", cardType = TokenDepend.ITEM)
         val cardB = Card(cardId = UUID.randomUUID(), cardRealName = "testB", cardType = TokenDepend.ITEM)
         Container.register<Card>("cardA").toValue(cardA).inSingletonScope()

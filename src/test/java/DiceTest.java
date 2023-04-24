@@ -1,5 +1,5 @@
-import org.co2dice.mirai.bean.dice.diceList.DiceList;
-import org.co2dice.mirai.utils.DiceUtils;
+import org.co2dice.mirai.core.bean.dice.diceList.DiceList;
+import org.co2dice.mirai.core.utils.DiceUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
