@@ -1,13 +1,12 @@
 package org.co2dice.mirai.core.bean.card.instance.item
 
+import org.co2dice.mirai.core.bean.api.CAO
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.api.PermanentCardInstance
 import org.co2dice.mirai.core.bean.card.prototype.ItemCard
-import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldActiveEffect
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldPassiveEffect
+import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.publicEnums.ItemType
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -30,10 +29,24 @@ class ItemCardInstance(
     = if (entry.card is ItemCard) entry.card.occupy.toMutableMap() else mutableMapOf(),
     //占用槽，默认值为，如果entry里的卡是装备卡，就读取其占用的装备栏，否则就留空
     entryRound : Int,
-
-    override var activeEffects: EffectInstance<FieldActiveEffect> = ,
-    override var passiveEffects: EffectInstance<FieldPassiveEffect> =
-) : PermanentCardInstance<FieldActiveEffect,FieldPassiveEffect>(entry,registry,entryRound),DependPlayer<PlayerInstance?> {
+    override var effects: EffectInstance<FieldEffect>
+) : PermanentCardInstance<FieldEffect>(entry,registry,entryRound),DependPlayer<PlayerInstance?>,CAO {
+    override val chaos: Int?
+        get(){
+            return if (entry.card is CAO){
+                (entry.card as CAO).chaos
+            }else{
+                null
+            }
+        }
+    override val order: Int?
+        get(){
+            return if (entry.card is CAO){
+                (entry.card as CAO).order
+            }else{
+                null
+            }
+        }
 
 
 }

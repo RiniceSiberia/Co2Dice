@@ -4,14 +4,16 @@ import org.co2dice.mirai.core.bean.api.Agent
 import org.co2dice.mirai.core.bean.api.AttributeAPI
 import org.co2dice.mirai.core.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
+import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
 import org.co2dice.mirai.core.bean.game.Damage
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
+import org.co2dice.mirai.core.decorator.handler.DecoratorHolder
 
 abstract class ChessmanInstance(
     val entry : ChessmanEntry,
     var holder: PlayerInstance?,
     override val attributeTable: AttributeInstanceTable = entry.chessman.attributeEntryTable.toInstance()
-) : AttributeAPI , Agent {
+) : AttributeAPI , Agent<FieldEffect> , DecoratorHolder() {
 
 
     var isAlive = true

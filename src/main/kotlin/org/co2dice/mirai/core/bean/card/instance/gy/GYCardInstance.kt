@@ -17,6 +17,6 @@ class GYCardInstance (
     entry: CardEntry,
     registry : UniqueIdRegistry,
     override var holder: PlayerInstance,
-) : PublicCardInstance(entry,registry), DependPlayer<PlayerInstance> {
+) : PublicCardInstance<>(entry,registry), DependPlayer<PlayerInstance> {
     val activeEffects: MutableList<EffectEntry> =
 }

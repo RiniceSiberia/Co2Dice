@@ -3,6 +3,7 @@ package org.co2dice.mirai.core.ast.symbol.impl.leaf.param
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -22,5 +23,7 @@ object IntegerParam : ParamLeafSymbol<Int>(){
     override fun operation(key: String, params: Params): Int {
         return params.get(key)
     }
+
+    override val clazz: KClass<*> = Int::class
 
 }

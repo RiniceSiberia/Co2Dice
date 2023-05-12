@@ -9,6 +9,7 @@ package org.co2dice.mirai.core.decorator.api;
  * new value instance. This is intended.
  * //作用为装饰器的返回值
  * //如果你把decorator当做一个function call，context就是parameter，value instance就是return value
+ * @author lcy0x1
  */
 public interface DecoratorValueInstance<V extends Record & DecoratorValueInstance<V>> {
 }

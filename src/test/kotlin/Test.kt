@@ -3,12 +3,12 @@ package org.co2dice.mirai.plugin
 import org.co2dice.mirai.core.bean.player.prototype.Player
 
 import org.co2dice.mirai.core.bean.game.GameSessionPool
-import org.co2dice.mirai.core.decorator.env.AttributeNumericType
+import org.co2dice.mirai.core.decorator.env.card.numeric.CardNumericType
 import org.co2dice.mirai.core.decorator.handler.DecoratorRegistry
-import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentAddValueDecorator
-import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentMultiplyValueDecorator
-import org.co2dice.mirai.core.decorator.implementation.numeric.SimpleNumericPermanentSwitchStatDecorator
-import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.GetNumericAttributeContext
+import org.co2dice.mirai.core.decorator.implementation.card.numeric.CardNumericPermanentAddValueDecorator
+import org.co2dice.mirai.core.decorator.implementation.card.numeric.CardNumericPermanentMultiplyValueDecorator
+import org.co2dice.mirai.core.decorator.implementation.card.numeric.CardNumericPermanentSwitchStatDecorator
+import org.co2dice.mirai.core.decorator.instance.card.numeric.GetCardNumericContext
 import org.co2dice.mirai.core.publicEnums.TokenDepend
 import org.co2dice.mirai.core.bean.card.instance.skill.SkillCardInstance
 import org.co2dice.mirai.core.bean.chessman.prototype.FullAttributeChessman
@@ -35,23 +35,23 @@ class Test {
         val scene = gameSession.getPlayerScene(player)!!
         val card = SkillCardInstance()
         scene.addDecorator(
-            SimpleNumericPermanentAddValueDecorator(
-                AttributeNumericType.CHAOS,
+            CardNumericPermanentAddValueDecorator(
+                CardNumericType.CHAOS,
                 500
             )
         )
-        scene.addDecorator(SimpleNumericPermanentSwitchStatDecorator())
+        scene.addDecorator(CardNumericPermanentSwitchStatDecorator())
         scene.addDecorator(
-            SimpleNumericPermanentMultiplyValueDecorator(
-                AttributeNumericType.ORDER,
+            CardNumericPermanentMultiplyValueDecorator(
+                CardNumericType.ORDER,
                 2
             )
         )
-        val value: Int = scene.getHandler(DecoratorRegistry.GET_NUMERIC_ATTRIBUTE)
+        val value: Int = scene.getHandler(DecoratorRegistry.GET_CARD_NUMERIC)
             //获取场景的Token，并运用于卡片的获取属性值
             .apply(
-                GetNumericAttributeContext(
-                    AttributeNumericType.CHAOS,
+                GetCardNumericContext(
+                    CardNumericType.CHAOS,
                     card
                 )
             ).value()

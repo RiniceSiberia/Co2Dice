@@ -49,4 +49,13 @@ class AttributeEntryTable(private val map : Map<AttributeAPI,Int>) {
             map.forEach { (k, v) -> put(k,ValueInstance(v,v)) } }
         return AttributeInstanceTable(m.toMap())
     }
+
+    fun combine(other :AttributeEntryTable) : AttributeEntryTable {
+        val m = mutableMapOf<AttributeAPI,Int>().apply {
+            map.forEach { (k, v) -> put(k,v) }
+            //如果已经存在key,就加上value,否则put
+            other.map.forEach { (k, v) -> put(k,this[k]?.plus(v) ?: v) }
+        }
+        return AttributeEntryTable(m.toMap())
+    }
 }

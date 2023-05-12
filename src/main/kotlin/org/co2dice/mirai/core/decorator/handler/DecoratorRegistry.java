@@ -3,15 +3,20 @@ package org.co2dice.mirai.core.decorator.handler;
 import org.co2dice.mirai.core.decorator.api.Decorator;
 import org.co2dice.mirai.core.decorator.api.DecoratorContext;
 import org.co2dice.mirai.core.decorator.api.DecoratorValueInstance;
-import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.DefaultGetNumericAttributeDecorator;
-import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.GetNumericAttributeContext;
-import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.GetNumericAttributeDecorator;
-import org.co2dice.mirai.core.decorator.instance.get_numeric_attribute.GetNumericAttributeValueInstance;
+import org.co2dice.mirai.core.decorator.instance.card.numeric.DefaultGetCardNumericDecorator;
+import org.co2dice.mirai.core.decorator.instance.card.numeric.GetCardNumericContext;
+import org.co2dice.mirai.core.decorator.instance.card.numeric.GetCardNumericDecorator;
+import org.co2dice.mirai.core.decorator.instance.card.numeric.GetCardNumericValueInstance;
+import org.co2dice.mirai.core.decorator.instance.chess.numeric.DefaultGetChessNumericDecorator;
+import org.co2dice.mirai.core.decorator.instance.chess.numeric.GetChessNumericContext;
+import org.co2dice.mirai.core.decorator.instance.chess.numeric.GetChessNumericDecorator;
+import org.co2dice.mirai.core.decorator.instance.chess.numeric.GetChessNumericValueInstance;
 
 import java.util.LinkedHashMap;
 
 /**
  * registry class that provides decorator token instance. Call register() to initialize
+ * @author lcy0x1
  */
 public class DecoratorRegistry {
 
@@ -24,16 +29,25 @@ public class DecoratorRegistry {
 	 * the decorator for getting numeric attributes of a card
 	 */
 	public static final DecoratorToken<
-            GetNumericAttributeDecorator,
-            GetNumericAttributeContext,
-            GetNumericAttributeValueInstance
-                > GET_NUMERIC_ATTRIBUTE;
+			GetCardNumericDecorator,
+			GetCardNumericContext,
+			GetCardNumericValueInstance> GET_CARD_NUMERIC;
+
+	public static final DecoratorToken<
+			GetChessNumericDecorator,
+			GetChessNumericContext,
+			GetChessNumericValueInstance> GET_CHESS_NUMERIC;
 
 	static {
-		GET_NUMERIC_ATTRIBUTE = registerDecorator(new DecoratorToken<>(
-				"get_numeric_attribute",
-				GetNumericAttributeDecorator.class,
-				new DefaultGetNumericAttributeDecorator()));
+		GET_CARD_NUMERIC = registerDecorator(new DecoratorToken<>(
+				"get_card_numeric",
+				GetCardNumericDecorator.class,
+				new DefaultGetCardNumericDecorator()));
+
+		GET_CHESS_NUMERIC = registerDecorator(new DecoratorToken<>(
+				"get_chess_numeric",
+				GetChessNumericDecorator.class,
+				new DefaultGetChessNumericDecorator()));
 	}
 
 	/**

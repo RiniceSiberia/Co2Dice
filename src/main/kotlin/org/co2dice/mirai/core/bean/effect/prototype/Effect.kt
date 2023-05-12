@@ -1,6 +1,10 @@
 package org.co2dice.mirai.core.bean.effect.prototype
 
 import org.co2dice.mirai.core.ast.AstTree
+import org.co2dice.mirai.core.bean.effect.EffectTargets
+import org.co2dice.mirai.core.bean.effect.cost.Costs
+import org.co2dice.mirai.core.bean.effect.utils.EffectTargetSelectors
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -10,6 +14,16 @@ import org.co2dice.mirai.core.ast.AstTree
  * 效果根据所在区域和所在卡的不同而分类，比如从手牌发动的效果和墓地发动的效果就不是一类效果。
  **/
 interface Effect {
+
+
+    val targetFunction : AstTree<EffectTargets>
+    //发动时选择目标，与其相关逻辑。传入一个key，使用value对应的取对象方法，即可获取对应的目标。
+    //目标会作为Param的一部分传入到effectFunction中
+
+    val cost : AstTree<Costs>
+    //传的是传参和场景。使用等于处理cost,返回空代表cost不满足条件
+
+
     val operation: AstTree<String>
 
     val check : AstTree<Int>
@@ -22,4 +36,33 @@ interface Effect {
     //效果本身
     val launchConditions : AstTree<Boolean>
     //发动所需的条件(和cost的检查函数有互动，也和本技能依赖的主体的卡片有互动)
+
+    fun paramTypes(): Map<String, KClass<*>> {
+        val param = mutableMapOf<String,KClass<*>>()
+        val targetParam = targetFunction.getParams()
+        val launchConditionParam = launchConditions.getParams()
+        val costParam = cost.getParams()
+        val checkParam = check.getParams()
+        val reactParam = react.getParams()
+        val operationParam = operation.getParams()
+        param.putAll(targetParam)
+        param.putAll(launchConditionParam)
+        param.putAll(costParam)
+        param.putAll(checkParam)
+        param.putAll(reactParam)
+        param.putAll(operationParam)
+        if (targetParam.size
+            + launchConditionParam.size
+            + costParam.size
+            + checkParam.size
+            + reactParam.size
+            + operationParam.size != this.size)
+            throw Exception("param name conflict")
+        return param
+    }
+    //使用效果需要的传参，以及其对应的类型
+    //输入的传参的格式检查器。用来检查输入的参数的Class和typeCheck中的是否一致。如果是输入文字的形式，就是要根据typeCheck反查对应的对象了。
+    //left代表这个参数是选择目标，right代表这个参数是非目标相关,比如说丢弃x张手牌这种自定义参数
+    //String代表这个输入的参数意味着什么,距离:effectA( a = 青眼白龙 1 , b = 玩家b, c = 3)，其中c是发动技能时支付的力量值
+    // 这种情况下typeCheck里应该存储("a" to Selectors.MONSTER_SELECTOR , "b" to PLAYER_SELECTOR c to Int)
 }

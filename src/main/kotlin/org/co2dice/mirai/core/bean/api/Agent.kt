@@ -11,7 +11,6 @@ import org.co2dice.mirai.core.bean.effect.prototype.PassiveEffect
  * @Time:  2023-04-20-13:29
  * @Message: 存储特殊效果的接口
  **/
-interface Agent<A : ActiveEffect , P : PassiveEffect> {
-    var activeEffects : EffectInstance<A>
-    var passiveEffects : EffectInstance<P>
+interface Agent<E : Effect> {
+    var effects : EffectInstance<E>
 }

@@ -6,6 +6,7 @@ package org.co2dice.mirai.core.decorator.api;
  * Has only 1 public function: apply
  * //持有修饰器的对象，用于修饰器的调用
  * //apply方法为获取所有修饰器处理完毕后的总结果
+ * @author lcy0x1
  */
 public interface DecoratorHandler<D extends Decorator<D, C, V>,
 		C extends Record & DecoratorContext<C>,

@@ -17,6 +17,7 @@ record DecoratorHandlerImpl<D extends Decorator<D, C, V>,
 		List<D> list, int index
 ) implements DecoratorHandler<D, C, V> {
 
+	@Override
 	public V apply(C context) {
 		return index < 0 ? token.def().apply(context) : list.get(index).apply(getNext(), context);
 	}

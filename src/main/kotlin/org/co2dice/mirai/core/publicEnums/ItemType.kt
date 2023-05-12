@@ -1,11 +1,9 @@
 package org.co2dice.mirai.core.publicEnums
 
-enum class ItemType {
-    LEFT_HAND,
-    RIGHT_HAND,
-    TWO_HAND,
-    HEAD,
-    BODY,
-    FOOT,
-    MISCELLANEOUS
+enum class ItemType(val nameStr : String) {
+    LEFT_HAND("左手"),
+    RIGHT_HAND("右手"),
+    HEAD("头部"),
+    BODY("身体"),
+    FOOT("脚"),
 }

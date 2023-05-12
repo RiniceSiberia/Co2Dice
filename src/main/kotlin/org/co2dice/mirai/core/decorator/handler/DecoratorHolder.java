@@ -1,6 +1,5 @@
 package org.co2dice.mirai.core.decorator.handler;
 
-import org.co2dice.mirai.core.bean.game.decorator.api.*;
 import org.co2dice.mirai.core.decorator.api.*;
 
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
  * The superclass of all objects that can hold decorators.
  * To access decorators, get a DecoratorHandler with a DecoratorToken.
  * Provides methods to add decorators and remove stale decorators
+ * @author lcy0x1
  */
 public abstract class DecoratorHolder {
 

@@ -4,12 +4,14 @@ import org.co2dice.mirai.core.bean.effect.prototype.Effect
 import java.util.*
 
 class EventCard(
-    override val cardId : UUID,
-    override val cardRealName : String,
-    override val effects : MutableList<Effect> = mutableListOf()
+    cardId : UUID,
+    cardRealName : String,
+    types : Set<String>,
+    effects : MutableList<Effect> = mutableListOf()
 ) : Card(
     cardId = cardId,
     cardRealName = cardRealName,
-    effects = effects
+    effects = effects,
+    types = types
 ){
 }

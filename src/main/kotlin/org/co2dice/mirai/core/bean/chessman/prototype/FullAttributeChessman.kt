@@ -15,8 +15,9 @@ open class FullAttributeChessman(
     wis : Int,
     int : Int,
     san : Int,
+    types : Set<String>,
     name: String
-) : EliteChessman(AttributeEntryTable.createElite(str = str,con = con,dex = dex,wis = wis,int = int,san = san),name) {
+) : EliteChessman(AttributeEntryTable.createElite(str = str,con = con,dex = dex,wis = wis,int = int,san = san),types,name) {
     //拥有完整六维的棋子，不会存在空属性，一般用于玩家的棋子
     //可以作为开始的主将，也可以将对应的卡加入卡组
 

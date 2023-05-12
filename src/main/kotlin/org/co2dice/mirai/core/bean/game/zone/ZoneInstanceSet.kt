@@ -7,20 +7,16 @@ import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 class ZoneInstanceSet(
-    var holder: PlayerInstance?,
+    var holder: PlayerInstance,
     deck : MutableList<CardEntry>,
     venueDeck : MutableList<CardEntry>,
     //主卡组的卡片列表,记录了entry的信息
     //领域归属于玩家,而不是棋子
     chessman: ChessmanEntry
 ) {
-    init {
-        createEquipmentZone(chessman.toInstance(holder))
-    }
+    //区域类，核心是玩家
+    //这个类中所有的卡片都是依附于玩家的，而非棋子的，玩家不可为空
 
-    val equipmentZone : MutableMap<ChessmanInstance, EquipmentsZoneInstance> = mutableMapOf()
-    //一个玩家可以拥有不止一个棋子，当失去所有棋子或所有棋子都无法行动时,游戏失败,除非是系统棋子
-    //Equipments(装备）是和棋子绑定的
 
     private val buffer : BufferInstance = BufferInstance(holder = holder)
     //缓冲区，释放卡片时的区域，类比如万智牌的堆叠区域或者连锁处理区
@@ -78,30 +74,7 @@ class ZoneInstanceSet(
         }
     }
 
-    fun chessmanDie(chessman: ChessmanInstance){
-        chessman.die()
-        //棋子死亡
-        equipmentZone.remove(chessman)
-        //检查是否还有棋子
-        if (equipmentZone.isEmpty()){
-            //没有棋子了，游戏失败
-            throw FailException()
-        }
-    }
 
-    fun createEquipmentZone(chessman: ChessmanInstance){
-        //创建永久物区域
-        equipmentZone[chessman] = EquipmentsZoneInstance(chessman)
-    }
-
-    fun <B :CardInstance,A :CardInstance>moveCard(card : B,before : CardsVessel<B>,after : CardsVessel<A>){
-        card
-
-
-
-
-
-    }
 
 
 

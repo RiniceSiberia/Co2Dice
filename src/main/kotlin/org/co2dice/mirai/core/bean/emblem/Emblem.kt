@@ -2,7 +2,7 @@ package org.co2dice.mirai.core.bean.emblem
 
 import org.co2dice.mirai.core.bean.api.Agent
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
-import org.co2dice.mirai.core.bean.effect.utils.Situation
+import org.co2dice.mirai.core.utils.situation.api.SituationApi
 
 /**
  *      使用IDEA编写
@@ -16,7 +16,7 @@ import org.co2dice.mirai.core.bean.effect.utils.Situation
 class Emblem<T : Any>(val activeEffects: MutableMap<String, EffectEntry>) : Agent{
 
 
-    fun invoke(effectId : String, situation: Situation, initiator : T){
+    fun invoke(effectId : String, situation: SituationApi, initiator : T){
 
     }
 

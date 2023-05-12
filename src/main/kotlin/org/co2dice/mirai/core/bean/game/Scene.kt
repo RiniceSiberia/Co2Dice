@@ -1,14 +1,13 @@
 package org.co2dice.mirai.core.bean.game
 
-import org.co2dice.mirai.core.bean.api.Agent
-import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
-import org.co2dice.mirai.core.bean.effect.utils.Situation
-import org.co2dice.mirai.core.bean.game.zone.VenueHexMap
+import org.co2dice.mirai.core.bean.game.time.Turns
+import org.co2dice.mirai.core.bean.game.zone.VenueMap
 import org.co2dice.mirai.core.bean.game.zone.ZoneInstanceSet
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.decorator.handler.DecoratorHolder
 import org.co2dice.mirai.core.utils.ConstantUtils
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
+import org.co2dice.mirai.core.utils.situation.ResolutionSituation
 
 /**
  *      使用IDEA编写
@@ -27,16 +26,14 @@ abstract class Scene (
     var isClosed:Boolean,
     //是否已经关闭（暂停）
     mapSize:Int = ConstantUtils.VENUE_SIZE_MAX,
-    val venueMap: VenueHexMap = VenueHexMap(mapSize)
+    val venueMap: VenueMap = VenueMap(mapSize),
+    //角色和地形卡的地图
+    val turns: Turns = Turns(),
 ): DecoratorHolder() {
-    //一個六边形地图
 
     val registry : UniqueIdRegistry = UniqueIdRegistry()
 
-    val damageList: MutableList<Damage> = mutableListOf()
-    //伤害列表
-
-    val history :MutableList<Situation> = mutableListOf()
+    val history :MutableList<ResolutionSituation> = mutableListOf()
     //历史记录列表
 
     fun makeDamage(){
@@ -44,21 +41,24 @@ abstract class Scene (
     }
 
 
-    fun createSituation(input : Map<String,Any>, agent : Agent, player: PlayerInstance, effect : EffectEntry) : Situation{
-
-
-
-        return Situation(
-            input = input,
-            scene = this,
-            agent = agent,
-            player = player,
-            initiator = ,
-            target = ,
-            effect = effect,
-
-        )
-    }
+//    fun<E : Effect> createSituation(input : Map<String,Any>,
+//                                    agent : Agent<E>,
+//                                    player: PlayerInstance,
+//                                    effect : EffectEntry<E>) : Situation {
+//
+//
+//
+//        return Situation(
+//            input = input,
+//            scene = this,
+//            agent = agent,
+//            player = player,
+//            initiator = ,
+//            target = ,
+//            effect = effect,
+//
+//        )
+//    }
 
 
 

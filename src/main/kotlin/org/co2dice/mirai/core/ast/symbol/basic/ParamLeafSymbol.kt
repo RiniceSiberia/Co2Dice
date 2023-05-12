@@ -5,6 +5,7 @@ import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.node.ParamLeafNode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
 import kotlin.jvm.Throws
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -13,6 +14,8 @@ import kotlin.jvm.Throws
  * @Message: Have a good time!  :)
  **/
 abstract class ParamLeafSymbol<O : Any> : Symbol<O> {
+
+    abstract val clazz : KClass<*>
 
     abstract fun natualSign(key : String) : String
 

@@ -4,7 +4,7 @@ import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.node.basic.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
-import org.co2dice.mirai.core.bean.effect.utils.Situation
+import org.co2dice.mirai.core.utils.situation.ActivationSituation
 
 /**
  *      使用IDEA编写
@@ -12,16 +12,16 @@ import org.co2dice.mirai.core.bean.effect.utils.Situation
  * @Time:  2023-04-20-23:05
  * @Message: Have a good time!  :)
  **/
-object GetInitiator : UniOpSymbol<ChessmanInstance, Situation>() {
+object GetInitiator : UniOpSymbol<ChessmanInstance, ActivationSituation>() {
     init {
         SymbolRegistry.register(this)
     }
 
-    override fun natualSign(input: INode<Situation>): String {
+    override fun natualSign(input: INode<ActivationSituation>): String {
         return "$input.getInitiator()"
     }
 
-    override fun operation(input: Situation): ChessmanInstance {
+    override fun operation(input: ActivationSituation): ChessmanInstance {
         return input.initiator!!
     }
 }

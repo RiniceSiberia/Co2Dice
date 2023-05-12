@@ -10,7 +10,8 @@ import org.co2dice.mirai.core.bean.attribute.table.AttributeEntryTable
  **/
 open class EliteChessman (
     attributeEntryTable : AttributeEntryTable,
-    name:String) : Chessman(attributeEntryTable,name) {
+    types : Set<String>,
+    name:String) : Chessman(attributeEntryTable,types,name) {
         //精英怪棋子，带有一些属性，但不一定是完整的六维属性
         //可以被玩家召唤，但无法作为主将
 }

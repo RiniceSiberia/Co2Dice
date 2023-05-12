@@ -14,6 +14,7 @@ import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
  **/
 class ParamLeafNode<O : Any>(override var symbol: ParamLeafSymbol<O>,
                              val key: String) : INode<O>, ISymbolHolder<ParamLeafSymbol<O>> {
+
     override fun evaluate(params: Params): O {
         return symbol.operation(key, params)
     }

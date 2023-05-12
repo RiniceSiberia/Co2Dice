@@ -5,7 +5,7 @@ import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
 import org.co2dice.mirai.core.bean.effect.prototype.field.FieldPassiveEffect
-import org.co2dice.mirai.core.bean.effect.utils.Situation
+import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
 
 /**

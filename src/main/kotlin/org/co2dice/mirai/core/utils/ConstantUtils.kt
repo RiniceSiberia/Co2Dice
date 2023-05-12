@@ -28,6 +28,12 @@ object ConstantUtils {
 
     const val VENUE_SIZE_MAX = 16
 
+    const val VENUE_REGULARITY_DEFAULT_RATE : Double= 0.7
+    //地图规则度，值越小说明越规则
+
+    const val TINY_FUSE = 1000
+    //循环熔断开关，用于防止死循环
+
     const val SKILL_LEVEL_SIGN = "skill_level"
 
     const val INNER_AST_SIGN = "inner_ast"

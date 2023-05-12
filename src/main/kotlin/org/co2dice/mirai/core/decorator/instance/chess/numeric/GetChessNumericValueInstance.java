@@ -1,0 +1,27 @@
+package org.co2dice.mirai.core.decorator.instance.chess.numeric;
+
+import org.co2dice.mirai.core.decorator.api.DecoratorValueInstance;
+
+/**
+ * 使用IDEA编写
+ *
+ * @Author: DUELIST
+ * @Time: 2023-04-30-22:14
+ * @Message: Have a good time!  :)
+ **/
+public record GetChessNumericValueInstance(Integer value)
+        implements DecoratorValueInstance<GetChessNumericValueInstance> {
+
+    public GetChessNumericValueInstance add(int value) {
+        return new GetChessNumericValueInstance(this.value + value);
+    }
+
+    public GetChessNumericValueInstance multiply(int value) {
+        return new GetChessNumericValueInstance((int) Math.ceil(this.value * value));
+    }
+
+    public GetChessNumericValueInstance divide(int value) {
+        return new GetChessNumericValueInstance(this.value / value);
+    }
+
+}

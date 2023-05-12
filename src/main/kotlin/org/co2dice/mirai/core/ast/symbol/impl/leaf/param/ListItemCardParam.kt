@@ -3,6 +3,7 @@ package org.co2dice.mirai.core.ast.symbol.impl.leaf.param
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 import org.co2dice.mirai.core.bean.card.instance.item.ItemCardInstance
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -19,4 +20,7 @@ object ListItemCardParam : ParamLeafSymbol<List<ItemCardInstance>>(){
     override fun operation(key: String, params: Params): List<ItemCardInstance> {
         return params.get(key)
     }
+
+    override val clazz: KClass<*> = List::class
+
 }

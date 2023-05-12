@@ -3,6 +3,8 @@ package org.co2dice.mirai.core.bean.chessman.instance
 import org.co2dice.mirai.core.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.core.bean.attribute.prototype.MobAttribute
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
+import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
+import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
 import org.co2dice.mirai.core.bean.game.Damage
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
@@ -14,7 +16,9 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
  **/
 class MobChessmanInstance(entry : ChessmanEntry,
                           holder : PlayerInstance?,
-                          attributeInstanceTable : AttributeInstanceTable = entry.chessman.attributeEntryTable.toInstance())
+                          attributeInstanceTable : AttributeInstanceTable = entry.chessman.attributeEntryTable.toInstance(),
+                          override var effects: EffectInstance<FieldEffect>
+)
     : ChessmanInstance(entry = entry,holder = holder,attributeTable = attributeInstanceTable) {
 
 

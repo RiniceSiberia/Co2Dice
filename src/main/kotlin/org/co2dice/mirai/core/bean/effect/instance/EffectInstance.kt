@@ -1,14 +1,10 @@
 package org.co2dice.mirai.core.bean.effect.instance
 
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.bean.api.Agent
-import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldActiveEffect
-import org.co2dice.mirai.core.bean.effect.utils.Situation
+import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
-import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
  *      使用IDEA编写
@@ -19,7 +15,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
 abstract class EffectInstance<E :Effect>(
 ) {
     abstract val entries : List<EffectEntry<E>>
-    abstract fun invoke (index : Int,situation : Situation,input : Map<String,Any>) : String?
+    abstract fun invoke (index : Int, situation : Situation, input : Map<String,Any>) : String?
 
     open fun canLaunch(param : Params,eff : E) : Boolean{
         return eff.launchConditions.execute(param) == true

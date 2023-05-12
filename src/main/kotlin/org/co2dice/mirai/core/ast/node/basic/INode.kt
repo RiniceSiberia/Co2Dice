@@ -2,7 +2,6 @@ package org.co2dice.mirai.core.ast.node.basic
 
 import com.google.gson.JsonObject
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.bean.effect.utils.Situation
 import kotlin.jvm.Throws
 
 

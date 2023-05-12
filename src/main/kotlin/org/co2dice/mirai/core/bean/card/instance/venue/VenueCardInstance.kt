@@ -17,4 +17,9 @@ class VenueCardInstance (
 ) : PermanentCardInstance(entry,registry)  {
 
 
+    fun canPassArrow (): Boolean{
+        return true
+        //先写true，以后如果出现被动效果是无法通过箭头的，再改
+    }
+
 }

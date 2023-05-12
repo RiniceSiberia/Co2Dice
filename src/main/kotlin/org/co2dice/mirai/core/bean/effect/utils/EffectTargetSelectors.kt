@@ -1,6 +1,7 @@
 package org.co2dice.mirai.core.bean.effect.utils
 
 import org.co2dice.mirai.core.ast.AstTree
+import org.co2dice.mirai.core.utils.situation.Situation
 
 /**
  *      使用IDEA编写

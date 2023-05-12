@@ -6,9 +6,10 @@ import org.co2dice.mirai.core.publicEnums.ItemType
 import java.util.*
 
 class ItemCard(
-    override val cardId : UUID,
-    override val cardRealName : String,
-    override val effects : MutableList<Effect> = mutableListOf(),
+    cardId : UUID,
+    cardRealName : String,
+    effects : MutableList<Effect> = mutableListOf(),
+    types : Set<String>,
     override val chaos : Int,
     override val order : Int,
     val occupy : Map<ItemType,Int>
@@ -16,6 +17,7 @@ class ItemCard(
 ) : Card(
     cardId = cardId,
     cardRealName = cardRealName,
-    effects = effects
+    effects = effects,
+    types = types
 ), CAO {
 }

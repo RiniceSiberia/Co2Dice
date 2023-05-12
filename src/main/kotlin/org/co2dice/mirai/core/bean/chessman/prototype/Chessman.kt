@@ -10,6 +10,7 @@ import org.co2dice.mirai.core.bean.attribute.table.AttributeEntryTable
  **/
 abstract class Chessman(
     val attributeEntryTable : AttributeEntryTable,
+    val types : Set<String>,
     var name: String
 ) {
     //棋子是有属性的，但这个属性不会存储在抽象的棋子里。不同的棋子有不同的属性，比如杂鱼有忠诚

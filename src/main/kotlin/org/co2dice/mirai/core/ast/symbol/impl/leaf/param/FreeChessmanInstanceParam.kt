@@ -4,6 +4,7 @@ import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -23,4 +24,6 @@ object FreeChessmanInstanceParam : ParamLeafSymbol<ChessmanInstance>(){
     override fun operation(key: String, params: Params): ChessmanInstance {
         return params.get(key)
     }
+
+    override val clazz: KClass<*> = ChessmanInstance::class
 }

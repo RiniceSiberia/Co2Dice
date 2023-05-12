@@ -4,6 +4,7 @@ import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
+import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -23,4 +24,6 @@ object PlayerParam : ParamLeafSymbol<PlayerInstance>() {
     override fun operation(key: String, params: Params): PlayerInstance {
         return params.get(key)
     }
+
+    override val clazz: KClass<*> = PlayerInstance::class
 }

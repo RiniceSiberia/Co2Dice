@@ -9,6 +9,7 @@ package org.co2dice.mirai.core.decorator.api;
  * new context. This is intended.
  * //作用为装饰器的传参
  * //如果你把decorator当做一个function call，context就是parameter，value instance就是return value
+ * @author lcy0x1
  */
 
 public interface DecoratorContext<C extends Record & DecoratorContext<C>> {

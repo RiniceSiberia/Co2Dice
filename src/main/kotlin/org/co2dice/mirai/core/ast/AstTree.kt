@@ -3,7 +3,6 @@ package org.co2dice.mirai.core.ast
 import com.google.gson.JsonObject
 import org.co2dice.mirai.core.ast.node.ParamLeafNode
 import org.co2dice.mirai.core.ast.node.basic.INode
-import org.co2dice.mirai.core.bean.effect.utils.Situation
 import kotlin.reflect.KClass
 
 /**
@@ -30,5 +29,15 @@ class AstTree<O : Any> (private var root : INode<O>){
         return root.competeDfs(func)
     }
 
+    fun getParams() : List<Pair<String,KClass<*>>>{
+        val params = dfs { it is ParamLeafNode }
+        val list = mutableListOf<Pair<String,KClass<*>>>()
+        for (param in params){
+            val key = (param as ParamLeafNode).key
+            val type : KClass<*> = param.symbol.clazz
+            list.add(Pair(key,type))
+        }
+        return list
+    }
 
 }

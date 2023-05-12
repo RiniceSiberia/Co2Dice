@@ -5,8 +5,8 @@ import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldActiveEffect
-import org.co2dice.mirai.core.bean.effect.utils.Situation
+import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
+import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
 
 /**
@@ -16,17 +16,17 @@ import org.co2dice.mirai.core.utils.ConstantUtils
  * @Message: Have a good time!  :)
  **/
 class FieldActiveEffectInstance(
-    override val entries : List<EffectEntry<FieldActiveEffect>>
-) : EffectInstance<FieldActiveEffect>() {
+    override val entries : List<EffectEntry<FieldEffect>>
+) : EffectInstance<FieldEffect>() {
 
-    constructor(entry : EffectEntry<FieldActiveEffect>) : this(listOf(entry))
+    constructor(entry : EffectEntry<FieldEffect>) : this(listOf(entry))
 
     constructor(card : Card) : this(
-        entries = card.effects.filterIsInstance<FieldActiveEffect>().map { EffectEntry<FieldActiveEffect>(it) }
+        entries = card.effects.filterIsInstance<FieldEffect>().map { EffectEntry<FieldEffect>(it) }
     )
 
 
-    override fun invoke(index : Int,situation: Situation, input: Map<String, Any>): String {
+    override fun invoke(index : Int, situation: Situation, input: Map<String, Any>): String {
         try {
             val eff = entries[index].effect
             val level = entries[index].level
@@ -54,12 +54,12 @@ class FieldActiveEffectInstance(
     }
 
 
-    fun canLaunch(param : Params,eff : FieldActiveEffect) : Boolean{
+    override fun canLaunch(param : Params, eff : FieldEffect) : Boolean{
         return eff.launchConditions.execute(param) == true
     }
 
 
-    fun targetSelect(param : Params,eff : FieldActiveEffect) : String{
+    fun targetSelect(param : Params,eff : FieldEffect) : String{
         val targets : EffectTargets
         return try {
             targets = eff.targetFunc.execute(param)!!
@@ -70,7 +70,7 @@ class FieldActiveEffectInstance(
         }
     }
 
-    fun payCost(param : Params,eff : FieldActiveEffect) : String{
+    fun payCost(param : Params,eff : FieldEffect) : String{
         val cost = eff.cost.execute(param)
         return if (cost != null){
             check(param,eff)
