@@ -17,6 +17,10 @@ abstract class ParamLeafSymbol<O : Any> : Symbol<O> {
 
     abstract val clazz : KClass<*>
 
+    open fun check(key : String, params: Params) : O{
+        return operation(key, params)
+    }
+
     abstract fun natualSign(key : String) : String
 
     override fun deserialize(json: JsonObject): ParamLeafNode<O> {

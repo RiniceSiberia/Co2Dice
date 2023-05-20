@@ -18,6 +18,9 @@ interface INode <
     @Throws(NullPointerException::class)
     fun evaluate(params: Params) : O
 
+    @Throws(NullPointerException::class)
+    fun check(params: Params) : O
+
     fun serialize() : JsonObject
 
     fun natualSerialize() : String

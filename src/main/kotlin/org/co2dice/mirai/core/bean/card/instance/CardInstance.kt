@@ -2,6 +2,7 @@ package org.co2dice.mirai.core.bean.card.instance
 
 import org.co2dice.mirai.core.bean.api.Agent
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
+import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
 import org.co2dice.mirai.core.decorator.handler.DecoratorHolder
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -13,7 +14,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Message: Have a good time!  :)
  **/
 abstract class CardInstance<E : Effect>(
-    open val entry: CardEntry,
+    open val entry: CardEntry<*>,
     registry: UniqueIdRegistry
 ) : Agent<E>, DecoratorHolder() {
     val uniqueId: Int = registry.register(this :: class)

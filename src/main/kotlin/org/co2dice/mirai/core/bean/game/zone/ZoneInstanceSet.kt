@@ -5,14 +5,15 @@ import org.co2dice.mirai.core.bean.card.instance.CardInstance
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
+import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 class ZoneInstanceSet(
+    val registry : UniqueIdRegistry,
     var holder: PlayerInstance,
     deck : MutableList<CardEntry>,
     venueDeck : MutableList<CardEntry>,
     //主卡组的卡片列表,记录了entry的信息
     //领域归属于玩家,而不是棋子
-    chessman: ChessmanEntry
 ) {
     //区域类，核心是玩家
     //这个类中所有的卡片都是依附于玩家的，而非棋子的，玩家不可为空

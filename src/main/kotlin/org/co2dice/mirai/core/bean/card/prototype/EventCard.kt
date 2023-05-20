@@ -7,7 +7,7 @@ class EventCard(
     cardId : UUID,
     cardRealName : String,
     types : Set<String>,
-    effects : MutableList<Effect> = mutableListOf()
+    effects : List<Effect> = mutableListOf()
 ) : Card(
     cardId = cardId,
     cardRealName = cardRealName,

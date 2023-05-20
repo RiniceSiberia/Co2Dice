@@ -17,6 +17,10 @@ abstract class UniOpSymbol<O : Any,I : Any> : Symbol<O> {
 
     abstract fun natualSign(input : INode<I>) : String
 
+    open fun check(input: I) : O{
+        return operation(input)
+    }
+
     override fun deserialize(json: JsonObject): UniOpNode<O, I> {
         val nodeA: INode<I> = SymbolRegistry.deserialize(json.get("child").asJsonObject)
         return UniOpNode(this,nodeA)

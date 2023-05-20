@@ -16,22 +16,33 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
  * @Message: Have a good time!  :)
  **/
 abstract class Scene (
-    val players:MutableList<PlayerInstance>,
+    val registry : UniqueIdRegistry = UniqueIdRegistry(),
+    //依赖于场景的注册器
     decks :Map<PlayerInstance,DeckEntry>,
-    val zones:MutableMap<PlayerInstance, ZoneInstanceSet> = mutableMapOf<PlayerInstance, ZoneInstanceSet>()
-        .apply { players.forEach { this[it] = ZoneInstanceSet(holder = it, deck = ) } },
     //玩家与其相关区域的映射
     var hasEnded:Boolean,
     //是否已经结束
     var isClosed:Boolean,
     //是否已经关闭（暂停）
     mapSize:Int = ConstantUtils.VENUE_SIZE_MAX,
-    val venueMap: VenueMap = VenueMap(mapSize),
-    //角色和地形卡的地图
     val turns: Turns = Turns(),
+    //角色和地形卡的地图
+    val players:MutableList<PlayerInstance> = decks.keys.toMutableList(),
+    //玩家的映射
+    val zones:MutableMap<PlayerInstance, ZoneInstanceSet> = mutableMapOf<PlayerInstance, ZoneInstanceSet>()
+        .apply { players.forEach { this[it] = ZoneInstanceSet(
+            holder = it,
+            deck = decks[it]!!.getMainCards(),
+            venueDeck = decks[it]!!.getVenueCards()
+        ) } },
+    val venueMap: VenueMap = VenueMap(mapSize).apply {
+        //从每个玩家的venueDeck中获取4张地形卡
+        zones.forEach { it.ve }
+    },
 ): DecoratorHolder() {
 
-    val registry : UniqueIdRegistry = UniqueIdRegistry()
+
+
 
     val history :MutableList<ResolutionSituation> = mutableListOf()
     //历史记录列表

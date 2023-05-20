@@ -5,6 +5,7 @@ import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
 import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
+import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
@@ -13,8 +14,11 @@ import org.co2dice.mirai.core.utils.ConstantUtils
  * @Message: Have a good time!  :)
  **/
 abstract class EffectInstance<E :Effect>(
+    val entries : List<EffectEntry<E>>
 ) {
-    abstract val entries : List<EffectEntry<E>>
+
+    abstract fun preActivationCheck(situation: PreActivationSituation) : List<Int>
+    //返回的是能触发几号效果
     abstract fun invoke (index : Int, situation : Situation, input : Map<String,Any>) : String?
 
     open fun canLaunch(param : Params,eff : E) : Boolean{

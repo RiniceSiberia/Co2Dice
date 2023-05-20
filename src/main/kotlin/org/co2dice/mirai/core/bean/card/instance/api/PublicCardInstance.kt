@@ -2,9 +2,7 @@ package org.co2dice.mirai.core.bean.card.instance.api
 
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.effect.prototype.ActiveEffect
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
-import org.co2dice.mirai.core.bean.effect.prototype.PassiveEffect
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
@@ -14,7 +12,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Message: Have a good time!  :)
  **/
 abstract class PublicCardInstance<E : Effect>(
-    entry: CardEntry,
+    entry: CardEntry<*>,
     registry : UniqueIdRegistry,
 ) : CardInstance<E>(entry,registry) {
 }

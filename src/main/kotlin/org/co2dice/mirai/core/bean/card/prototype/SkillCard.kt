@@ -8,7 +8,7 @@ class SkillCard(
     cardId : UUID,
     cardRealName : String,
     types : Set<String>,
-    effects : MutableList<Effect> = mutableListOf(),
+    effects : List<Effect> = mutableListOf(),
     override val chaos : Int,
     override val order : Int,
     ) : Card(

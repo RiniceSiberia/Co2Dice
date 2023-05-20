@@ -21,6 +21,7 @@ object GetAttributeValue : BiOpSymbol<Int, ChessmanInstance, AttributeAPI>() {
         return l.attributeTable.getValue(r)!!
     }
 
+
     override fun natualSign(left: INode<ChessmanInstance>, right: INode<AttributeAPI>): String {
         return "${left.natualSerialize()}.getAttributeValue(${right.natualSerialize()})"
     }

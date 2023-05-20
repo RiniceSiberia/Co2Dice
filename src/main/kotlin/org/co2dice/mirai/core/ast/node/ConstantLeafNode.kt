@@ -18,6 +18,10 @@ class ConstantLeafNode<O : Any>(override var symbol: ConstantLeafSymbol<O>,
         return symbol.operation(value)
     }
 
+    override fun check(params: Params): O {
+        return symbol.check(value)
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)

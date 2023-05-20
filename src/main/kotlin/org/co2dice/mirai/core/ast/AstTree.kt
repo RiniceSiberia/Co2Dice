@@ -3,6 +3,10 @@ package org.co2dice.mirai.core.ast
 import com.google.gson.JsonObject
 import org.co2dice.mirai.core.ast.node.ParamLeafNode
 import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.utils.situation.ActivationSituation
+import org.co2dice.mirai.core.utils.situation.PreActivationSituation
+import org.co2dice.mirai.core.utils.situation.ResolutionSituation
+import org.co2dice.mirai.core.utils.situation.ResultSituation
 import kotlin.reflect.KClass
 
 /**
@@ -25,6 +29,16 @@ class AstTree<O : Any> (private var root : INode<O>){
         return null
     }
 
+    //检查能不能跑
+    fun check(params: Params) : Boolean{
+        return try {
+            root.check(params)
+            true
+        }catch (e : Exception){
+            false
+        }
+    }
+
     private fun dfs(func : (INode<*>) -> Boolean) : List<INode<*>>{
         return root.competeDfs(func)
     }
@@ -38,6 +52,15 @@ class AstTree<O : Any> (private var root : INode<O>){
             list.add(Pair(key,type))
         }
         return list
+    }
+
+    fun getParamsNoSituation() : List<Pair<String,KClass<*>>>{
+        return getParams().filter {
+            it.second != PreActivationSituation::class
+                || it.second != ActivationSituation::class
+                || it.second != ResolutionSituation::class
+                || it.second != ResultSituation::class
+        }
     }
 
 }

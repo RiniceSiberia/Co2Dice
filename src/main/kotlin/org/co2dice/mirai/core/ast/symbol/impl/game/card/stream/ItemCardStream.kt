@@ -1,4 +1,4 @@
-package org.co2dice.mirai.core.ast.symbol.impl.game.card
+package org.co2dice.mirai.core.ast.symbol.impl.game.card.stream
 
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
@@ -11,7 +11,7 @@ import org.co2dice.mirai.core.utils.ConstantUtils.INNER_AST_SIGN
  *      使用IDEA编写
  * @Author: DUELIST
  * @Time:  2023-04-24-22:13
- * @Message: Have a good time!  :)
+ * @Message: 输入一个list和一个处理list的函数，返回经过函数处理的list
  **/
 object ItemCardStream : BiOpSymbol<List<ItemCardInstance>,
     List<ItemCardInstance>,

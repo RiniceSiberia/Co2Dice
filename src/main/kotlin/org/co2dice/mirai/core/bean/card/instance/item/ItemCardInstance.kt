@@ -22,7 +22,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
   * @log /
   */
 class ItemCardInstance(
-    entry: CardEntry,
+    entry: CardEntry<*>,
     registry : UniqueIdRegistry,
     override var holder: PlayerInstance? = null,
     val occupy : MutableMap<ItemType,Int>

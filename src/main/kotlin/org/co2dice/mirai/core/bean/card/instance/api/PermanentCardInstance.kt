@@ -1,9 +1,7 @@
 package org.co2dice.mirai.core.bean.card.instance.api
 
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
-import org.co2dice.mirai.core.bean.effect.prototype.ActiveEffect
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
-import org.co2dice.mirai.core.bean.effect.prototype.PassiveEffect
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
@@ -13,9 +11,9 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Message: Have a good time!  :)
  **/
 abstract class PermanentCardInstance<E : Effect>(
-    entry: CardEntry,
+    entry: CardEntry<*>,
     registry : UniqueIdRegistry,
-    var entryRound : Int,
+    var entryRound : Int = 0,
     //进场回合
 ) :PublicCardInstance<E>(entry,registry){
     var faceUp : Boolean = true

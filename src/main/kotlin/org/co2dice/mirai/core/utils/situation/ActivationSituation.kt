@@ -14,13 +14,13 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
  * @Message: 用于提供对象的指针，选择目标确认发动后的situation
  **/
 open class ActivationSituation(
-    input: Map<String, Any>,
-    scene: Scene,
-    player: PlayerInstance,
+    open val input: Map<String, Any>,
+    open val scene: Scene,
+    open val player: PlayerInstance,
     open val agent: Agent<*>,
     open val initiator: ChessmanInstance?,
     open val target: EffectTargets,
     open val effect: EffectEntry<*>,
     open val isActive : Boolean,
-) : PreActivationSituation(input,scene,player) {
+)  {
 }

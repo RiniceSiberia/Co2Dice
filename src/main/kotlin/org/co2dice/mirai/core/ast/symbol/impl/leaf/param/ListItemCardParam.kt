@@ -21,6 +21,6 @@ object ListItemCardParam : ParamLeafSymbol<List<ItemCardInstance>>(){
         return params.get(key)
     }
 
-    override val clazz: KClass<*> = List::class
+    override val clazz: KClass<List<*>> = List::class
 
 }

@@ -1,6 +1,7 @@
 package org.co2dice.mirai.core.bean.effect.instance.field
 
 import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
@@ -8,6 +9,7 @@ import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
 import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
 import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
+import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
@@ -16,14 +18,24 @@ import org.co2dice.mirai.core.utils.ConstantUtils
  * @Message: Have a good time!  :)
  **/
 class FieldActiveEffectInstance(
-    override val entries : List<EffectEntry<FieldEffect>>
-) : EffectInstance<FieldEffect>() {
+    entries : List<EffectEntry<FieldEffect>>
+) : EffectInstance<FieldEffect>(entries) {
 
-    constructor(entry : EffectEntry<FieldEffect>) : this(listOf(entry))
-
-    constructor(card : Card) : this(
-        entries = card.effects.filterIsInstance<FieldEffect>().map { EffectEntry<FieldEffect>(it) }
+    constructor(entry : CardEntry<*>) : this(
+        entries = entry.effectEntry.filterIsInstance<EffectEntry<FieldEffect>>()
     )
+
+    override fun preActivationCheck(situation: PreActivationSituation): List<Int> {
+        for (effectEntry in entries){
+            try {
+                val params = effectEntry.effect.paramTypes()
+            }catch (e : Exception){
+                //出现问题说明param name conflict,报错跳过
+                e.printStackTrace()
+                continue
+            }
+        }
+    }
 
 
     override fun invoke(index : Int, situation: Situation, input: Map<String, Any>): String {
@@ -62,7 +74,7 @@ class FieldActiveEffectInstance(
     fun targetSelect(param : Params,eff : FieldEffect) : String{
         val targets : EffectTargets
         return try {
-            targets = eff.targetFunc.execute(param)!!
+            targets = eff.targetFunction.execute(param)!!
             param.add(ConstantUtils.EFFECT_TARGETS_SIGN,targets)
             payCost(param,eff)
         }catch (e : Exception){

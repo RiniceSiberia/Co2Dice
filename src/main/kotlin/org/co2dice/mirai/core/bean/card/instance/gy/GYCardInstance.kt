@@ -14,7 +14,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Message: Have a good time!  :)
  **/
 class GYCardInstance (
-    entry: CardEntry,
+    entry: CardEntry<*>,
     registry : UniqueIdRegistry,
     override var holder: PlayerInstance,
 ) : PublicCardInstance<>(entry,registry), DependPlayer<PlayerInstance> {

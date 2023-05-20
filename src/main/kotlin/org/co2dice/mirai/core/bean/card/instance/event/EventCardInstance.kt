@@ -15,7 +15,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Message: Have a good time!  :)
  **/
 class EventCardInstance(
-    entry: CardEntry,
+    entry: CardEntry<*>,
     registry : UniqueIdRegistry,
     override var holder: PlayerInstance? = null,
     override var effects: EffectInstance<UnPublicEffect>,

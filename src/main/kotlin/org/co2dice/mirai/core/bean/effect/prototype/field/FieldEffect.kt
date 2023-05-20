@@ -11,6 +11,7 @@ import org.co2dice.mirai.core.ast.symbol.impl.math.integer.Plus
 import org.co2dice.mirai.core.bean.attribute.prototype.EliteAttribute
 import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.cost.Costs
+import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
 
 /**
@@ -28,7 +29,7 @@ import org.co2dice.mirai.core.bean.effect.prototype.Effect
  * 效果具体处理时使用的函数
  *
  **/
-open class FieldEffect(
+class FieldEffect(
 
     override val targetFunction : AstTree<EffectTargets>,
     //需要指定的目标，一个通过typeCheck验证过的输入参数，经过targetFunc调用后便会返回一个封装的EffectTargets。
@@ -97,11 +98,14 @@ open class FieldEffect(
 
 
 
+
     fun inputLegal(map : Map<String,Any>) : Boolean{
         //将target进行stream化，如果key都对得上且对应key的value，每个map的类型是value的子类或者本类，返回true
         //允许param中存在target中不存在的key
-        return this.paramTypes().entries.stream().allMatch {
-            map.containsKey(it.key) && it.value.isInstance(map[it.key])
-        }
+//        return this.paramTypes().entries.stream().allMatch {
+//            map.containsKey(it.key) && it.value.isInstance(map[it.key])
+//        }
+        return true
     }
+
 }

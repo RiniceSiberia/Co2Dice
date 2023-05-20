@@ -23,6 +23,12 @@ class BiOpNode<O : Any,L : Any,R : Any>(
         return symbol.operation(l,r)
     }
 
+    override fun check(params: Params): O {
+        val l = left.check(params)
+        val r = right.check(params)
+        return symbol.check(l,r)
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)

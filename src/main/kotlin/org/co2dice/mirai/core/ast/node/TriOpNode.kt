@@ -25,6 +25,10 @@ class TriOpNode<O : Any,F : Any,S : Any,T : Any>(
         return symbol.operation(f,s,t)
     }
 
+    override fun check(params: Params): O {
+        return symbol.check(first.check(params),second.check(params),third.check(params))
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)

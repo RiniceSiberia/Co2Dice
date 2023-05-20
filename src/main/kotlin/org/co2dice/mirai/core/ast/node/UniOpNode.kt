@@ -20,6 +20,10 @@ class UniOpNode<O : Any,I : Any>(
         return symbol.operation(child.evaluate(params))
     }
 
+    override fun check(params: Params): O {
+        return check(params)
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)

@@ -24,4 +24,8 @@ abstract class BiOpSymbol<O : Any,L : Any,R : Any> : Symbol<O> {
     }
 
     abstract fun operation(l: L, r: R): O
+
+    open fun check(l: L, r: R): O{
+        return operation(l,r)
+    }
 }

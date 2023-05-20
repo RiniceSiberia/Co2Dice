@@ -15,6 +15,10 @@ abstract class ConstantLeafSymbol<O : Any> : Symbol<O> {
 
     abstract fun natualSign(value : O) : String
 
+    open fun check(value : O) : O{
+        return value
+    }
+
 
     override fun deserialize(json: JsonObject): ConstantLeafNode<O> {
         val value = wrapper(json.get("value"))

@@ -17,6 +17,8 @@ abstract class ListOpSymbol<O : Any, E : Any> : Symbol<O> {
 
     abstract fun natualSign(list : List<INode<out E>>) : String
 
+    abstract fun check(list : List<E>) : O
+
     override fun deserialize(json: JsonObject): ListOpNode<O, E> {
         val nodes = mutableListOf<INode<E>>()
         for (i in json.get("children").asJsonArray) {
@@ -29,6 +31,8 @@ abstract class ListOpSymbol<O : Any, E : Any> : Symbol<O> {
     }
 
 
-    abstract fun operation(list : List<E>): O
+    open fun operation(list : List<E>): O{
+        return check(list)
+    }
 
 }

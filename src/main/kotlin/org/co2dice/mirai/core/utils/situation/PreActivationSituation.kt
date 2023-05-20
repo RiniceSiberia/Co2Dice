@@ -13,16 +13,18 @@ import org.co2dice.mirai.core.utils.situation.api.SituationApi
  * @Author: DUELIST
  * @Time:  2023-05-11-22:22
  * @Message: 用于提供对象的指针，发动选择目标前的situation
+ * 主要是遍历用的，用于检查是否可以发动，比如:手里有一张需要力量才能使用的牌，此时就需要使用这个来检验能否发动
  **/
 open class PreActivationSituation(
-    override val input: Map<String, Any>,
-    override val scene: Scene,
-    override val player: PlayerInstance
-) : SituationApi {
+    val input: Map<String, Any>,
+    val scene: Scene,
+    val player: PlayerInstance,
+    val agent: Agent<*>,
+    val initiator: ChessmanInstance?,
+
+) {
 
     fun toActivationSituation(
-        agent: Agent<*>,
-        initiator: ChessmanInstance?,
         target: EffectTargets,
         effect: EffectEntry<*>,
         isActive: Boolean

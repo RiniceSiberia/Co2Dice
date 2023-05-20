@@ -8,7 +8,7 @@ import java.util.*
 class ItemCard(
     cardId : UUID,
     cardRealName : String,
-    effects : MutableList<Effect> = mutableListOf(),
+    effects : List<Effect> = mutableListOf(),
     types : Set<String>,
     override val chaos : Int,
     override val order : Int,

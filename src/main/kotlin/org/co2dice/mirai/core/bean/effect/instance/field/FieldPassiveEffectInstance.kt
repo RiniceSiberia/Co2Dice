@@ -4,7 +4,7 @@ import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldPassiveEffect
+import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
 import org.co2dice.mirai.core.utils.situation.Situation
 import org.co2dice.mirai.core.utils.ConstantUtils
 
@@ -15,13 +15,13 @@ import org.co2dice.mirai.core.utils.ConstantUtils
  * @Message: Have a good time!  :)
  **/
 class FieldPassiveEffectInstance(
-    override val entries : List<EffectEntry<FieldPassiveEffect>>
-) : EffectInstance<FieldPassiveEffect>() {
+    entries : List<EffectEntry<FieldEffect>>
+) : EffectInstance<FieldEffect>(entries) {
 
-    constructor(entry : EffectEntry<FieldPassiveEffect>) : this(listOf(entry))
+    constructor(entry : EffectEntry<FieldEffect>) : this(listOf(entry))
 
     constructor(card : Card) : this(
-        entries = card.effects.filterIsInstance<FieldPassiveEffect>().map { EffectEntry<FieldPassiveEffect>(it) }
+        entries = card.effects.filterIsInstance<FieldEffect>().map { EffectEntry<FieldEffect>(it) }
     )
 
     fun trigger(situation: Situation) : Int? {

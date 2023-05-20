@@ -16,6 +16,10 @@ abstract class TriOpSymbol<O : Any,F : Any,S : Any,T : Any> : Symbol<O> {
 
     abstract fun natualSign(first : INode<F>,second : INode<S>,third : INode<T>) : String
 
+    open fun check (f : F,s : S, t : T) : O{
+        return operation(f,s,t)
+    }
+
     override fun deserialize(json: JsonObject): TriOpNode<O, F, S, T> {
         val firstNode:INode<F> = SymbolRegistry.deserialize(json.get("first").asJsonObject)
         val secondNode:INode<S> = SymbolRegistry.deserialize(json.get("second").asJsonObject)

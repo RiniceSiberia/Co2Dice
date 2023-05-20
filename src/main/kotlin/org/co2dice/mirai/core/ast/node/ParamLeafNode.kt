@@ -19,6 +19,10 @@ class ParamLeafNode<O : Any>(override var symbol: ParamLeafSymbol<O>,
         return symbol.operation(key, params)
     }
 
+    override fun check(params: Params): O {
+        return symbol.check(key,params)
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)

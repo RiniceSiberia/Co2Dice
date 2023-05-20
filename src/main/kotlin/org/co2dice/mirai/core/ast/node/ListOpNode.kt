@@ -23,6 +23,12 @@ class ListOpNode<O : Any,E : Any>(
         )
     }
 
+    override fun check(params: Params): O {
+        return symbol.check(
+            list = children.map { it.check(params) }
+        )
+    }
+
     override fun serialize(): JsonObject {
         val json = JsonObject()
         json.addProperty("symbol", symbol::class.java.simpleName)
