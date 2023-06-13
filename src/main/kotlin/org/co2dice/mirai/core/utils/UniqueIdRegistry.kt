@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.utils
 
-import org.co2dice.mirai.core.bean.dice.single.LotteryPool
+import org.co2dice.mirai.core.bean.dice.entry.LotteryPool
 import kotlin.reflect.KClass
 
 /**

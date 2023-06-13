@@ -1,11 +1,13 @@
 package org.co2dice.mirai.core.ast.symbol.basic
 
-import com.google.gson.JsonObject
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.node.ListOpNode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
-import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -15,14 +17,20 @@ import kotlin.reflect.KClass
  **/
 abstract class ListOpSymbol<O : Any, E : Any> : Symbol<O> {
 
-    abstract fun natualSign(list : List<INode<out E>>) : String
+    init {
+        SymbolRegistry.register(this)
+    }
 
-    abstract fun check(list : List<E>) : O
+    abstract fun natualSign(list : List<INode<out E>>) : String
+    abstract fun operation(list: List<E>, params:Params) : O
+    open fun check(list: List<E>, params:Params): O{
+        return operation(list,params)
+    }
 
     override fun deserialize(json: JsonObject): ListOpNode<O, E> {
-        val nodes = mutableListOf<INode<E>>()
-        for (i in json.get("children").asJsonArray) {
-            nodes.add(SymbolRegistry.deserialize(i.asJsonObject))
+        val nodes = mutableListOf<INode<out E>>()
+        for (i in json["children"]?.jsonArray!!) {
+            nodes.add(SymbolRegistry.deserialize(i.jsonObject))
         }
 // 语法糖模式如下，为了代码可读性注了，引以为戒，不要乱用语法糖，该写类型还是得写类型
 //        val nodes:List<INode<E>> = json.get("children").asJsonArray.map { SymbolRegistry.parseNode(it.asJsonObject) }
@@ -31,8 +39,5 @@ abstract class ListOpSymbol<O : Any, E : Any> : Symbol<O> {
     }
 
 
-    open fun operation(list : List<E>): O{
-        return check(list)
-    }
 
 }

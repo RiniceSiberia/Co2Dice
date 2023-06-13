@@ -1,35 +1,14 @@
 package org.co2dice.mirai.core.utils
 
+import org.co2dice.mirai.core.bean.dice.SampleSpace
 import org.co2dice.mirai.core.bean.dice.diceList.DiceList
-import org.co2dice.mirai.core.bean.dice.single.api.AbstractDice
+import org.co2dice.mirai.core.bean.dice.entry.AbstractDice
 import org.co2dice.mirai.core.publicEnums.UsuallyDices
 import java.util.*
 import kotlin.math.abs
+import kotlin.streams.toList
 
 object DiceUtils {
-    val EXPECTED_VALUE:List<Double> = listOf(
-        2.0,
-        3.0,
-        4.5,
-        6.0,
-        8.0,
-        10.0,
-        12.5,
-        15.0,
-        18.0,
-        21.0,
-        25.0,
-        29.0,
-        34.0,
-        39.5,
-        45.5,
-        52.0,
-        59.5,
-        68.0,
-        77.0,
-        87.0,
-        98.0
-    )
     fun getExpectDice(e:Double): DiceList {
         val dices = DiceList()
         //循环遍历将所有的骰子都加入到dices,计算出所有的可能性，再将dices清空，算出最接近期望值的样子
@@ -40,7 +19,7 @@ object DiceUtils {
             for (dice in getListByPriority()){
                 //计算dices中所有骰子的期望值
                 dices.add(dice.diceList)
-                val odds:Map<Int,Double> = dices.expected()
+                val odds:Map<Int,Double> = dices.exceptedDouble()
                 //所有和的概率
                 //获取一个总的期望值，即每个key乘以每个value后得到的总和
                 var value:Double = 0.0;

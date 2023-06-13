@@ -1,5 +1,9 @@
 package org.co2dice.mirai.plugin
 
+import org.co2dice.mirai.core.ast.tree.AstTree
+import org.co2dice.mirai.core.ast.node.BiOpNode
+import org.co2dice.mirai.core.ast.symbol.basic.api.stream.StreamSymbolApi
+import org.co2dice.mirai.core.bean.card.instance.ItemCardInstance
 import org.co2dice.mirai.core.bean.player.prototype.Player
 
 import org.co2dice.mirai.core.bean.game.GameSessionPool
@@ -10,7 +14,7 @@ import org.co2dice.mirai.core.decorator.implementation.card.numeric.CardNumericP
 import org.co2dice.mirai.core.decorator.implementation.card.numeric.CardNumericPermanentSwitchStatDecorator
 import org.co2dice.mirai.core.decorator.instance.card.numeric.GetCardNumericContext
 import org.co2dice.mirai.core.publicEnums.TokenDepend
-import org.co2dice.mirai.core.bean.card.instance.skill.SkillCardInstance
+import org.co2dice.mirai.core.bean.card.instance.ReleaseCardInstance
 import org.co2dice.mirai.core.bean.chessman.prototype.FullAttributeChessman
 import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.junit.jupiter.api.Test
@@ -33,7 +37,7 @@ class Test {
         )
         gameSession.addBattle(mutableListOf(characterCard))
         val scene = gameSession.getPlayerScene(player)!!
-        val card = SkillCardInstance()
+        val card = ReleaseCardInstance()
         scene.addDecorator(
             CardNumericPermanentAddValueDecorator(
                 CardNumericType.CHAOS,
@@ -71,5 +75,18 @@ class Test {
         val a = Container.resolve("cardA", Card::class.java)
         val b = Container.resolve("cardPrototype", Card::class.java)
         System.out.println("1");
+    }
+
+    @Test
+    fun test3(){
+        val launchFunction : AstTree<Boolean> = AstTree(
+            root = BiOpNode<Boolean,List<ItemCardInstance>, AstTree<Boolean>>(
+                symbol = StreamSymbolApi,
+                left = ,
+                right = AstTree<Boolean>(
+
+                ),
+            )
+        )
     }
 }

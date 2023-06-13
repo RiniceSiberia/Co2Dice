@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.bean.game.zone
 
 import org.checkerframework.common.value.qual.IntRange
-import org.co2dice.mirai.core.bean.card.instance.venue.VenueCardInstance
+import org.co2dice.mirai.core.bean.card.instance.VenueCardInstance
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.core.utils.ConstantUtils.TINY_FUSE
 import org.co2dice.mirai.core.utils.ConstantUtils.VENUE_REGULARITY_DEFAULT_RATE
@@ -23,9 +23,9 @@ class VenueMap(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.toLong
                //方向池,这个方向决定了地图的边数,目前允许四边形,六边形和八边形chunk的地图
                private val regularityRate : Double = VENUE_REGULARITY_DEFAULT_RATE
 ) {
-    private val chunks : Array<Array<VenueCardInstance?>> = Array(size) { arrayOfNulls(size) }
+    val chunks : Array<Array<VenueCardInstance?>> = Array(size) { arrayOfNulls(size) }
     //区块，类似mc的区块，每个区块都是一个地形卡
-    private val chessMap : MutableMap<ChessmanInstance, ChessmanValue> = mutableMapOf()
+    val chessMap : MutableMap<ChessmanInstance, ChessmanValue> = mutableMapOf()
     //一个玩家可以拥有不止一个棋子，当失去所有棋子或所有棋子都无法行动时,游戏失败,除非是系统棋子
     //Equipments(装备）是和棋子绑定的
 
@@ -74,7 +74,7 @@ class VenueMap(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.toLong
 
     fun addChessman(chessman: ChessmanInstance, coordinate: Coordinate2D) : Boolean{
         if (venueCanStand(coordinate)){
-            chessMap[chessman] = ChessmanValue(coordinate, Equipments(chessman, mutableMapOf()))
+            chessMap[chessman] = ChessmanValue(coordinate, Equipments())
             return true
         }
         return false

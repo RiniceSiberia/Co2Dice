@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.prototype.field
 
-import org.co2dice.mirai.core.ast.AstTree
+import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.ast.node.*
 import org.co2dice.mirai.core.ast.symbol.impl.game.attribute.GetAttributeValue
 import org.co2dice.mirai.core.ast.symbol.impl.game.dice.*
@@ -10,8 +10,7 @@ import org.co2dice.mirai.core.ast.symbol.impl.leaf.constant.IntegerConstant
 import org.co2dice.mirai.core.ast.symbol.impl.math.integer.Plus
 import org.co2dice.mirai.core.bean.attribute.prototype.EliteAttribute
 import org.co2dice.mirai.core.bean.effect.EffectTargets
-import org.co2dice.mirai.core.bean.effect.cost.Costs
-import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
+import org.co2dice.mirai.core.bean.effect.cost.Cost
 import org.co2dice.mirai.core.bean.effect.prototype.Effect
 
 /**
@@ -39,7 +38,7 @@ class FieldEffect(
     override val launchConditions : AstTree<Boolean>,
     //技能发动所需的条件(和cost的检查函数有互动，也和本技能依赖的主体的卡片有互动)
 
-    override val cost: AstTree<Costs>,
+    override val cost: AstTree<Cost>,
     //传的是传参和场景。使用等于处理cost,返回空代表cost不满足条件
 
     override val check : AstTree<Int> = AstTree(
@@ -47,9 +46,9 @@ class FieldEffect(
         UniOpNode(
             symbol = Open,
             child = UniOpNode(
-                symbol = Roll,
+                symbol = DiceRollSymbol,
                 child = ListOpNode(
-                    symbol = DiceListSymbol,
+                    symbol = DiceSumSymbol,
                     children = listOf(
                         UniOpNode(
                             symbol = FairDiceSymbol,
@@ -71,7 +70,7 @@ class FieldEffect(
     //检定值,宣言后会检定是否可以使用技能。传参:玩家的输入值，场景，技能本身。返回值:检定值
     //示例检定函数，使用敏捷进行检定,进行一个0修正值,1d20+敏捷的检定
 
-    override val react:AstTree<Int> = AstTree(
+    override val react: AstTree<Int> = AstTree(
         //检定直接使用敏捷
         BiOpNode(
             symbol = Plus,

@@ -1,8 +1,8 @@
 package org.co2dice.mirai.core.publicEnums
 
-import org.co2dice.mirai.core.bean.dice.single.DesignatedDice
-import org.co2dice.mirai.core.bean.dice.single.api.AbstractDice
-import org.co2dice.mirai.core.bean.dice.single.FairDice
+import org.co2dice.mirai.core.bean.dice.entry.DesignatedDice
+import org.co2dice.mirai.core.bean.dice.entry.AbstractDice
+import org.co2dice.mirai.core.bean.dice.entry.FairDice
 
 enum class UsuallyDices(val diceList: AbstractDice, val priority :Int) {
     D1(DesignatedDice(1),2),

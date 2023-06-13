@@ -1,9 +1,11 @@
 package org.co2dice.mirai.core.ast.symbol.basic
 
-import com.google.gson.JsonObject
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
+import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.node.TriOpNode
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
@@ -14,19 +16,23 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
  **/
 abstract class TriOpSymbol<O : Any,F : Any,S : Any,T : Any> : Symbol<O> {
 
-    abstract fun natualSign(first : INode<F>,second : INode<S>,third : INode<T>) : String
+    init {
+        SymbolRegistry.register(this)
+    }
 
-    open fun check (f : F,s : S, t : T) : O{
-        return operation(f,s,t)
+    abstract fun natualSign(first : INode<F>, second : INode<S>, third : INode<T>) : String
+
+    abstract fun operation(f: F, s: S, t: T, params:Params): O
+
+    open fun check (f: F, s: S, t: T, params:Params) : O{
+        return operation(f, s, t,params)
     }
 
     override fun deserialize(json: JsonObject): TriOpNode<O, F, S, T> {
-        val firstNode:INode<F> = SymbolRegistry.deserialize(json.get("first").asJsonObject)
-        val secondNode:INode<S> = SymbolRegistry.deserialize(json.get("second").asJsonObject)
-        val thirdNode:INode<T> = SymbolRegistry.deserialize(json.get("third").asJsonObject)
+        val firstNode: INode<F> = SymbolRegistry.deserialize(json["first"]!!.jsonObject)
+        val secondNode: INode<S> = SymbolRegistry.deserialize(json["second"]!!.jsonObject)
+        val thirdNode: INode<T> = SymbolRegistry.deserialize(json["third"]!!.jsonObject)
         return TriOpNode(this,firstNode,secondNode,thirdNode)
     }
-
-    abstract fun operation(f : F,s : S, t : T): O
 
 }

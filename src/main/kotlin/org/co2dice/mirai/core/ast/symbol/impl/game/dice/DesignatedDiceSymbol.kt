@@ -1,9 +1,9 @@
 package org.co2dice.mirai.core.ast.symbol.impl.game.dice
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
-import org.co2dice.mirai.core.bean.dice.single.DesignatedDice
+import org.co2dice.mirai.core.bean.dice.entry.DesignatedDice
 
 /**
  *      使用IDEA编写
@@ -12,11 +12,8 @@ import org.co2dice.mirai.core.bean.dice.single.DesignatedDice
  * @Message: Have a good time!  :)
  **/
 object DesignatedDiceSymbol : UniOpSymbol<DesignatedDice, Int>() {
-    init {
-        SymbolRegistry.register(this)
-    }
 
-    override fun operation(item: Int): DesignatedDice {
+    override fun operation(item: Int, params:Params): DesignatedDice {
         return DesignatedDice(item)
     }
 

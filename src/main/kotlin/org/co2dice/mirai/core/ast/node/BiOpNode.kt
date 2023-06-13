@@ -1,9 +1,11 @@
 package org.co2dice.mirai.core.ast.node
 
-import com.google.gson.JsonObject
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.node.api.ISymbolHolder
-import org.co2dice.mirai.core.ast.node.basic.INode
 import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
 
 /**
@@ -14,27 +16,31 @@ import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
  **/
 class BiOpNode<O : Any,L : Any,R : Any>(
     override var symbol: BiOpSymbol<O, L, R>,
-    val left: INode<L>,
-    val right: INode<R>
+    var left: INode<L>,
+    var right: INode<R>
 ) : INode<O>, ISymbolHolder<BiOpSymbol<O, L, R>> {
-    override fun evaluate(params: Params): O {
+    override fun evaluate(params:Params): O {
         val l = left.evaluate(params)
         val r = right.evaluate(params)
-        return symbol.operation(l,r)
+        return symbol.operation(l,r,params)
     }
 
-    override fun check(params: Params): O {
+    override fun check(params:Params): O {
         val l = left.check(params)
         val r = right.check(params)
-        return symbol.check(l,r)
+        return symbol.check(l,r,params)
     }
 
     override fun serialize(): JsonObject {
-        val json = JsonObject()
-        json.addProperty("symbol", symbol::class.java.simpleName)
-        json.add("left", left.serialize())
-        json.add("right", right.serialize())
-        return json
+//        val json = JsonObject()
+//        json.addProperty("symbol", symbol::class.java.simpleName)
+//        json.add("left", left.serialize())
+//        json.add("right", right.serialize())
+        return JsonObject(mapOf(
+            "symbol" to Json.encodeToJsonElement(symbol::class.java.simpleName),
+            "left" to Json.encodeToJsonElement(left.serialize()),
+            "right" to Json.encodeToJsonElement(right.serialize())
+        ))
     }
 
     override fun natualSerialize(): String {
@@ -46,4 +52,16 @@ class BiOpNode<O : Any,L : Any,R : Any>(
         return listOf(left,right)
     }
 
+    @Deprecated("测试替换节点方法，不知道啥时候会删，谨慎使用")
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> replaceNode(input: INode<T>, output: INode<T>): Boolean {
+        if (left == input) {
+            left = output as INode<L>
+            return true
+        }else if (right == input) {
+            right = output as INode<R>
+            return true
+        }
+        return false
+    }
 }

@@ -6,7 +6,6 @@ import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.game.Scene
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
-import org.co2dice.mirai.core.utils.situation.api.SituationApi
 
 /**
  *      使用IDEA编写
@@ -17,12 +16,12 @@ import org.co2dice.mirai.core.utils.situation.api.SituationApi
  **/
 open class PreActivationSituation(
     val input: Map<String, Any>,
-    val scene: Scene,
-    val player: PlayerInstance,
+    override val scene: Scene,
+    override val player: PlayerInstance,
     val agent: Agent<*>,
     val initiator: ChessmanInstance?,
 
-) {
+    ) : SituationApi{
 
     fun toActivationSituation(
         target: EffectTargets,

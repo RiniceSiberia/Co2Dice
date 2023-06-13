@@ -1,7 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.impl.leaf.param
 
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import kotlin.reflect.KClass
@@ -13,15 +12,12 @@ import kotlin.reflect.KClass
  * @Message: Have a good time!  :)
  **/
 object FreeChessmanInstanceParam : ParamLeafSymbol<ChessmanInstance>(){
-    init {
-        SymbolRegistry.register(this)
-    }
 
     override fun natualSign(key: String): String {
         return "$key :: ChessmanInstance(Free)"
     }
 
-    override fun operation(key: String, params: Params): ChessmanInstance {
+    override fun operation(key: String, params:Params): ChessmanInstance {
         return params.get(key)
     }
 

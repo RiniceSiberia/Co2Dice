@@ -6,7 +6,7 @@ import org.co2dice.mirai.core.bean.effect.prototype.Effect
 import java.util.*
 
 
-abstract class Card(
+sealed class Card(
     open val cardId : UUID,
     open val cardRealName : String,
     open val types : Set<String>,

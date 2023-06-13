@@ -1,9 +1,9 @@
 package org.co2dice.mirai.core.ast.symbol.impl.game.dice
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
-import org.co2dice.mirai.core.bean.dice.single.FairDice
+import org.co2dice.mirai.core.bean.dice.entry.FairDice
 
 /**
  *      使用IDEA编写
@@ -12,12 +12,8 @@ import org.co2dice.mirai.core.bean.dice.single.FairDice
  * @Message: Have a good time!  :)
  **/
 object FairDiceSymbol : UniOpSymbol<FairDice,Int>() {
-    init {
-        SymbolRegistry.register(this)
-    }
 
-
-    override fun operation(item: Int): FairDice {
+    override fun operation(item: Int, params:Params): FairDice {
         return FairDice(item)
     }
 

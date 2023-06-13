@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.ast.symbol.impl.game.situation
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
@@ -13,15 +13,12 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * @Message: Have a good time!  :)
  **/
 object GetPlayer : UniOpSymbol<PlayerInstance, PreActivationSituation>() {
-    init {
-        SymbolRegistry.register(this)
-    }
 
     override fun natualSign(input: INode<PreActivationSituation>): String {
         return "$input.getPlayer()"
     }
 
-    override fun operation(input: PreActivationSituation): PlayerInstance {
+    override fun operation(input: PreActivationSituation, params:Params): PlayerInstance {
         return input.player
     }
 }

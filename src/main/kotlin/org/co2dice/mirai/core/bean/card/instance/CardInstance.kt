@@ -13,7 +13,7 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Time:  2022-12-05-22:58
  * @Message: Have a good time!  :)
  **/
-abstract class CardInstance<E : Effect>(
+sealed class CardInstance<E : Effect>(
     open val entry: CardEntry<*>,
     registry: UniqueIdRegistry
 ) : Agent<E>, DecoratorHolder() {

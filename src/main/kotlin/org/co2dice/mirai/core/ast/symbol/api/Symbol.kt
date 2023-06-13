@@ -1,8 +1,7 @@
 package org.co2dice.mirai.core.ast.symbol.api
 
-import com.google.gson.JsonObject
-import org.co2dice.mirai.core.ast.node.basic.INode
-import kotlin.reflect.KClass
+import kotlinx.serialization.json.JsonObject
+import org.co2dice.mirai.core.ast.node.INode
 
 /**
  *      使用IDEA编写

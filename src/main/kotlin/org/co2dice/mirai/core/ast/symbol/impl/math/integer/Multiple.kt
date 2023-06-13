@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.ast.symbol.impl.math.integer
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
 
 /**
@@ -11,10 +11,7 @@ import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
  * @Message: Have a good time!  :)
  **/
 object Multiple : BiOpSymbol<Int, Int, Int>(){
-    init {
-        SymbolRegistry.register(this)
-    }
-    override fun operation(l: Int, r: Int): Int {
+    override fun operation(l: Int, r: Int, params:Params): Int {
         return l * r
     }
 

@@ -6,7 +6,6 @@ import org.co2dice.mirai.core.bean.effect.EffectTargets
 import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
 import org.co2dice.mirai.core.bean.game.Scene
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
-import org.co2dice.mirai.core.utils.situation.api.SituationApi
 
 /**
  *      使用IDEA编写

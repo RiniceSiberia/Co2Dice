@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.utils
 
-import org.co2dice.mirai.core.ast.AstTree
+import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.utils.situation.Situation
 
 /**
@@ -12,7 +12,7 @@ import org.co2dice.mirai.core.utils.situation.Situation
 object EffectTargetSelectors {
 
     val SELECT_ALL_SCENE_ITEM = AstTree<Set<EffectTarget>>(
-        //查找全场道具的实例，可以有两种搜索模式:序号(使用一个List<Int>搜索,或者使用一个string(卡名/别名)+int(序号)搜索)
+        //查找全场道具的实例，可以有两种搜索模式:序号(使用一个List<Intelligence>搜索,或者使用一个string(卡名/别名)+int(序号)搜索)
         root =
     )
 

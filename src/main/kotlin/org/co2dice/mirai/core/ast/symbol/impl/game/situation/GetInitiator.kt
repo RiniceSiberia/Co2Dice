@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.ast.symbol.impl.game.situation
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
@@ -13,15 +13,12 @@ import org.co2dice.mirai.core.utils.situation.ActivationSituation
  * @Message: Have a good time!  :)
  **/
 object GetInitiator : UniOpSymbol<ChessmanInstance, ActivationSituation>() {
-    init {
-        SymbolRegistry.register(this)
-    }
 
     override fun natualSign(input: INode<ActivationSituation>): String {
         return "$input.getInitiator()"
     }
 
-    override fun operation(input: ActivationSituation): ChessmanInstance {
+    override fun operation(input: ActivationSituation, params:Params): ChessmanInstance {
         return input.initiator!!
     }
 }

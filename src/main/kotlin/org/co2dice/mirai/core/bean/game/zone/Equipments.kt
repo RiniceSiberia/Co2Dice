@@ -1,13 +1,10 @@
 package org.co2dice.mirai.core.bean.game.zone
 
 import org.co2dice.mirai.core.publicEnums.ItemType
-import org.co2dice.mirai.core.bean.api.DependChessman
-import org.co2dice.mirai.core.bean.card.instance.item.ItemCardInstance
-import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
+import org.co2dice.mirai.core.bean.card.instance.ItemCardInstance
 
 //棋子装备栏
-class Equipments(override var chessman: ChessmanInstance?,
-                 private val equipments : MutableMap<ItemType,EquipSlots>) : DependChessman {
+class Equipments(private val equipments : MutableMap<ItemType,EquipSlots> = mutableMapOf())  {
 
     fun equip(instance: ItemCardInstance):Boolean{
         val map = instance.occupy
@@ -17,7 +14,7 @@ class Equipments(override var chessman: ChessmanInstance?,
                 return false
             }
             if (!equipments[key]!!.addEquipment(instance,value)){
-                equipments.values.forEach{ it.remove(instance) }
+                remove(instance)
                 //一个出错就全删，返回false
                 return false
             }
@@ -54,6 +51,16 @@ class Equipments(override var chessman: ChessmanInstance?,
         return set
     }
 
+    fun remove(instance: ItemCardInstance) : Boolean{
+        var b = false
+        equipments.values.forEach {
+            if (it.remove(instance) ){
+                b = true
+            }
+        }
+        return b
+    }
+
     data class EquipSlots(val limit : Int,
                           private val equipments :MutableList<ItemCardInstance> = mutableListOf()){
         fun getEquipments() : Set<ItemCardInstance>{
@@ -64,7 +71,7 @@ class Equipments(override var chessman: ChessmanInstance?,
             return limit - equipments.size
         }
 
-        fun addEquipment(equip : ItemCardInstance,time : Int = 1) : Boolean{
+        fun addEquipment(equip : ItemCardInstance, time : Int = 1) : Boolean{
             var b = true
             for (i in 0 until time){
                 b = add(equip) && b

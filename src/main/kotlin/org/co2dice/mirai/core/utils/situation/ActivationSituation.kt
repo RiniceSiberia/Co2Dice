@@ -15,12 +15,12 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
  **/
 open class ActivationSituation(
     open val input: Map<String, Any>,
-    open val scene: Scene,
-    open val player: PlayerInstance,
+    override val scene: Scene,
+    override val player: PlayerInstance,
     open val agent: Agent<*>,
     open val initiator: ChessmanInstance?,
     open val target: EffectTargets,
     open val effect: EffectEntry<*>,
     open val isActive : Boolean,
-)  {
+)  : SituationApi{
 }

@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.impl.leaf.constant
 
-import com.google.gson.JsonElement
+import kotlinx.serialization.json.JsonElement
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ConstantLeafSymbol
 
@@ -11,11 +11,8 @@ import org.co2dice.mirai.core.ast.symbol.basic.ConstantLeafSymbol
  * @Message: Have a good time!  :)
  **/
 object StringConstant : ConstantLeafSymbol<String>(){
-    init {
-        SymbolRegistry.register(this)
-    }
     override fun wrapper(json: JsonElement): String {
-        return json.asString
+        return json.toString()
     }
 
     override fun natualSign(value: String): String {

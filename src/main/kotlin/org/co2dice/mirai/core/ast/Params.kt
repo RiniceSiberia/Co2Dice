@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.ast
 
+import org.co2dice.mirai.core.utils.situation.SituationApi
 import kotlin.reflect.KClass
 
 /**
@@ -8,9 +9,11 @@ import kotlin.reflect.KClass
  * @Time:  2023-04-06-22:10
  * @Message: 存放参数的类
  **/
-class Params (
-    private val map : MutableMap<String, Any>
+data class Params (
+    val map : MutableMap<String, Any>,
+    val situation : SituationApi,
     ){
+
     //强转param类型
     @SuppressWarnings("unchecked","unsafe")
     @Suppress("UNCHECKED_CAST")
@@ -28,5 +31,10 @@ class Params (
     fun add(key : String, value : Any){
         map[key] = value
     }
+
+    fun remove(key : String) : Any?{
+        return map.remove(key)
+    }
+
 
 }

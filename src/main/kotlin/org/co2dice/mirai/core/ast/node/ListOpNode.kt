@@ -1,10 +1,13 @@
 package org.co2dice.mirai.core.ast.node
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.node.api.ISymbolHolder
-import org.co2dice.mirai.core.ast.node.basic.INode
 import org.co2dice.mirai.core.ast.symbol.basic.ListOpSymbol
 
 /**
@@ -15,29 +18,32 @@ import org.co2dice.mirai.core.ast.symbol.basic.ListOpSymbol
  **/
 class ListOpNode<O : Any,E : Any>(
     override var symbol: ListOpSymbol<O, E>,
-    val children: List<INode<out E>>
+    val children: MutableList<INode<out E>>
     ) : INode<O>, ISymbolHolder<ListOpSymbol<O, E>> {
-    override fun evaluate(params: Params): O {
+    override fun evaluate(params:Params): O {
         return symbol.operation(
-            list = children.map { it.evaluate(params) }
+            list = children.map { it.evaluate(params) },params
         )
     }
 
-    override fun check(params: Params): O {
+    override fun check(params:Params): O {
         return symbol.check(
-            list = children.map { it.check(params) }
+            list = children.map { it.check(params) },params
         )
     }
 
     override fun serialize(): JsonObject {
-        val json = JsonObject()
-        json.addProperty("symbol", symbol::class.java.simpleName)
-        json.add("children", JsonArray().apply {
-            children.forEach {
-                add(it.serialize())
-            }
-        })
-        return json
+//        val json = JsonObject()
+//        json.addProperty("symbol", symbol::class.java.simpleName)
+//        json.add("children", JsonArray().apply {
+//            children.forEach {
+//                add(it.serialize())
+//            }
+//        })
+        return JsonObject(mapOf(
+            "symbol" to Json.encodeToJsonElement(symbol::class.java.simpleName),
+            "children" to JsonArray(children.map { it.serialize() })
+        ))
     }
 
     override fun natualSerialize(): String {
@@ -47,6 +53,18 @@ class ListOpNode<O : Any,E : Any>(
 
     override fun getChild(): List<INode<*>> {
         return children
+    }
+
+    @Deprecated("测试替换节点方法，不知道啥时候会删，谨慎使用")
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> replaceNode(input: INode<T>, output: INode<T>): Boolean {
+        children.forEachIndexed { index, node ->
+            if (node == input) {
+                children[index] = output as INode<out E>
+                return true
+            }
+        }
+        return false
     }
 
 }

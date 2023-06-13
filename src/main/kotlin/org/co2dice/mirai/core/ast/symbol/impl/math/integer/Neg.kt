@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.ast.symbol.impl.math.integer
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 
 /**
@@ -11,10 +11,7 @@ import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
  * @Message: Have a good time!  :)
  **/
 object Neg : UniOpSymbol<Int, Int>(){
-    init {
-        SymbolRegistry.register(this)
-    }
-    override fun operation(item: Int): Int {
+    override fun operation(item: Int, params:Params): Int {
         return -item
     }
 

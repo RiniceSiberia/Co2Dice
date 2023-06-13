@@ -1,8 +1,7 @@
 package org.co2dice.mirai.core.decorator.env.chess.numeric;
 
 import org.co2dice.mirai.core.bean.api.CAO;
-import org.co2dice.mirai.core.bean.attribute.prototype.EliteAttribute;
-import org.co2dice.mirai.core.bean.attribute.prototype.MobAttribute;
+import org.co2dice.mirai.core.bean.attribute.prototype.*;
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance;
 import org.co2dice.mirai.core.decorator.instance.chess.numeric.GetChessNumericValueInstance;
 
@@ -30,25 +29,25 @@ public final class ChessNumericType {
    });
 
    public static final ChessNumericType STR
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.STR));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Strength.INSTANCE));
 
     public static final ChessNumericType CON
-            = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.CON));
+            = new ChessNumericType(e -> e.getAttributeTable().getValue(Constitution.INSTANCE));
 
     public static final ChessNumericType DEX
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.DEX));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Dexterity.INSTANCE));
 
     public static final ChessNumericType WIS
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.WIS));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Wisdom.INSTANCE));
 
    public static final ChessNumericType INT
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.INT));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Intelligence.INSTANCE));
 
    public static final ChessNumericType SAN
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(EliteAttribute.SAN));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Sanity.INSTANCE));
 
    public static final ChessNumericType LOYALTY
-           = new ChessNumericType(e -> e.getAttributeTable().getValue(MobAttribute.LOYALTY));
+           = new ChessNumericType(e -> e.getAttributeTable().getValue(Loyalty.INSTANCE));
 
 
    private final Function<ChessmanInstance, Integer> getter;

@@ -1,10 +1,8 @@
 package org.co2dice.mirai.core.ast
 
-import com.google.gson.JsonObject
-import org.co2dice.mirai.core.ast.node.basic.INode
+import kotlinx.serialization.json.JsonObject
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
-import org.co2dice.mirai.core.ast.symbol.basic.*
-import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
@@ -16,8 +14,9 @@ object SymbolRegistry {
 
     private val symbolFactory = mutableMapOf<String, Symbol<*>>()
 
-    fun <O : Any> deserialize(json:JsonObject):INode<O>{
-        val symbol : Symbol<O> = getSymbol(json.get("symbol").asString)
+
+    fun <O : Any> deserialize(json: JsonObject): INode<O> {
+        val symbol : Symbol<O> = getSymbol(json["symbol"].toString())
         return symbol.deserialize(json)
     }
 
@@ -26,9 +25,9 @@ object SymbolRegistry {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <O : Any>  getSymbol(symbolName: String): Symbol<O> {
+    fun <S : Symbol<O>,O>  getSymbol(symbolName: String): S {
         //唯一的强转
-        return symbolFactory[symbolName] as Symbol<O>
+        return symbolFactory[symbolName] as S
     }
 
 

@@ -1,9 +1,8 @@
 package org.co2dice.mirai.core.bean.dice.diceList
 
 import org.co2dice.mirai.core.bean.dice.DiceResult
-import org.co2dice.mirai.core.bean.dice.single.coc.CoCReRollDice
-import org.co2dice.mirai.core.bean.dice.single.DesignatedDice
-import org.co2dice.mirai.core.bean.dice.single.api.AbstractDice
+import org.co2dice.mirai.core.bean.dice.entry.DesignatedDice
+import org.co2dice.mirai.core.bean.dice.entry.AbstractDice
 import java.util.*
 import java.util.function.Function
 import java.util.stream.Collectors

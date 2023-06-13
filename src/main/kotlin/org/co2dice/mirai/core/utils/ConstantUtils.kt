@@ -38,4 +38,13 @@ object ConstantUtils {
 
     const val INNER_AST_SIGN = "inner_ast"
 
+    const val HAND_LIMIT = 7
+    //手牌上限
+
+    const val CARD_LIMIT_MAX = 40
+
+    const val CARD_LIMIT_MIN = 20
+
+    const val IT = "it"
+
 }

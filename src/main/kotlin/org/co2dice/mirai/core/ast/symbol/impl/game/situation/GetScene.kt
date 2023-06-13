@@ -1,10 +1,10 @@
 package org.co2dice.mirai.core.ast.symbol.impl.game.situation
 
-import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.basic.INode
+import org.co2dice.mirai.core.ast.Params
+import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 import org.co2dice.mirai.core.bean.game.Scene
-import org.co2dice.mirai.core.utils.situation.api.SituationApi
+import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
@@ -13,15 +13,11 @@ import org.co2dice.mirai.core.utils.situation.api.SituationApi
  * @Message: Have a good time!  :)
  **/
 object GetScene : UniOpSymbol<Scene, SituationApi>() {
-    init {
-        SymbolRegistry.register(this)
-    }
-
     override fun natualSign(input: INode<SituationApi>): String {
         return "$input.getScene()"
     }
 
-    override fun operation(input: SituationApi): Scene {
+    override fun operation(input: SituationApi, params:Params): Scene {
         return input.scene
     }
 }

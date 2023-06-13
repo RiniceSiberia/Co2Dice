@@ -2,12 +2,13 @@ package org.co2dice.mirai.core.bean.game.zone
 
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
 import org.co2dice.mirai.core.bean.api.DependPlayer
+import org.co2dice.mirai.core.bean.effect.prototype.Effect
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
-open class StackZoneInstance<C : CardInstance>(
+sealed class StackZoneInstance<C : CardInstance<E>,E : Effect>(
     override var holder: PlayerInstance,
     override val cards: MutableList<C>
-    ) : CardsVessel<C>(),
+    ) : CardsVessel<C,E>(),
     DependPlayer<PlayerInstance> {
     fun addCardToTop(card: C):Boolean{
         //index[cards.size-1]为最上方

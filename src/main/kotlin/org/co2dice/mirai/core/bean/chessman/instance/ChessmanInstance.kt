@@ -2,6 +2,7 @@ package org.co2dice.mirai.core.bean.chessman.instance
 
 import org.co2dice.mirai.core.bean.api.Agent
 import org.co2dice.mirai.core.bean.api.AttributeAPI
+import org.co2dice.mirai.core.bean.attribute.table.AttributeEntryTable
 import org.co2dice.mirai.core.bean.attribute.table.AttributeInstanceTable
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
@@ -35,8 +36,18 @@ abstract class ChessmanInstance(
 
     abstract fun makeDamage(damage: Damage) : Boolean
 
+    fun payAttributeCost(table : AttributeEntryTable) : Boolean{
+        return attributeTable.payCost(table) && survive()
+    }
 
-
+    fun survive() : Boolean{
+        if (attributeTable.survive()){
+            return true
+        }else{
+            disengagement()
+            return false
+        }
+    }
 
 
 }

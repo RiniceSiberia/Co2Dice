@@ -28,7 +28,7 @@ class GameSession (
     //可同时处于会话中的玩家的最大数。 值范围为 2-16。 一旦会话包含的玩家达到最大数，其他加入会话的请求将被拒绝。
 //    var playersCanBeRemovedBy:PlayersRemovedEnum = ,
 //    //谁可以踢掉其他玩家
-//    var titleId:Int = 0,
+//    var titleId:Intelligence = 0,
 //    //游戏会话的标题 ID。 此值对服务器是不透明的。
     var visibility: VisibilityLevelEnum = VisibilityLevelEnum.PRIVATE,
     //能如何访问这个会话

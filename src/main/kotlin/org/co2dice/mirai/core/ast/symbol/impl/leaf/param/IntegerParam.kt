@@ -1,7 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.impl.leaf.param
 
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 import kotlin.reflect.KClass
 
@@ -12,15 +11,12 @@ import kotlin.reflect.KClass
  * @Message: Have a good time!  :)
  **/
 object IntegerParam : ParamLeafSymbol<Int>(){
-    init {
-        SymbolRegistry.register(this)
-    }
 
     override fun natualSign(key: String): String {
         return "$key :: Integer"
     }
 
-    override fun operation(key: String, params: Params): Int {
+    override fun operation(key: String, params:Params): Int {
         return params.get(key)
     }
 

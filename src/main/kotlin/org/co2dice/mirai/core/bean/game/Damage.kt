@@ -1,17 +1,17 @@
 package org.co2dice.mirai.core.bean.game
 
+import org.co2dice.mirai.core.bean.api.Agent
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.attribute.prototype.AttributeAPI
-import org.co2dice.mirai.core.bean.dice.diceList.DiceList
+import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
 
 data class Damage(
-    val damager: CardInstance?,
+    val damager: Agent<*>?,
     //伤害源
-    val target: CardInstance,
+    val target: CardInstance<*>,
     //目标
-    val damage: DiceList,
+    val damage: Int,
     //伤害
-    val damageType: AttributeAPI,
+    val damageType: Attribute,
     //伤害类型
     val sourceType: List<DamageType>) {
     enum class DamageType {

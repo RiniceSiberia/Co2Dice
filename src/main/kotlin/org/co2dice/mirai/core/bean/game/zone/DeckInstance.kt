@@ -1,9 +1,11 @@
 package org.co2dice.mirai.core.bean.game.zone
 
+import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.card.instance.item.ItemCardInstance
-import org.co2dice.mirai.core.bean.card.instance.skill.SkillCardInstance
-import org.co2dice.mirai.core.bean.card.instance.unpublic.UnPublicCardInstance
+import org.co2dice.mirai.core.bean.card.instance.ItemCardInstance
+import org.co2dice.mirai.core.bean.card.instance.ReleaseCardInstance
+import org.co2dice.mirai.core.bean.card.instance.UnPublicCardInstance
+import org.co2dice.mirai.core.bean.effect.prototype.release.ReleaseEffect
 import org.co2dice.mirai.core.bean.game.DeckEntry
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -13,11 +15,12 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * @Author: DUELIST
  * @Time:  2022-12-05-23:03
  * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
+ * 子类是场地卡卡组
  **/
 open class DeckInstance(
     override val cards: MutableList<UnPublicCardInstance>,
     holder: PlayerInstance,
-) : StackZoneInstance<UnPublicCardInstance>(holder,cards) {
+) : StackZoneInstance<UnPublicCardInstance,ReleaseEffect>(holder,cards) {
     //初始化完毕后进行检测，如果卡片不合法则抛出异常，并将错误的卡片筛掉
     init {
         val illegalCards = cards.filter { !typeLegal(it) }
@@ -30,17 +33,29 @@ open class DeckInstance(
     }
     constructor(registry : UniqueIdRegistry,deck : DeckEntry,player: PlayerInstance = deck.holder) : this(
         holder = player,
-        cards = deck.cards.map { UnPublicCardInstance(it,registry,deck.holder) }.toMutableList(),
+        cards = deck.main.map { UnPublicCardInstance(
+            entry = it,
+            registry = registry,
+            holder = deck.holder
+            ) }.toMutableList(),
     )
 
 
+    open fun draw() : UnPublicCardInstance? {
+        //抽卡
+        return cards.removeFirstOrNull()
+    }
 
     open fun countLegal() : Boolean{
         return cards.size in 0..100
     }
 
-    override fun typeLegal(card: CardInstance): Boolean {
-        return card is ItemCardInstance || card is SkillCardInstance
+    override fun typeLegal(card: CardInstance<*>): Boolean {
+        return card is ItemCardInstance || card is ReleaseCardInstance
+    }
+
+    override fun constructInstance(card: CardEntry<*>, registry: UniqueIdRegistry): UnPublicCardInstance {
+        return UnPublicCardInstance(card,registry,holder)
     }
 
     override fun addCard(card: UnPublicCardInstance): Boolean {
