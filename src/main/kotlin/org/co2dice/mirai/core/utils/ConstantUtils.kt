@@ -47,4 +47,8 @@ object ConstantUtils {
 
     const val IT = "it"
 
+    const val DEFINITE_INTEGRAL_SEGMENT = 256
+    //定积分分割时的默认段数
+    //遇到定义域无穷就的用这个/2堵两头
+
 }

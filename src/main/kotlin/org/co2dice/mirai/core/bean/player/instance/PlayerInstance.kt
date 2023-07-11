@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.player.instance
 
+import org.co2dice.mirai.core.bean.api.InstanceStructure
 import org.co2dice.mirai.core.bean.player.enrty.PlayerEntry
 
 /**
@@ -9,10 +10,8 @@ import org.co2dice.mirai.core.bean.player.enrty.PlayerEntry
  * @Message: Have a good time!  :)
  **/
 class PlayerInstance(
-    val entry : PlayerEntry,
-    var resource : Int = 0,
-    //玩家的资源量,相当于货币
-) {
+    override val entry : PlayerEntry,
+) : InstanceStructure<PlayerEntry>{
 
 
 }

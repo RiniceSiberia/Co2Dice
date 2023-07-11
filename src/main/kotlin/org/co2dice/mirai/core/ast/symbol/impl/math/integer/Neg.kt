@@ -15,7 +15,7 @@ object Neg : UniOpSymbol<Int, Int>(){
         return -item
     }
 
-    override fun natualSign(input: INode<Int>): String {
+    override fun natualSign(input: INode<out Int>): String {
         return "-${input.natualSerialize()}"
     }
 }

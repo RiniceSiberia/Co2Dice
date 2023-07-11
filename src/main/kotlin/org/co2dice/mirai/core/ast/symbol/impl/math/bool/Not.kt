@@ -15,7 +15,7 @@ object Not : UniOpSymbol<Boolean, Boolean>(){
         return !item
     }
 
-    override fun natualSign(input: INode<Boolean>): String {
+    override fun natualSign(input: INode<out Boolean>): String {
         return "!${input.natualSerialize()}"
     }
 }

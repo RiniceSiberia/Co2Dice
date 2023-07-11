@@ -15,7 +15,7 @@ object Or : BiOpSymbol<Boolean, Boolean, Boolean>(){
         return l || r
     }
 
-    override fun natualSign(left: INode<Boolean>, right: INode<Boolean>): String {
+    override fun natualSign(left: INode<out Boolean>, right: INode<out Boolean>): String {
         return "(${left.natualSerialize()} || ${right.natualSerialize()})"
     }
 

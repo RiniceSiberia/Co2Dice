@@ -14,7 +14,7 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  **/
 object GetPlayer : UniOpSymbol<PlayerInstance, PreActivationSituation>() {
 
-    override fun natualSign(input: INode<PreActivationSituation>): String {
+    override fun natualSign(input: INode<out PreActivationSituation>): String {
         return "$input.getPlayer()"
     }
 

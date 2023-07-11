@@ -15,7 +15,7 @@ object ListOr : ListOpSymbol<Boolean, Boolean>(){
         return list.joinToString(" || ", "(", ")") { it.natualSerialize() }
     }
 
-    override fun check(list: List<Boolean>, params:Params): Boolean {
+    override fun operation(list: List<Boolean>, params:Params): Boolean {
         return list.any { it }
     }
 

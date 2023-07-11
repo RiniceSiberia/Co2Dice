@@ -1,20 +1,20 @@
 package org.co2dice.mirai.core.bean.card.prototype
 
 import org.co2dice.mirai.core.bean.api.CAO
-import org.co2dice.mirai.core.bean.effect.prototype.Effect
+import org.co2dice.mirai.core.bean.category.CategoryPack
+import org.co2dice.mirai.core.bean.effect.triggered_ability.prototype.TriggeredAbility
 import java.util.*
 
 class SkillCard(
-    cardId : UUID,
+    uuid : UUID,
     cardRealName : String,
-    types : Set<String>,
-    effects : List<Effect> = mutableListOf(),
+    types : CategoryPack,
+    val triggeredAbilities :List<TriggeredAbility>,
     override val chaos : Int,
     override val order : Int,
     ) : Card(
-    cardId = cardId,
+    uuid = uuid,
     cardRealName = cardRealName,
-    effects = effects,
     types = types
 ), CAO {
 

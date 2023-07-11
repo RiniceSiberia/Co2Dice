@@ -1,7 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.impl.leaf.constant
 
 import kotlinx.serialization.json.JsonElement
-import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.symbol.basic.ConstantLeafSymbol
 
 /**

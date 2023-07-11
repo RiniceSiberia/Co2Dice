@@ -3,7 +3,7 @@ package org.co2dice.mirai.core.ast.symbol.impl.game.situation
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
-import org.co2dice.mirai.core.bean.game.Scene
+import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
@@ -13,7 +13,7 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
  * @Message: Have a good time!  :)
  **/
 object GetScene : UniOpSymbol<Scene, SituationApi>() {
-    override fun natualSign(input: INode<SituationApi>): String {
+    override fun natualSign(input: INode<out SituationApi>): String {
         return "$input.getScene()"
     }
 

@@ -14,19 +14,19 @@ import java.util.function.Function;
  * @Message: Have a good time!  :)
  **/
 public final class CardStringType {
-    public static final CardStringType NAME = new CardStringType(e -> e.getEntry().getCard().getCardRealName());
+    public static final CardStringType NAME = new CardStringType(e -> e.getEntry().getPrototype().getCardRealName());
 
     public static final CardStringType ALIAS = new CardStringType(e -> e.getEntry().getCardAlias());
 
-    public static final CardStringType TYPES = new CardStringType(e -> StringUtils.join(e.getEntry().getCard().getTypes(), "|" ));
+    public static final CardStringType TYPES = new CardStringType(e -> StringUtils.join(e.getEntry().getPrototype().getTypes(), "|" ));
 
-    private final Function<CardInstance<?>, String> getter;
+    private final Function<CardInstance, String> getter;
 
-    private CardStringType(Function<CardInstance<?>, String> getter) {
+    private CardStringType(Function<CardInstance, String> getter) {
         this.getter = getter;
     }
 
-    public GetCardStringValueInstance getValue(CardInstance<?> target) {
+    public GetCardStringValueInstance getValue(CardInstance target) {
         return new GetCardStringValueInstance(getter.apply(target));
     }
 }

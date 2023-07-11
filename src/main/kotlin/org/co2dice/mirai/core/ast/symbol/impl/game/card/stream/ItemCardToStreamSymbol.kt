@@ -11,7 +11,7 @@ import org.co2dice.mirai.core.bean.card.instance.ItemCardInstance
  * @Message: 输入一个list和一个处理list的函数，返回经过函数处理的list
  **/
 object ItemCardToStreamSymbol : ToStreamApi<ItemCardInstance>() {
-    override fun natualSign(input: INode<Collection<ItemCardInstance>>): String {
+    override fun natualSign(input: INode<out Collection<ItemCardInstance>>): String {
         return "(${input.natualSerialize()}.ItemCardToStream())"
     }
 }

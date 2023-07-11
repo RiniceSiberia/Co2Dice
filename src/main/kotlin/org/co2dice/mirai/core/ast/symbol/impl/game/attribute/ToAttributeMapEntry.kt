@@ -13,8 +13,8 @@ import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
  **/
 object ToAttributeMapEntry : BiOpSymbol<Pair<Attribute, Int>,Attribute,Int>() {
 
-    override fun natualSign(left: INode<Attribute>, right: INode<Int>): String {
-        return "Map.Entry<Attribute,Intelligence>(${left.natualSerialize()},${right.natualSerialize()})"
+    override fun natualSign(left: INode<out Attribute>, right: INode<out Int>): String {
+        return "Map.EntryStructure<Attribute,Intelligence>(${left.natualSerialize()},${right.natualSerialize()})"
     }
 
     override fun operation(l: Attribute, r: Int, params: Params): Pair<Attribute, Int> {

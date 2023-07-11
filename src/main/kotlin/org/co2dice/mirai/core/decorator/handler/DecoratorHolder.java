@@ -20,6 +20,7 @@ public abstract class DecoratorHolder {
 	 */
 	@SuppressWarnings("unchecked")
 	public <D extends Decorator<D, C, V>,
+			//
 			C extends Record & DecoratorContext<C>,
 			V extends Record & DecoratorValueInstance<V>>
     DecoratorHandler<D, C, V> getHandler(DecoratorToken<D, C, V> token) {
@@ -34,6 +35,10 @@ public abstract class DecoratorHolder {
 	 */
 	public void addDecorator(DecoratorModifier<?, ?, ?> decorator) {
 		list.add(decorator);
+	}
+
+	public void removeDecorator(DecoratorModifier<?, ?, ?> decorator) {
+		list.remove(decorator);
 	}
 
 	/**

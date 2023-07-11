@@ -14,13 +14,13 @@ import java.util.stream.Stream
  * @Time:  2023-05-21-19:18
  * @Message: 抓取场上属性相同的道具实体stream处理
  **/
-object AnyItemCardStream : StreamSymbolApi<Boolean, ItemCardInstance,Boolean>() {
+object AnyItemCardStream : StreamSymbolApi<Boolean, ItemCardInstance>() {
 
-    override fun natualSign(left: INode<Stream<ItemCardInstance>>, right: INode<AstTree<Boolean>>): String {
-        return "(${left.natualSerialize()}.AnyItemCardStream(${right.natualSerialize()}))"
+    override fun natualSign(left: INode<out Stream<ItemCardInstance>>, right: INode<out AstTree>): String {
+        return "(${left.natualSerialize()}.anyItemCardStream(${right.natualSerialize()}))"
     }
 
-    override fun operation(l: Stream<ItemCardInstance>, r: AstTree<Boolean>, params:Params): Boolean {
+    override fun operation(l: Stream<ItemCardInstance>, r: AstTree, params:Params): Boolean {
         val newParams = Params(params.map,params.situation)
         return l.anyMatch {
             newParams.add(IT,it)

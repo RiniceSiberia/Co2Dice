@@ -11,7 +11,7 @@ public class SerializeUtils {
         List<String> list = new ArrayList<>();
             String[] ids = str.split(regex);
             for (String id : ids) {
-                if (id != null && !id.equals("")) {
+                if (id != null && !"".equals(id)) {
                     list.add(id);
                 }
             }

@@ -17,7 +17,7 @@ object DesignatedDiceSymbol : UniOpSymbol<DesignatedDice, Int>() {
         return DesignatedDice(item)
     }
 
-    override fun natualSign(input: INode<Int>): String {
+    override fun natualSign(input: INode<out Int>): String {
         return input.natualSerialize()
     }
 }

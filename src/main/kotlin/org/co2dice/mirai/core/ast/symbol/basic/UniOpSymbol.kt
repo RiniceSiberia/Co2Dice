@@ -19,7 +19,7 @@ abstract class UniOpSymbol<O : Any,I : Any> : Symbol<O> {
     init {
         SymbolRegistry.register(this)
     }
-    abstract fun natualSign(input : INode<I>) : String
+    abstract fun natualSign(input : INode<out I>) : String
     abstract fun operation(input: I, params:Params): O
 
     open fun check(input: I, params:Params) : O{

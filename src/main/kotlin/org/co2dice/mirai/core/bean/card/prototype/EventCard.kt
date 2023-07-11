@@ -1,17 +1,17 @@
 package org.co2dice.mirai.core.bean.card.prototype
 
-import org.co2dice.mirai.core.bean.effect.prototype.Effect
+import org.co2dice.mirai.core.bean.category.CategoryPack
+import org.co2dice.mirai.core.bean.effect.triggered_ability.prototype.TriggeredAbility
 import java.util.*
 
 class EventCard(
-    cardId : UUID,
+    uuid : UUID,
     cardRealName : String,
-    types : Set<String>,
-    effects : List<Effect> = mutableListOf()
-) : Card(
-    cardId = cardId,
+    types : CategoryPack,
+    val triggeredAbilities :List<TriggeredAbility>
+    ) : Card(
+    uuid = uuid,
     cardRealName = cardRealName,
-    effects = effects,
     types = types
 ){
 }

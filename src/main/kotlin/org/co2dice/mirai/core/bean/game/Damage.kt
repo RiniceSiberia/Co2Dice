@@ -1,11 +1,12 @@
 package org.co2dice.mirai.core.bean.game
 
-import org.co2dice.mirai.core.bean.api.Agent
+import org.co2dice.mirai.core.bean.api.agent.ActivatedAgent
+import org.co2dice.mirai.core.bean.api.agent.Agent
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
 import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
 
 data class Damage(
-    val damager: Agent<*>?,
+    val damageSource: Agent,
     //伤害源
     val target: CardInstance<*>,
     //目标

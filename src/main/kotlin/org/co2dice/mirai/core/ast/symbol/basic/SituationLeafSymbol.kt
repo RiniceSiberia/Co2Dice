@@ -1,7 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.basic
 
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
 import org.co2dice.mirai.core.ast.node.SituationLeafNode

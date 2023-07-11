@@ -17,7 +17,7 @@ object FairDiceSymbol : UniOpSymbol<FairDice,Int>() {
         return FairDice(item)
     }
 
-    override fun natualSign(input: INode<Int>): String {
+    override fun natualSign(input: INode<out Int>): String {
         return "D${input.natualSerialize()}"
     }
 }

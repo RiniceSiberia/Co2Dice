@@ -1,8 +1,6 @@
 package org.co2dice.mirai.core.ast.symbol.basic.sub
 
-import kotlinx.serialization.json.JsonObject
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.ast.node.ConsumerNode
 import org.co2dice.mirai.core.ast.symbol.basic.ConsumerSymbol
 import org.co2dice.mirai.core.ast.tree.AstTree
 

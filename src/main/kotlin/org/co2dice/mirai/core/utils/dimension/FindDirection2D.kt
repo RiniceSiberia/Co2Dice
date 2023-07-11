@@ -2,8 +2,6 @@ package org.co2dice.mirai.core.utils
 
 import org.co2dice.mirai.core.utils.dimension.Coordinate2D
 import org.co2dice.mirai.core.utils.dimension.Direction2D
-import org.co2dice.mirai.core.utils.dimension.Hexagon
-import org.co2dice.mirai.core.utils.dimension.Square
 
 /**
  *      使用IDEA编写

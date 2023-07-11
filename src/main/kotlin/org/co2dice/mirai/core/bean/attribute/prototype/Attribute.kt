@@ -29,7 +29,6 @@ object Dexterity : Attribute("dex")
 object Wisdom : Attribute("wis")
 object Intelligence : Attribute("int")
 object Sanity : Attribute("san")
-object Loyalty : Attribute("loyalty")
 
 object AttributeSerializer : KSerializer<Attribute> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Attribute", PrimitiveKind.STRING)

@@ -1,10 +1,5 @@
 package org.co2dice.mirai.core.ast.symbol.basic
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 import org.co2dice.mirai.core.ast.Params
@@ -26,7 +21,7 @@ abstract class BiOpSymbol<O : Any,L : Any,R : Any> : Symbol<O> {
         SymbolRegistry.register(this)
     }
 
-    abstract fun natualSign(left : INode<L>, right : INode<R>) : String
+    abstract fun natualSign(left : INode<out L>, right : INode<out R>) : String
 
     override fun deserialize(json: JsonObject): BiOpNode<O, L, R> {
         val nodeA: INode<L> = json["left"]?.let { SymbolRegistry.deserialize(it.jsonObject) }!!

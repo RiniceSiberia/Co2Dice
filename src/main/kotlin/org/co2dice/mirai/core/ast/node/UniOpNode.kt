@@ -1,7 +1,5 @@
 package org.co2dice.mirai.core.ast.node
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.encodeToJsonElement
@@ -17,7 +15,7 @@ import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
  **/
 class UniOpNode<O : Any,I : Any>(
     override var symbol: UniOpSymbol<O, I>,
-    var child: INode<I>
+    var child: INode<out I>
     ) : INode<O>, ISymbolHolder<UniOpSymbol<O, I>> {
     override fun evaluate(params:Params): O {
         return symbol.operation(child.evaluate(params),params)

@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.utils.situation
 
-import org.co2dice.mirai.core.bean.game.Scene
+import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**

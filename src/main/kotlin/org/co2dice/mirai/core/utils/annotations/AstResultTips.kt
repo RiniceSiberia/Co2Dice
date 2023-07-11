@@ -1,7 +1,5 @@
 package org.co2dice.mirai.core.utils.annotations
 
-import kotlin.reflect.KClass
-
 /**
  *      使用IDEA编写
  * @Author: DUELIST

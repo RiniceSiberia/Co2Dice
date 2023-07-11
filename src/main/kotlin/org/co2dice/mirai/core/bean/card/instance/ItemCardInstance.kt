@@ -4,10 +4,14 @@ import org.co2dice.mirai.core.bean.api.CAO
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.prototype.ItemCard
-import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
-import org.co2dice.mirai.core.bean.effect.instance.EffectInstance
-import org.co2dice.mirai.core.bean.effect.instance.field.FieldEffectInstance
-import org.co2dice.mirai.core.bean.effect.prototype.field.FieldEffect
+import org.co2dice.mirai.core.bean.effect.activated_ability.entry.toInstance
+import org.co2dice.mirai.core.bean.effect.activated_ability.instance.FieldActivatedAbilityInstance
+import org.co2dice.mirai.core.bean.effect.static_ability.entry.toInstance
+import org.co2dice.mirai.core.bean.effect.static_ability.instance.FieldStaticAbilityInstance
+import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.toInstance
+import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.EnterFieldTriggeredAbilityInstance
+import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.LeavingFieldTriggeredAbilityInstance
+import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.OnFieldTriggeredAbilityInstance
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.publicEnums.ItemType
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -23,28 +27,38 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
   * @log /
   */
 class ItemCardInstance(
-    entry: CardEntry<*>,
+    entry: CardEntry,
     registry : UniqueIdRegistry,
-    override var holder: PlayerInstance? = null,
-    val occupy : MutableMap<ItemType,Int>
-    = if (entry.card is ItemCard) entry.card.occupy.toMutableMap() else mutableMapOf(),
+    override var holder: PlayerInstance,
+    val occupy : MutableMap<ItemType,Int> = if (entry.prototype is ItemCard) entry.prototype.occupy.toMutableMap() else mutableMapOf(),
     //占用槽，默认值为，如果entry里的卡是装备卡，就读取其占用的装备栏，否则就留空
-    entryRound : Int,
-    override var effects: EffectInstance<FieldEffect>
-    = FieldEffectInstance( entry.effectEntry.filterIsInstance<EffectEntry<FieldEffect>>())
-) : PermanentCardInstance(entry,registry,entryRound),DependPlayer<PlayerInstance?>,CAO {
+    entryRound : Int = 0,
+    override var activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
+    override val staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
+    override val enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
+    = entry.triggeredAbilityEntries.toInstance(),
+    override val leavingFieldTriggeredAbilities: List<LeavingFieldTriggeredAbilityInstance>
+    = entry.triggeredAbilityEntries.toInstance(),
+    override val onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
+    = entry.triggeredAbilityEntries.toInstance(),
+    ) : PermanentCardInstance(entry,registry,entryRound),DependPlayer {
+        init {
+            enterFieldTriggeredAbilities.forEach {
+                //进程效果逐条触发
+            }
+        }
     override val chaos: Int?
         get(){
-            return if (entry.card is CAO){
-                (entry.card as CAO).chaos
+            return if (entry.prototype is CAO){
+                (entry.prototype as CAO).chaos
             }else{
                 null
             }
         }
     override val order: Int?
         get(){
-            return if (entry.card is CAO){
-                (entry.card as CAO).order
+            return if (entry.prototype is CAO){
+                (entry.prototype as CAO).order
             }else{
                 null
             }

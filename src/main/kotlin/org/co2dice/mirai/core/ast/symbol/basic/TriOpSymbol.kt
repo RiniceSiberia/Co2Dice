@@ -4,8 +4,8 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.TriOpNode
 import org.co2dice.mirai.core.ast.node.INode
+import org.co2dice.mirai.core.ast.node.TriOpNode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
@@ -20,7 +20,7 @@ abstract class TriOpSymbol<O : Any,F : Any,S : Any,T : Any> : Symbol<O> {
         SymbolRegistry.register(this)
     }
 
-    abstract fun natualSign(first : INode<F>, second : INode<S>, third : INode<T>) : String
+    abstract fun natualSign(first : INode<out F>, second : INode<out S>, third : INode<out T>) : String
 
     abstract fun operation(f: F, s: S, t: T, params:Params): O
 

@@ -14,7 +14,7 @@ import org.co2dice.mirai.core.utils.situation.ActivationSituation
  **/
 object GetInitiator : UniOpSymbol<ChessmanInstance, ActivationSituation>() {
 
-    override fun natualSign(input: INode<ActivationSituation>): String {
+    override fun natualSign(input: INode<out ActivationSituation>): String {
         return "$input.getInitiator()"
     }
 

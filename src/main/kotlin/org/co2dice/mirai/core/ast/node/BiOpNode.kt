@@ -1,6 +1,5 @@
 package org.co2dice.mirai.core.ast.node
 
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.encodeToJsonElement
@@ -16,8 +15,8 @@ import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
  **/
 class BiOpNode<O : Any,L : Any,R : Any>(
     override var symbol: BiOpSymbol<O, L, R>,
-    var left: INode<L>,
-    var right: INode<R>
+    var left: INode<out L>,
+    var right: INode<out R>
 ) : INode<O>, ISymbolHolder<BiOpSymbol<O, L, R>> {
     override fun evaluate(params:Params): O {
         val l = left.evaluate(params)

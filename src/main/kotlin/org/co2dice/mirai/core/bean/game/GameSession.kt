@@ -1,8 +1,9 @@
 package org.co2dice.mirai.core.bean.game
 
 
-import org.co2dice.mirai.core.bean.game.zone.ZoneInstanceSet
+import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
+import org.co2dice.mirai.core.bean.player.prototype.Player
 import java.util.*
 
 /**
@@ -55,30 +56,14 @@ class GameSession (
     //新建一场战斗，需要：
     //1：初始的玩家，玩家的数量不能小于1
     //2：每个玩家的卡组和场地卡组和棋子
-    fun addBattle(map:MutableMap<PlayerInstance, ZoneInstanceSet>):Boolean{
-        //使用一些map来创建一个Sence
-        //1:判定该角色是否是本会话中的角色
-        map.keys.forEach{
-            if (it !in rosters){
-                return false
-            }
-        }
-        //2:如果是本绘画的角色，判定该角色是否在其他场景里
-        //现在,一个player只能在一个场景里,所以这里不需要判定角色的chessman了
-        map.keys.forEach{
-            if (it in sceneList.map {i -> i.zones.keys }.flatten()){
-                return false
-            }
-        }
-        //新建一个场景
-        val battle = Battle(map)
-        return sceneList.add(battle)
-    }
 
-    fun getPlayerScene(player: PlayerInstance):Scene?{
+
+    fun getPlayerScene(player: Player): Scene?{
         //获取玩家所在的场景
         return sceneList.stream()
-            .filter { player in it.zones.keys }
+            .filter { scene ->
+                player in scene.desks
+                    .map { it.holder.entry.prototype } }
             .findFirst().orElse(null)
     }
 

@@ -3,7 +3,7 @@ package org.co2dice.mirai.core.ast.symbol.impl.game.situation
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.node.INode
 import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
-import org.co2dice.mirai.core.bean.effect.EffectTargets
+import org.co2dice.mirai.core.bean.activated.EffectTargets
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
 
 /**
@@ -14,7 +14,7 @@ import org.co2dice.mirai.core.utils.situation.ActivationSituation
  **/
 object GetTargets : UniOpSymbol<EffectTargets, ActivationSituation>() {
 
-    override fun natualSign(input: INode<ActivationSituation>): String {
+    override fun natualSign(input: INode<out ActivationSituation>): String {
         return "$input.getTargets()"
     }
 

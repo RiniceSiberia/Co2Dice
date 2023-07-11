@@ -1,10 +1,10 @@
 package org.co2dice.mirai.core.utils.situation
 
-import org.co2dice.mirai.core.bean.api.Agent
+import org.co2dice.mirai.core.bean.api.agent.ActivatedAgent
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
-import org.co2dice.mirai.core.bean.effect.EffectTargets
-import org.co2dice.mirai.core.bean.effect.entry.EffectEntry
-import org.co2dice.mirai.core.bean.game.Scene
+import org.co2dice.mirai.core.bean.activated.EffectTargets
+import org.co2dice.mirai.core.bean.activated.entry.EffectEntry
+import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**
@@ -17,10 +17,10 @@ data class ResolutionSituation(
     override val input: Map<String, Any>,
     override val scene: Scene,
     override val player: PlayerInstance,
-    override val agent: Agent<*>,
+    override val activatedAgent: ActivatedAgent<*>,
     override val initiator: ChessmanInstance?,
     override val target: EffectTargets,
     override val effect: EffectEntry<*>,
     override val isActive : Boolean
-) : ActivationSituation(input, scene, player, agent, initiator, target, effect, isActive) {
+) : ActivationSituation(input, scene, player, activatedAgent, initiator, target, effect, isActive) {
 }

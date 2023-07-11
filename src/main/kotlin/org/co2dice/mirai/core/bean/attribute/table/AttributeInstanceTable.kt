@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.bean.attribute.table
 
 import org.co2dice.mirai.core.bean.attribute.prototype.*
-import org.co2dice.mirai.core.bean.dice.entry.IntSampleSpace
+import org.co2dice.mirai.core.bean.dice.entry.DispersedSpace
 import org.co2dice.mirai.core.bean.dice.instance.ListDices.tripleD6
 
 /**
@@ -33,12 +33,13 @@ class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
         }
         //精英怪的构造器，不填或负数属性代表没有这个属性
 
-        fun createElite(str: List<IntSampleSpace> = tripleD6,
-                        con: List<IntSampleSpace> = tripleD6,
-                        dex: List<IntSampleSpace> = tripleD6,
-                        wis: List<IntSampleSpace> = tripleD6,
-                        int: List<IntSampleSpace> = tripleD6,
-                        san: List<IntSampleSpace> = tripleD6): AttributeInstanceTable {
+        fun createElite(
+            str: List<DispersedSpace<Int>> = tripleD6,
+            con: List<DispersedSpace<Int>> = tripleD6,
+            dex: List<DispersedSpace<Int>> = tripleD6,
+            wis: List<DispersedSpace<Int>> = tripleD6,
+            int: List<DispersedSpace<Int>> = tripleD6,
+            san: List<DispersedSpace<Int>> = tripleD6): AttributeInstanceTable {
             return createElite(
                 str.stream().mapToInt { it.roll() }.sum(),
                 con.stream().mapToInt { it.roll() }.sum(),
@@ -49,10 +50,6 @@ class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
             )
         }
         //现roll的构造器
-
-        fun createMob(loyalty:Int) : AttributeInstanceTable {
-            return AttributeInstanceTable(mapOf(Loyalty to ValueInstance(loyalty,loyalty)))
-        }
     }
 
     fun survive() : Boolean{
@@ -63,11 +60,11 @@ class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
         return findAttribute(attribute) != null
     }
 
-    fun allContain(table: AttributeEntryTable) : Boolean{
+    fun allContain(table: AttributeTable) : Boolean{
         return table.getAttributes().all{ this.contain(it) }
     }
 
-    fun canPayToCost(table: AttributeEntryTable) : Boolean{
+    fun canPayToCost(table: AttributeTable) : Boolean{
         table.getAttributes().forEach{
             if (this.contain(it)){
                 //如果本实体包括这个元素就对比，如果table里的值大于本方法就false
@@ -82,7 +79,7 @@ class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
         return true
     }
 
-    fun payCost(table: AttributeEntryTable) : Boolean {
+    fun payCost(table: AttributeTable) : Boolean {
         //需要原子化操作
         return if (!allContain(table)){
             false

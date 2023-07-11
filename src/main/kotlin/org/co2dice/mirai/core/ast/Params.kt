@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
  * @Message: 存放参数的类
  **/
 data class Params (
-    val map : MutableMap<String, Any>,
+    val map : MutableMap<String, Any> = mutableMapOf(),
     val situation : SituationApi,
     ){
 

@@ -9,7 +9,7 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
  * @Time:  2022-12-11-18:11
  * @Message: Have a good time!  :)
  **/
-interface DependPlayer <T : PlayerInstance?>{
-    var holder: T
+interface DependPlayer {
+    var holder: PlayerInstance
     //持有者可为空
 }

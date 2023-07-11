@@ -7,18 +7,15 @@ package org.co2dice.mirai.core.bean.attribute.prototype
  * @Message: Have a good time!  :)
  **/
 object AttributeRegistry {
-    val eliteAttribute : List<Attribute> = listOf(
+    fun eliteAttribute() : List<Attribute> = listOf(
         Strength,Constitution,Dexterity,Wisdom,Intelligence,Sanity
-    )
-
-    val mobAttribute : List<Attribute> = listOf(
-        Loyalty
     )
 
     val customAttribute : List<Attribute> = mutableListOf()
     //自定义属性
 
     fun getAttribute(name : String) : Attribute?{
-        return eliteAttribute.find { it.nameStr == name } ?: mobAttribute.find { it.nameStr == name }
+        return eliteAttribute().find { it.nameStr == name }
+            ?: customAttribute.find { it.nameStr == name }
     }
 }

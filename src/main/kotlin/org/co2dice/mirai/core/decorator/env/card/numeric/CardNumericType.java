@@ -31,13 +31,13 @@ public final class CardNumericType {
 		}
 	});
 
-	private final Function<CardInstance<?>, Integer> getter;
+	private final Function<CardInstance, Integer> getter;
 
-	private CardNumericType(Function<CardInstance<?>, Integer> getter) {
+	private CardNumericType(Function<CardInstance, Integer> getter) {
 		this.getter = getter;
 	}
 
-	public GetCardNumericValueInstance getValue(CardInstance<?> target) {
+	public GetCardNumericValueInstance getValue(CardInstance target) {
 		return new GetCardNumericValueInstance(getter.apply(target));
 	}
 }

@@ -37,14 +37,16 @@ dependencies {
     val junitVersion = "5.9.1"
     val dataFixerUpperVersion = "4.1.27"
     val log4jVersion = "2.19.0"
-    val kolinSerializationVersion = "1.5.1"
+    val kotlinSerializationVersion = "1.5.1"
     val luajVersion = "3.0.1"
+    val apacheCommonsStatistics = "1.0"
     api("net.mamoe:mirai-console-terminal:${miraiVersion}") // 自行替换版本
     api("net.mamoe:mirai-core:${miraiVersion}")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${kolinSerializationVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlinSerializationVersion}")
     implementation("org.apache.logging.log4j:log4j-api:${log4jVersion}")
     implementation("com.theokanning.openai-gpt3-java:api:${openGpt3Version}")
+    implementation("org.apache.commons:commons-statistics-distribution:${apacheCommonsStatistics}")
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("com.mojang:datafixerupper:${dataFixerUpperVersion}")
