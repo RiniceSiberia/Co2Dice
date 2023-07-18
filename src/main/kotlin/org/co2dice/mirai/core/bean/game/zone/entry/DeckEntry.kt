@@ -11,9 +11,9 @@ import org.co2dice.mirai.core.utils.ConstantUtils.CARD_LIMIT_MIN
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-18-23:27
- * @Message: 卡组实体,游戏外的存储数据
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-18-23:27
+ * {@code @Message:} 卡组实体,游戏外的存储数据
  **/
 class DeckEntry(
     val holder : PlayerEntry,
@@ -37,5 +37,4 @@ class DeckEntry(
         //检查卡组构建完成了没
         return main.size in CARD_LIMIT_MIN..CARD_LIMIT_MAX
     }
-
 }

@@ -8,7 +8,6 @@ import org.co2dice.mirai.core.bean.card.prototype.Card
 import org.co2dice.mirai.core.bean.card.prototype.ItemCard
 import org.co2dice.mirai.core.bean.card.prototype.SkillCard
 import org.co2dice.mirai.core.bean.card.prototype.VenueCard
-import org.co2dice.mirai.core.bean.card.prototype.api.PermanentPrototypeApi
 import org.co2dice.mirai.core.bean.effect.activated_ability.entry.ActivatedAbilityEntry
 import org.co2dice.mirai.core.bean.effect.static_ability.entry.StaticAbilityEntry
 import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbilityEntry
@@ -16,17 +15,17 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import java.util.*
 
 class CardEntry(
-    override val uuid: UUID,
+    override val uuid: UUID = UUID.randomUUID(),
     override val prototype: Card,
     val cardAlias: String = prototype.cardRealName,
-    val flavorText : String,
-    val imgUrl : String,
+    val flavorText : String = "",
+    val imgUrl : String = "",
     val activatedAbilityEntries : List<ActivatedAbilityEntry>
-    = prototype.activatedAbilities.stream(). map { ActivatedAbilityEntry(it,1)}.toList(),
+    = prototype.activatedAbilities.stream(). map { ActivatedAbilityEntry(prototype = it)}.toList(),
     val staticAbilityEntries : List<StaticAbilityEntry>
-    = if (prototype is PermanentPrototypeApi) prototype.staticAbilities.stream(). map { StaticAbilityEntry(it, 1) }.toList() else listOf(),
+    = prototype.staticAbilities.stream(). map { StaticAbilityEntry(prototype = it) }.toList(),
     val triggeredAbilityEntries : List<TriggeredAbilityEntry>
-    = if (prototype is PermanentPrototypeApi) prototype.triggeredAbilities.stream().map { TriggeredAbilityEntry(it , 1) }.toList() else listOf(),
+    = prototype.triggeredAbilities.stream().map { TriggeredAbilityEntry(prototype = it) }.toList(),
 ) : EntryStructure<Card>{
 
     fun initializeDeckInstance(holder : PlayerInstance) : MainDeckUnPublicCardInstance? {

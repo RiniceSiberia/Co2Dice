@@ -7,9 +7,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-20:53
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-20:53
+ * {@code @Message:} Have a good time!  :)
  **/
 object PlayerParam : ParamLeafSymbol<PlayerInstance>() {
     override fun natualSign(key: String): String {

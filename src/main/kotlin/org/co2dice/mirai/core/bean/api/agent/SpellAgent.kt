@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.EnterFieldT
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-09-16:58
- * @Message: 发动效果的代理
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-09-16:58
+ * {@code @Message:} 发动效果的代理
  **/
 interface SpellAgent {
     val spellAbilities : List<EnterFieldTriggeredAbilityInstance>

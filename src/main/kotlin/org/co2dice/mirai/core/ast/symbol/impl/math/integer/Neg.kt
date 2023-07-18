@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-18:54
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-18:54
+ * {@code @Message:} Have a good time!  :)
  **/
 object Neg : UniOpSymbol<Int, Int>(){
     override fun operation(item: Int, params:Params): Int {

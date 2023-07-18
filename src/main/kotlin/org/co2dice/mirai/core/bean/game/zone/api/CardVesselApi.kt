@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.card.instance.CardInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-15-0:14
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-15-0:14
+ * {@code @Message:} Have a good time!  :)
  **/
 interface CardVesselApi<C : CardInstance> {
     fun checkCard(function: (C) -> Boolean):Boolean

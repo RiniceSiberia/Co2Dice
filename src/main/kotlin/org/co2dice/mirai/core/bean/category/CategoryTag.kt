@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.bean.category
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-08-21:30
- * @Message: 物品/棋子的分类词条
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-08-21:30
+ * {@code @Message:} 物品/棋子的分类词条
  **/
 class CategoryTag(
     val name : String,

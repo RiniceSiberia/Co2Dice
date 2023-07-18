@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-24-22:58
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-24-22:58
+ * {@code @Message:} Have a good time!  :)
  **/
 abstract class TriOpSymbol<O : Any,F : Any,S : Any,T : Any> : Symbol<O> {
 

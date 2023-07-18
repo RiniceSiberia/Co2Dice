@@ -5,12 +5,11 @@ import kotlin.streams.toList
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-13-23:51
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-13-23:51
+ * {@code @Message:} Have a good time!  :)
  **/
-class DiceListExpectant (
-    ){
+object DiceListExpectant{
     /*
     * 所有可能性的穷举，value是该可能性的出现次数
      */
@@ -31,7 +30,9 @@ class DiceListExpectant (
         //现在获得了所有的结果
         return possibilityMap.toMap()
     }
-/**
+
+
+    /**
  *
  * 算特定几种情况的概率
  **/
@@ -84,10 +85,20 @@ class DiceListExpectant (
         possibilityMap : MutableMap<K,Int>,
         now : MutableList<Int>,
         limit: List<Int>){
+        return calculate(toKey,spaces.map { it.toList() },possibilityMap,now,limit)
+    }
+
+
+    private fun <T: Any,K : Any>calculate(
+        toKey : (List<T>) -> K,
+        spaces : List<List<T>>,
+        possibilityMap : MutableMap<K,Int>,
+        now : MutableList<Int>,
+        limit: List<Int>){
         //首先提取每个spaces中下标和和now一致的元素,然后组成list
         var index = 0
         val thisResult : List<T> = spaces.stream().map {
-            it.toList()[now[index]].also { index++ }
+            it[now[index]].also { index++ }
         }.toList()
         val key = toKey(thisResult)
         if (possibilityMap[key] == null){

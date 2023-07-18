@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.bean.effect.activated_ability.entry.ActivatedAbili
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-27-22:44
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-27-22:44
+ * {@code @Message:} Have a good time!  :)
  **/
 class GyActivatedAbilityInstance(
     entry : ActivatedAbilityEntry,

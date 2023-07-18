@@ -5,9 +5,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-02-18:18
- * @Message: 专属于棋子的静止式效果
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-02-18:18
+ * {@code @Message:} 专属于棋子的静止式效果
  **/
 class DiceSlotStaticAbility(
     override val uuid: UUID,

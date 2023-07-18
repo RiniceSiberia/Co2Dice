@@ -2,13 +2,14 @@ package org.co2dice.mirai.core.bean.effect.activated_ability.prototype
 
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.effect.module.cost.CostPackage
+import org.co2dice.mirai.core.bean.effect.module.target.TargetSelectorPackage
 import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2022-12-06-21:30
- * @Message: 主动技能，只能在自己的回合使用。
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2022-12-06-21:30
+ * {@code @Message:} 主动技能，只能在自己的回合使用。
  * 一个主动技能需要以下东西:
  * 输入的传参的格式检查器
  * 需要指定的目标，传参是通过typeCheck的出来的Map
@@ -21,7 +22,7 @@ import java.util.*
 class FieldActivatedAbility(
     override val uuid: UUID,
 
-    override val targetFunction : AstTree,
+    override val target : TargetSelectorPackage,
     //需要指定的目标，一个通过typeCheck验证过的输入参数，经过targetFunc调用后便会返回一个封装的EffectTargets。
     //如果某个map.entry是选取的目标，那么他应该是effectTargetSelectors
     //入参和返回值都会存入situation

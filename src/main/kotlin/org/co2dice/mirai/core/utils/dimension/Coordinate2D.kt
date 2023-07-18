@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.utils.dimension
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-02-17:20
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-02-17:20
+ * {@code @Message:} Have a good time!  :)
  **/
 data class Coordinate2D(val x : Int, val y : Int){
     companion object{

@@ -8,14 +8,14 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-20:14
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-20:14
+ * {@code @Message:} Have a good time!  :)
  **/
 object GetPlayer : UniOpSymbol<PlayerInstance, PreActivationSituation>() {
 
     override fun natualSign(input: INode<out PreActivationSituation>): String {
-        return "$input.getPlayer()"
+        return "${input.natualSerialize()}.getPlayer()"
     }
 
     override fun operation(input: PreActivationSituation, params:Params): PlayerInstance {

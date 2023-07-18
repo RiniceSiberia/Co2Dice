@@ -4,9 +4,9 @@ import com.mojang.datafixers.util.Either
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-10-11:31
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-10-11:31
+ * {@code @Message:} Have a good time!  :)
  **/
 object SelectorUtils {
     fun inputTrans(input : String, splitter : String = "\\s+") : Either<List<Int>, Pair<String, Int>> {

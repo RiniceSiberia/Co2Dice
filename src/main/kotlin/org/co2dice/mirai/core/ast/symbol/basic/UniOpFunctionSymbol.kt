@@ -4,17 +4,17 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.SymbolRegistry
-import org.co2dice.mirai.core.ast.node.UniOpFunctionNode
 import org.co2dice.mirai.core.ast.node.INode
+import org.co2dice.mirai.core.ast.node.UniOpFunctionNode
 import org.co2dice.mirai.core.ast.symbol.api.Symbol
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.utils.ConstantUtils.IT
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-05-23:05
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-05-23:05
+ * {@code @Message:} Have a good time!  :)
  **/
 abstract class UniOpFunctionSymbol<O : Any,I : Any,A : Any> : Symbol<O> {
 

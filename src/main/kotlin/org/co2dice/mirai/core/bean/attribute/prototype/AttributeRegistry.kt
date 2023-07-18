@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.bean.attribute.prototype
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-11-15:21
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-11-15:21
+ * {@code @Message:} Have a good time!  :)
  **/
 object AttributeRegistry {
     fun eliteAttribute() : List<Attribute> = listOf(

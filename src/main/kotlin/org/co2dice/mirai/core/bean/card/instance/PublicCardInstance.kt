@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.card.entry.CardEntry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-21-12:02
- * @Message: 公开的卡片实体，包括:
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-21-12:02
+ * {@code @Message:} 公开的卡片实体，包括:
  * 墓地·场上·除外区的所有卡片
  * 发动中的卡片
  **/

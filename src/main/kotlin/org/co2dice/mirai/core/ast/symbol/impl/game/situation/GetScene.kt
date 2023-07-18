@@ -8,13 +8,13 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-20:36
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-20:36
+ * {@code @Message:} Have a good time!  :)
  **/
 object GetScene : UniOpSymbol<Scene, SituationApi>() {
     override fun natualSign(input: INode<out SituationApi>): String {
-        return "$input.getScene()"
+        return "${input.natualSerialize()}.getScene()"
     }
 
     override fun operation(input: SituationApi, params:Params): Scene {

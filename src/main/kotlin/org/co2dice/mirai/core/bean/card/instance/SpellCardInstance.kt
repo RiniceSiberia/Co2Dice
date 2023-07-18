@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-02-19:51
- * @Message: 咒语卡，只在释放时存在
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-02-19:51
+ * {@code @Message:} 咒语卡，只在释放时存在
  * 存在本身就是这个卡的cost和发动条件检查已经通过了，发动通过才会出现这么一张卡
  **/
 class SpellCardInstance(

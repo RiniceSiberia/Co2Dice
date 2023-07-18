@@ -8,9 +8,9 @@ import org.co2dice.mirai.core.bean.chessman.instance.FieldChessmanInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-22:47
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-22:47
+ * {@code @Message:} Have a good time!  :)
  **/
 object GetAttributeValue : BiOpSymbol<Int, FieldChessmanInstance, Attribute>() {
 

@@ -8,12 +8,12 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-23-18:43
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-23-18:43
+ * {@code @Message:} Have a good time!  :)
  **/
 class StaticAbilityEntry(
-    override val uuid: UUID,
+    override val uuid: UUID = UUID.randomUUID(),
     override val prototype: StaticAbility,
     val level : Int = 1,
     //做样子的被动等级

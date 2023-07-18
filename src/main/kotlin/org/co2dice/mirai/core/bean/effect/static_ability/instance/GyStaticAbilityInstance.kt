@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.static_ability.entry.StaticAbilityEntr
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-23-22:59
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-23-22:59
+ * {@code @Message:} Have a good time!  :)
  **/
 class GyStaticAbilityInstance(entry : StaticAbilityEntry) : StaticAbilityInstance(entry) {
 }

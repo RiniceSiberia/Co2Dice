@@ -16,16 +16,16 @@ import org.apache.commons.statistics.distribution.ContinuousDistribution
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-13-12:29
- * @Message: 样本空间类，抽象的骰子，随机数生成器
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-13-12:29
+ * {@code @Message:} 样本空间类，抽象的骰子，随机数生成器
  * 可以在任何场景调用,投掷不会触发额外的事件
  * 用来让作者理解离散函数的定义用的，纯爱好产物
  **/
 @Serializable(with = DispersedSpaceSerializer::class)
 open class DispersedSpace<T : Any> (
-    open val space : Map<T,Int>,
-){
+    space : Map<T,Int>,
+) : HashMap<T,Int>(space){
 
 
     open fun roll() : T{
@@ -33,27 +33,27 @@ open class DispersedSpace<T : Any> (
     }
 
     fun toList() : List<T> {
-        return mutableListOf<T>().apply {
-            space.forEach { (t, u) ->
-                repeat(u){
-                    add(t)
-                }
+        val list = mutableListOf<T>()
+        this.forEach { (t, u) ->
+            for (i in 0 until u){
+                list.add(t)
             }
         }
+        return list
     }
 
     fun isSubSet(parentSet : DispersedSpace<T>) : Boolean {
-        return parentSet.space.keys.containsAll(this.space.keys)
-    }
-
-    fun isEmpty() : Boolean {
-        return space.isEmpty()
+        return parentSet.keys.containsAll(this.keys)
     }
 
     companion object{
 
-        fun <T : Any>getDispersedSpace(distribution : ContinuousDistribution, min : Double, max : Double,mapping : (Double) -> T) : DispersedSpace<T> {
-            val space = getDispersedSpace(distribution,min, max).space
+        fun <T : Any>getDispersedSpace(
+            distribution : ContinuousDistribution,
+            min : Double,
+            max : Double,
+            mapping : (Double) -> T) : DispersedSpace<T> {
+            val space = getDispersedSpace(distribution,min, max)
             val newSpace = mutableMapOf<T,Int>().apply {
                 space.forEach { (k, v) ->
                     if (this[mapping(k)] == null) this[mapping(k)] = 0
@@ -63,7 +63,10 @@ open class DispersedSpace<T : Any> (
             return DispersedSpace(newSpace)
         }
 
-        fun getDispersedSpace(distribution : ContinuousDistribution, min : Double = 0.0, max : Double, precision : Int = (max - min).toInt()) : DispersedSpace<Double> {
+        fun getDispersedSpace(distribution : ContinuousDistribution,
+                              min : Double = 0.0,
+                              max : Double,
+                              precision : Int = (max - min).toInt()) : DispersedSpace<Double> {
             //默认精度为取整数
             val map : Map<Double,Double> = mutableMapOf<Double, Double>().apply {
                 //截取min到max中precision段
@@ -92,47 +95,48 @@ open class DispersedSpace<T : Any> (
  * 将普通类型的离散空间转化为Int为Key的离散空间
  **/
 
-fun <D : DispersedSpace<T>,T : Any,R : Any> D.mapping(mapping : (T) -> R) : DispersedSpace<R> {
+fun <D : DispersedSpace<T>,T : Any,R : Any> D.mapping(mapper : (T) -> R) : DispersedSpace<R> {
+    val space = this
     return DispersedSpace(
         mutableMapOf<R, Int>().apply {
-        space.forEach { (k, v) ->
-            if (this[mapping(k)] == null) this[mapping(k)] = 0
-            this[mapping(k)] = this[mapping(k)]!! + v
+            space.forEach { (k, v) ->
+            if (this[mapper(k)] == null) this[mapper(k)] = 0
+            this[mapper(k)] = this[mapper(k)]!! + v
         }
     })
 }
 
 fun<D : DispersedSpace<T>,T:Any> D.intersect(other: D): DispersedSpace<T> {
     //交运算,将两个列表中相同的元素取出来,并且将他们的权重相减少
-    return DispersedSpace((this.space.keys + other.space.keys).associateWith { key ->
-        (this.space[key] ?: 0) - (other.space[key] ?: 0)
+    return DispersedSpace((this.keys + other.keys).associateWith { key ->
+        (this[key] ?: 0) - (other[key] ?: 0)
     })
 }
 
 fun<D : DispersedSpace<T>,T:Any> D.complements(other: D): DispersedSpace<T> {
     //补运算,将两个列表中不同的元素取出来
-    return DispersedSpace(this.space.filterKeys { key ->
-        !other.space.keys.contains(key)
-    } + other.space.filterKeys {key ->
-        !this.space.keys.contains(key)
+    return DispersedSpace(this.filterKeys { key ->
+        !other.keys.contains(key)
+    } + other.filterKeys {key ->
+        !this.keys.contains(key)
     })
 }
 
 fun<D : DispersedSpace<T>,T:Any> D.union(other: D): DispersedSpace<T> {
     //并运算,将两个列表中的元素取出来拼接,并且将他们的权重相加
-    return DispersedSpace((this.space.keys + other.space.keys).associateWith { key ->
-        (this.space[key] ?: 0) + (other.space[key] ?: 0)
+    return DispersedSpace((this.keys + other.keys).associateWith { key ->
+        (this[key] ?: 0) + (other[key] ?: 0)
     })
 }
 /*
 *Int专属
  */
 fun<D : DispersedSpace<Int>> D.max() : Int{
-    return this.space.keys.maxOrNull()!!
+    return this.keys.maxOrNull()!!
 }
 
 fun<D : DispersedSpace<Int>> D.min() : Int{
-    return this.space.keys.minOrNull()!!
+    return this.keys.minOrNull()!!
 }
 
 class DispersedSpaceSerializer<T : Any>(
@@ -158,7 +162,7 @@ class DispersedSpaceSerializer<T : Any>(
     }
 
     override fun serialize(encoder: Encoder, value: DispersedSpace<T>) {
-        encoder.encodeSerializableValue(MapSerializer(tSerializer,Int.serializer()),value.space)
+        encoder.encodeSerializableValue(MapSerializer(tSerializer,Int.serializer()),value)
     }
 
 }

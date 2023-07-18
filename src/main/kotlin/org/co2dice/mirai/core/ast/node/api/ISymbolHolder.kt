@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-04-13:38
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-04-13:38
+ * {@code @Message:} Have a good time!  :)
  **/
 interface ISymbolHolder <S : Symbol<*>>{
     var symbol : S

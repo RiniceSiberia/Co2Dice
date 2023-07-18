@@ -11,9 +11,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-05-22:30
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-05-22:30
+ * {@code @Message:} Have a good time!  :)
  **/
 abstract class ParamLeafSymbol<O : Any> : Symbol<O> {
 

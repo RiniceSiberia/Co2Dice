@@ -6,9 +6,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-18:16
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-18:16
+ * {@code @Message:} Have a good time!  :)
  **/
 object StringParam : ParamLeafSymbol<String>(){
 

@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-20-23:32
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-20-23:32
+ * {@code @Message:} Have a good time!  :)
  **/
 object BaseSituationSymbol : SituationLeafSymbol<SituationApi>() {
     override fun natualSign(): String {

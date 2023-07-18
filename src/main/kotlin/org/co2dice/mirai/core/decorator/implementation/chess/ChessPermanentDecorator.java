@@ -8,9 +8,9 @@ import org.co2dice.mirai.core.decorator.api.DecoratorValueInstance;
 /**
  * 使用IDEA编写
  *
- * @Author: DUELIST
- * @Time: 2023-04-30-22:43
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:} 2023-04-30-22:43
+ * {@code @Message:} Have a good time!  :)
  **/
 public abstract class ChessPermanentDecorator<
         D extends Decorator<D, C, V>,

@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.decorator.api.DefaultDecorator;
 /**
  * 使用IDEA编写
  *
- * @Author: DUELIST
- * @Time: 2023-04-30-22:17
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:} 2023-04-30-22:17
+ * {@code @Message:} Have a good time!  :)
  **/
 public final class DefaultGetChessNumericDecorator
         extends DefaultDecorator<GetChessNumericDecorator,

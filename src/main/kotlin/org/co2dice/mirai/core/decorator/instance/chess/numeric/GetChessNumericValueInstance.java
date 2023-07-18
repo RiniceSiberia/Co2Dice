@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.decorator.api.DecoratorValueInstance;
 /**
  * 使用IDEA编写
  *
- * @Author: DUELIST
- * @Time: 2023-04-30-22:14
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:} 2023-04-30-22:14
+ * {@code @Message:} Have a good time!  :)
  **/
 public record GetChessNumericValueInstance(Integer value)
         implements DecoratorValueInstance<GetChessNumericValueInstance> {

@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.utils.dimension.Direction2D
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-16-0:17
- * @Message: 顺时针方向
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-16-0:17
+ * {@code @Message:} 顺时针方向
  **/
 object FindDirection2D {
     //这个对象的目的是要实现多边的方向构建

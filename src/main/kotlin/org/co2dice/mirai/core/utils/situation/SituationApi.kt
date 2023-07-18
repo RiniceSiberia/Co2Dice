@@ -11,9 +11,9 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-26-20:33
- * @Message: 情景指针接口
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-26-20:33
+ * {@code @Message:} 情景指针接口
  **/
 interface SituationApi {
     val scene: Scene

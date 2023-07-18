@@ -11,9 +11,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2022-12-06-21:22
- * @Message: 棋子基础类
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2022-12-06-21:22
+ * {@code @Message:} 棋子基础类
  **/
 sealed class Chessman(
     override val uuid: UUID,

@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.ListOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-01-13:36
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-01-13:36
+ * {@code @Message:} Have a good time!  :)
  **/
 class ListOpNode<O : Any,E : Any>(
     override var symbol: ListOpSymbol<O, E>,

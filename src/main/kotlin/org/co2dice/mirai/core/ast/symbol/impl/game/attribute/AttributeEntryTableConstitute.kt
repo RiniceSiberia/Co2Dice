@@ -8,9 +8,9 @@ import org.co2dice.mirai.core.bean.attribute.table.AttributeTable
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-03-0:04
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-03-0:04
+ * {@code @Message:} Have a good time!  :)
  **/
 object AttributeEntryTableConstitute : ListOpSymbol<AttributeTable, Pair<Attribute, Int>>() {
     override fun natualSign(list: List<INode<out Pair<Attribute, Int>>>): String {
@@ -18,6 +18,6 @@ object AttributeEntryTableConstitute : ListOpSymbol<AttributeTable, Pair<Attribu
     }
 
     override fun operation(list: List<Pair<Attribute, Int>>, params: Params): AttributeTable {
-        return AttributeTable(list.toMap())
+        return AttributeTable(list.toMap().toMutableMap())
     }
 }

@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.utils.annotations
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-05-0:43
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-05-0:43
+ * {@code @Message:} Have a good time!  :)
  **/
 @Target( AnnotationTarget.TYPE, AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)

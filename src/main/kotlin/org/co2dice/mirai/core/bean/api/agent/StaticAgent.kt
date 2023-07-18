@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.static_ability.instance.StaticAbilityI
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-24-13:34
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-24-13:34
+ * {@code @Message:} Have a good time!  :)
  **/
 interface StaticAgent <A : StaticAbilityInstance> : Agent{
     val staticAbilities : List<A>

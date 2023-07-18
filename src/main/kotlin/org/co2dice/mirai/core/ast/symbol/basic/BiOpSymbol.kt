@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-31-21:40
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-31-21:40
+ * {@code @Message:} Have a good time!  :)
  **/
 
 abstract class BiOpSymbol<O : Any,L : Any,R : Any> : Symbol<O> {

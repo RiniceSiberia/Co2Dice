@@ -14,9 +14,9 @@ import org.co2dice.mirai.core.utils.dimension.DirectionsPool
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-16-0:13
- * @Message: 地图类
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-16-0:13
+ * {@code @Message:} 地图类
  **/
 class FieldInstance(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.toLong())Int = VENUE_SIZE_MAX,
                //尺寸是固定的，永远是正方的
@@ -54,7 +54,7 @@ class FieldInstance(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.t
         return this
     }
 
-    fun randomChess(chessmen : List<ChessmanInstance>) : FieldInstance {
+    fun randomChess(chessmen : List<FieldChessmanInstance>) : FieldInstance {
         val mutable = chessmen.toMutableList()
         var blowout = 0
         while (mutable.isNotEmpty() && blowout < TINY_FUSE){
@@ -73,7 +73,7 @@ class FieldInstance(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.t
         return true
     }
 
-    fun addChessman(chessman: ChessmanInstance, coordinate: Coordinate2D) : Boolean{
+    fun addChessman(chessman: FieldChessmanInstance, coordinate: Coordinate2D) : Boolean{
         if (venueCanStand(coordinate)){
             chessmen[chessman] = ChessmanValue(coordinate, Equipments())
             return true
@@ -81,7 +81,7 @@ class FieldInstance(private val size : @IntRange(from = 0, to = VENUE_SIZE_MAX.t
         return false
     }
 
-    fun addChessman(chessman: ChessmanInstance, x : Int , y : Int) : Boolean{
+    fun addChessman(chessman: FieldChessmanInstance, x : Int , y : Int) : Boolean{
         return addChessman(chessman, Coordinate2D(x,y))
     }
 

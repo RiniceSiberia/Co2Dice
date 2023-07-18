@@ -9,16 +9,16 @@ import org.co2dice.mirai.core.utils.situation.getAgentCardInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-21-16:29
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-21-16:29
+ * {@code @Message:} Have a good time!  :)
  **/
-object AgentToCardInstanceAny : UniOpSymbol<CardInstance<*>,PreActivationSituation>() {
+object AgentToCardInstanceAny : UniOpSymbol<CardInstance,PreActivationSituation>() {
     override fun natualSign(input: INode<out PreActivationSituation>): String {
-        return "${input.natualSerialize()}.getAgentToCardInstance<*>()"
+        return "${input.natualSerialize()}.getAgentToCardInstance()"
     }
 
-    override fun operation(input: PreActivationSituation, params: Params): CardInstance<*> {
-        return input.getAgentCardInstance<CardInstance<*>>()!!
+    override fun operation(input: PreActivationSituation, params: Params): CardInstance {
+        return input.getAgentCardInstance<CardInstance>()!!
     }
 }

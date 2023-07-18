@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.bean.category
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-09-0:01
- * @Message: tag包整合
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-09-0:01
+ * {@code @Message:} tag包整合
  **/
 class CategoryPack (
     private val categories : MutableSet<CategoryTag> = mutableSetOf(),

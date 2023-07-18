@@ -9,9 +9,9 @@ import java.util.stream.Stream
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-31-22:58
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-31-22:58
+ * {@code @Message:} Have a good time!  :)
  **/
 object GetInitiatorChessInstanceStream : UniOpSymbol<Stream<FieldChessmanInstance>, SituationApi>(){
     override fun natualSign(input: INode<out SituationApi>): String {

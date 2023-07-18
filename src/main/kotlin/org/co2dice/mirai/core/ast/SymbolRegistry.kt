@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-16-10:19
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-16-10:19
+ * {@code @Message:} Have a good time!  :)
  **/
 object SymbolRegistry {
 

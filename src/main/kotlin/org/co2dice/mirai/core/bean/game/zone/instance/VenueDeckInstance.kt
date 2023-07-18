@@ -3,15 +3,15 @@ package org.co2dice.mirai.core.bean.game.zone.instance
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
 import org.co2dice.mirai.core.bean.card.instance.SideDeckUnPublicCardInstance
-import org.co2dice.mirai.core.bean.card.instance.VenueCardInstance
+import org.co2dice.mirai.core.bean.card.prototype.VenueCard
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-02-26-0:59
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-02-26-0:59
+ * {@code @Message:} Have a good time!  :)
  **/
 class VenueDeckInstance(override var holder: PlayerInstance,
                         override val cards: MutableList<SideDeckUnPublicCardInstance>)
@@ -28,8 +28,13 @@ class VenueDeckInstance(override var holder: PlayerInstance,
         }
     }
 
-    override fun typeLegal(card: CardInstance): Boolean {
-        return card is VenueCardInstance
+    fun typeLegal(card: CardInstance): Boolean {
+        return card.entry.prototype is VenueCard
+    }
+
+    open fun draw() : SideDeckUnPublicCardInstance? {
+        //抽卡
+        return cards.removeFirstOrNull()
     }
 
     override fun constructInstance(card: CardEntry, registry: UniqueIdRegistry): SideDeckUnPublicCardInstance {

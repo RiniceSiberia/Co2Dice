@@ -8,9 +8,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-24-22:01
- * @Message:一个stream的param节点，主要用来获取一个区域的所有卡片
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-24-22:01
+ * {@code @Message:}一个stream的param节点，主要用来获取一个区域的所有卡片
  * 但是很蛋疼，泛型擦除之后，这个节点的类型就是List<*>不保留泛型
  * 在考虑要不要从头干
  **/

@@ -9,9 +9,9 @@ import kotlin.jvm.Throws
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-26-20:26
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-26-20:26
+ * {@code @Message:} Have a good time!  :)
  **/
 class PreActionTree<O : Any> (private var root : INode<O>) {
 

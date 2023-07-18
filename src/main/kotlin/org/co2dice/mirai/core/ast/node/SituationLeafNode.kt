@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-05-22:29
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-05-22:29
+ * {@code @Message:} Have a good time!  :)
  **/
 class SituationLeafNode<O : SituationApi>(override var symbol: SituationLeafSymbol<O>
 ) : INode<O>, ISymbolHolder<SituationLeafSymbol<O>> {

@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-14-20:26
- * @Message: 非公开的类，手牌和主卡组的通用类(不包括场地)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-14-20:26
+ * {@code @Message:} 非公开的类，手牌和主卡组的通用类(不包括场地)
  * 无法持有静态效果，但可以变成一个action(行动)，比如发动技能或者放置
  **/
 class MainDeckUnPublicCardInstance (

@@ -4,9 +4,9 @@ import com.mojang.datafixers.util.Either
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-24-23:33
- * @Message: 一个单一类型的二叉树
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-24-23:33
+ * {@code @Message:} 一个单一类型的二叉树
  **/
 class BinaryTree<T>(
     var root : BinaryNode<T> = BinaryNode<T>()

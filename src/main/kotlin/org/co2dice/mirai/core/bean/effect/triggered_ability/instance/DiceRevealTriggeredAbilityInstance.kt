@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbili
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-07-23:31
- * @Message: 骰子揭示实例
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-07-23:31
+ * {@code @Message:} 骰子揭示实例
  **/
 class DiceRevealTriggeredAbilityInstance(
     entry : TriggeredAbilityEntry

@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-11-21:49
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-11-21:49
+ * {@code @Message:} Have a good time!  :)
  **/
 object MoveCard : TriOpSymbol<Boolean, Scene, CardListVessel<*>,CardInstance>() {
     override fun natualSign(

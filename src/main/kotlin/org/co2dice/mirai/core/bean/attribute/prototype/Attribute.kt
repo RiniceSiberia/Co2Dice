@@ -10,9 +10,9 @@ import kotlinx.serialization.encoding.Encoder
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-06-14:54
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-06-14:54
+ * {@code @Message:} Have a good time!  :)
  **/
 @Serializable(with = AttributeSerializer::class)
 open class Attribute(

@@ -16,14 +16,14 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2022-12-08-20:55
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2022-12-08-20:55
+ * {@code @Message:} 场景类，游戏内的一幕
  **/
 class Scene (
     val registry : UniqueIdRegistry = UniqueIdRegistry(),
     //依赖于场景的注册器
-    decks :Map<PlayerEntry, DeckEntry>,
+    decks : Set<DeckEntry> = setOf(),
     //玩家与其相关区域的映射
     var hasEnded:Boolean = false,
     //是否已经结束
@@ -33,12 +33,13 @@ class Scene (
     val turns: Turns = Turns(),
     //回合
     val desks:MutableSet<DeskInstance> = mutableSetOf<DeskInstance>()
-        .apply { decks.keys.filter { decks[it]?.checkDeckLegal()?:false }.forEach {
+        .apply { decks.filter { it.checkDeckLegal() }.distinctBy { it.holder }.forEach {
+            //合法并去掉相同持有者
             this.add(DeskInstance(
                 registry = registry,
-                holder = PlayerInstance(it),
-                deck = decks[it]!!.main,
-                venueDeck = decks[it]!!.venueCard
+                holder = PlayerInstance(it.holder),
+                deck = it.main,
+                venueDeck = it.venueCard
             )) } },
     //卡组不合法直接禁止游戏
     val field: FieldInstance = FieldInstance(mapSize).apply {
@@ -46,7 +47,7 @@ class Scene (
         desks.forEach {
             val list : MutableList<VenueCardInstance> = mutableListOf()
             for (i in 0 until 3){
-                val unPublicVenue = it.value.venueDeck.draw()
+                val unPublicVenue = it.drawVenue()
                 if (unPublicVenue != null){
                     list.add(
                         VenueCardInstance(
@@ -83,7 +84,7 @@ class Scene (
         //开启场景，所有角色抽5张卡,如果有人卡组有问题，返回false
         getPlayers().forEach{
             for (i in 0 until  4){
-                val deckNotEmpty = desks[it]?.draw() ?: return false
+                val deckNotEmpty = getDesk(it)?.draw() ?: return false
                 //如果false
                 if (!deckNotEmpty){
                     //如果卡组空了
@@ -168,7 +169,7 @@ class Scene (
     }
 
     //专门给cost用的
-    fun findCardCostVessel(card : CardInstance) : CardVesselApi<out CardInstance<out ActivatedAbility>>? {
+    fun findCardCostVessel(card : CardInstance) : CardVesselApi<out CardInstance>? {
         if (card is ItemCardInstance){
             val equipments = field.chessmen.values.stream().map { it.equipments }.toList()
             if (equipments.stream().anyMatch { it.contain(card) }){

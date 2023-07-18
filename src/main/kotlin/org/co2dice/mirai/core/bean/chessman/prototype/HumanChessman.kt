@@ -12,9 +12,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-06-1:13
- * @Message: 人类棋子
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-06-1:13
+ * {@code @Message:} 人类棋子
  * 除了有基础的属性盘，还拥有chaos和order属性
  **/
 open class HumanChessman (

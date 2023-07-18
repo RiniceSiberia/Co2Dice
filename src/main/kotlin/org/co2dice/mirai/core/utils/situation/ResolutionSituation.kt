@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-11-22:24
- * @Message: 用于提供对象的指针，结算前的situation
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-11-22:24
+ * {@code @Message:} 用于提供对象的指针，结算前的situation
  **/
 data class ResolutionSituation(
     override val input: Map<String, Any>,

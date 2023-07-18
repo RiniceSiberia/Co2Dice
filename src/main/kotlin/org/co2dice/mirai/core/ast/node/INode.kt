@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.ast.Params
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-13-17:46
- * @Message: 节点的基类，instance，可以被new
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-13-17:46
+ * {@code @Message:} 节点的基类，instance，可以被new
  **/
 sealed interface INode <
     O

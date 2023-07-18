@@ -21,9 +21,9 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-06-15:46
- * @Message: 场上的棋子实例
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-06-15:46
+ * {@code @Message:} 场上的棋子实例
  **/
 open class FieldChessmanInstance(
     entry: ChessmanEntry,

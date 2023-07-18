@@ -8,9 +8,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-23-18:43
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-23-18:43
+ * {@code @Message:} Have a good time!  :)
  **/
 sealed class StaticAbilityInstance(
     override val entry : StaticAbilityEntry,

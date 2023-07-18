@@ -9,13 +9,13 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-20:28
- * @Message:
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-20:28
+ * {@code @Message:}
  **/
-object GetZones : BiOpSymbol<DeskInstance, PreActivationSituation, PlayerInstance>() {
+object GetDesk : BiOpSymbol<DeskInstance, PreActivationSituation, PlayerInstance>() {
     override fun natualSign(left: INode<out PreActivationSituation>, right: INode<out PlayerInstance>): String {
-        return "$left.getZones($right)"
+        return "${left.natualSerialize()}.getZones($right)"
     }
 
     override fun operation(l: PreActivationSituation, r: PlayerInstance, params:Params): DeskInstance {

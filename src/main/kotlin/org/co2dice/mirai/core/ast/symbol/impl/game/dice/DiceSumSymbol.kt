@@ -7,9 +7,9 @@ import org.co2dice.mirai.core.bean.dice.entry.DispersedSpace
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-10-18:00
- * @Message: 将骰子捻成一个组
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-10-18:00
+ * {@code @Message:} 将骰子捻成一个组
  **/
 object DiceSumSymbol : ListOpSymbol<Int, DispersedSpace<Int>>() {
 

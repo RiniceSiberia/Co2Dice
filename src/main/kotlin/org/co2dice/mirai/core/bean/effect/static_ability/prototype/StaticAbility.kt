@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.bean.api.PrototypeStructure
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-22-23:42
- * @Message: 永续型的效果，和主动发动的Effect区分开
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-22-23:42
+ * {@code @Message:} 永续型的效果，和主动发动的Effect区分开
  **/
 sealed interface StaticAbility : PrototypeStructure{
 

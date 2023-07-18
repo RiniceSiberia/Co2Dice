@@ -10,21 +10,19 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-11-22:22
- * @Message: 用于提供对象的指针，选择目标确认发动后，支付cost时,自排连锁时的situation
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-11-22:22
+ * {@code @Message:} 用于提供对象的指针，选择目标确认发动后，支付cost时,自排连锁时的situation
  **/
 open class ActivationSituation(
-    val costIndex : List<Int>,
+    val costIndex : Map<String,Int>,
     //cost选择的index
-    val targetIndex : List<Int>,
+    val targetIndex : Map<String,Int>,
     //使用targetIndex选择的目标
-    override val scene: Scene,
-    override val player: PlayerInstance,
-    val activatedAgent: ActivatedAgent<*>,
+    scene : Scene,
+    player : PlayerInstance,
+    agent : Agent,
     initiator: ChessmanInstance?,
-    target: EffectTargets,
-    effect: EffectEntry<*>,
     isActive : Boolean,
 )  : PreActivationSituation() {
 }

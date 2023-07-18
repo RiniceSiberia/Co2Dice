@@ -42,7 +42,7 @@ public final class ChessNumericType {
        this.getter = getter;
    }
 
-   public GetChessNumericValueInstance getValue(FieldChessmanInstance target) {
+   public GetChessNumericValueInstance getValue(ChessmanInstance target) {
        return new GetChessNumericValueInstance(getter.apply(target));
    }
 }

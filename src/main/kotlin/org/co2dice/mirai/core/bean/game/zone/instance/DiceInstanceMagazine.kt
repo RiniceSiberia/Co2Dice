@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-06-23:18
- * @Message: 骰子的储存槽，这儿的Magazine是弹匣的意思
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-06-23:18
+ * {@code @Message:} 骰子的储存槽，这儿的Magazine是弹匣的意思
  * 因为骰子会被按在这个槽里，所以这个槽也可以叫做骰子槽
  **/
 class DiceInstanceMagazine (

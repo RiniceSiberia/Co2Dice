@@ -10,9 +10,9 @@ import java.util.stream.Stream
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-21-19:18
- * @Message: 抓取场上属性相同的道具实体stream处理
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-21-19:18
+ * {@code @Message:} 抓取场上属性相同的道具实体stream处理
  **/
 object AnyItemCardStream : StreamSymbolApi<Boolean, ItemCardInstance>() {
 

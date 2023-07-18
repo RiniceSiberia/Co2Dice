@@ -7,9 +7,9 @@ import org.co2dice.mirai.core.bean.attribute.prototype.AttributeRegistry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-23:14
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-23:14
+ * {@code @Message:} Have a good time!  :)
  **/
 object AttributePrototypeConstant : ConstantLeafSymbol<Attribute>(){
     override fun wrapper(json: JsonElement): Attribute {

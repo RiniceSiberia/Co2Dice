@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.ConstantLeafSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-18:14
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-18:14
+ * {@code @Message:} Have a good time!  :)
  **/
 object StringConstant : ConstantLeafSymbol<String>(){
     override fun wrapper(json: JsonElement): String {

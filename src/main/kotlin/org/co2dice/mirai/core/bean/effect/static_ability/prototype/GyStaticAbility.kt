@@ -5,9 +5,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-23-22:51
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-23-22:51
+ * {@code @Message:} Have a good time!  :)
  **/
 class GyStaticAbility(
     override val uuid: UUID, override val trigger : AstTree, override val operation : AstTree) : StaticAbility {

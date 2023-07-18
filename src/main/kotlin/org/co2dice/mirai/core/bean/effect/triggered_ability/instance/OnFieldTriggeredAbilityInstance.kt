@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbili
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-28-22:56
- * @Message: 战吼实例
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-28-22:56
+ * {@code @Message:} 战吼实例
  **/
 class OnFieldTriggeredAbilityInstance(
     entry : TriggeredAbilityEntry

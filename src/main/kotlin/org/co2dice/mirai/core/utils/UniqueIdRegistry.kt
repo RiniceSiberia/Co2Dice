@@ -5,9 +5,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-22:10
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-22:10
+ * {@code @Message:} Have a good time!  :)
  **/
 class UniqueIdRegistry {
     private val map = mutableMapOf<KClass<*>, MutableSet<Int>>()

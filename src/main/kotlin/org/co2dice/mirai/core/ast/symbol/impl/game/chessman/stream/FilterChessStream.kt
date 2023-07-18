@@ -9,9 +9,9 @@ import java.util.stream.Stream
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-02-22:59
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-02-22:59
+ * {@code @Message:} Have a good time!  :)
  **/
 object FilterChessStream : UniOpFunctionSymbol<List<ChessmanInstance>, Stream<ChessmanInstance>, Boolean>() {
 

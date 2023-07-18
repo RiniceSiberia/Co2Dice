@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-28-22:50
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-28-22:50
+ * {@code @Message:} Have a good time!  :)
  **/
 sealed class TriggeredAbilityInstance (
     override val entry : TriggeredAbilityEntry,
@@ -25,8 +25,8 @@ sealed class TriggeredAbilityInstance (
         return entry.prototype.launchConditions.execute(Params(situation = situation)) ?: false
     }
 
-    fun targetFunction(situation: PreActivationSituation) : PermanentInstance?{
-        return entry.prototype.targetFunction.execute(Params(situation = situation))
+    fun targetFunction(situation: PreActivationSituation) : ?{
+        return entry.prototype.target.execute(Params(situation = situation))
     }
 
 }

@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.utils
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-24-21:56
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-24-21:56
+ * {@code @Message:} Have a good time!  :)
  **/
 data class Quadruple<out A : Any, out B : Any, out C : Any, out D : Any>(
     val first: A,

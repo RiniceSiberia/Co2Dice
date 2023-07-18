@@ -18,9 +18,9 @@ import org.co2dice.mirai.core.utils.situation.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-14-12:29
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-14-12:29
+ * {@code @Message:} Have a good time!  :)
  **/
 @Serializable(with = AstTree.AstTreeSerializer::class)
 class AstTree (json : JsonObject){

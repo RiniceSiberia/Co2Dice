@@ -10,9 +10,9 @@ import java.util.stream.Stream
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-31-23:04
- * @Message: any chess instance stream
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-31-23:04
+ * {@code @Message:} any chess instance stream
  **/
 object AnyChessStream : StreamSymbolApi<Boolean, Stream<ChessmanInstance>>() {
     override fun natualSign(left: INode<out Stream<Stream<ChessmanInstance>>>, right: INode<out AstTree>): String {

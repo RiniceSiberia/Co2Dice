@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.bean.category
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-08-12:30
- * @Message: 词缀tag的深度有向图
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-08-12:30
+ * {@code @Message:} 词缀tag的深度有向图
  **/
 object CategoryDepthGraph {
 

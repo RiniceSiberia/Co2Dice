@@ -5,9 +5,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-15-15:17
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-15-15:17
+ * {@code @Message:} Have a good time!  :)
  **/
 object EitherUtils {
 

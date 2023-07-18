@@ -8,9 +8,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-09-19:57
- * @Message: 棋子列表的param节点，主要用来获取一个区域的所有棋子
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-09-19:57
+ * {@code @Message:} 棋子列表的param节点，主要用来获取一个区域的所有棋子
  **/
 object StreamChessmanParam : ParamLeafSymbol<Stream<ChessmanInstance>>(){
 

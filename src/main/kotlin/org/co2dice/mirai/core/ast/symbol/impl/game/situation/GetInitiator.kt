@@ -8,14 +8,14 @@ import org.co2dice.mirai.core.utils.situation.ActivationSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-20-23:05
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-20-23:05
+ * {@code @Message:} Have a good time!  :)
  **/
 object GetInitiator : UniOpSymbol<ChessmanInstance, ActivationSituation>() {
 
     override fun natualSign(input: INode<out ActivationSituation>): String {
-        return "$input.getInitiator()"
+        return "${input.natualSerialize()}.getInitiator()"
     }
 
     override fun operation(input: ActivationSituation, params:Params): ChessmanInstance {

@@ -7,9 +7,9 @@ import org.co2dice.mirai.core.bean.dice.entry.DesignatedDice
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-09-19:04
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-09-19:04
+ * {@code @Message:} Have a good time!  :)
  **/
 object DesignatedDiceSymbol : UniOpSymbol<DesignatedDice, Int>() {
 

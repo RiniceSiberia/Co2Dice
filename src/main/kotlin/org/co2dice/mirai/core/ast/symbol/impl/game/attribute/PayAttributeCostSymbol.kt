@@ -8,18 +8,18 @@ import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-03-0:01
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-03-0:01
+ * {@code @Message:} Have a good time!  :)
  **/
 object PayAttributeCostSymbol  : BiOpSymbol<Boolean, ChessmanInstance, AttributeTable>() {
 
     override fun natualSign(left: INode<out ChessmanInstance>, right: INode<out AttributeTable>): String {
-        return "${left.natualSerialize()}.anyCheemanAttributeCost(${right.natualSerialize()})"
+        return "${left.natualSerialize()}.anyChessmanAttributeCost(${right.natualSerialize()})"
     }
 
     override fun operation(l: ChessmanInstance, r: AttributeTable, params: Params): Boolean {
-        return l.payAttributeCost(r)
+        return l.attributeTable.payCost(r)
     }
 
 }

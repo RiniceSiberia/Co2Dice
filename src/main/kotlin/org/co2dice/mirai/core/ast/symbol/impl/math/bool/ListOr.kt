@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.ListOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-31-17:57
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-31-17:57
+ * {@code @Message:} Have a good time!  :)
  **/
 object ListOr : ListOpSymbol<Boolean, Boolean>(){
     override fun natualSign(list: List<INode<out Boolean>>): String {

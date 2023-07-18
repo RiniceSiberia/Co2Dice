@@ -27,6 +27,7 @@ import org.co2dice.mirai.core.bean.effect.activated_ability.prototype.FieldActiv
 import org.co2dice.mirai.core.bean.game.zone.entry.DeckEntry
 import org.co2dice.mirai.core.bean.game.zone.instance.Scene
 import org.co2dice.mirai.core.bean.player.enrty.PlayerEntry
+import org.co2dice.mirai.core.utils.MathUtils
 import org.junit.jupiter.api.Test
 import space.controlnet.lightioc.api.Container
 import java.util.*
@@ -41,10 +42,10 @@ class Test {
         val player2 = Player(UUID.randomUUID(),qq = 2979897511L)
         val player3 = Player(UUID.randomUUID(),qq = 2979897512L)
         val player4 = Player(UUID.randomUUID(),qq = 2979897513L)
-        val player1Entry = PlayerEntry(uuid = UUID.randomUUID(),player1)
-        val player2Entry = PlayerEntry(uuid = UUID.randomUUID(),player2)
-        val player3Entry = PlayerEntry(uuid = UUID.randomUUID(),player3)
-        val player4Entry = PlayerEntry(uuid = UUID.randomUUID(),player4)
+        val player1Entry = PlayerEntry(prototype = player1)
+        val player2Entry = PlayerEntry(prototype = player2)
+        val player3Entry = PlayerEntry(prototype = player3)
+        val player4Entry = PlayerEntry(prototype = player4)
 
         val chessmen : MutableList<ChessmanEntry> = mutableListOf<ChessmanEntry>()
         repeat(8){
@@ -70,7 +71,7 @@ class Test {
                 ))
         }
         val main : MutableList<CardEntry> = mutableListOf<CardEntry>()
-        repeat(40){
+        repeat(30){
             main.add(CardEntry(
                 uuid = UUID.randomUUID(),
                 prototype = ItemCard(
@@ -80,14 +81,40 @@ class Test {
                     activatedAbilities = listOf(),
                     staticAbilities = listOf(),
                     triggeredAbilities = listOf(),
+                    chaos = 1,
+                    order = 1,
+                    occupy = mapOf(),
                     ),
                 ))
         }
-        val venueCard : MutableList<CardEntry>
-        val deckEntry1 = DeckEntry(UUID.randomUUID(),player1Entry)
+        val venueCard : MutableList<CardEntry> = mutableListOf<CardEntry>()
+        repeat(15){
+            venueCard.add(CardEntry(
+                uuid = UUID.randomUUID(),
+                prototype = ItemCard(
+                    uuid = UUID.randomUUID(),
+                    cardRealName = "testVenueCard${it}",
+                    types = CategoryPack(),
+                    activatedAbilities = listOf(),
+                    staticAbilities = listOf(),
+                    triggeredAbilities = listOf(),
+                    chaos = 1,
+                    order = 1,
+                    occupy = mapOf(),
+                    ),
+                ))
+        }
+        val deckEntry1 = DeckEntry(player1Entry,chessmen, main, venueCard)
+        val deckEntry2 = DeckEntry(player2Entry,chessmen, main, venueCard)
+        val deckEntry3 = DeckEntry(player3Entry,chessmen, main, venueCard)
+        val deckEntry4 = DeckEntry(player4Entry,chessmen, main, venueCard)
         val scene = Scene(
-            decks = ,
-
+            decks = setOf(
+                deckEntry1,
+                deckEntry2,
+                deckEntry3,
+                deckEntry4,
+            ),
         )
 
 
@@ -142,27 +169,10 @@ class Test {
 
     @Test
     fun test3(){
-        //测试效果:场上发动，丢弃1张手牌,解放此卡,献祭一个骰子,没有额外的启动限制,选择场上的一个棋子,对其造成3点力量伤害,检定力量值+3(默认为0),对抗目标的力量值.
-        val effectActivated : FieldActivatedAbilityInstance = FieldActivatedAbilityInstance(
-            entry = ActivatedAbilityEntry(
-                uuid = UUID.randomUUID(),
-                prototype = FieldActivatedAbility(
-                    uuid = UUID.randomUUID(),
-                    targetFunction = AstTree(
-                        json = ,
-                    ),
-                    launchConditions = AstTree(
-                        json = ConstantLeafNode<Boolean>(
-                            symbol = BoolConstant,
-                            value = true,
-                        ).serialize(),
-                    ),
-                    cost = ,
-                    check = ,
-                    react = ,
-                    operation = ,
-                )
-            ),
+        MathUtils.selectElements(
+            listOf(1,2,3,4,5,6,7,8,9),
+            { it.size in 4..5 },
+            {it != 5 && it != 6}
         )
     }
 }

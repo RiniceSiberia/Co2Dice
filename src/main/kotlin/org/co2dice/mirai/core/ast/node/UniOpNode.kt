@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.UniOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-01-13:34
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-01-13:34
+ * {@code @Message:} Have a good time!  :)
  **/
 class UniOpNode<O : Any,I : Any>(
     override var symbol: UniOpSymbol<O, I>,

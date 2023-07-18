@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-11-22:22
- * @Message: 用于提供对象的指针，发动选择目标前的situation
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-11-22:22
+ * {@code @Message:} 用于提供对象的指针，发动选择目标前的situation
  * 主要是遍历用的，用于检查是否可以发动，比如:手里有一张需要力量才能使用的牌，此时就需要使用这个来检验能否发动
  * 泛型Agent,代表了这个情景是谁发动的
  **/

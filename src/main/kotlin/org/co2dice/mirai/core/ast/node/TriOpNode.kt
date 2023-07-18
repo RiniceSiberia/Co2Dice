@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.TriOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-24-23:02
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-24-23:02
+ * {@code @Message:} Have a good time!  :)
  **/
 class TriOpNode<O : Any,F : Any,S : Any,T : Any>(
     override var symbol: TriOpSymbol<O,F,S,T>,

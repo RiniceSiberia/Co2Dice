@@ -11,19 +11,18 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbili
 import java.util.*
 
 class ChessmanEntry(
-    override val uuid: UUID,
+    override val uuid: UUID = UUID.randomUUID(),
     override val prototype: Chessman,
     override val chaos: Int? = if (prototype is CAO && prototype.chaos != null) prototype.chaos else null,
     override val order: Int? = if (prototype is CAO && prototype.order != null) prototype.order else null,
     val dice : DispersedSpace<Int> = prototype.dice,
     val attributeEntry : AttributeTable = prototype.attributeTable,
     val activatedAbilityEntries : List<ActivatedAbilityEntry>
-    = prototype.activatedAbilities.stream(). map { ActivatedAbilityEntry(it,1) }.toList(),
+    = prototype.activatedAbilities.stream(). map { ActivatedAbilityEntry(prototype = it) }.toList(),
     val staticAbilityEntries : List<StaticAbilityEntry>
-    = prototype.staticAbilities.stream(). map { StaticAbilityEntry(it, 1) }.toList(),
+    = prototype.staticAbilities.stream(). map { StaticAbilityEntry(prototype = it) }.toList(),
     val triggeredAbilityEntries : List<TriggeredAbilityEntry>
-    = prototype.triggeredAbilities.stream().map { TriggeredAbilityEntry(it,1) }.toList(),
-
+    = prototype.triggeredAbilities.stream().map { TriggeredAbilityEntry(prototype = it) }.toList(),
     ) :EntryStructure<Chessman>, CAO {
 
 }

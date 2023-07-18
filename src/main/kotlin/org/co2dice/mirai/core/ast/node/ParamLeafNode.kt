@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.ParamLeafSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-05-22:29
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-05-22:29
+ * {@code @Message:} Have a good time!  :)
  **/
 class ParamLeafNode<O : Any>(override var symbol: ParamLeafSymbol<O>,
                              var key: String) : INode<O>, ISymbolHolder<ParamLeafSymbol<O>> {

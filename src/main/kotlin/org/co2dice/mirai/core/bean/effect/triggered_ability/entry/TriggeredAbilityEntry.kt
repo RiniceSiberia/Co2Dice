@@ -7,12 +7,12 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-28-22:48
- * @Message: 触发式效果的实体
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-28-22:48
+ * {@code @Message:} 触发式效果的实体
  **/
 class TriggeredAbilityEntry(
-    override val uuid: UUID,
+    override val uuid: UUID = UUID.randomUUID(),
     override val prototype: TriggeredAbility,
     val level : Int = 1,
     //做样子的技能等级

@@ -11,9 +11,9 @@ import org.co2dice.mirai.core.ast.symbol.api.Symbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-04-21:48
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-04-21:48
+ * {@code @Message:} Have a good time!  :)
  **/
 abstract class ListOpSymbol<O : Any, E : Any> : Symbol<O> {
 

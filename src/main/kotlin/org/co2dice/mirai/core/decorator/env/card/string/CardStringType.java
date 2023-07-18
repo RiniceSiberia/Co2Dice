@@ -9,9 +9,9 @@ import java.util.function.Function;
 /**
  * 使用IDEA编写
  *
- * @Author: DUELIST
- * @Time: 2023-05-03-14:30
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:} 2023-05-03-14:30
+ * {@code @Message:} 卡片修饰器的字符串类型
  **/
 public final class CardStringType {
     public static final CardStringType NAME = new CardStringType(e -> e.getEntry().getPrototype().getCardRealName());

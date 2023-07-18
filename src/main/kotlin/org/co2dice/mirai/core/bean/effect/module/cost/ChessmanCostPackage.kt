@@ -3,9 +3,9 @@ package org.co2dice.mirai.core.bean.effect.module.cost
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-09-17:05
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-09-17:05
+ * {@code @Message:} Have a good time!  :)
  **/
 class ChessmanCostPackage (
     val anyChessmanAttributeCost: AnyChessmanAttributeCost? = null,

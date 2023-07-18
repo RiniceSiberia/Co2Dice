@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.BiOpSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-01-13:33
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-01-13:33
+ * {@code @Message:} Have a good time!  :)
  **/
 class BiOpNode<O : Any,L : Any,R : Any>(
     override var symbol: BiOpSymbol<O, L, R>,

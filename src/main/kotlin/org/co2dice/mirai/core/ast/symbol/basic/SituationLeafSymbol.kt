@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-05-22:30
- * @Message: 特殊的"情景"叶子节点，专门用于存储情景，一个param只能有一个
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-05-22:30
+ * {@code @Message:} 特殊的"情景"叶子节点，专门用于存储情景，一个param只能有一个
  **/
 abstract class SituationLeafSymbol<O : SituationApi> : Symbol<O> {
 

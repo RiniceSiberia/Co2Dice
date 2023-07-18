@@ -8,9 +8,9 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2022-12-05-23:03
- * @Message: 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2022-12-05-23:03
+ * {@code @Message:} 卡组实体，最上方一张是index[0],最下方是index[deck.size-1]
  * 子类是场地卡卡组
  **/
 open class DeckInstance(

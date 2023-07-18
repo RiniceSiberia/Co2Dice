@@ -2,12 +2,13 @@ package org.co2dice.mirai.core.bean.effect.triggered_ability.prototype
 
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.api.PrototypeStructure
+import org.co2dice.mirai.core.bean.effect.module.target.TargetSelectorPackage
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-28-21:29
- * @Message: 发动的效果
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-28-21:29
+ * {@code @Message:} 发动的效果
  * 类似炉石的战吼和法术发动
  * 这种效果不能被简单的一个agent封装,因为他可能存在多个不同类型的效果，比如战吼和亡语同时在一张卡上存在
  **/
@@ -16,7 +17,7 @@ sealed interface TriggeredAbility : PrototypeStructure{
     //<Boolean>
     //发动所需的条件(和cost的检查函数有互动，也和本技能依赖的主体的卡片有互动)
 
-    val targetFunction : AstTree
+    val target : TargetSelectorPackage
     //<EffectTargets>
     //发动时选择目标，与其相关逻辑。传入一个key，使用value对应的取对象方法，即可获取对应的目标。
     //目标会作为Param的一部分传入到effectFunction中

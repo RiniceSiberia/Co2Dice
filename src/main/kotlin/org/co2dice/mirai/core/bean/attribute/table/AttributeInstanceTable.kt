@@ -6,9 +6,9 @@ import org.co2dice.mirai.core.bean.dice.instance.ListDices.tripleD6
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-06-0:28
- * @Message: 一个动态的属性表
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-06-0:28
+ * {@code @Message:} 一个动态的属性表
  **/
 class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
     //不用set的原因是需要保留AttributeInstance这个完整体

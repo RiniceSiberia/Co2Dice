@@ -9,9 +9,9 @@ import org.co2dice.mirai.core.ast.symbol.basic.ConstantLeafSymbol
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-01-13:35
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-01-13:35
+ * {@code @Message:} Have a good time!  :)
  **/
 class ConstantLeafNode<O : Any>(override var symbol: ConstantLeafSymbol<O>,
                                 val value: O) : INode<O>, ISymbolHolder<ConstantLeafSymbol<O>> {

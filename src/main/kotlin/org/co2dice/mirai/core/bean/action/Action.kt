@@ -5,9 +5,9 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-24-16:37
- * @Message: 所有行动的接口
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-24-16:37
+ * {@code @Message:} 所有行动的接口
  * 行动包括:
  * 攻击Attack
  * 移动Movement

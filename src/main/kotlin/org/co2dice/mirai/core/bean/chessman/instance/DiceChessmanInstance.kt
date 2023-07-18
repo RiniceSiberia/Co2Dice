@@ -12,9 +12,9 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-02-13:23
- * @Message: 骰子状态的棋子
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-02-13:23
+ * {@code @Message:} 骰子状态的棋子
  * 没有生命值，没有属性，没有战斗力，无法被正常攻击击中
  * 静态的能力也只有entry
  **/

@@ -5,9 +5,9 @@ import kotlin.collections.ArrayList
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-10-14:06
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-10-14:06
+ * {@code @Message:} Have a good time!  :)
  **/
 class DirectionsPool (
     directions : List<Direction2D>

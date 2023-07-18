@@ -10,9 +10,9 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.OnFieldTrig
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-06-19-21:17
- * @Message: 永久物接口，所有在场上的可被取为对象的实体都是这个接口的实现。拥有一个id来区分不同的永久物。
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-06-19-21:17
+ * {@code @Message:} 永久物接口，所有在场上的可被取为对象的实体都是这个接口的实现。拥有一个id来区分不同的永久物。
  * 永久物也具有混乱/秩序接口。
  **/
 interface PermanentInstance

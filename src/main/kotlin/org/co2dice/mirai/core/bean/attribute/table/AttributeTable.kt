@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.attribute.prototype.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-03-06-1:34
- * @Message: 一个记录在卡片上的静态的属性表,可用于卡片记录信息，或者是传递属性cost消耗
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-03-06-1:34
+ * {@code @Message:} 一个记录在卡片上的静态的属性表,可用于卡片记录信息，或者是传递属性cost消耗
  **/
 class AttributeTable(private val map : MutableMap<Attribute,Int>) {
 

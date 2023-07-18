@@ -7,9 +7,9 @@ import org.co2dice.mirai.core.decorator.env.chess.numeric.ChessNumericType;
 /**
  * 使用IDEA编写
  *
- * @Author: DUELIST
- * @Time: 2023-04-30-21:58
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:} 2023-04-30-21:58
+ * {@code @Message:} Have a good time!  :)
  **/
 public record GetChessNumericContext(ChessNumericType type, ChessmanInstance target)
         implements DecoratorContext<GetChessNumericContext> {

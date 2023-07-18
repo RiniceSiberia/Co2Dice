@@ -14,21 +14,24 @@ import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
 import org.co2dice.mirai.core.bean.attribute.table.AttributeTable
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
+import org.co2dice.mirai.core.bean.effect.module.cost.CostConstUtils.THIS_CHESSMAN_COST
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 import org.co2dice.mirai.core.utils.situation.getAgentChessmanInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-09-17:18
- * @Message: 发动效果的棋子支付属性
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-09-17:18
+ * {@code @Message:} 发动效果的棋子支付属性
  **/
 @Serializable(with = ThisChessmanCostSerializer::class)
 class ThisChessmanCost(
     val table : Map<Attribute, JsonObject>
 ) : OnlySelectionCost<ChessmanInstance> {
-    override fun check(situation: PreActivationSituation): ChessmanInstance? {
+    override val costName: String = THIS_CHESSMAN_COST
+
+    override fun getCosts(situation: PreActivationSituation): ChessmanInstance? {
         val param = Params(mutableMapOf(),situation)
         val agent = situation.getAgentChessmanInstance<ChessmanInstance>()
         if (agent != null && table.all {
@@ -40,7 +43,7 @@ class ThisChessmanCost(
         return null
     }
 
-    override fun execute(
+    override fun practice(
         obj: ChessmanInstance,
         situation: ActivationSituation
     ): Boolean {

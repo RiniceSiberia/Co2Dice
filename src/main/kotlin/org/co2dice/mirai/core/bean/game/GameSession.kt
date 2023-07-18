@@ -8,9 +8,9 @@ import java.util.*
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2022-12-25-15:13
- * @Message: Have a good time!  :)
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2022-12-25-15:13
+ * {@code @Message:} Have a good time!  :)
  **/
 class GameSession (
 

@@ -5,9 +5,9 @@ import kotlin.reflect.KClass
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-06-22:10
- * @Message: 存放参数的类
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-06-22:10
+ * {@code @Message:} 存放参数的类
  **/
 data class Params (
     val map : MutableMap<String, Any> = mutableMapOf(),

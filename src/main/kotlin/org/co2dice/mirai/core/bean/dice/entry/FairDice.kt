@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.bean.dice.entry
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-12-21:40
- * @Message: 普通骰子
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-12-21:40
+ * {@code @Message:} 普通骰子
  **/
 class FairDice(diceNum: Int)
     : DispersedSpace<Int>((1..diceNum).associateWith { 1 }.toMap()) {

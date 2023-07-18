@@ -12,9 +12,9 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-04-15-23:45
- * @Message: 墓地发动的效果
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-04-15-23:45
+ * {@code @Message:} 墓地发动的效果
  **/
 class GYCardInstance (
     entry: CardEntry,

@@ -4,9 +4,9 @@ import org.co2dice.mirai.core.bean.effect.static_ability.entry.StaticAbilityEntr
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-07-02-18:19
- * @Message: 骰子槽里可发动的静止式异能
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-07-02-18:19
+ * {@code @Message:} 骰子槽里可发动的静止式异能
  **/
 class DiceSlotStaticAbilityInstance(entry : StaticAbilityEntry) : StaticAbilityInstance(entry){
 }

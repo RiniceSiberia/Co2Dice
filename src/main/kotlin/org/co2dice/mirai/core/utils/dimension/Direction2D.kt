@@ -2,9 +2,9 @@ package org.co2dice.mirai.core.utils.dimension
 
 /**
  *      使用IDEA编写
- * @Author: DUELIST
- * @Time:  2023-05-02-22:06
- * @Message: 基础类,2D的方向都要能通过这个来获取下一步的坐标
+ * {@code @Author:} DUELIST
+ * {@code @Time:}  2023-05-02-22:06
+ * {@code @Message:} 基础类,2D的方向都要能通过这个来获取下一步的坐标
  **/
 open class Direction2D(val name : String, val func : (Coordinate2D) -> Coordinate2D){
     fun getStepPosition(x: Int, y: Int) : Coordinate2D{
