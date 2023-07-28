@@ -1,20 +1,15 @@
 package org.co2dice.mirai.core.bean.effect.module.cost
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
 import org.co2dice.mirai.core.bean.attribute.table.AttributeTable
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
-import org.co2dice.mirai.core.bean.effect.module.cost.CostConstUtils.THIS_CHESSMAN_COST
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 import org.co2dice.mirai.core.utils.situation.getAgentChessmanInstance
@@ -25,14 +20,13 @@ import org.co2dice.mirai.core.utils.situation.getAgentChessmanInstance
  * {@code @Time:}  2023-07-09-17:18
  * {@code @Message:} 发动效果的棋子支付属性
  **/
-@Serializable(with = ThisChessmanCostSerializer::class)
+@Serializable
 class ThisChessmanCost(
     val table : Map<Attribute, JsonObject>
-) : OnlySelectionCost<ChessmanInstance> {
-    override val costName: String = THIS_CHESSMAN_COST
+) : OneToOneSelectionCost<ChessmanInstance> {
 
-    override fun getCosts(situation: PreActivationSituation): ChessmanInstance? {
-        val param = Params(mutableMapOf(),situation)
+    override fun getCostScope(input: Map<String, Any>, situation: PreActivationSituation): ChessmanInstance? {
+        val param = Params(input.toMutableMap(),situation)
         val agent = situation.getAgentChessmanInstance<ChessmanInstance>()
         if (agent != null && table.all {
                 agent.attributeTable.contain(it.key)
@@ -43,11 +37,8 @@ class ThisChessmanCost(
         return null
     }
 
-    override fun practice(
-        obj: ChessmanInstance,
-        situation: ActivationSituation
-    ): Boolean {
-        val param = Params(mutableMapOf(),situation)
+    override fun practice(input: Map<String, Any>, obj: ChessmanInstance, situation: ActivationSituation): Boolean {
+        val param = Params(input.toMutableMap(),situation)
         return obj.attributeTable.payCost(
             table = AttributeTable(
                 mutableMapOf<Attribute, Int>().apply {
@@ -58,24 +49,7 @@ class ThisChessmanCost(
             )
         )
     }
-}
-object ThisChessmanCostSerializer : KSerializer<ThisChessmanCost> {
-    override val descriptor = buildClassSerialDescriptor("ThisChessmanCost"){
-        element("table", MapSerializer(Attribute.serializer(), JsonElement.serializer()).descriptor)
-    }
-
-    override fun deserialize(decoder: Decoder): ThisChessmanCost {
-        return ThisChessmanCost(
-            decoder.decodeSerializableValue(
-                MapSerializer(Attribute.serializer(),JsonElement.serializer())
-            ).map { (key, value) -> key to value.jsonObject }.toMap()
-        )
-    }
-
-    override fun serialize(encoder: Encoder, value: ThisChessmanCost) {
-        return encoder.encodeSerializableValue(
-            MapSerializer(Attribute.serializer(),JsonElement.serializer()),
-            value.table.map { (key, value) -> key to value }.toMap()
-        )
+    override fun toJson(obj: ChessmanInstance): JsonElement {
+        return Json.encodeToJsonElement(obj)
     }
 }

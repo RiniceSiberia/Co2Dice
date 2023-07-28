@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.api.agent.SpellAgent
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
@@ -15,11 +16,12 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * {@code @Message:} 非公开的类，手牌和主卡组的通用类(不包括场地)
  * 无法持有静态效果，但可以变成一个action(行动)，比如发动技能或者放置
  **/
-class MainDeckUnPublicCardInstance (
-    entry: CardEntry,
+@Serializable
+class MainDeckCardInstance (
+    override val entry: CardEntry,
     override var holder: PlayerInstance,
     override val spellAbilities : List<EnterFieldTriggeredAbilityInstance> = entry.triggeredAbilityEntries.toInstance(),
-    ) : CardInstance(entry), SpellAgent, DependPlayer {
+    ) : CardInstance(), SpellAgent, DependPlayer {
         var open : Boolean = false
 
     fun launchConditions(situation: PreActivationSituation) : Boolean{

@@ -5,10 +5,14 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.chessman.instance.FieldChessmanInstance
 import org.co2dice.mirai.core.utils.ConstantUtils.IT
+import org.co2dice.mirai.core.utils.MathUtils.listToMap
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
 /**
@@ -36,25 +40,27 @@ class SelectSingleFieldChessman(
 //            ),
 //            right = ConstantLeafNode<Int>(
 //                symbol = IntegerConstant,
-//                value = Int.MAX_VALUE,
+//                value = 5,
 //            ),
 //        ).serialize(),
 //    ),
-    //示范
-) : TargetSelector<FieldChessmanInstance> {
-
-    override fun check(situation: PreActivationSituation): Boolean {
-        return get(situation).isNotEmpty()
+    //示范,选一个力量大于5的棋子
+) : ManyToOneTargetSelector<FieldChessmanInstance> {
+    override fun toJson(obj: FieldChessmanInstance): JsonElement {
+        return Json.encodeToJsonElement(obj)
     }
-    override fun get(situation: PreActivationSituation): List<FieldChessmanInstance> {
+
+    override fun getSelectScope(
+        input: Map<String, Any>,
+        situation: PreActivationSituation
+    ): Map<Int, FieldChessmanInstance> {
         //返回一个选择的范围
         return situation.getField().chessmen.keys.stream()
             .filter { filter.execute<Boolean>(Params(mutableMapOf(IT to it),situation)) == true }.filter {
                 true
 //                it.staticAbilities.any { ability -> ability is CanBeTargetAbility }
-            }.toList()
+            }.toList().listToMap()
     }
-
 }
 object SelectFieldChessmanSerializer : KSerializer<SelectSingleFieldChessman> {
     override val descriptor = buildClassSerialDescriptor("SelectSingleFieldChessman") {

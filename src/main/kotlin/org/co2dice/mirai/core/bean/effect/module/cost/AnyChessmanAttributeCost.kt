@@ -1,21 +1,16 @@
 package org.co2dice.mirai.core.bean.effect.module.cost
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.attribute.prototype.Attribute
 import org.co2dice.mirai.core.bean.attribute.table.AttributeTable
 import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
-import org.co2dice.mirai.core.bean.effect.module.cost.CostConstUtils.ANY_CHESSMAN_ATTRIBUTE_COST
+import org.co2dice.mirai.core.utils.MathUtils.listToMap
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
@@ -26,22 +21,22 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * {@code @Message:} 单一任意角色支付属性点的cost
  * 如果有类似沙利亚这种加税(加消耗属性点的)的，加入到修饰器里
  **/
-@Serializable(with = AnyChessmanAttributeCostSerializer::class)
-class AnyChessmanAttributeCost(val table : Map<Attribute,JsonObject>) : MultipleSelectionCost<ChessmanInstance> {
-    override val costName: String = ANY_CHESSMAN_ATTRIBUTE_COST
+@Serializable
+class AnyChessmanAttributeCost(val table : Map<Attribute,JsonObject>) : ManyToOneSelectionCost<ChessmanInstance> {
+
 
     //最简单的，必须比这个值大
-    override fun getCosts(situation: PreActivationSituation): List<ChessmanInstance> {
-        val param = Params(mutableMapOf(),situation)
+    override fun getCostScope(input : Map<String,Any>, situation: PreActivationSituation): Map<Int, ChessmanInstance> {
+        val param = Params(input.toMutableMap(),situation)
         return situation.scene.field.chessmen.keys.stream().filter { chessman ->
             table.all {
                 chessman.attributeTable.contain(it.key) && chessman.attributeTable.getValue(it.key)!! >= (AstTree(it.value).execute<Int>(param) ?: return@all false)
             }
-        }.toList()
+        }.toList().listToMap()
     }
 
-    override fun practice(obj : ChessmanInstance, situation: ActivationSituation): Boolean {
-        val param = Params(mutableMapOf(),situation)
+    override fun practice(input : Map<String,Any>,obj : ChessmanInstance, situation: ActivationSituation): Boolean {
+        val param = Params(input.toMutableMap(),situation)
         return obj.attributeTable.payCost(
             table = AttributeTable(
                 mutableMapOf<Attribute, Int>().apply {
@@ -53,26 +48,7 @@ class AnyChessmanAttributeCost(val table : Map<Attribute,JsonObject>) : Multiple
         )
     }
 
-
-}
-object AnyChessmanAttributeCostSerializer : KSerializer<AnyChessmanAttributeCost> {
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AnyChessmanAttributeCost") {
-        element("table", MapSerializer(Attribute.serializer(),JsonElement.serializer()).descriptor)
+    override fun toJson(obj: ChessmanInstance): JsonElement {
+        return Json.encodeToJsonElement(obj)
     }
-
-    override fun deserialize(decoder: Decoder): AnyChessmanAttributeCost {
-        return AnyChessmanAttributeCost(
-            decoder.decodeSerializableValue(
-                MapSerializer(Attribute.serializer(),JsonElement.serializer())
-            ).map { (key, value) -> key to value.jsonObject }.toMap()
-        )
-    }
-
-    override fun serialize(encoder: Encoder, value: AnyChessmanAttributeCost) {
-        return encoder.encodeSerializableValue(
-            MapSerializer(Attribute.serializer(),JsonElement.serializer()),
-            value.table.map { (key, value) -> key to value }.toMap()
-        )
-    }
-
 }

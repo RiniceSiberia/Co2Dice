@@ -5,6 +5,7 @@ import java.math.MathContext
 import java.math.RoundingMode
 import kotlin.math.exp
 import kotlin.math.ln
+import kotlin.random.Random
 
 
 /**
@@ -67,8 +68,57 @@ object MathUtils {
         return { x -> this(x, y) }
     }
 
+    fun <L : List<T>,T> L.listToMap() : Map<Int,T>{
+        val result = mutableMapOf<Int,T>()
+        for (i in this.indices){
+            result[i] = this[i]
+        }
+        return result
+    }
 
+    /**
+     * 计算集合的幂集（包含所有可能的子集），并返回一个包含所有子集的集合。
+     *
+     * @param inputSet 输入集合，表示要计算幂集的原始集合。
+     * @return 幂集的集合，其中每个元素都是输入集合的一个子集。注意，空集 {} 也是结果集合的子集。
+     */
+    fun <T> powerSet(inputSet: Collection<T>): Set<Set<T>> {
+        if (inputSet.isEmpty()) {
+            return setOf(emptySet())
+        }
 
+        val element = inputSet.first()
+        val restOfSet = inputSet.minus(element)
+        val powerSetWithoutElement = powerSet(restOfSet)
+
+        val powerSetWithElement = powerSetWithoutElement.map { subset -> subset + element }
+
+        return powerSetWithoutElement + powerSetWithElement
+    }
+
+    /**
+     * 统计满足条件的子集在集合中的出现次数，并返回一个包含子集及其出现次数的映射。
+     *
+     * @param inputCollection 输入集合，表示要统计子集的集合。
+     * @param checkFunc 检查函数，用于判断给定子集是否满足条件。
+     * @return 一个映射，其中包含满足 checkFunc 条件的子集以及它们在输入集合中的出现次数。
+     */
+    fun <T> countSubsetOccurrences(inputCollection: Collection<T>, checkFunc: (Set<T>) -> Boolean): Map<Set<T>, Int> {
+        val result = mutableMapOf<Set<T>, Int>()
+
+        // 获取输入集合元素的幂集
+        val powerSet = powerSet(inputCollection.toSet())
+
+        // 统计满足 checkFunc 条件的子集在输入集合中的出现次数
+        for (subset in powerSet) {
+            if (checkFunc(subset)) {
+                val count = inputCollection.count { it in subset }
+                result[subset] = count
+            }
+        }
+
+        return result
+    }
 
     // apply simpson rule to approximately compute the integration.
     fun simpsonRule(upper: BigDecimal,
@@ -97,95 +147,319 @@ object MathUtils {
         return result
     }
 
-    fun <A : Any> selectElements(list: Collection<A>,
-                                 conditionSet : (Set<A>) -> Boolean,
-                                 conditionSeg : (A) -> Boolean,
-                                 sort : (A) -> Int = {0},
-                                 //排序的方法，升序排列,最前面的返回1，第二的返回2，以此类推
-                                 ): List<Set<A>> {
-        // 创建一个空的list作为结果
-        val result = mutableListOf<Set<A>>()
-        // 调用一个辅助方法，传入listA, M和一个空的set作为初始值
-        helper(list, setOf(), conditionSet, conditionSeg, result)
-        // 返回结果
-        return result.apply {
-            //对内部进行排序和去重
-            forEach { it.sortedBy (sort) }
-            this.distinct()
+
+    /**
+     * 获取多个List中每个List的Set元素的所有组合，并按照指定的排序函数排序，去除重复的组合。
+     *
+     * @param lists     包含多个List的列表，每个List包含一组Set元素。
+     * @param sort      排序函数，用于比较两个List的Set元素，根据返回的值进行排序，默认按照Set元素个数升序排列。
+     * @return          返回所有合法组合的列表，按照排序函数的规则排序且去除重复组合。
+     */
+    fun <T : Any> getCombinations(
+        lists: List<List<Set<T>>>,
+        sort: (List<Set<T>>) -> Int = { it.sumOf { set -> set.size } }
+    ): List<List<Set<T>>> {
+        val result: MutableList<List<Set<T>>> = mutableListOf()
+
+        /**
+         * 检查一个组合是否有效，即是否没有重复元素。
+         *
+         * @param combination   要检查的组合，包含多个Set。
+         * @return              如果组合有效（没有重复元素），返回true，否则返回false。
+         */
+        fun isValid(combination: List<Set<T>>): Boolean {
+            val seen: MutableSet<T> = mutableSetOf()
+            for (set in combination) {
+                for (element in set) {
+                    if (seen.contains(element)) {
+                        return false
+                    } else {
+                        seen.add(element)
+                    }
+                }
+            }
+            return true
         }
+
+        /**
+         * 递归生成所有组合的内部函数。
+         *
+         * @param depth     当前递归深度，从0开始。
+         * @param current   当前正在生成的组合。
+         */
+        fun generateCombinations(depth: Int, current: MutableList<Set<T>>) {
+            if (depth == lists.size) {
+                if (isValid(current)) {
+                    result.add(ArrayList(current))
+                }
+                return
+            }
+
+            for (set in lists[depth]) {
+                current.add(set)
+                generateCombinations(depth + 1, current)
+                current.removeAt(current.size - 1)
+            }
+        }
+
+        generateCombinations(0, mutableListOf())
+        return result.distinct().sortedBy(sort)
     }
 
-    fun <A> helper(list: Collection<A>,
-                   temp: Set<A>,
-                   conditionSet: (Set<A>) -> Boolean,
-                   conditionEntry: (A) -> Boolean,
-                   result: MutableList<Set<A>>) {
-        // 如果list为空，说明已经遍历完所有的元素
-        if (list.isEmpty()) {
-            // 判断temp是否满足conditionSet函数
-            if (conditionSet(temp)) {
-                // 如果是，则将temp加入到结果中
-                result.add(temp)
+
+    fun <K, V> getAllCombinations(map: Map<K, List<V>>): List<Map<K, V>> {
+        val keys = map.keys.toList()
+        val combinations = mutableListOf<Map<K, V>>()
+
+        fun generateCombinations(index: Int, current: MutableMap<K, V>) {
+            if (index == keys.size) {
+                combinations.add(current.toMap())
+                return
+            }
+
+            val key = keys[index]
+            val values = map[key] ?: emptyList()
+
+            for (value in values) {
+                if (!current.values.contains(value)) {
+                    current[key] = value
+                    generateCombinations(index + 1, current)
+                    current.remove(key)
+                }
+            }
+        }
+
+        generateCombinations(0, mutableMapOf())
+        return combinations
+    }
+
+
+    /**
+     * 生成样本空间，并统计符合条件的子集及其出现次数。
+     *
+     * @param collection 输入的集合，包含泛型元素A。
+     * @param checkFunc 检查子集是否符合条件的函数。默认为 { it.size == 1 }，即只包含一个元素的子集。
+     * @param frequencyInSampling 随机抽样计算的次数。大于0则视为使用随机抽样。默认为-1，即使用精确递归计算。
+     * @return 返回包含符合条件的子集及其出现次数的Map。
+     */
+    fun <A> generateSamples(
+        collection: Collection<A>,
+        checkFunc: (Set<A>) -> Boolean = { it.size == 1 },
+        frequencyInSampling: Int = -1
+    ): Map<Set<A>, Int> {
+        // 创建一个样本空间，用于存储符合条件的子集及其出现次数
+        val sampleSpace = mutableMapOf<Set<A>, Int>()
+
+        /**
+         * 递归生成子集并统计符合条件的子集及其出现次数。
+         *
+         * @param index 当前元素在集合中的索引。
+         * @param subset 当前子集。
+         */
+        fun generateSubsets(index: Int, subset: MutableSet<A>) {
+            // 如果当前索引等于集合大小，表示子集生成完成
+            if (index == collection.size) {
+                // 检查子集是否符合条件，若符合则将其添加到样本空间中
+                if (checkFunc(subset)) {
+                    sampleSpace[subset.toSet()] = sampleSpace.getOrDefault(subset.toSet(), 0) + 1
+                }
+                return
+            }
+
+            // 排除当前索引对应的元素
+            generateSubsets(index + 1, subset)
+
+            // 包含当前索引对应的元素
+            subset.add(collection.elementAt(index))
+            generateSubsets(index + 1, subset)
+            subset.remove(collection.elementAt(index))
+        }
+
+        // 根据useRandomSampling决定使用精确递归计算还是随机抽样计算
+        if (frequencyInSampling > 0) {
+            repeat(frequencyInSampling) {
+                // 随机抽样生成一个子集
+                val randomSubset = collection.filter { Random.nextBoolean() }.toSet()
+                // 检查子集是否符合条件，若符合则将其添加到样本空间中
+                if (checkFunc(randomSubset)) {
+                    sampleSpace[randomSubset] = sampleSpace.getOrDefault(randomSubset, 0) + 1
+                }
             }
         } else {
-            // 否则，取出list中的第一个元素
-            val first = list.first()
-            // 判断它是否满足conditionEntry函数
-            if (conditionEntry(first)) {
-                // 如果是，则将其加入到temp中
-                val newTemp = temp + first
-                // 递归地调用自己，传入剩余的list和新的temp
-                helper(list.drop(1), newTemp, conditionSet, conditionEntry, result)
-            }
-            // 无论是否满足条件，都要考虑不选这个元素的情况
-            // 递归地调用自己，传入剩余的list和原来的temp
-            helper(list.drop(1), temp, conditionSet, conditionEntry, result)
+            // 使用精确递归计算生成子集
+            generateSubsets(0, mutableSetOf())
         }
+
+        return sampleSpace
     }
 
-    fun <T : Any> getCombinations(lists: List<List<Set<T>>>,
-                                  sort : (List<Set<T>>) -> Int = { it.stream().mapToInt { s -> s.size }.sum() },
-                                  //一样也是升序排列
-                                  ): List<List<Set<T>>> {
-        // 从最外层的list里，每个组选一个set拿出，组成一个list，遍历，作为结果
-        val result: MutableList<List<Set<T>>> = mutableListOf() // 存储最终结果
-        generateCombinations(lists, result, 0, ArrayList()) // 调用递归方法
-        return result.sortedBy(sort).distinct()
+
+
+
+    /**
+     * 计算从外层的collection中，遍历内层的每个collection，求从所有内层collection中抽取元素的可能排列组合总和，并统计结果。
+     * 注:该方法和getAllCombinations不同，不是求幂集的
+     *
+     * @param collections 外层的collection，其中每个元素都是内层的collection（List<A>），A为泛型。
+     * @param selector 一个函数 (List<A>) -> R，用于将统计结果变为R类型。
+     * @return 返回一个Map<R, Int>，其中key为selector函数对应的结果，value为该结果出现的次数。
+     */
+    fun <T, R> calculatePermutationsAndCount(
+        collections: List<Collection<T>>,
+        selector: (List<T>) -> R
+    ): Map<R, Int> {
+        val allCombinations = mutableListOf<List<T>>()
+        generateCombinations(collections, 0, emptyList(), allCombinations)
+
+        // 统计结果的Map
+        val resultMap = mutableMapOf<R, Int>()
+
+        for (combination in allCombinations) {
+            val result = selector(combination)
+            resultMap[result] = resultMap.getOrDefault(result, 0) + 1
+        }
+
+        return resultMap
     }
 
-    // 递归方法，用于生成所有可能的组合
+    /**
+     * 递归函数，生成从所有内层collection中抽取元素的可能排列组合。
+     *
+     * @param collections 外层的collection，其中每个元素都是内层的collection（List<A>），A为泛型。
+     * @param index 当前遍历到的外层collection的索引。
+     * @param currentCombination 当前已经生成的排列组合。
+     * @param allCombinations 存储所有排列组合的结果列表。
+     */
     private fun <T> generateCombinations(
-        lists: List<List<Set<T>>>,
-        result: MutableList<List<Set<T>>>,
-        depth: Int,
-        current: MutableList<Set<T>>
+        collections: List<Collection<T>>,
+        index: Int,
+        currentCombination: List<T>,
+        allCombinations: MutableList<List<T>>
     ) {
-        if (depth == lists.size) { // 如果已经遍历完所有的list
-            if (isValid(current)) { // 检查当前的组合是否有效（没有重复元素）
-                result.add(ArrayList(current)) // 把当前的组合加入到结果中
-            }
+        if (index == collections.size) {
+            allCombinations.add(currentCombination)
             return
         }
-        for (i in lists[depth].indices) { // 遍历当前深度的list中的每个set
-            current.add(lists[depth][i]) // 把当前的set加入到当前的组合中
-            generateCombinations(lists, result, depth + 1, current) // 递归调用下一层深度的list
-            current.removeAt(current.size - 1) // 回溯，移除当前的set
+
+        val currentCollection = collections[index]
+        for (item in currentCollection) {
+            val newCombination = currentCombination + item
+            generateCombinations(collections, index + 1, newCombination, allCombinations)
         }
     }
 
-    // 检查一个list中的set是否有重复元素
-    private fun <T> isValid(list: List<Set<T>>): Boolean {
-        val set: MutableSet<T> = mutableSetOf() // 用一个set来存储所有元素
-        list.forEach { s -> s.forEach {
-            // 遍历list中的每个set
-            t ->
-            // 遍历set中的每个元素
-            if (set.contains(t)) return false
-            // 如果set已经包含了该元素，说明有重复，返回false
-            else set.add(t)
-            // 否则，把该元素加入到set中
-        } }
+    private fun <A,K> convertPairToMap(pairs: Map<K, Map<Int, A>>): List<Map<K, A>> {
+        //内外翻转
+        val outerKeys = pairs.keys.toList()
+        val innerMaps = pairs.values.toList()
+        val combinations = mutableListOf<Map<K, A>>()
+
+        fun generateCombination(index: Int, currentCombination: MutableMap<K, A>) {
+            if (index == innerMaps.size) {
+                combinations.add(currentCombination.toMap())
+                return
+            }
+
+            val innerMap = innerMaps[index]
+            for ((innerKey, value) in innerMap) {
+                currentCombination[outerKeys[index]] = value
+                generateCombination(index + 1, currentCombination)
+                currentCombination.remove(outerKeys[index])
+            }
+        }
+
+        generateCombination(0, mutableMapOf())
+        return combinations
+    }
+
+    /**
+     * 生成所有可能的组合列表
+     * @param oto Map<String, A>
+     * @param mto Map<String, Map<Int, A>>
+     * @param mtm Map<String, Map<Int, Set<A>>>
+     * @return 所有可能的组合列表
+     */
+
+    fun <A> generateAllCombinations(
+        oto: Map<String, A>,
+        mto: Map<String, Map<Int, A>>,
+        mtm: Map<String, Map<Int, Set<A>>>
+    ): List<Map<String, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>> {
+
+        val pairs: MutableMap<String, Map<Int, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>> = mutableMapOf()
+
+        oto.forEach { (string, value) ->
+            pairs[string] = mapOf(1 to TriEither.Left(value))
+        }
+
+        mto.forEach { (string, map) ->
+            pairs[string] = map.mapValues { TriEither.Middle(it.toPair()) }
+        }
+
+        mtm.forEach { (string, setMap) ->
+            pairs[string] = setMap.mapValues { TriEither.Right(it.toPair()) }
+        }
+
+        return filterCombinations(convertPairToMap(pairs))
+    }
+
+    /**
+     * 筛选并返回符合条件的组合列表
+     * @param combinations 所有可能的组合列表
+     * @return 符合条件的组合列表
+     */
+    fun<A> filterCombinations(combinations: List<Map<String, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>>): List<Map<String, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>> {
+        val filteredCombinations = mutableListOf<Map<String, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>>()
+
+        for (combination in combinations) {
+            if (isValidCombination(combination)) {
+                filteredCombinations.add(combination)
+            }
+        }
+
+        return filteredCombinations
+    }
+
+    /**
+     * 检查组合是否满足条件
+     * @param combination 单个组合
+     * @return 是否满足条件
+     */
+    private fun<A> isValidCombination(combination: Map<String, TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>>): Boolean {
+        for (triEither1 in combination) {
+            for (triEither2 in combination.filter { it != triEither1 }) {
+                if (!triEitherFilter(triEither1.value, triEither2.value)) {
+                    return false
+                }
+            }
+        }
         return true
+    }
+
+    /**
+     * 对比TriEither是否满足条件
+     * @param a TriEither对象A
+     * @param b TriEither对象B
+     * @return 是否满足条件
+     */
+    private fun <A> triEitherFilter(a: TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>, b: TriEither<A, Pair<Int, A>, Pair<Int, Set<A>>>): Boolean {
+        return when (a) {
+            is TriEither.Left -> when (b) {
+                is TriEither.Left -> a.value != b.value
+                is TriEither.Middle -> a.value != b.value.second
+                is TriEither.Right -> a.value !in b.value.second
+            }
+            is TriEither.Middle -> when (b) {
+                is TriEither.Left -> a.value.second != b.value
+                is TriEither.Middle -> a.value.second != b.value.second
+                is TriEither.Right -> a.value.second !in b.value.second
+            }
+            is TriEither.Right -> when (b) {
+                is TriEither.Left -> b.value !in a.value.second
+                is TriEither.Middle -> b.value.second !in a.value.second
+                is TriEither.Right -> a.value.second.intersect(b.value.second).isEmpty()
+            }
+        }
     }
 
 

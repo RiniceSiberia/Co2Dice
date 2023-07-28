@@ -1,8 +1,11 @@
 package org.co2dice.mirai.core.bean.effect.triggered_ability.prototype
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.effect.module.cost.CostPackage
 import org.co2dice.mirai.core.bean.effect.module.target.TargetSelectorPackage
+import org.co2dice.mirai.core.utils.serializer.UUIDSerializer
 import java.util.*
 
 /**
@@ -13,7 +16,10 @@ import java.util.*
  * 类似炉石的战吼和法术，技能此时会进入一个特定的区域"缓冲区"
  * 道具的Spell被无效的话，道具的战吼不会被触发，而技能的Spell被无效了
  **/
+@Serializable
+@SerialName("enter_field_triggered_ability")
 class EnterFieldTriggeredAbility(
+    @Serializable(with = UUIDSerializer::class)
     override val uuid: UUID,
     override val launchConditions: AstTree,
     //触发条件,false则不触发,如果是技能就是无法发动，道具或者事件就是无事发生
@@ -27,5 +33,5 @@ class EnterFieldTriggeredAbility(
     //检定
     override val react: AstTree
     //对抗
-) : TriggeredAbility{
+) : TriggeredAbility(){
 }

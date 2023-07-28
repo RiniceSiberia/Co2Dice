@@ -1,13 +1,10 @@
 package org.co2dice.mirai.core.bean.effect.module.cost
 
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.descriptors.element
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.effect.module.cost.CostConstUtils.THIS_CARD_COST
 import org.co2dice.mirai.core.bean.game.zone.api.CardVesselApi
 import org.co2dice.mirai.core.bean.game.zone.instance.CardListVessel
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
@@ -23,7 +20,7 @@ import org.co2dice.mirai.core.utils.situation.getAgentCardInstance
  * 我放弃了，我选择最啥b的方法
  * 卡片专属的cost，禁止其他类型的cost使用
  **/
-@Serializable(with = ThisCardCostSerializer::class)
+@Serializable
 class ThisCardCost(
     val from : Int,
     val to : Int,
@@ -46,9 +43,7 @@ class ThisCardCost(
     // 41.丢弃(从卡组)
     // 42.除外(从卡组)
 
-) : OnlySelectionCost<CardInstance> {
-
-    override val costName: String = THIS_CARD_COST
+) : OneToOneSelectionCost<CardInstance> {
 
     init {
         if (from == to){
@@ -62,7 +57,11 @@ class ThisCardCost(
         }
     }
 
-    override fun getCosts(situation: PreActivationSituation): CardInstance? {
+    override fun toJson(obj: CardInstance): JsonElement {
+        return Json.encodeToJsonElement(obj)
+    }
+
+    override fun getCostScope(input : Map<String,Any>, situation: PreActivationSituation): CardInstance? {
         val agent = situation.getAgentCardInstance<CardInstance>()
         if (agent != null && getFrom(from,situation,agent).contain(agent)){
             return agent
@@ -70,7 +69,7 @@ class ThisCardCost(
         return null
     }
 
-    override fun practice(obj : CardInstance, situation: ActivationSituation): Boolean {
+    override fun practice(input: Map<String, Any>, obj: CardInstance, situation: ActivationSituation): Boolean {
         val agent = situation.getAgentCardInstance<CardInstance>() ?: return false
         val from = getFrom(from,situation,agent)
         val to = getTo(to,situation)
@@ -99,24 +98,5 @@ class ThisCardCost(
                 else -> throw Exception("t must be in 1..4")
             }
         }
-    }
-
-}
-
-object ThisCardCostSerializer : KSerializer<ThisCardCost> {
-    override val descriptor = buildClassSerialDescriptor("ThisCardCost"){
-        element<Int>("from")
-        element<Int>("to")
-    }
-
-    override fun deserialize(decoder: Decoder): ThisCardCost {
-        val from = decoder.decodeInt()
-        val to = decoder.decodeInt()
-        return ThisCardCost(from,to)
-    }
-
-    override fun serialize(encoder: Encoder, value: ThisCardCost) {
-        encoder.encodeInt(value.from)
-        encoder.encodeInt(value.to)
     }
 }

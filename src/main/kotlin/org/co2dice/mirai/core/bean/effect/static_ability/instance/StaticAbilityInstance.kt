@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.static_ability.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.ast.tree.AstTree
 import org.co2dice.mirai.core.bean.api.InstanceStructure
@@ -12,11 +13,10 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
  * {@code @Time:}  2023-06-23-18:43
  * {@code @Message:} Have a good time!  :)
  **/
-sealed class StaticAbilityInstance(
-    override val entry : StaticAbilityEntry,
-    val trigger : AstTree  = entry.prototype.trigger,
-    val operation : AstTree = entry.prototype.operation,
-) : InstanceStructure<StaticAbilityEntry>{
+@Serializable
+sealed class StaticAbilityInstance() : InstanceStructure<StaticAbilityEntry>{
+    val trigger : AstTree  = entry.prototype.trigger
+    val operation : AstTree = entry.prototype.operation
 
     fun trigger(situationApi: SituationApi) : Boolean{
         return trigger.execute<Boolean>(Params(situation = situationApi)) ?: false

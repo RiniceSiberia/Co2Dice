@@ -1,27 +1,13 @@
 package org.co2dice.mirai.core.bean.effect.module.cost
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 import org.co2dice.mirai.core.ast.Params
-import org.co2dice.mirai.core.ast.node.BiOpNode
-import org.co2dice.mirai.core.ast.node.ConstantLeafNode
-import org.co2dice.mirai.core.ast.node.SituationLeafNode
-import org.co2dice.mirai.core.ast.node.UniOpNode
-import org.co2dice.mirai.core.ast.symbol.impl.game.situation.GetDesk
-import org.co2dice.mirai.core.ast.symbol.impl.game.situation.GetPlayer
-import org.co2dice.mirai.core.ast.symbol.impl.game.zone.GetHand
-import org.co2dice.mirai.core.ast.symbol.impl.game.zone.HandCombinationRestrictAmountSymbol
-import org.co2dice.mirai.core.ast.symbol.impl.leaf.constant.IntegerConstant
-import org.co2dice.mirai.core.ast.symbol.impl.leaf.param.situation.PreActivationSituationSymbol
 import org.co2dice.mirai.core.ast.tree.AstTree
-import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.effect.module.cost.CostConstUtils.DISCARD_COST
-import org.co2dice.mirai.core.bean.game.zone.instance.DeskInstance
-import org.co2dice.mirai.core.bean.game.zone.instance.HandInstance
-import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
+import org.co2dice.mirai.core.bean.card.instance.MainDeckCardInstance
+import org.co2dice.mirai.core.utils.ConstantUtils.IT
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
 import org.co2dice.mirai.core.utils.situation.PreActivationSituation
 
@@ -31,56 +17,71 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * {@code @Time:}  2023-06-22-23:39
  * {@code @Message:} 丢卡，check会返回丢卡的所有可能性组合
  **/
+@Serializable
 class DiscardCost(
-    val getCard :AstTree = AstTree(
-        json = BiOpNode<List<Set<CardInstance>>,HandInstance,Int>(
-            symbol = HandCombinationRestrictAmountSymbol,
-            left = UniOpNode<HandInstance,DeskInstance>(
-                symbol = GetHand,
-                child = BiOpNode<DeskInstance, PreActivationSituation, PlayerInstance>(
-                    symbol = GetDesk,
-                    left = SituationLeafNode<PreActivationSituation>(
-                        symbol = PreActivationSituationSymbol,
-                    ),
-                    right =UniOpNode<PlayerInstance, PreActivationSituation>(
-                        symbol = GetPlayer,
-                        child = SituationLeafNode<PreActivationSituation>(
-                            symbol = PreActivationSituationSymbol,
-                        ),
-                    ),
-                ),
-            ),
-            right = ConstantLeafNode<Int>(
-                symbol = IntegerConstant,
-                value = 1,
-            )
-        ).serialize()
-    )
-    //测试案例，1张卡的结果混合
-) : MultipleSelectionCost<Set<CardInstance>> {
-    override val costName: String = DISCARD_COST
-
-    override fun getCosts(situation: PreActivationSituation): List<Set<CardInstance>> {
-        val params = Params(mutableMapOf(),situation)
-        return getCard.execute<List<Set<CardInstance>>>(params)?.distinct() ?: emptyList()
+    val filterSeg : AstTree,
+//    = AstTree(
+//        json = BiOpNode<Boolean,Int,Int>(
+//            symbol =Greater,
+//            left = UniOpNode<Int,CardInstance>(
+//                symbol = GetCardChaos,
+//                child = ParamLeafNode<MainDeckCardInstance>(
+//                    symbol = MainDeckCardParam,
+//                    key = IT
+//                )
+//            ),
+//            right = ConstantLeafNode<Int>(
+//                symbol = IntegerConstant,
+//                value = 5
+//            ),
+//        ).serialize()
+//    ),
+    //样板,选择chaos >5的卡丢弃
+    val filterSet : AstTree,
+//      = AstTree(
+//        json = BiOpNode<Boolean,Int,Int>(
+//            symbol = Equal,
+//            left = UniOpNode<Int,Set<*>>(
+//                symbol = SetSizeSymbol,
+//                child = ParamLeafNode<Set<MainDeckCardInstance>>(
+//                    symbol = SetMainDeckCardParam,
+//                    key = IT
+//                )
+//            ),
+//            right = ConstantLeafNode<Int>(
+//                symbol = IntegerConstant,
+//                value = 2,
+//            ),
+//        ).serialize(),
+//    ),
+    //测试案例，丢弃2张卡
+) : ManyToManySelectionCost<MainDeckCardInstance> {
+    override fun getScope(input: Map<String, Any>, situation: PreActivationSituation)
+    : Set<MainDeckCardInstance> {
+        return situation.getHand().get().filter {
+            filterSeg.execute<Boolean>(Params(input.toMutableMap().also {p -> p[IT] = it },situation)) == true
+        }.toSet()
     }
 
-    override fun practice(obj : Set<CardInstance>, situation: ActivationSituation): Boolean {
-        return situation.getHand().discard(obj)
-    }
-}
-
-object DiscardCostSerializer : KSerializer<DiscardCost>{
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DiscardCost") {
-        element("getCard", AstTree.serializer().descriptor)
+    override fun getCostScope(input: Map<String, Any>, situation: PreActivationSituation)
+    : Map<Int, Set<MainDeckCardInstance>> {
+        return super.getCostScope(input, situation).filter {
+            filterSet.execute<Boolean>(Params(input.toMutableMap().also {p -> p[IT] = it.value },situation)) == true
+        }
     }
 
-    override fun deserialize(decoder: Decoder): DiscardCost {
-        return DiscardCost(decoder.decodeSerializableValue(AstTree.serializer()))
+    override fun toJson(obj: MainDeckCardInstance): JsonElement {
+        return Json.encodeToJsonElement(obj)
     }
 
-    override fun serialize(encoder: Encoder, value: DiscardCost) {
-        encoder.encodeSerializableValue(AstTree.serializer(),value.getCard)
+    override fun practice(
+        input: Map<String, Any>,
+        obj: Set<MainDeckCardInstance>,
+        situation: ActivationSituation
+    ): Set<Any> {
+        if (situation.scene.moveCards(obj,situation.getHand(),situation.getGy())){
+            return obj
+        }
+        return emptySet()
     }
-
 }

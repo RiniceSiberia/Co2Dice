@@ -1,8 +1,9 @@
 package org.co2dice.mirai.core.bean.attribute.table
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.attribute.prototype.*
-import org.co2dice.mirai.core.bean.dice.entry.DispersedSpace
 import org.co2dice.mirai.core.bean.dice.instance.ListDices.tripleD6
+import org.co2dice.mirai.core.bean.dice.roll
 
 /**
  *      使用IDEA编写
@@ -10,7 +11,8 @@ import org.co2dice.mirai.core.bean.dice.instance.ListDices.tripleD6
  * {@code @Time:}  2023-03-06-0:28
  * {@code @Message:} 一个动态的属性表
  **/
-class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
+@Serializable
+data class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
     //不用set的原因是需要保留AttributeInstance这个完整体
 
 
@@ -34,12 +36,12 @@ class AttributeInstanceTable (private val map : Map<Attribute,ValueInstance>){
         //精英怪的构造器，不填或负数属性代表没有这个属性
 
         fun createElite(
-            str: List<DispersedSpace<Int>> = tripleD6,
-            con: List<DispersedSpace<Int>> = tripleD6,
-            dex: List<DispersedSpace<Int>> = tripleD6,
-            wis: List<DispersedSpace<Int>> = tripleD6,
-            int: List<DispersedSpace<Int>> = tripleD6,
-            san: List<DispersedSpace<Int>> = tripleD6): AttributeInstanceTable {
+            str: List<Map<Int,Int>> = tripleD6,
+            con: List<Map<Int,Int>> = tripleD6,
+            dex: List<Map<Int,Int>> = tripleD6,
+            wis: List<Map<Int,Int>> = tripleD6,
+            int: List<Map<Int,Int>> = tripleD6,
+            san: List<Map<Int,Int>> = tripleD6): AttributeInstanceTable {
             return createElite(
                 str.stream().mapToInt { it.roll() }.sum(),
                 con.stream().mapToInt { it.roll() }.sum(),

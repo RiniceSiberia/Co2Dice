@@ -7,7 +7,6 @@ import org.co2dice.mirai.core.bean.chessman.instance.ChessmanInstance
 import org.co2dice.mirai.core.bean.game.time.Turns
 import org.co2dice.mirai.core.bean.game.zone.api.CardVesselApi
 import org.co2dice.mirai.core.bean.game.zone.entry.DeckEntry
-import org.co2dice.mirai.core.bean.player.enrty.PlayerEntry
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.decorator.handler.DecoratorHolder
 import org.co2dice.mirai.core.utils.ConstantUtils
@@ -114,6 +113,13 @@ class Scene (
         }.map { it.value.equipments }.toSet()
     }
 
+    fun <C : CardInstance> moveCards(cards :Set<C>,from : CardVesselApi<*>,to : CardListVessel<*>) : Boolean{
+        if (cards.all { from.contain(it) }){
+            return cards.all { moveCard(it,from, to) }
+        }
+        return false
+    }
+
     fun moveCard(card : CardInstance,from : CardVesselApi<*>,to : CardListVessel<*>) : Boolean{
         var wasRemoved = false
         if (card is ItemCardInstance){
@@ -136,7 +142,7 @@ class Scene (
 
     fun releaseCard(player: PlayerInstance,chessmanInstance: ChessmanInstance,card : CardInstance) : Boolean{
         //释放卡必须通过棋子和玩家来发动
-        if (card is MainDeckUnPublicCardInstance){
+        if (card is MainDeckCardInstance){
             //主卡组的卡,如果不在手卡直接返回false
             if (getDesk(player) != null && getDesk(player)!!.hand.contain(card)){
                 //存在于手牌中，开始判定卡片类型
@@ -157,7 +163,7 @@ class Scene (
             }else{
                 return false
             }
-        }else if (card is SideDeckUnPublicCardInstance){
+        }else if (card is SideDeckCardInstance){
 
         }
 

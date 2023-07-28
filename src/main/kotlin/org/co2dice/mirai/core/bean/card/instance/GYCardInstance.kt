@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.api.agent.ActivatedAgent
 import org.co2dice.mirai.core.bean.api.agent.StaticAgent
@@ -16,12 +17,13 @@ import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
  * {@code @Time:}  2023-04-15-23:45
  * {@code @Message:} 墓地发动的效果
  **/
+@Serializable
 class GYCardInstance (
-    entry: CardEntry,
+    override val entry: CardEntry,
     override var holder: PlayerInstance,
     override var activatedAbilities: List<GyActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
     override val staticAbilities: List<GyStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
-) : PublicCardInstance(entry),
+) : PublicCardInstance(),
     ActivatedAgent<GyActivatedAbilityInstance>,
     StaticAgent<GyStaticAbilityInstance>,
     DependPlayer {

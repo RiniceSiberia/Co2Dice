@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.CAO
 import org.co2dice.mirai.core.bean.api.InstanceStructure
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
@@ -14,9 +15,8 @@ import org.co2dice.mirai.core.bean.card.prototype.VenueCard
  * {@code @Time:}  2022-12-05-22:58
  * {@code @Message:} 卡片实例
  **/
-sealed class CardInstance(
-    override val entry: CardEntry,
-) :InstanceStructure<CardEntry>{
+@Serializable
+sealed class CardInstance() :InstanceStructure<CardEntry>{
     fun sort() : Int{
         val prototype = entry.prototype
         //返回这张卡的排序优先级

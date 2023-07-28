@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.attribute.table
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.attribute.prototype.*
 
 /**
@@ -8,7 +9,8 @@ import org.co2dice.mirai.core.bean.attribute.prototype.*
  * {@code @Time:}  2023-03-06-1:34
  * {@code @Message:} 一个记录在卡片上的静态的属性表,可用于卡片记录信息，或者是传递属性cost消耗
  **/
-class AttributeTable(private val map : MutableMap<Attribute,Int>) {
+@Serializable
+data class AttributeTable(private val map : MutableMap<Attribute,Int>) {
 
     companion object{
         fun createElite(str:Int = 0, con:Int = 0, dex:Int = 0, wis:Int = 0, int:Int = 0, san:Int = 0)

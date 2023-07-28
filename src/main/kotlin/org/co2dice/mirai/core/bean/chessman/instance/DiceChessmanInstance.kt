@@ -1,7 +1,8 @@
 package org.co2dice.mirai.core.bean.chessman.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
-import org.co2dice.mirai.core.bean.dice.entry.DispersedSpace
+import org.co2dice.mirai.core.bean.dice.roll
 import org.co2dice.mirai.core.bean.effect.static_ability.entry.toInstance
 import org.co2dice.mirai.core.bean.effect.static_ability.instance.DiceSlotStaticAbilityInstance
 import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.toInstance
@@ -18,10 +19,11 @@ import org.co2dice.mirai.core.utils.situation.SituationApi
  * 没有生命值，没有属性，没有战斗力，无法被正常攻击击中
  * 静态的能力也只有entry
  **/
+@Serializable
 class DiceChessmanInstance(
-    entry: ChessmanEntry,
-    holder: PlayerInstance,
-    val dice : DispersedSpace<Int> = entry.dice,
+    override val entry: ChessmanEntry,
+    override var holder: PlayerInstance,
+    val dice : Map<Int,Int> = entry.dice,
     //使用的骰子
     private var point : Int = dice.roll(),
     val staticAbilities: List<DiceSlotStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
@@ -29,10 +31,7 @@ class DiceChessmanInstance(
     //进场触发的能力
     val diceRevealTriggeredAbilities : List<DiceRevealTriggeredAbilityInstance> = entry.triggeredAbilityEntries.toInstance(),
     //骰子揭露时触发的能力
-) : ChessmanInstance(
-    entry = entry,
-    holder = holder,
-    ) {
+) : ChessmanInstance() {
 
 
     fun getPoint() = point
@@ -43,7 +42,7 @@ class DiceChessmanInstance(
 
     fun diceReveal(input : Map<String,Any>,situation : SituationApi){
         diceRevealTriggeredAbilities.forEach {
-
+            //TODO
         }
     }
 

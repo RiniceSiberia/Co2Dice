@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.chessman.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.AttributeAPI
 import org.co2dice.mirai.core.bean.api.CAO
 import org.co2dice.mirai.core.bean.api.PermanentInstance
@@ -25,12 +26,11 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * {@code @Time:}  2023-03-06-15:46
  * {@code @Message:} 场上的棋子实例
  **/
-open class FieldChessmanInstance(
-    entry: ChessmanEntry,
-    holder: PlayerInstance,
-    override val chaos: Int? = entry.chaos,
-    override val order: Int? = entry.order,
-    attributeTable: AttributeInstanceTable = entry.attributeEntry.toInstance(),
+@Serializable
+class FieldChessmanInstance(
+    override val uniqueId: Int,
+    override val entry: ChessmanEntry,
+    override var holder: PlayerInstance,
     override val activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
     override val staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
     override val enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
@@ -39,15 +39,30 @@ open class FieldChessmanInstance(
     = entry.triggeredAbilityEntries.toInstance(),
     override val onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
     = entry.triggeredAbilityEntries.toInstance(),
-    registry : UniqueIdRegistry,
-): ChessmanInstance(
-    entry = entry,
-    holder = holder,
-    attributeTable = attributeTable,
-    chaos = chaos,
-    order = order), AttributeAPI,PermanentInstance, CAO {
+): ChessmanInstance(), AttributeAPI,PermanentInstance {
 
-    override val uniqueId: Int = registry.register(this :: class)
+    constructor(
+        registry : UniqueIdRegistry,
+        entry: ChessmanEntry,
+        holder: PlayerInstance,
+        activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
+        staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
+        enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance(),
+        leavingFieldTriggeredAbilities: List<LeavingFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance(),
+        onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance(),
+        ) : this(
+            registry.register(FieldChessmanInstance::class),
+            entry,
+            holder,
+            activatedAbilities,
+            staticAbilities,
+            enterFieldTriggeredAbilities,
+            leavingFieldTriggeredAbilities,
+            onFieldTriggeredAbilities,
+            )
 
 
 

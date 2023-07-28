@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.prototype.ItemCard
@@ -15,11 +16,12 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
  * {@code @Message:} 咒语卡，只在释放时存在
  * 存在本身就是这个卡的cost和发动条件检查已经通过了，发动通过才会出现这么一张卡
  **/
+@Serializable
 class SpellCardInstance(
-    entry: CardEntry,
+    override val entry: CardEntry,
     override var holder: PlayerInstance,
     val spellAbilities : List<EnterFieldTriggeredAbilityInstance> = entry.triggeredAbilityEntries.toInstance(),
-) : PublicCardInstance(entry),DependPlayer {
+) : PublicCardInstance(),DependPlayer {
 
     fun settlement(situation: ResolutionSituation) : Boolean{
         //结算

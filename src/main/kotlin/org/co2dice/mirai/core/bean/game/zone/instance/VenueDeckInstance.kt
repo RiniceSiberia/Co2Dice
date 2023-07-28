@@ -2,7 +2,7 @@ package org.co2dice.mirai.core.bean.game.zone.instance
 
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.card.instance.SideDeckUnPublicCardInstance
+import org.co2dice.mirai.core.bean.card.instance.SideDeckCardInstance
 import org.co2dice.mirai.core.bean.card.prototype.VenueCard
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -14,8 +14,8 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * {@code @Message:} Have a good time!  :)
  **/
 class VenueDeckInstance(override var holder: PlayerInstance,
-                        override val cards: MutableList<SideDeckUnPublicCardInstance>)
-    : StackZoneInstance<SideDeckUnPublicCardInstance>(holder, cards){
+                        override val cards: MutableList<SideDeckCardInstance>)
+    : StackZoneInstance<SideDeckCardInstance>(holder, cards){
     //场地卡组，类比于游戏王的场地卡组，或者万智牌的场地卡组
 
     init {
@@ -32,13 +32,13 @@ class VenueDeckInstance(override var holder: PlayerInstance,
         return card.entry.prototype is VenueCard
     }
 
-    open fun draw() : SideDeckUnPublicCardInstance? {
+    open fun draw() : SideDeckCardInstance? {
         //抽卡
         return cards.removeFirstOrNull()
     }
 
-    override fun constructInstance(card: CardEntry, registry: UniqueIdRegistry): SideDeckUnPublicCardInstance {
-        return SideDeckUnPublicCardInstance(card,holder)
+    override fun constructInstance(card: CardEntry, registry: UniqueIdRegistry): SideDeckCardInstance {
+        return SideDeckCardInstance(card,holder)
     }
 
     fun countLegal(): Boolean {

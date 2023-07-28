@@ -1,7 +1,7 @@
 package org.co2dice.mirai.core.bean.effect.activated_ability.instance
 
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
-import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.bean.api.InstanceStructure
 import org.co2dice.mirai.core.bean.effect.activated_ability.entry.ActivatedAbilityEntry
 import org.co2dice.mirai.core.utils.situation.ActivationSituation
@@ -14,39 +14,23 @@ import org.co2dice.mirai.core.utils.situation.PreActivationSituation
  * {@code @Time:}  2023-04-19-20:26
  * {@code @Message:} Have a good time!  :)
  **/
-sealed class ActivatedAbilityInstance(
-    override val entry : ActivatedAbilityEntry,
-): InstanceStructure<ActivatedAbilityEntry> {
-
-    fun could(situation:PreActivationSituation) : Boolean {
+@Serializable
+sealed class ActivatedAbilityInstance(): InstanceStructure<ActivatedAbilityEntry> {
+    fun check(situation:PreActivationSituation) : Boolean {
         //发动前的遍历检查
-        val t = entry.prototype
-        return t.launchConditions.execute<Boolean>(Params(situation = situation)) == true
-            && t.cost.check(situation)
-            && t.target.check(situation)
+        return entry.costCheck(situation) && entry.launchConditions(situation) && entry.targetCheck(situation)
     }
 
 
-    fun can(situation:PreActivationSituation) : JsonObject{
-        //返回一堆打包了的需要选择的东西
+    fun getScope(situation:ActivationSituation) : JsonObject{
+        //遍历获取可行的操作
         return JsonObject(mapOf(
-            "cost" to entry.prototype.cost.getSelectScope(situation),
-            "target" to entry.prototype.target.getSelectScope(situation)
+            "cost" to entry.costGetSelectScope(situation),
+            "target" to entry.targetGetSelectScope(situation),
         ))
     }
 
-    fun active(situation : ActivationSituation) : Boolean{
-        //发动
-        val t = entry.prototype
-        if (t.launchConditions.execute<Boolean>(Params(situation = situation)) == true
-            && t.cost.practice(situation)
-            && t.target.getSelectScope(situation)
-            )
-
-
-
-
-    }
+    fun
 
 
 }

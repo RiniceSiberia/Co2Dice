@@ -1,8 +1,10 @@
 package org.co2dice.mirai.core.bean.effect.static_ability.entry
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.EntryStructure
 import org.co2dice.mirai.core.bean.effect.static_ability.instance.*
 import org.co2dice.mirai.core.bean.effect.static_ability.prototype.*
+import org.co2dice.mirai.core.utils.serializer.UUIDSerializer
 import java.util.*
 
 
@@ -12,10 +14,12 @@ import java.util.*
  * {@code @Time:}  2023-06-23-18:43
  * {@code @Message:} Have a good time!  :)
  **/
+@Serializable
 class StaticAbilityEntry(
+    @Serializable(with = UUIDSerializer::class)
     override val uuid: UUID = UUID.randomUUID(),
     override val prototype: StaticAbility,
-    val level : Int = 1,
+    var level : Int = 1,
     //做样子的被动等级
 ) : EntryStructure<StaticAbility>{
     

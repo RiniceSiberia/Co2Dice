@@ -21,9 +21,9 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
  * 注:场地不是卡片，虽然也拥有场地卡类，但没有
  */
 class VenueCardInstance (
-    entry: CardEntry,
-    registry : UniqueIdRegistry,
-    val volume :Int = 8,
+    override val entry: CardEntry,
+    override val uniqueId: Int,
+    val volume :Int,
     override val activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
     override val staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
     override val enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
@@ -36,9 +36,31 @@ class VenueCardInstance (
     //举例说明，宽敞的大平原可容纳的只有2个棋子，而狭窄的山谷可容纳的棋子只有1~2个
     //如果场地容纳棋子数为0，那么该场地就是一个障碍物，棋子不能进入。如果强制进入，那么这个棋子就会直接死亡。
 
-) : CardInstance(entry),PermanentInstance,ActivatedAgent<FieldActivatedAbilityInstance>,StaticAgent<FieldStaticAbilityInstance> {
+) : CardInstance(),
+    PermanentInstance,
+    ActivatedAgent<FieldActivatedAbilityInstance>,
+    StaticAgent<FieldStaticAbilityInstance> {
 
-    override val uniqueId: Int = registry.register(this::class)
+    constructor(entry: CardEntry,
+                registry : UniqueIdRegistry,
+                volume :Int,
+                activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
+                staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
+                enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
+                = entry.triggeredAbilityEntries.toInstance(),
+                leavingFieldTriggeredAbilities: List<LeavingFieldTriggeredAbilityInstance>
+                = entry.triggeredAbilityEntries.toInstance(),
+                onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
+                = entry.triggeredAbilityEntries.toInstance()) : this(
+                    entry,
+                    registry.register(VenueCardInstance::class),
+                    volume,
+                    activatedAbilities,
+                    staticAbilities,
+                    enterFieldTriggeredAbilities,
+                    leavingFieldTriggeredAbilities,
+                    onFieldTriggeredAbilities
+                )
     override val chaos: Int?
         get() = if (entry.prototype is CAO) entry.prototype.chaos else null
     override val order: Int?

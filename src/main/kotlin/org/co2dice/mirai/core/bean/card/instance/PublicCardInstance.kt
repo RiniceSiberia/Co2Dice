@@ -1,6 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
-import org.co2dice.mirai.core.bean.card.entry.CardEntry
+import kotlinx.serialization.Serializable
 
 /**
  *      使用IDEA编写
@@ -10,7 +10,6 @@ import org.co2dice.mirai.core.bean.card.entry.CardEntry
  * 墓地·场上·除外区的所有卡片
  * 发动中的卡片
  **/
-sealed class PublicCardInstance(
-    entry: CardEntry,
-) : CardInstance(entry) {
+@Serializable
+sealed class PublicCardInstance() : CardInstance() {
 }

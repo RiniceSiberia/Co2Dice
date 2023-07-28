@@ -6,6 +6,7 @@ package org.co2dice.mirai.core.bean.category
  * {@code @Time:}  2023-07-08-21:30
  * {@code @Message:} 物品/棋子的分类词条
  **/
+
 class CategoryTag(
     val name : String,
     sup : List<CategoryTag> = listOf(),

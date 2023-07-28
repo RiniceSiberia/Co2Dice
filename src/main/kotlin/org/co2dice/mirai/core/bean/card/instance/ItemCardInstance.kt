@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.card.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.CAO
 import org.co2dice.mirai.core.bean.api.DependPlayer
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
@@ -26,13 +27,14 @@ import org.co2dice.mirai.core.utils.UniqueIdRegistry
   * 而装备如果损坏，则对应的是banish，放逐，这种情况下就必须通过智力或者意志，要么将其修复，要么将其复制。
   * @log /
   */
+@Serializable
 class ItemCardInstance(
-    entry: CardEntry,
-    registry : UniqueIdRegistry,
+    override val uniqueId: Int,
+    override var entryRound : Int,
+    override val entry: CardEntry,
     override var holder: PlayerInstance,
     val occupy : MutableMap<ItemType,Int> = if (entry.prototype is ItemCard) entry.prototype.occupy.toMutableMap() else mutableMapOf(),
     //占用槽，默认值为，如果entry里的卡是装备卡，就读取其占用的装备栏，否则就留空
-    entryRound : Int = 0,
     override var activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
     override val staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
     override val enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
@@ -41,12 +43,41 @@ class ItemCardInstance(
     = entry.triggeredAbilityEntries.toInstance(),
     override val onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
     = entry.triggeredAbilityEntries.toInstance(),
-    ) : PermanentCardInstance(entry,registry,entryRound),DependPlayer {
+    ) : PermanentCardInstance(),DependPlayer {
+
         init {
             enterFieldTriggeredAbilities.forEach {
                 //进程效果逐条触发
+                //TODO
             }
         }
+
+    constructor(
+        registry : UniqueIdRegistry,
+        entry: CardEntry,
+        holder: PlayerInstance,
+        occupy : MutableMap<ItemType,Int> = if (entry.prototype is ItemCard) entry.prototype.occupy.toMutableMap() else mutableMapOf(),
+        //占用槽，默认值为，如果entry里的卡是装备卡，就读取其占用的装备栏，否则就留空
+        activatedAbilities: List<FieldActivatedAbilityInstance> = entry.activatedAbilityEntries.toInstance(),
+        staticAbilities: List<FieldStaticAbilityInstance> = entry.staticAbilityEntries.toInstance(),
+        enterFieldTriggeredAbilities: List<EnterFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance(),
+        leavingFieldTriggeredAbilities: List<LeavingFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance(),
+        onFieldTriggeredAbilities: List<OnFieldTriggeredAbilityInstance>
+        = entry.triggeredAbilityEntries.toInstance()
+    ) : this(
+        registry.register(ItemCardInstance::class),
+        0,
+        entry,
+        holder,
+        occupy,
+        activatedAbilities,
+        staticAbilities,
+        enterFieldTriggeredAbilities,
+        leavingFieldTriggeredAbilities,
+        onFieldTriggeredAbilities
+    )
     override val chaos: Int?
         get(){
             return if (entry.prototype is CAO){

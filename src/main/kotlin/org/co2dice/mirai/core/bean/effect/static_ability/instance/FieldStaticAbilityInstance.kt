@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.static_ability.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.effect.static_ability.entry.StaticAbilityEntry
 
 /**
@@ -8,5 +9,6 @@ import org.co2dice.mirai.core.bean.effect.static_ability.entry.StaticAbilityEntr
  * {@code @Time:}  2023-06-23-22:58
  * {@code @Message:} 场上的永续效果
  **/
-class FieldStaticAbilityInstance(entry : StaticAbilityEntry) : StaticAbilityInstance(entry) {
+@Serializable
+class FieldStaticAbilityInstance(override val entry : StaticAbilityEntry) : StaticAbilityInstance() {
 }

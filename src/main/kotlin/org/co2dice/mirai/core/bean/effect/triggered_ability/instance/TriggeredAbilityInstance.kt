@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.triggered_ability.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.ast.Params
 import org.co2dice.mirai.core.bean.api.InstanceStructure
 import org.co2dice.mirai.core.bean.api.PermanentInstance
@@ -13,9 +14,8 @@ import org.co2dice.mirai.core.utils.situation.ResolutionSituation
  * {@code @Time:}  2023-06-28-22:50
  * {@code @Message:} Have a good time!  :)
  **/
-sealed class TriggeredAbilityInstance (
-    override val entry : TriggeredAbilityEntry,
-) : InstanceStructure<TriggeredAbilityEntry>{
+@Serializable
+sealed class TriggeredAbilityInstance () : InstanceStructure<TriggeredAbilityEntry>{
 
     fun invoke(situation: ResolutionSituation) : Boolean{
         return entry.prototype.operation.execute<Boolean>(Params(mutableMapOf(),situation)) ?: false

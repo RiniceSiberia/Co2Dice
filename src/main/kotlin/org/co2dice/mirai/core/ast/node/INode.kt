@@ -46,7 +46,7 @@ sealed interface INode <
         }
         return null
     }
-
+    @Deprecated("嘛用么得")
     fun getParams() : List<ParamLeafNode<*>>{
         return flatMap().filterIsInstance<ParamLeafNode<*>>()
     }

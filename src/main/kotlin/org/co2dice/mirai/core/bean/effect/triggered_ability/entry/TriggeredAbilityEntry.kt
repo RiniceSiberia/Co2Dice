@@ -1,8 +1,10 @@
 package org.co2dice.mirai.core.bean.effect.triggered_ability.entry
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.api.EntryStructure
 import org.co2dice.mirai.core.bean.effect.triggered_ability.instance.*
 import org.co2dice.mirai.core.bean.effect.triggered_ability.prototype.*
+import org.co2dice.mirai.core.utils.serializer.UUIDSerializer
 import java.util.*
 
 /**
@@ -11,10 +13,12 @@ import java.util.*
  * {@code @Time:}  2023-06-28-22:48
  * {@code @Message:} 触发式效果的实体
  **/
+@Serializable
 class TriggeredAbilityEntry(
+    @Serializable(with = UUIDSerializer::class)
     override val uuid: UUID = UUID.randomUUID(),
     override val prototype: TriggeredAbility,
-    val level : Int = 1,
+    var level : Int = 1,
     //做样子的技能等级
 ) : EntryStructure<TriggeredAbility>{
 

@@ -19,8 +19,8 @@ import org.co2dice.mirai.core.bean.card.prototype.ItemCard
 import org.co2dice.mirai.core.bean.category.CategoryPack
 import org.co2dice.mirai.core.bean.chessman.entry.ChessmanEntry
 import org.co2dice.mirai.core.bean.chessman.prototype.HumanChessman
-import org.co2dice.mirai.core.bean.dice.entry.DispersedSpace
 import org.co2dice.mirai.core.bean.dice.instance.ListDices.tripleD6
+import org.co2dice.mirai.core.bean.dice.roll
 import org.co2dice.mirai.core.bean.effect.activated_ability.entry.ActivatedAbilityEntry
 import org.co2dice.mirai.core.bean.effect.activated_ability.instance.FieldActivatedAbilityInstance
 import org.co2dice.mirai.core.bean.effect.activated_ability.prototype.FieldActivatedAbility
@@ -56,12 +56,12 @@ class Test {
                     chaos = 1,
                     order = 1,
                     attributeTable = AttributeTable.createElite(
-                        tripleD6.sumOf (DispersedSpace<Int>::roll),
-                        tripleD6.sumOf (DispersedSpace<Int>::roll),
-                        tripleD6.sumOf (DispersedSpace<Int>::roll),
-                        tripleD6.sumOf (DispersedSpace<Int>::roll),
-                        tripleD6.sumOf (DispersedSpace<Int>::roll),
-                        tripleD6.sumOf (DispersedSpace<Int>::roll)),
+                        tripleD6.sumOf {dl -> dl.roll() },
+                        tripleD6.sumOf {dl -> dl.roll() },
+                        tripleD6.sumOf {dl -> dl.roll() },
+                        tripleD6.sumOf {dl -> dl.roll() },
+                        tripleD6.sumOf {dl -> dl.roll() },
+                        tripleD6.sumOf {dl -> dl.roll() }),
                     types = CategoryPack(),
                     name = "Test${it}",
                     activatedAbilities = listOf(),

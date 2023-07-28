@@ -12,12 +12,12 @@ import org.co2dice.mirai.core.bean.game.zone.instance.HandInstance
  * @Time:  2023-07-17-20:52
  * @Message: Have a good time!  :)
  **/
-object HandCombinationRestrictAmountSymbol : BiOpSymbol<List<Set<CardInstance>>, HandInstance,Int>() {
+object HandCombinationRestrictAmountSymbol : BiOpSymbol<Set<Set<CardInstance>>, HandInstance,Int>() {
     override fun natualSign(left: INode<out HandInstance>, right: INode<out Int>): String {
         return "${left.natualSerialize()}.combinationRestrictAmount(${right.natualSerialize()})"
     }
 
-    override fun operation(l: HandInstance, r: Int, params: Params): List<Set<CardInstance>> {
+    override fun operation(l: HandInstance, r: Int, params: Params): Set<Set<CardInstance>> {
         return l.getCombinationsHands({ it.size == r })
     }
 

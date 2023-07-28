@@ -2,7 +2,7 @@ package org.co2dice.mirai.core.bean.game.zone.instance
 
 import org.co2dice.mirai.core.bean.card.entry.CardEntry
 import org.co2dice.mirai.core.bean.card.instance.CardInstance
-import org.co2dice.mirai.core.bean.card.instance.SideDeckUnPublicCardInstance
+import org.co2dice.mirai.core.bean.card.instance.SideDeckCardInstance
 import org.co2dice.mirai.core.bean.game.zone.api.CardVesselApi
 import org.co2dice.mirai.core.bean.player.instance.PlayerInstance
 import org.co2dice.mirai.core.utils.UniqueIdRegistry
@@ -51,7 +51,7 @@ class DeskInstance(
         return true
     }
 
-    fun drawVenue() : SideDeckUnPublicCardInstance?{
+    fun drawVenue() : SideDeckCardInstance?{
         return venueDeck.draw()
     }
 

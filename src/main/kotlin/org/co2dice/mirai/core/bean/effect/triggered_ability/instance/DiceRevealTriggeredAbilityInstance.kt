@@ -1,5 +1,6 @@
 package org.co2dice.mirai.core.bean.effect.triggered_ability.instance
 
+import kotlinx.serialization.Serializable
 import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbilityEntry
 
 /**
@@ -8,7 +9,8 @@ import org.co2dice.mirai.core.bean.effect.triggered_ability.entry.TriggeredAbili
  * {@code @Time:}  2023-07-07-23:31
  * {@code @Message:} 骰子揭示实例
  **/
+@Serializable
 class DiceRevealTriggeredAbilityInstance(
-    entry : TriggeredAbilityEntry
-) : TriggeredAbilityInstance(entry) {
+    override val entry : TriggeredAbilityEntry
+) : TriggeredAbilityInstance() {
 }

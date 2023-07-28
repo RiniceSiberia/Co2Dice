@@ -9,5 +9,5 @@ import java.util.*
  * {@code @Message:} 原型类，这个类必须能存在于数据库中作为模板使用
  **/
 interface PrototypeStructure {
-    val uuid : UUID
+     val uuid : UUID
 }
